@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAP EA Certification Study Guide</title>
+<style>
+:root {
+  --blue: #0070F2; --dark: #003767; --light: #E8F0FE;
+  --bg: #F5F7FA; --card: #fff; --text: #1D2433; --muted: #6B7280;
+  --border: #E5E7EB; --success: #16A34A; --error: #DC2626; --warn: #D97706;
+  --r: 8px; --shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+a { text-decoration:none; }
+
+nav { background:var(--dark); height:54px; display:flex; align-items:center; padding:0 20px; gap:24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+.nav-brand { color:#fff; font-weight:700; font-size:15px; cursor:pointer; white-space:nowrap; }
+.nav-links { display:flex; gap:2px; overflow-x:auto; flex:1; }
+.nl { color:rgba(255,255,255,.7); font-size:13px; padding:5px 11px; border-radius:4px; cursor:pointer; white-space:nowrap; }
+.nl:hover, .nl.active { background:rgba(255,255,255,.15); color:#fff; }
+
+main { max-width:1080px; margin:0 auto; padding:28px 20px; }
+.page { display:none; }
+.page.active { display:block; }
+
+/* HOME */
+.home-hero { text-align:center; margin-bottom:36px; }
+.home-hero h1 { font-size:26px; font-weight:800; color:var(--dark); }
+.home-hero p { color:var(--muted); margin-top:6px; }
+.badges { display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.badge { background:var(--light); color:var(--dark); font-size:12px; font-weight:700; padding:3px 12px; border-radius:20px; }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:22px; cursor:pointer; box-shadow:var(--shadow); transition:transform .15s,box-shadow .15s; }
+.card:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,.1); }
+.card-icon { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:12px; }
+.card h3 { font-size:14px; font-weight:700; margin-bottom:5px; }
+.card p { font-size:13px; color:var(--muted); }
+.card .wt { font-size:12px; font-weight:700; margin-top:8px; }
+
+/* SECTIONS */
+.ph { margin-bottom:24px; }
+.ph h2 { font-size:21px; font-weight:800; color:var(--dark); }
+.ph p { color:var(--muted); font-size:14px; margin-top:4px; }
+.ph .domain-tag { display:inline-block; padding:2px 10px; border-radius:4px; font-size:12px; font-weight:700; margin-top:8px; }
+
+.acc { background:var(--card); border:1px solid var(--border); border-radius:var(--r); margin-bottom:12px; overflow:hidden; }
+.acc-h { padding:13px 18px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; font-weight:700; font-size:14px; user-select:none; }
+.acc-h:hover { background:var(--bg); }
+.acc-b { padding:4px 18px 18px; font-size:14px; display:none; }
+.acc.open .acc-b { display:block; }
+.chev { font-size:11px; opacity:.5; transition:transform .2s; }
+.acc.open .chev { transform:rotate(180deg); }
+
+/* TABLES */
+table { width:100%; border-collapse:collapse; font-size:13px; margin:10px 0; }
+th { background:var(--bg); text-align:left; padding:7px 12px; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); border-bottom:1px solid var(--border); }
+td { padding:8px 12px; border-bottom:1px solid #F3F4F6; vertical-align:top; }
+tr:last-child td { border-bottom:none; }
+
+/* ALERTS */
+.alert { padding:11px 15px; border-radius:6px; font-size:13px; margin:10px 0; line-height:1.5; }
+.aw { background:#FFF7ED; border-left:3px solid var(--warn); color:#7C2D12; }
+.ai { background:var(--light); border-left:3px solid var(--blue); color:var(--dark); }
+.as { background:#F0FDF4; border-left:3px solid var(--success); color:#14532D; }
+
+/* QUIZ */
+.quiz-tabs { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; }
+.qt { padding:7px 18px; border:2px solid var(--blue); border-radius:var(--r); background:#fff; color:var(--blue); font-weight:700; font-size:13px; cursor:pointer; }
+.qt:hover, .qt.active { background:var(--blue); color:#fff; }
+
+#quiz-box { background:#fff; border:1px solid var(--border); border-radius:var(--r); padding:26px; }
+.qprog { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.pbar { flex:1; height:4px; background:var(--border); border-radius:2px; }
+.pfill { height:100%; background:var(--blue); border-radius:2px; transition:width .3s; }
+.qnum { font-size:12px; color:var(--muted); }
+.qtext { font-size:15px; font-weight:700; line-height:1.5; margin-bottom:18px; }
+.opts { display:flex; flex-direction:column; gap:8px; }
+.opt { padding:11px 15px; border:2px solid var(--border); border-radius:6px; cursor:pointer; font-size:14px; text-align:left; background:#fff; width:100%; }
+.opt:hover:not(:disabled) { border-color:var(--blue); background:var(--light); }
+.opt.correct { border-color:var(--success); background:#F0FDF4; color:#14532D; }
+.opt.wrong { border-color:var(--error); background:#FEF2F2; color:#7F1D1D; }
+.opt.reveal { border-color:var(--success); background:#F0FDF4; color:#14532D; }
+.opt:disabled { cursor:default; }
+.explain { margin-top:14px; padding:11px 15px; background:#F8FAFF; border:1px solid #DBEAFE; border-radius:6px; font-size:13px; color:var(--dark); }
+.qnav { display:flex; justify-content:space-between; align-items:center; margin-top:18px; }
+.btn { padding:8px 20px; border-radius:var(--r); font-weight:700; font-size:14px; cursor:pointer; border:none; }
+.btn-p { background:var(--blue); color:#fff; }
+.btn-p:hover { background:#0060D0; }
+.btn-p:disabled { opacity:.45; cursor:not-allowed; }
+.btn-o { background:#fff; color:var(--dark); border:2px solid var(--border); }
+.btn-o:hover { border-color:var(--blue); color:var(--blue); }
+
+.score-card { text-align:center; padding:36px; }
+.score-ring { width:110px; height:110px; border-radius:50%; border:4px solid; display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto 18px; }
+.sn { font-size:34px; font-weight:800; line-height:1; }
+.sd { font-size:13px; opacity:.7; }
+.s-pass { border-color:var(--success); color:var(--success); background:#F0FDF4; }
+.s-warn { border-color:var(--warn); color:var(--warn); background:#FFFBEB; }
+.s-fail { border-color:var(--error); color:var(--error); background:#FEF2F2; }
+
+/* TRAPS */
+.trap { background:#fff; border:1px solid var(--border); border-left:4px solid var(--warn); border-radius:var(--r); padding:15px; margin-bottom:10px; }
+.trap h4 { font-size:14px; font-weight:700; margin-bottom:5px; }
+.trap p { font-size:13px; color:var(--muted); line-height:1.5; }
+.trap .c { color:var(--success); font-weight:700; }
+.trap .x { color:var(--error); font-weight:700; }
+
+/* TRACKER */
+.tr-sec { background:#fff; border:1px solid var(--border); border-radius:var(--r); padding:18px; margin-bottom:14px; }
+.tr-sec h3 { font-size:15px; font-weight:700; color:var(--dark); margin-bottom:12px; }
+.ci { display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid var(--bg); font-size:14px; }
+.ci:last-child { border-bottom:none; }
+.ci input { width:16px; height:16px; cursor:pointer; accent-color:var(--blue); }
+.ci label { cursor:pointer; flex:1; }
+.ci input:checked + label { text-decoration:line-through; color:var(--muted); }
+
+/* COLORS */
+.c1 { background:#EEF2FF; color:#3730A3; }
+.c2 { background:#F0FDFA; color:#065F46; }
+.c3 { background:#FFF7ED; color:#7C2D12; }
+.c4 { background:#FDF4FF; color:#6B21A8; }
+.cq { background:#FFF1F2; color:#9F1239; }
+.ct { background:#FFFBEB; color:#78350F; }
+.ch { background:var(--light); color:var(--dark); }
+
+strong { font-weight:700; }
+ul { padding-left:18px; }
+li { margin-bottom:3px; }
+h4 { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin:14px 0 6px; }
+.kf { background:var(--light); border-radius:6px; padding:9px 13px; font-size:13px; margin:6px 0; color:var(--dark); font-weight:600; }
+
+@media(max-width:600px) {
+  .grid { grid-template-columns:1fr; }
+  nav { padding:0 12px; }
+  main { padding:18px 12px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand" onclick="go('home')">SAP EA Cert</span>
+  <div class="nav-links">
+    <span class="nl" onclick="go('home')">Home</span>
+    <span class="nl" onclick="go('overview')">Overview</span>
+    <span class="nl" onclick="go('d1')">Domain 1</span>
+    <span class="nl" onclick="go('d2')">Domain 2</span>
+    <span class="nl" onclick="go('d3')">Domain 3</span>
+    <span class="nl" onclick="go('d4')">Domain 4</span>
+    <span class="nl" onclick="go('quiz')">Quiz</span>
+    <span class="nl" onclick="go('traps')">Exam Traps</span>
+    <span class="nl" onclick="go('tracker')">Tracker</span>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div id="page-home" class="page active">
+  <div class="home-hero">
+    <h1>SAP Enterprise Architect Certification</h1>
+    <p>SAP Certified Professional – SAP Enterprise Architect</p>
+    <div class="badges">
+      <span class="badge">40 Questions</span>
+      <span class="badge">80% Pass Mark (32/40)</span>
+      <span class="badge">3 Hours</span>
+      <span class="badge">22 MCQ + 18 Wanderlust</span>
+      <span class="badge">All Domains Equal Weight</span>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card" onclick="go('overview')">
+      <div class="card-icon ch">📋</div>
+      <h3>Exam Overview</h3>
+      <p>Format, domain breakdown, exam day strategy and preparation path.</p>
+    </div>
+    <div class="card" onclick="go('d1')">
+      <div class="card-icon c1">🏗️</div>
+      <h3>Domain 1: Framework &amp; Toolset</h3>
+      <p>5 building blocks, ADM phases, Metro Map, integrated toolchain, org models, maturity.</p>
+      <div class="wt" style="color:#3730A3">20–30% of exam</div>
+    </div>
+    <div class="card" onclick="go('d2')">
+      <div class="card-icon c2">🗺️</div>
+      <h3>Domain 2: Vision &amp; Roadmap</h3>
+      <p>Stakeholder map, BMC sequence, Architecture Principles, TIME model, roadmaps.</p>
+      <div class="wt" style="color:#065F46">20–30% of exam</div>
+    </div>
+    <div class="card" onclick="go('d3')">
+      <div class="card-icon c3">🏢</div>
+      <h3>Domain 3: Business Architecture</h3>
+      <p>Capability maps, MECE, process hierarchy, Business Footprint, gap analysis.</p>
+      <div class="wt" style="color:#7C2D12">20–30% of exam</div>
+    </div>
+    <div class="card" onclick="go('d4')">
+      <div class="card-icon c4">⚙️</div>
+      <h3>Domain 4: Data, App &amp; Tech</h3>
+      <p>6 app diagrams, SaaS/PaaS/IaaS, Clean Core extensions, ISA-M, S/4HANA strategies.</p>
+      <div class="wt" style="color:#6B21A8">20–30% of exam</div>
+    </div>
+    <div class="card" onclick="go('quiz')">
+      <div class="card-icon cq">✏️</div>
+      <h3>Practice Quizzes</h3>
+      <p>15 questions per domain with instant feedback and explanations.</p>
+    </div>
+    <div class="card" onclick="go('traps')">
+      <div class="card-icon ct">⚠️</div>
+      <h3>Exam Traps</h3>
+      <p>31 common mistakes. Review the night before exam day.</p>
+    </div>
+    <div class="card" onclick="go('tracker')">
+      <div class="card-icon" style="background:#F3F4F6;color:#374151">✅</div>
+      <h3>Progress Tracker</h3>
+      <p>Track milestones from first read through to exam day.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="page-overview" class="page">
+  <div class="ph">
+    <h2>Exam Overview</h2>
+    <p>SAP Certified Professional – SAP Enterprise Architect</p>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Exam Format <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Element</th><th>Detail</th></tr>
+        <tr><td>Total Questions</td><td><strong>40</strong></td></tr>
+        <tr><td>Section 1</td><td>22 Multiple Choice Questions</td></tr>
+        <tr><td>Section 2</td><td>18 questions based on Wanderlust Case Study</td></tr>
+        <tr><td>Passing Score</td><td><strong>80% — 32/40 correct minimum</strong></td></tr>
+        <tr><td>Duration</td><td>3 hours</td></tr>
+        <tr><td>Difficulty (approx)</td><td>25 easy / 10 moderate / 5 very hard</td></tr>
+      </table>
+      <div class="alert aw">⚠️ The passing score is unusually high at 80%. You cannot afford to have any weak domain — maximum 8 wrong answers across all 40 questions.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Domain Weightings <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>#</th><th>Domain</th><th>Weight</th><th>Approx Q's</th></tr>
+        <tr><td>1</td><td>SAP EA Framework and Toolset</td><td>20–30%</td><td>8–12</td></tr>
+        <tr><td>2</td><td>Architecture Vision and Roadmap</td><td>20–30%</td><td>8–12</td></tr>
+        <tr><td>3</td><td>Business Architecture</td><td>20–30%</td><td>8–12</td></tr>
+        <tr><td>4</td><td>Data, Application, and Technology Architecture</td><td>20–30%</td><td>8–12</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Exam Day Strategy <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <ul>
+        <li><strong>Read Wanderlust before exam day</strong> — published in advance; 18/40 questions come from it</li>
+        <li><strong>Answer all questions</strong> — no penalty for wrong answers, never leave blanks</li>
+        <li><strong>Flag uncertain questions</strong> — revisit at end, time is usually sufficient</li>
+        <li><strong>Sequence matters</strong> — BMC order, ADM phase order, Metro Map flow are all tested</li>
+        <li><strong>Best answer, not perfect answer</strong> — look for the most appropriate response in context</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Pre-Exam Checklist <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <ul>
+        <li>TOGAF ADM phases memorised (Preliminary → A → B → C → D → E)</li>
+        <li>5 SAP EA Framework building blocks memorised</li>
+        <li>Business Model Canvas 9 blocks in sequence memorised</li>
+        <li>Stakeholder Map 4 quadrants + actions memorised</li>
+        <li>Metro Map 3 variants understood</li>
+        <li>All artifact names and their phases known</li>
+        <li>Wanderlust case study read and annotated</li>
+        <li>TIME model (Tolerate/Invest/Migrate/Eliminate) understood</li>
+        <li>Cloud models (SaaS/PaaS/IaaS) + deployment types understood</li>
+        <li>SAP Clean Core principles reviewed</li>
+        <li>ISA-M (Integration Solution Advisory Methodology) reviewed</li>
+        <li>Extension types (Key User / Developer / Side-by-Side) understood</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="tog(this)">Recommended Study Path <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Week</th><th>Focus</th></tr>
+        <tr><td>Week 1</td><td>Domain 1 – Framework &amp; Toolset</td></tr>
+        <tr><td>Week 2</td><td>Domain 2 – Architecture Vision &amp; Roadmap</td></tr>
+        <tr><td>Week 3</td><td>Domain 3 – Business Architecture</td></tr>
+        <tr><td>Week 4</td><td>Domain 4 – Data, Application &amp; Technology</td></tr>
+        <tr><td>Week 5</td><td>Revision + Quizzes + Wanderlust case study deep dive</td></tr>
+        <tr><td>Week 6</td><td>Mock exam + Exam traps review + final prep</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ DOMAIN 1 ═══════════════ -->
+<div id="page-d1" class="page">
+  <div class="ph">
+    <h2>Domain 1: SAP EA Framework &amp; Toolset</h2>
+    <span class="domain-tag c1">20–30% of exam · ~8–12 questions</span>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">The 5 Building Blocks <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <div class="alert aw">⚠️ Memorise these cold. Every Domain 1 question sits inside one of these five.</div>
+      <table>
+        <tr><th>Building Block</th><th>What It Is</th><th>Exam Signal Words</th></tr>
+        <tr><td><strong>Methodology</strong></td><td>TOGAF v10-based, tailored for SAP. Reduces tailoring effort per engagement.</td><td>"ADM", "phases", "iterative", "how to do EA"</td></tr>
+        <tr><td><strong>Reference Architecture Content</strong></td><td>Pre-built RBA + RSA blueprints. APQC-based. Adapt rather than invent.</td><td>"pre-built", "reference", "RBA", "RSA", "accelerate"</td></tr>
+        <tr><td><strong>Tooling</strong></td><td>LeanIX + Signavio + Cloud ALM + Business Accelerator Hub</td><td>"tools", "LeanIX", "Signavio", "Cloud ALM"</td></tr>
+        <tr><td><strong>Practice</strong></td><td>Organisational implementation of EA. Governance, operating model, maturity.</td><td>"org model", "governance", "maturity", "team"</td></tr>
+        <tr><td><strong>Services</strong></td><td>North Star Architecture. SAP-delivered engagement services.</td><td>"North Star", "engagement", "delivery", "modules"</td></tr>
+      </table>
+      <div class="alert aw">⚠️ Trap: <strong>Practice</strong> = internal org model. <strong>Services</strong> = external SAP engagement model. They sound similar — they are different.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">ADM Phases <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <div class="kf">Preliminary → A: Architecture Vision → B: Business Architecture → C: Application &amp; Data → D: Technology → E: Opportunities &amp; Solutions</div>
+      <div class="kf">Running through ALL phases: Requirements Management · Governance (Risk, Decisions, Principles)</div>
+      <div class="alert aw">⚠️ Critical: NOT a waterfall. Iterations happen within phases, between phases, and between full cycles.</div>
+      <h4>3 Types of Tailoring (Preliminary Phase)</h4>
+      <table>
+        <tr><th>Type</th><th>What It Covers</th></tr>
+        <tr><td><strong>Terminology</strong></td><td>Agreed glossary. Business-understood terms. Enterprise Glossary document.</td></tr>
+        <tr><td><strong>Content</strong></td><td>Adopt third-party frameworks, customise classification.</td></tr>
+        <tr><td><strong>Process</strong></td><td>Remove duplicate tasks, add org-specific checkpoints, align with portfolio mgmt.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">The Metro Map <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <p>SAP's visual representation of the entire methodology — like a tube/subway map. Shows the full set of artifacts, inputs from SAP Reference Architecture, and references to existing work products.</p>
+      <h4>3 Variants</h4>
+      <table>
+        <tr><th>Variant</th><th>When to Use</th></tr>
+        <tr><td><strong>Business-Centric</strong></td><td>Engagement driven by business transformation. Fewer IT artifacts.</td></tr>
+        <tr><td><strong>IT-Centric</strong></td><td>Engagement driven by technology change. Lighter business artifacts.</td></tr>
+        <tr><td><strong>Holistic</strong></td><td>Full end-to-end. All domains from strategy through technology.</td></tr>
+      </table>
+      <div class="alert ai">Artifact selection is always driven by <strong>stakeholder needs</strong>, not architectural completeness.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">The Integrated Toolchain <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Step</th><th>Tools</th><th>What Happens</th></tr>
+        <tr><td>1. INGEST</td><td>LeanIX ↔ Cloud ALM</td><td>Import current SAP system landscape</td></tr>
+        <tr><td>2. ANALYSE</td><td>Signavio</td><td>Process performance. 1,000+ built-in metrics. 24hr connection.</td></tr>
+        <tr><td>3. DESIGN</td><td>LeanIX + Signavio</td><td>Target architecture + future process models.</td></tr>
+        <tr><td>4. PLAN</td><td>LeanIX → Cloud ALM</td><td>Roadmaps handed over. Implementation projects generated.</td></tr>
+        <tr><td>5. EXECUTE</td><td>Signavio + Cloud ALM</td><td>Process designs transferred. Operations + monitoring.</td></tr>
+      </table>
+      <h4>Tool Roles</h4>
+      <table>
+        <tr><th>Tool</th><th>Primary Role</th></tr>
+        <tr><td><strong>SAP LeanIX</strong></td><td>Architecture Management. Application Portfolio, Roadmaps, Technology Risk.</td></tr>
+        <tr><td><strong>SAP Signavio</strong></td><td>Process Management. Process Insights (performance), Process Intelligence (conformance), Process Explorer (RBA content).</td></tr>
+        <tr><td><strong>SAP Cloud ALM</strong></td><td>Project Execution + Operations. Receives roadmaps from LeanIX.</td></tr>
+        <tr><td><strong>Business Accelerator Hub</strong></td><td>APIs, iFlows, Solution Process references. api.sap.com</td></tr>
+      </table>
+      <div class="alert aw">⚠️ LeanIX = architecture/applications. Signavio = processes. Don't swap them.</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="tog(this)">EA Practice — 4 Org Models <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Model</th><th>Best For</th><th>Risk</th></tr>
+        <tr><td><strong>Informal</strong></td><td>Early EA adoption, building the case</td><td>Long-term: misses all EA benefits</td></tr>
+        <tr><td><strong>Separated</strong></td><td>Loosely coupled divisions, different architectures</td><td>Legacy of acquisitions. Synergies missed.</td></tr>
+        <tr><td><strong>Federated</strong></td><td>Each unit has EA role, virtual team together</td><td>No conflict resolution → collapses to Separated</td></tr>
+        <tr><td><strong>Centralised</strong></td><td>Matrix-managed orgs with corporate culture</td><td>Too large → can't stay close to all functions</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="tog(this)">EA Practice Maturity — 8 Dimensions <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Dimension</th><th>What It Measures</th></tr>
+        <tr><td>Business-IT Alignment</td><td>Traceability between business objectives and IT capabilities</td></tr>
+        <tr><td>Stakeholder Involvement</td><td>Identification, engagement, and awareness of EA initiatives</td></tr>
+        <tr><td>Action &amp; Impact</td><td>Whether EA actually influences decisions on sourcing, investment, strategy</td></tr>
+        <tr><td>Architecture Development</td><td>Comprehensiveness and standardisation of deliverables</td></tr>
+        <tr><td>Architecture Process</td><td>How well-defined the development and governance process is</td></tr>
+        <tr><td>Organisation &amp; Governance</td><td>Formal structures, defined team, senior management endorsement</td></tr>
+        <tr><td>Communication</td><td>How well decisions are captured, shared, and used</td></tr>
+        <tr><td>People Enablement</td><td>Roles, responsibilities, skills, RACI matrices</td></tr>
+      </table>
+      <div class="kf">5 Maturity Levels: Ad-Hoc → Initial → Defined → Managed → Optimised · Output: spider web diagram</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="tog(this)">Risk &amp; Decision Management <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <div class="kf">Initial Risk = before mitigation · Residual Risk = after mitigation actions applied</div>
+      <div class="alert aw">⚠️ Architecture produced AFTER decisions = too late and causes conflict. EAs must be involved BEFORE key decisions are made.</div>
+      <p>Risk domains: Business · Data · Application · Technology<br>
+      Process: Identify → Assess (probability + impact) → Mitigate → Re-assess residual</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ DOMAIN 2 ═══════════════ -->
+<div id="page-d2" class="page">
+  <div class="ph">
+    <h2>Domain 2: Architecture Vision &amp; Roadmap</h2>
+    <span class="domain-tag c2">20–30% of exam · ~8–12 questions</span>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Strategy → Model → Architecture Hierarchy <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Layer</th><th>Definition</th><th>Example</th></tr>
+        <tr><td><strong>Business Strategy</strong></td><td>The goals the enterprise wants to achieve + metrics</td><td>"Increase market share by 20% in 3 years"</td></tr>
+        <tr><td><strong>Business Model</strong></td><td>HOW the enterprise seeks to profit — value proposition, competitive approach</td><td>"Subscription-based SaaS with freemium entry"</td></tr>
+        <tr><td><strong>Business Architecture</strong></td><td>The structure — capabilities, processes, information, organisation — to execute the model</td><td>"We need a Customer Management capability at maturity level 3"</td></tr>
+      </table>
+      <div class="alert aw">⚠️ These are hierarchical: Strategy → Model → Architecture. Do not confuse them.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Stakeholder Map — 4 Quadrants <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Quadrant</th><th>Influence</th><th>Attitude</th><th>Action</th></tr>
+        <tr><td><strong>Promoters</strong></td><td>High</td><td>Positive</td><td><span style="color:var(--success);font-weight:700">Actively engage</span> — use them to influence others</td></tr>
+        <tr><td><strong>Enthusiasts</strong></td><td>Low</td><td>Positive</td><td><span style="color:var(--blue);font-weight:700">Inform</span> — supportive but limited power</td></tr>
+        <tr><td><strong>Opponents</strong></td><td>High</td><td>Negative</td><td><span style="color:var(--error);font-weight:700">Satisfy</span> — highest priority, can kill the project</td></tr>
+        <tr><td><strong>Resisters</strong></td><td>Low</td><td>Negative</td><td><span style="color:var(--warn);font-weight:700">Monitor and respond</span> — low risk but don't ignore</td></tr>
+      </table>
+      <div class="alert aw">⚠️ Opponents are MORE dangerous than Resisters (both negative) because Opponents have HIGH influence — they can actually stop the engagement. Action = Satisfy, not fight.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Business Model Canvas — 9 Blocks in Order ⭐ <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <div class="alert aw">⚠️ The exam specifically tests the SEQUENCE. Memorise this order.</div>
+      <table>
+        <tr><th>#</th><th>Block</th><th>Question It Answers</th></tr>
+        <tr><td>1</td><td><strong>Value Proposition</strong></td><td>What value do we deliver? What problems do we solve?</td></tr>
+        <tr><td>2</td><td><strong>Customer Segments</strong></td><td>For whom? Who are our most important customers?</td></tr>
+        <tr><td>3</td><td><strong>Channels</strong></td><td>How do we reach them? How do we deliver the value?</td></tr>
+        <tr><td>4</td><td><strong>Customer Relationships</strong></td><td>What type of relationship does each segment expect?</td></tr>
+        <tr><td>5</td><td><strong>Revenue Streams</strong></td><td>What are customers willing to pay for?</td></tr>
+        <tr><td>6</td><td><strong>Key Resources</strong></td><td>What assets does our value proposition require?</td></tr>
+        <tr><td>7</td><td><strong>Key Activities</strong></td><td>What activities does our value proposition require?</td></tr>
+        <tr><td>8</td><td><strong>Key Partners</strong></td><td>Who are our key suppliers/partners? What do we outsource?</td></tr>
+        <tr><td>9</td><td><strong>Cost Structure</strong></td><td>What are the most important costs in our business model?</td></tr>
+      </table>
+      <div class="kf">Blocks 1–5: External / value delivery · Blocks 6–8: Internal / value creation · Block 9: Financial reality (always last)</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Architecture Principles <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Component</th><th>Description</th></tr>
+        <tr><td><strong>Name</strong></td><td>Short, memorable, technology-neutral. No ambiguous words: "support", "open", "consider", "avoid".</td></tr>
+        <tr><td><strong>Statement</strong></td><td>Succinctly and unambiguously communicates the fundamental rule.</td></tr>
+        <tr><td><strong>Rationale</strong></td><td>Business benefits of adhering. Business language.</td></tr>
+        <tr><td><strong>Implications</strong></td><td>Requirements (costs, activities, resources) for both business and IT.</td></tr>
+      </table>
+      <div class="kf">Maximum 10–20 principles. Too many = limits architectural flexibility.</div>
+      <div class="alert ai">Created through a consensus workshop — consensus means everyone can live with it, not 100% agreement.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Key Phase A Artifacts <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Artifact</th><th>Purpose</th><th>Key Rule</th></tr>
+        <tr><td><strong>Statement of Architecture Work</strong></td><td>The contract — defines scope, roles, acceptance criteria</td><td>Signed at END of Phase A. Phase B cannot begin without it.</td></tr>
+        <tr><td><strong>Business Strategy Map</strong></td><td>Links strategy → capabilities. TOGAF "Driver" = SAP "Strategic Priority". TOGAF "Objective" = SAP "Value Driver".</td><td>Strategic Priority → Goals → Value Drivers → Capabilities → Initiatives</td></tr>
+        <tr><td><strong>Business Context Diagram</strong></td><td>High-level map of how business interacts with external environment</td><td>NOT a process model. Shows actors, flows, and structural dependencies.</td></tr>
+        <tr><td><strong>Solution Context Diagram</strong></td><td>Organisational relationships to the proposed solution</td><td>10-minute test: stakeholder must understand in under 10 min. If not — simplify.</td></tr>
+        <tr><td><strong>Solution Concept Diagram</strong></td><td>High-level "pencil sketch" of the expected solution</td><td>Context = org relationships. Concept = technical building blocks.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="tog(this)">TIME Model — Application Portfolio <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Category</th><th>Tech Fit</th><th>Functional Fit</th><th>Action</th></tr>
+        <tr><td><strong>Tolerate</strong></td><td>High</td><td>Low</td><td>Keep temporarily while evaluating alternatives</td></tr>
+        <tr><td><strong>Invest</strong></td><td>High</td><td>High</td><td>Strategic — scale and enhance</td></tr>
+        <tr><td><strong>Migrate</strong></td><td>Low</td><td>High</td><td>Valuable to business but tech is outdated — move platform</td></tr>
+        <tr><td><strong>Eliminate</strong></td><td>Low</td><td>Low</td><td>Decommission or phase out</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="tog(this)">Roadmap Artifacts (Phase E) <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <div class="kf">Business Architecture Roadmap: 3–5 year horizon. Pick ONE entity type — Initiatives OR Capabilities OR Outcomes. Don't mix. Outcome-based resonates best with business.</div>
+      <table>
+        <tr><th>Approach</th><th>Pro</th><th>Con</th></tr>
+        <tr><td><strong>Big Bang</strong></td><td>Fastest to full target state</td><td>High risk, maximum disruption</td></tr>
+        <tr><td><strong>Phased by Company/BU</strong></td><td>Lower risk, staged value</td><td>Longer timeline, parallel complexity</td></tr>
+        <tr><td><strong>Phased by Application</strong></td><td>Each app optimised independently</td><td>Integration complexity</td></tr>
+      </table>
+      <p><strong>Transition Architecture</strong> = formally defined intermediate state between Baseline and Target architectures. Multiple may exist.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ DOMAIN 3 ═══════════════ -->
+<div id="page-d3" class="page">
+  <div class="ph">
+    <h2>Domain 3: Business Architecture</h2>
+    <span class="domain-tag c3">20–30% of exam · ~8–12 questions</span>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Two Main Approaches <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <div class="alert ai">Business Architecture is a <strong>prerequisite</strong> for all other domains. It must be completed first.</div>
+      <table>
+        <tr><th>Approach</th><th>Focus</th><th>Anchor Point</th><th>Tools</th></tr>
+        <tr><td><strong>Capability-Centric</strong></td><td>WHAT the business does</td><td>Business Capabilities → Solution Capabilities → Applications</td><td>SAP LeanIX, SAP Signavio</td></tr>
+        <tr><td><strong>Process-Centric</strong></td><td>HOW the business does it</td><td>Business Process Model → Solution Process Model → Applications</td><td>SAP Signavio Process Explorer</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Business Capability Map <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <div class="kf">Capabilities define WHAT the business does — independent of how technology supports it.</div>
+      <h4>3-Level Hierarchy</h4>
+      <table>
+        <tr><th>Level</th><th>Name</th><th>Description</th></tr>
+        <tr><td>Level 1</td><td>Business Domain</td><td>Highest grouping. Four enterprise domains.</td></tr>
+        <tr><td>Level 2</td><td>Business Area</td><td>Groups of related capabilities within a domain.</td></tr>
+        <tr><td>Level 3</td><td>Business Capability</td><td>Specific ability the org must possess.</td></tr>
+      </table>
+      <h4>4 Enterprise Domains (Level 1)</h4>
+      <div class="kf">1. Product &amp; Services · 2. Customer · 3. Supply · 4. Corporate</div>
+      <h4>MECE Principle</h4>
+      <ul>
+        <li><strong>Mutually Exclusive</strong> — no overlap between capabilities</li>
+        <li><strong>Collectively Exhaustive</strong> — no gaps in coverage</li>
+      </ul>
+      <div class="alert aw">⚠️ Business stakeholders OWN and NAME capabilities. Naming must resonate with business language, not IT jargon.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Business Process Model — 4 Levels <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Level</th><th>Name</th><th>Naming Convention</th></tr>
+        <tr><td>Level 1</td><td>E2E Business Process</td><td>Starts "Plan to Optimise…", ends "Manage…" (PDCA cycle)</td></tr>
+        <tr><td>Level 2</td><td>Business Process Module</td><td>Format: &lt;A to B&gt; e.g. "Hire to Retire". "Manage…" = pervasive</td></tr>
+        <tr><td>Level 3</td><td>Business Process Segment</td><td>Named same as related Business Area in BCM (creates synergy)</td></tr>
+        <tr><td>Level 4</td><td>Business Activity</td><td>Lowest value-creating step. ONE central Business Activity Repository.</td></tr>
+      </table>
+      <div class="kf">Based on APQC Process Classification Framework (PCF) v7.2.1</div>
+      <div class="alert aw">⚠️ Level 3 Business Process Segment shares its name with the Business Area in the BCM — intentional! They are different objects with the same name. This creates synergy, not an error.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Key Business Architecture Artifacts <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Artifact</th><th>What It Shows</th><th>Key Rule</th></tr>
+        <tr><td><strong>Organisation Map</strong></td><td>Network of relationships between org units, partners, stakeholder groups</td><td>NOT an org chart — shows working relationships, not reporting hierarchy</td></tr>
+        <tr><td><strong>Business Capability Map</strong></td><td>What the org must be able to do. 3 levels. MECE.</td><td>Business owns it</td></tr>
+        <tr><td><strong>Business Value Flow Diagram</strong></td><td>Value-adding activities from a value perspective</td><td>Starting point for process decomposition</td></tr>
+        <tr><td><strong>Business Data Catalog</strong></td><td>Business-relevant information objects and their relationships</td><td>Connected to capabilities and processes. Source: SAP One Domain Model.</td></tr>
+        <tr><td><strong>Business Footprint Diagram ⭐</strong></td><td>The "X-ray" — links org units → strategic goals → processes → capabilities → solution components → technology</td><td>Cross-domain artifact. Links ALL architecture domains in one view.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="tog(this)">Gap Analysis &amp; Assessment Models <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <div class="kf">Gap Analysis: Baseline Architecture (as-is) → Target Architecture (to-be) → Gaps → Roadmap (Phase E)</div>
+      <h4>3-Lens Integrated Assessment Model</h4>
+      <table>
+        <tr><th>Lens</th><th>Assesses</th><th>Output</th></tr>
+        <tr><td>Business Capability Assessment</td><td>Viability of existing operating model</td><td>Business Capability Heatmap (commodity / differentiation / innovation)</td></tr>
+        <tr><td>Technology Capability Assessment</td><td>Feasibility of current IT landscape</td><td>Technology Capability Heatmap</td></tr>
+        <tr><td>Applications &amp; Solutions Assessment</td><td>Usability and value delivery</td><td>TIME model (Tolerate / Invest / Migrate / Eliminate)</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ DOMAIN 4 ═══════════════ -->
+<div id="page-d4" class="page">
+  <div class="ph">
+    <h2>Domain 4: Data, Application &amp; Technology Architecture</h2>
+    <span class="domain-tag c4">20–30% of exam · ~8–12 questions</span>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">6 Application Architecture Diagrams <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Diagram</th><th>What It Shows</th><th>Key Use</th></tr>
+        <tr><td><strong>Product Map</strong></td><td>Recommended products/solution components per Business Domain or Area</td><td>"What SAP products do we need?" — Bill of Materials</td></tr>
+        <tr><td><strong>Solution Component Diagram</strong></td><td>Blueprint of solution components and communication channels (STRUCTURE)</td><td>"How do the systems connect?" — static view</td></tr>
+        <tr><td><strong>Solution Value Flow Diagram</strong></td><td>High-level process — value-adding activities mapped to solution components</td><td>"What value does each system deliver?"</td></tr>
+        <tr><td><strong>Solution Process Flow Diagram</strong></td><td>Detailed BPMN 2.0 collaboration diagram (BEHAVIOUR)</td><td>"What exactly happens step by step?" — dynamic view</td></tr>
+        <tr><td><strong>Application Architecture Overview</strong></td><td>Abstract view of all relevant solution components and integrations</td><td>"What's the full landscape?"</td></tr>
+        <tr><td><strong>Software Distribution Diagram</strong></td><td>How solution components are distributed across infrastructure</td><td>"Where does everything live?" Phase C → feeds Phase D E&amp;L diagram</td></tr>
+      </table>
+      <div class="alert aw">⚠️ Solution Component Diagram = STRUCTURE (static). Solution Process Flow = BEHAVIOUR (dynamic). Most commonly confused pair.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">Deployment Types &amp; Cloud Service Models <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <h4>Deployment Types</h4>
+      <table>
+        <tr><th>Type</th><th>Definition</th></tr>
+        <tr><td><strong>On-Premise</strong></td><td>Software installed and runs on the organisation's own computers/data centres.</td></tr>
+        <tr><td><strong>Private Cloud</strong></td><td>Cloud for exclusive use of a single organisation (single-tenant). Accessed via VPN. Managed by org or third party.</td></tr>
+        <tr><td><strong>Public Cloud</strong></td><td>Cloud for open use by the general public (multi-tenant). Managed by cloud provider.</td></tr>
+      </table>
+      <div class="alert aw">⚠️ Private Cloud ≠ On-Premise. Private Cloud is still a cloud deployment — just single-tenant and accessed via VPN.</div>
+      <h4>Cloud Service Models</h4>
+      <table>
+        <tr><th>Model</th><th>Provider Manages</th><th>Customer Controls</th></tr>
+        <tr><td><strong>SaaS</strong></td><td>Everything including the application</td><td>User-specific config only. No control over releases.</td></tr>
+        <tr><td><strong>PaaS</strong></td><td>Infrastructure + platform/middleware</td><td>Deployed applications + platform configuration</td></tr>
+        <tr><td><strong>IaaS</strong></td><td>Physical hardware only</td><td>OS, storage, deployed applications, selected network (VLAN)</td></tr>
+      </table>
+      <div class="kf">IaaS = most customer control. SaaS = least customer control (user config only).</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">SAP Clean Core — 3 Extension Types ⭐ <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <div class="alert ai">Clean Core = keeping S/4HANA standard and unmodified. One of the most exam-tested topics.</div>
+      <table>
+        <tr><th>Extension Type</th><th>Where It Runs</th><th>How It Extends</th></tr>
+        <tr><td><strong>Key User Extensibility</strong></td><td>On S/4HANA itself</td><td>Business users configure without code. In-app tools. Low risk.</td></tr>
+        <tr><td><strong>Developer Extensibility</strong></td><td>On S/4HANA itself (ABAP Environment)</td><td>Developers extend using SAP's stable, published APIs. No modification of SAP code.</td></tr>
+        <tr><td><strong>Side-by-Side Extensions</strong></td><td>On SAP BTP</td><td>Separate system entirely. Connected via APIs. Maximum flexibility and isolation.</td></tr>
+      </table>
+      <div class="kf">New complex extensions → Side-by-Side on BTP. Simple user config → Key User. ABAP dev on S/4HANA → Developer Extensibility.</div>
+    </div>
+  </div>
+
+  <div class="acc open">
+    <div class="acc-h" onclick="tog(this)">ISA-M — 4 Integration Domains <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Domain</th><th>What It Covers</th></tr>
+        <tr><td><strong>Process Integration</strong></td><td>Connecting business processes across systems (A2A and B2B)</td></tr>
+        <tr><td><strong>Data Integration</strong></td><td>Moving and synchronising data between systems</td></tr>
+        <tr><td><strong>Analytics Integration</strong></td><td>Connecting operational data to analytics and reporting systems</td></tr>
+        <tr><td><strong>IoT Integration</strong></td><td>Connecting devices and things to enterprise systems</td></tr>
+      </table>
+      <h4>Integration Styles</h4>
+      <div class="kf">Synchronous (request/reply) · Asynchronous (event-driven) · Batch (scheduled) · Real-time (immediate)</div>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="tog(this)">S/4HANA Transformation Strategies <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <table>
+        <tr><th>Strategy</th><th>Description</th><th>When to Use</th></tr>
+        <tr><td><strong>Greenfield</strong></td><td>New implementation from scratch</td><td>New business, clean start, maximum standardisation desired</td></tr>
+        <tr><td><strong>Brownfield</strong></td><td>System conversion from existing SAP to S/4HANA</td><td>Existing SAP customer, wants to preserve config and data</td></tr>
+        <tr><td><strong>Selective Data Transition</strong></td><td>Process re-engineering + selective data migration</td><td>Wants Greenfield processes but needs specific historical data</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc">
+    <div class="acc-h" onclick="tog(this)">Technology Architecture (Phase D) <span class="chev">▼</span></div>
+    <div class="acc-b">
+      <p>Describes the technology stack, physical computing environment, and network connectivity that enable the Application and Data Architecture building blocks.</p>
+      <h4>Environments &amp; Location Diagram</h4>
+      <p>Evolves from the <strong>Software Distribution Diagram</strong> (Phase C) into a more detailed deployment view. Names data centre providers, locations, infrastructure, and maps building blocks to environments.</p>
+      <div class="alert aw">⚠️ Software Distribution Diagram = Phase C (Application Architecture). Environments &amp; Location Diagram = Phase D (Technology Architecture). The SD is the INPUT to the E&amp;L diagram.</div>
+      <h4>Data Architecture</h4>
+      <table>
+        <tr><th>Diagram</th><th>Purpose</th></tr>
+        <tr><td>Solution Data Flow Diagram</td><td>Typical data flows for master, transactional, configuration data between solution components</td></tr>
+        <tr><td>Conceptual Data Diagram</td><td>Entity-Relationship style. Steps: Define Entities → Define Attributes → Define Relationships</td></tr>
+      </table>
+      <div class="kf">SAP One Domain Model (ODM) at api.sap.com/sap-one-domain-model — defines the structure of Solution Data Objects</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ QUIZ ═══════════════ -->
+<div id="page-quiz" class="page">
+  <div class="ph">
+    <h2>Practice Quizzes</h2>
+    <p>15 questions per domain with instant feedback. Select a domain to begin.</p>
+  </div>
+  <div class="quiz-tabs">
+    <button class="qt active" onclick="startQuiz('d1',this)">Domain 1</button>
+    <button class="qt" onclick="startQuiz('d2',this)">Domain 2</button>
+    <button class="qt" onclick="startQuiz('d3',this)">Domain 3</button>
+    <button class="qt" onclick="startQuiz('d4',this)">Domain 4</button>
+  </div>
+  <div id="quiz-box"></div>
+</div>
+
+<!-- ═══════════════ TRAPS ═══════════════ -->
+<div id="page-traps" class="page">
+  <div class="ph">
+    <h2>Exam Traps</h2>
+    <p>31 common mistakes that catch candidates out. Review the night before exam day.</p>
+  </div>
+
+  <h4 style="margin-bottom:10px">Domain 1</h4>
+  <div class="trap"><h4>⚠️ Practice ≠ Services</h4><p><span class="x">Practice</span> = the internal organisational model of EA within a company. <span class="c">Services</span> = the external SAP engagement offering (North Star Architecture). They sound similar — completely different things.</p></div>
+  <div class="trap"><h4>⚠️ ADM is NOT waterfall</h4><p>The ADM is <span class="c">iterative</span> — within phases, between phases, between full cycles. Never describe it as a sequential waterfall process.</p></div>
+  <div class="trap"><h4>⚠️ Artifacts are for stakeholders, not architecture</h4><p>When asked why you choose a subset of Metro Map artifacts, the answer is always <span class="c">stakeholder needs</span> — not "to cover all architecture domains" or "for completeness."</p></div>
+  <div class="trap"><h4>⚠️ LeanIX vs Signavio</h4><p><span class="c">LeanIX</span> = architecture and applications management. <span class="c">Signavio</span> = business process management and analysis. Don't swap them.</p></div>
+  <div class="trap"><h4>⚠️ Maturity model has 8 dimensions — all testable</h4><p>Don't confuse the 8 maturity dimensions with the 5 building blocks or the ADM phases.</p></div>
+
+  <h4 style="margin:16px 0 10px">Domain 2</h4>
+  <div class="trap"><h4>⚠️ BMC sequence is specifically tested</h4><p>Order: <span class="c">Value Proposition → Customer Segments → Channels → Customer Relationships → Revenue Streams → Key Resources → Key Activities → Key Partners → Cost Structure</span>. External (1–5) before internal (6–8). Cost (9) is always last.</p></div>
+  <div class="trap"><h4>⚠️ Strategy vs Model vs Architecture</h4><p>Strategy = goals &amp; metrics. Model = how you profit. Architecture = structure to execute the model. Hierarchical — don't conflate them.</p></div>
+  <div class="trap"><h4>⚠️ Statement of Architecture Work timing</h4><p>Must be signed and approved at the <span class="c">end of Phase A</span>. Phase B cannot begin without it. Architecture produced after a decision = too late.</p></div>
+  <div class="trap"><h4>⚠️ Architecture Principles — 10–20 maximum</h4><p>More than 20 principles limits architectural flexibility. If a scenario describes 40 principles, that is <span class="x">a problem</span>, not a best practice.</p></div>
+  <div class="trap"><h4>⚠️ Roadmap entity types — don't mix</h4><p>Business roadmaps can show: Initiatives OR Capabilities OR Outcomes. Pick one. Mixing entity types is incorrect. Outcome-based resonates most with business stakeholders.</p></div>
+  <div class="trap"><h4>⚠️ Solution Context vs Solution Concept</h4><p><span class="c">Solution Context</span> = organisational relationships. <span class="c">Solution Concept</span> = technical building blocks (pencil sketch). Both are Phase A artifacts but serve different purposes.</p></div>
+  <div class="trap"><h4>⚠️ Opponents vs Resisters</h4><p>Both have negative attitude. <span class="x">Opponents</span> = High influence → <strong>Satisfy</strong> (highest priority). <span class="x">Resisters</span> = Low influence → <strong>Monitor and respond</strong>. Don't swap the actions.</p></div>
+  <div class="trap"><h4>⚠️ TOGAF → SAP EA term changes</h4><p>TOGAF "Driver" → SAP EA <span class="c">"Strategic Priority"</span>. TOGAF "Objective" → SAP EA <span class="c">"Value Driver"</span>.</p></div>
+
+  <h4 style="margin:16px 0 10px">Domain 3</h4>
+  <div class="trap"><h4>⚠️ Capability vs Process</h4><p><span class="c">Capability</span> = WHAT the business does (stable, rarely changes, independent of technology). <span class="c">Process</span> = HOW the business does it (continually improved).</p></div>
+  <div class="trap"><h4>⚠️ Business owns capabilities</h4><p>Business people name and own the capabilities. Naming must resonate with business language, not IT jargon.</p></div>
+  <div class="trap"><h4>⚠️ MECE — both conditions required simultaneously</h4><p>Mutually Exclusive AND Collectively Exhaustive — both must be true at the same time. Not just one or the other.</p></div>
+  <div class="trap"><h4>⚠️ Business Footprint Diagram is cross-domain</h4><p>It is NOT just a business architecture diagram. It links strategy → capabilities → solution components → technology. It crosses ALL architecture domains.</p></div>
+  <div class="trap"><h4>⚠️ Level 3 Business Process Segment naming</h4><p>Named the same as the corresponding Business Area in the BCM. This is <span class="c">intentional</span> — it creates synergy. They are different objects that happen to share the same name.</p></div>
+  <div class="trap"><h4>⚠️ Organisation Map ≠ Org Chart</h4><p>Org Map = network of working relationships. Org Chart = hierarchical reporting structure. EA uses Org Maps.</p></div>
+  <div class="trap"><h4>⚠️ Business Activity Repository</h4><p>ALL Level 4 Business Activities are stored in ONE central repository. Names can change per industry but the inherent meaning cannot.</p></div>
+
+  <h4 style="margin:16px 0 10px">Domain 4</h4>
+  <div class="trap"><h4>⚠️ Solution Component vs Solution Process Flow diagrams</h4><p><span class="c">Solution Component Diagram</span> = STRUCTURE (static view). <span class="c">Solution Process Flow</span> = BEHAVIOUR (dynamic step-by-step flow). Most commonly confused pair in this domain.</p></div>
+  <div class="trap"><h4>⚠️ Private Cloud ≠ On-Premise</h4><p>Private Cloud is still a cloud deployment — single-tenant, can be managed by org or third party. On-Premise = physically on the organisation's own premises.</p></div>
+  <div class="trap"><h4>⚠️ SaaS customer control</h4><p>In SaaS: customer controls ONLY user-specific configuration. No control over releases, underlying infrastructure, or platform. IaaS gives the MOST customer control.</p></div>
+  <div class="trap"><h4>⚠️ Clean Core extension location</h4><p>Key User = ON S/4HANA (no code). Developer = ON S/4HANA (ABAP, stable APIs). Side-by-Side = ON BTP (separate system, APIs). Don't confuse where each runs.</p></div>
+  <div class="trap"><h4>⚠️ Software Distribution Diagram phase</h4><p>Belongs to <span class="c">Phase C</span> (Application Architecture). Provides INPUT to the Environments &amp; Location Diagram in <span class="c">Phase D</span>. They are different diagrams at different levels of detail.</p></div>
+  <div class="trap"><h4>⚠️ ISA-M has 4 domains</h4><p>Process Integration · Data Integration · Analytics Integration · IoT Integration. All four are individually testable.</p></div>
+
+  <h4 style="margin:16px 0 10px">General</h4>
+  <div class="trap"><h4>⚠️ Wanderlust = 45% of the exam</h4><p>18/40 questions = 45% of the exam come from the Wanderlust case study. It is published in advance. Read it BEFORE exam day.</p></div>
+  <div class="trap"><h4>⚠️ Transition Architecture vs Target Architecture</h4><p><span class="c">Target Architecture</span> = final desired state. <span class="c">Transition Architecture</span> = formally defined intermediate state on the journey to the target. Multiple Transition Architectures may exist.</p></div>
+  <div class="trap"><h4>⚠️ Requirements Management is cross-cutting</h4><p>Requirements Management runs through ALL ADM phases. It is NOT confined to Preliminary or Phase A. Same applies to Governance (Risk, Decisions, Principles).</p></div>
+  <div class="trap"><h4>⚠️ Best answer, not only correct answer</h4><p>SAP exam questions look for the MOST appropriate response in context. Read all four options before selecting. An answer that's right in one scenario may be wrong in another.</p></div>
+</div>
+
+<!-- ═══════════════ TRACKER ═══════════════ -->
+<div id="page-tracker" class="page">
+  <div class="ph">
+    <h2>Progress Tracker</h2>
+    <p>Track your preparation. Checkboxes are saved automatically in your browser.</p>
+  </div>
+  <div class="tr-sec">
+    <h3>Study Content</h3>
+    <div class="ci"><input type="checkbox" id="t1"><label for="t1">Domain 1 – SAP EA Framework &amp; Toolset read and understood</label></div>
+    <div class="ci"><input type="checkbox" id="t2"><label for="t2">Domain 2 – Architecture Vision &amp; Roadmap read and understood</label></div>
+    <div class="ci"><input type="checkbox" id="t3"><label for="t3">Domain 3 – Business Architecture read and understood</label></div>
+    <div class="ci"><input type="checkbox" id="t4"><label for="t4">Domain 4 – Data, Application &amp; Technology Architecture read and understood</label></div>
+  </div>
+  <div class="tr-sec">
+    <h3>Key Memorisation</h3>
+    <div class="ci"><input type="checkbox" id="t5"><label for="t5">5 SAP EA Framework building blocks memorised</label></div>
+    <div class="ci"><input type="checkbox" id="t6"><label for="t6">TOGAF ADM phases memorised (Preliminary → A → B → C → D → E)</label></div>
+    <div class="ci"><input type="checkbox" id="t7"><label for="t7">Business Model Canvas 9 blocks in sequence memorised</label></div>
+    <div class="ci"><input type="checkbox" id="t8"><label for="t8">Stakeholder Map 4 quadrants + actions memorised</label></div>
+    <div class="ci"><input type="checkbox" id="t9"><label for="t9">Metro Map 3 variants understood</label></div>
+    <div class="ci"><input type="checkbox" id="t10"><label for="t10">TIME model (Tolerate/Invest/Migrate/Eliminate) understood</label></div>
+    <div class="ci"><input type="checkbox" id="t11"><label for="t11">Cloud models (SaaS/PaaS/IaaS) + deployment types understood</label></div>
+    <div class="ci"><input type="checkbox" id="t12"><label for="t12">3 Clean Core extension types + where each runs</label></div>
+    <div class="ci"><input type="checkbox" id="t13"><label for="t13">ISA-M 4 integration domains memorised</label></div>
+    <div class="ci"><input type="checkbox" id="t14"><label for="t14">S/4HANA transformation strategies (Greenfield/Brownfield/Selective) understood</label></div>
+  </div>
+  <div class="tr-sec">
+    <h3>Practice &amp; Review</h3>
+    <div class="ci"><input type="checkbox" id="t15"><label for="t15">Domain 1 quiz completed (score 13+/15)</label></div>
+    <div class="ci"><input type="checkbox" id="t16"><label for="t16">Domain 2 quiz completed (score 13+/15)</label></div>
+    <div class="ci"><input type="checkbox" id="t17"><label for="t17">Domain 3 quiz completed (score 13+/15)</label></div>
+    <div class="ci"><input type="checkbox" id="t18"><label for="t18">Domain 4 quiz completed (score 13+/15)</label></div>
+    <div class="ci"><input type="checkbox" id="t19"><label for="t19">Artifact cheatsheet reviewed</label></div>
+    <div class="ci"><input type="checkbox" id="t20"><label for="t20">Exam traps reviewed</label></div>
+  </div>
+  <div class="tr-sec">
+    <h3>Final Preparation</h3>
+    <div class="ci"><input type="checkbox" id="t21"><label for="t21">Wanderlust case study read and annotated</label></div>
+    <div class="ci"><input type="checkbox" id="t22"><label for="t22">Mock exam completed</label></div>
+    <div class="ci"><input type="checkbox" id="t23"><label for="t23">Exam traps reviewed the night before</label></div>
+    <div class="ci"><input type="checkbox" id="t24"><label for="t24">Exam day — READY ✓</label></div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ── Navigation ──────────────────────────────────────────────
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nl').forEach(n => n.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  if (pg) pg.classList.add('active');
+  document.querySelectorAll('.nl').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) {
+      n.classList.add('active');
+    }
+  });
+  window.scrollTo(0, 0);
+}
+
+// ── Accordion ───────────────────────────────────────────────
+function tog(h) { h.parentElement.classList.toggle('open'); }
+
+// ── Progress Tracker persistence ────────────────────────────
+document.querySelectorAll('.ci input').forEach(cb => {
+  const key = 'sap_' + cb.id;
+  cb.checked = localStorage.getItem(key) === '1';
+  cb.addEventListener('change', () => localStorage.setItem(key, cb.checked ? '1' : '0'));
+});
+
+// ── Quiz Data ───────────────────────────────────────────────
+const QUIZ = {
+  d1: [
+    { q: "Which of the following best describes the relationship between TOGAF and the SAP EA Methodology?",
+      opts: ["SAP EA replaces TOGAF entirely with a proprietary approach","SAP EA is built on TOGAF and tailors it for SAP-specific contexts","TOGAF and SAP EA are parallel frameworks with no relationship","SAP EA is a simplified subset of TOGAF with fewer phases"],
+      ans: 1, exp: "SAP EA is built on TOGAF and tailors it for SAP contexts — it does not replace it." },
+    { q: "An organisation is planning an architecture engagement primarily focused on their upcoming cloud migration. Which Metro Map variant would be most appropriate?",
+      opts: ["Business-Centric Metro Map","Holistic Metro Map","IT-Centric Metro Map","Standard TOGAF ADM"],
+      ans: 2, exp: "Cloud migration = IT-driven engagement → IT-Centric Metro Map." },
+    { q: "A company has just hired their first enterprise architect and has no formal EA governance in place. Which EA organisational model best describes this situation?",
+      opts: ["Informal","Separated","Federated","Centralised"],
+      ans: 0, exp: "No dedicated EA team, EA skills not yet formalised = Informal model." },
+    { q: "Which SAP tool would you use to analyse the performance of business processes and identify areas of improvement using built-in metrics?",
+      opts: ["SAP LeanIX","SAP Cloud ALM","SAP Signavio","SAP Business Accelerator Hub"],
+      ans: 2, exp: "Signavio = process analysis, 1,000+ built-in metrics, 24-hour connection." },
+    { q: "In the SAP EA integrated toolchain, what happens in Step 4 — the 'Plan' step?",
+      opts: ["SAP Signavio connects to the live SAP system to extract process data","SAP LeanIX ingests the current system landscape from Cloud ALM","Roadmaps defined in LeanIX are handed over to Cloud ALM, generating implementation projects","Process designs in Signavio are approved and transferred for execution"],
+      ans: 2, exp: "Step 4 = LeanIX roadmaps handed to Cloud ALM, implementation projects generated." },
+    { q: "Which of the following is NOT one of the five SAP EA Framework building blocks?",
+      opts: ["Methodology","Reference Architecture Content","Tooling","Governance"],
+      ans: 3, exp: "The 5 blocks are: Methodology, Content, Tooling, Practice, Services. Governance is part of Practice — not a separate building block." },
+    { q: "An architect is assessing an organisation's EA maturity. Architecture deliverables are comprehensive, but EA rarely influences actual investment decisions. Which two maturity dimensions are most relevant?",
+      opts: ["Business-IT Alignment and Stakeholder Involvement","Architecture Development and Action & Impact","Communication and People Enablement","Organisation & Governance and Architecture Process"],
+      ans: 1, exp: "Deliverables = Architecture Development dimension. Not influencing decisions = Action & Impact dimension." },
+    { q: "Which statement about the ADM is correct?",
+      opts: ["The ADM is a sequential waterfall process that must be followed in order","The ADM is iterative within phases, between phases, and between full cycles","The ADM requires completing all phases in every architecture engagement","The ADM phases can be skipped if the stakeholder does not require them"],
+      ans: 1, exp: "The ADM is iterative — within phases, between phases, and between full cycles. Never waterfall." },
+    { q: "What is the primary purpose of the Preliminary Phase in the SAP EA Methodology?",
+      opts: ["To develop the Architecture Vision and obtain stakeholder buy-in","To set the ground for the engagement by selecting and tailoring the ADM","To conduct a gap analysis between the baseline and target architectures","To create the roadmap and implementation plan"],
+      ans: 1, exp: "Preliminary Phase = setup, ADM selection, tailoring — not yet architecture development." },
+    { q: "A company has multiple divisions with very different business models that operate largely independently. Which EA organisational model is MOST appropriate?",
+      opts: ["Informal","Separated","Federated","Centralised"],
+      ans: 1, exp: "Loosely coupled divisions with different architectures = Separated model." },
+    { q: "The SAP EA Framework was officially launched in which year?",
+      opts: ["1995","2001","2007","2015"],
+      ans: 2, exp: "SAP EAF was officially launched in 2007. TOGAF was founded in 1995." },
+    { q: "An architect is selecting which Metro Map artifacts to include in an engagement. What should be the PRIMARY driver for artifact selection?",
+      opts: ["Covering all architecture domains for completeness","Following the full Metro Map to ensure methodology compliance","The needs and concerns of the stakeholders involved","The timeline and budget available for the engagement"],
+      ans: 2, exp: "Artifacts are selected for the sake of stakeholders, not for architectural completeness." },
+    { q: "What is the difference between Initial Risk and Residual Risk?",
+      opts: ["Initial Risk is documented, Residual Risk is undocumented","Initial Risk is before mitigation, Residual Risk is after mitigation","Initial Risk applies to business domains, Residual Risk applies to IT domains","Initial Risk is high impact, Residual Risk is low impact"],
+      ans: 1, exp: "Initial = before mitigation actions. Residual = after mitigation actions have been applied." },
+    { q: "Which unique value proposition of the SAP integrated toolchain describes the ability to understand the effect of an architectural change on business processes?",
+      opts: ["Enabling continuous adoption and operational stability","Connecting business process models to real-world execution","Linking applications and processes for better impact analysis","Integration of planning and implementation views across tools"],
+      ans: 2, exp: "\"Linking applications and processes for better impact analysis\" — understanding knock-on effects of architectural changes." },
+    { q: "Architecture Decision Records (ADRs) should be created at which point in the decision-making process?",
+      opts: ["After the decision has been made and approved by leadership","During implementation to document decisions made by the project team","Before significant decisions are made, to inform and influence them","After the architecture engagement is complete, as a historical record"],
+      ans: 2, exp: "ADRs must be created BEFORE decisions are taken. Architecture produced after decisions = too late and causes conflict." }
+  ],
+  d2: [
+    { q: "An enterprise architect has just been engaged by a new client. The CEO has provided a high-level strategy document outlining the company's goals for the next five years. What is the FIRST artifact the architect should produce?",
+      opts: ["Business Capability Map","Stakeholder Map","Statement of Architecture Work","Business Model Canvas"],
+      ans: 1, exp: "Always start with a Stakeholder Map — you need to know who matters before producing anything else." },
+    { q: "A CFO has serious concerns about the proposed architecture transformation and has the authority to cancel the project. Which stakeholder quadrant do they fall into, and what is the recommended action?",
+      opts: ["Resisters — Monitor and respond","Opponents — Satisfy","Enthusiasts — Inform","Opponents — Actively engage"],
+      ans: 1, exp: "High influence + negative attitude = Opponents. Action = Satisfy (not fight, not ignore)." },
+    { q: "In the Business Model Canvas, which block comes IMMEDIATELY after 'Customer Segments'?",
+      opts: ["Revenue Streams","Key Resources","Channels","Customer Relationships"],
+      ans: 2, exp: "BMC sequence: Value Proposition → Customer Segments → Channels → Customer Relationships..." },
+    { q: "What is the SAP EA term for what TOGAF calls a 'Driver'?",
+      opts: ["Business Goal","Value Driver","Strategic Priority","Architecture Objective"],
+      ans: 2, exp: "SAP EA maps TOGAF 'Driver' to 'Strategic Priority'." },
+    { q: "An architect has just completed the Architecture Principles workshop. The team has produced 35 principles. What should the architect do?",
+      opts: ["Accept all 35 — comprehensive coverage reduces risk","Reduce to 10–20 principles — too many limits architectural flexibility","Submit for leadership approval before reducing","Convert the extra principles into requirements"],
+      ans: 1, exp: "10–20 principles maximum. More = less architectural flexibility. Reduce the set." },
+    { q: "Which of the following statements about the Statement of Architecture Work is CORRECT?",
+      opts: ["It is produced at the end of Phase B after the Business Architecture is complete","It is a living document that evolves throughout all ADM phases","It is produced at the end of Phase A and must be approved before Phase B begins","It is an optional artifact for smaller engagements"],
+      ans: 2, exp: "Statement of Architecture Work = output of Phase A, must be approved before Phase B begins." },
+    { q: "A stakeholder looks at the Solution Context Diagram and says 'I've been staring at this for 15 minutes and I still don't understand what we're building.' What should the architect do?",
+      opts: ["Provide additional training to the stakeholder","Simplify the diagram — it has failed the 10-minute test","Replace it with a Solution Concept Diagram","Schedule a walkthrough session to explain the complexity"],
+      ans: 1, exp: "10-minute rule: if a stakeholder can't understand in 10 minutes, the diagram is too complex. Simplify." },
+    { q: "Which component of an Architecture Principle explains WHY the principle benefits the business?",
+      opts: ["Name","Statement","Rationale","Implications"],
+      ans: 2, exp: "Rationale = the business benefits of adhering to the principle." },
+    { q: "A business roadmap shows initiatives, capabilities, and outcomes mixed together across a 5-year timeline. What is wrong with this approach?",
+      opts: ["The time horizon is too long — roadmaps should be 1–2 years","Roadmaps should use calendar years, not fiscal years","Only one entity type should be used per roadmap — don't mix","Nothing is wrong — mixing entity types gives richer context"],
+      ans: 2, exp: "One entity type per roadmap — don't mix Initiatives, Capabilities, and Outcomes." },
+    { q: "What is the PRIMARY difference between a Solution Context Diagram and a Solution Concept Diagram?",
+      opts: ["Solution Context is for technical stakeholders; Solution Concept is for business stakeholders","Solution Context shows organisational relationships; Solution Concept shows technical building blocks","Solution Context is produced in Phase B; Solution Concept is produced in Phase A","Solution Context is mandatory; Solution Concept is optional"],
+      ans: 1, exp: "Context = org relationships. Concept = technical building blocks (pencil sketch)." },
+    { q: "In the Business Strategy Map, which level sits directly below 'Value Drivers'?",
+      opts: ["Strategic Priorities","Business Goals","Business Capabilities","Initiatives"],
+      ans: 2, exp: "Strategy Map: Strategic Priority → Goals → Value Drivers → Business Capabilities → Initiatives" },
+    { q: "An application has high technical quality but provides very little functional value to the business. According to the TIME model, what category does this fall into?",
+      opts: ["Invest","Migrate","Tolerate","Eliminate"],
+      ans: 2, exp: "High tech fit + low functional fit = Tolerate." },
+    { q: "Which of the following is a Transition Architecture?",
+      opts: ["The final desired state of the enterprise architecture","A formally defined intermediate state between Baseline and Target architectures","A high-level vision of the architecture produced in Phase A","The architecture at the point of go-live"],
+      ans: 1, exp: "Transition Architecture = formally defined intermediate state on journey to Target. Multiple may exist." },
+    { q: "An architect is creating Architecture Principles with the team. Which attendee is MOST critical to ensure business alignment?",
+      opts: ["Head of Solutions Development","Head of IT Operations","Chief Information Officer (CIO)","External SAP Consultant"],
+      ans: 2, exp: "CIO is critical — they bridge business and IT at executive level." },
+    { q: "Which roadmap entity type is described as MOST effective for business stakeholder engagement?",
+      opts: ["Initiative-based","Capability-based","Outcome-based","Application-based"],
+      ans: 2, exp: "Outcome-based roadmaps resonate best with business stakeholders." }
+  ],
+  d3: [
+    { q: "Which statement BEST distinguishes a Business Capability from a Business Process?",
+      opts: ["Business Capabilities describe HOW the business operates; Business Processes describe WHAT it must do","Business Capabilities describe WHAT the business must be able to do; Business Processes describe HOW it does it","Business Capabilities are owned by IT; Business Processes are owned by the business","Business Capabilities change frequently; Business Processes are stable"],
+      ans: 1, exp: "Capabilities = WHAT (stable). Processes = HOW (continually improved)." },
+    { q: "A company's Business Capability Map includes capabilities that overlap between 'Sales' and 'Customer Service'. Which principle has been violated?",
+      opts: ["APQC PCF compliance","MECE — Mutually Exclusive condition","MECE — Collectively Exhaustive condition","Business Footprint alignment"],
+      ans: 1, exp: "Overlap between capabilities = violation of Mutually Exclusive (the first M in MECE)." },
+    { q: "Which of the following is the CORRECT naming convention for a Level 2 Business Process Module?",
+      opts: ["'Manage Customer Relationships'","'Customer to Cash'","'Sales Process Segment'","'Plan to Optimise Sales'"],
+      ans: 1, exp: "Level 2 format = <A to B> e.g. 'Customer to Cash'. Level 1 = 'Plan to Optimise…'." },
+    { q: "A Business Architect is conducting a heat mapping exercise. Which party should PRIMARILY own and name the business capabilities?",
+      opts: ["The enterprise architect","The IT department","The business stakeholders","The SAP implementation partner"],
+      ans: 2, exp: "Business stakeholders own and name capabilities. Naming must resonate with business language." },
+    { q: "The Business Footprint Diagram is described as a 'cross-domain X-ray.' What makes it unique?",
+      opts: ["It is the only artifact that uses colour coding","It links strategic objectives, capabilities, solution components, and technology in a single view","It is the only mandatory artifact in Phase B","It replaces both the Capability Map and the Process Model"],
+      ans: 1, exp: "Business Footprint = only artifact that links strategy → capabilities → solutions → technology in one view." },
+    { q: "Which approach to Business Architecture should be used when the engagement is driven by a new SAP S/4HANA implementation covering multiple business functions?",
+      opts: ["Experience-Based","Process-Centric","Capability-Centric","Technology-Centric"],
+      ans: 2, exp: "New implementation across multiple functions = Capability-Centric approach." },
+    { q: "A Level 3 Business Process Segment for 'Customer Management' shares its name with a Business Area in the BCM. An architect questions whether this is an error. What is the correct response?",
+      opts: ["It is an error — they must have different names to avoid confusion","It is intentional — the shared naming creates synergy between capability and process models","It is acceptable practice but not recommended by SAP","The process segment should be renamed to reflect the solution"],
+      ans: 1, exp: "Intentional. Shared naming = synergy between models. They are different objects with the same name." },
+    { q: "Which SAP tool provides access to the Reference Business Architecture process content?",
+      opts: ["SAP LeanIX","SAP Cloud ALM","SAP Signavio Process Explorer","SAP Business Application Studio"],
+      ans: 2, exp: "SAP Signavio Process Explorer provides access to RBA content." },
+    { q: "In the Business Process Model, at which level are all entries stored in ONE central repository?",
+      opts: ["Level 1 — E2E Business Process","Level 2 — Business Process Module","Level 3 — Business Process Segment","Level 4 — Business Activity"],
+      ans: 3, exp: "Level 4 Business Activities are stored in ONE central Business Activity Repository." },
+    { q: "An architect produces an Organisation Map showing the reporting lines between the CEO and department heads. A colleague says this is not an Organisation Map in the SAP EA sense. Why?",
+      opts: ["Organisation Maps should only show external stakeholders","Organisation Maps show networks of working relationships, not hierarchical reporting lines","Organisation Maps are not produced until Phase C","Organisation Maps should be based on the Business Capability structure"],
+      ans: 1, exp: "EA Organisation Map = network of working relationships, NOT a hierarchy/org chart." },
+    { q: "What does the APQC PCF provide in the context of SAP Business Architecture?",
+      opts: ["A technology reference model for SAP infrastructure","A process classification framework used as the basis for the Business Process Model","A capability maturity assessment framework","A set of SAP-specific integration patterns"],
+      ans: 1, exp: "APQC PCF v7.2.1 is the basis for the SAP Business Process Model." },
+    { q: "Which of the following BEST describes the bottom-up approach to Business Capability Assessment?",
+      opts: ["Start from strategic goals and link them to capabilities via the Strategy Map","Start from the current state and use heat mapping to identify gaps and priorities","Start from the SAP Reference Business Architecture and map to current capabilities","Start from identified IT investments and trace them back to business capabilities"],
+      ans: 1, exp: "Bottom-Up = start from current state, heat map, identify gaps. Top-Down = start from strategy." },
+    { q: "In which of the four Enterprise Domains would 'Financial Planning and Analysis' most likely be classified?",
+      opts: ["Product & Services","Customer","Supply","Corporate"],
+      ans: 3, exp: "Financial Planning = Corporate domain (finance, HR, legal, IT, risk)." },
+    { q: "A Business Architect maps business capabilities to solution capabilities and finds that a Business Capability has no corresponding Solution Capability. What does this represent?",
+      opts: ["A requirement to customise the SAP solution","A gap — this capability must be addressed in the roadmap","A capability that should be eliminated from the Business Capability Map","A non-functional requirement to be added to the Requirements Catalog"],
+      ans: 1, exp: "Missing Solution Capability = a gap. Must be addressed in the architecture roadmap." },
+    { q: "Which of the following is the PRIMARY purpose of the Business Data Catalog?",
+      opts: ["To document the database schema of the target SAP system","To summarise business-relevant information objects and their relationships","To define data migration requirements from legacy systems","To map solution data objects to infrastructure storage locations"],
+      ans: 1, exp: "Business Data Catalog = business-relevant information objects and their relationships." }
+  ],
+  d4: [
+    { q: "An architect needs to show how solution components communicate with each other statically — what systems exist, what they connect to, and through which channels. Which diagram should they use?",
+      opts: ["Solution Process Flow Diagram","Solution Value Flow Diagram","Solution Component Diagram","Application Architecture Overview"],
+      ans: 2, exp: "Solution Component Diagram = static STRUCTURE view of systems and connections." },
+    { q: "A company runs SAP S/4HANA on their own hardware in their own data centre, with no cloud involvement. What deployment type is this?",
+      opts: ["Private Cloud","Public Cloud","On-Premise","Hybrid Cloud"],
+      ans: 2, exp: "Own hardware, own data centre = On-Premise." },
+    { q: "In a SaaS deployment, what does the customer control?",
+      opts: ["The operating system and storage","The deployed applications and middleware","Only user-specific configuration","The physical hardware layer"],
+      ans: 2, exp: "SaaS customer controls ONLY user-specific configuration." },
+    { q: "A business user needs to extend SAP S/4HANA functionality without writing any code and without affecting the standard SAP delivery. Which Clean Core extension type should they use?",
+      opts: ["Developer Extensibility","Side-by-Side Extension","Key User Extensibility","ABAP Custom Code"],
+      ans: 2, exp: "Key User Extensibility = no code, in-app, on S/4HANA, no impact to standard delivery." },
+    { q: "A company wants to build a complex mobile application that integrates with S/4HANA but runs completely separately to avoid any impact on the core system. Which extension approach is recommended?",
+      opts: ["Key User Extensibility — low risk, in-app","Developer Extensibility — ABAP on S/4HANA","Side-by-Side Extension on SAP BTP","Core modification with SAP support approval"],
+      ans: 2, exp: "Complex separate app = Side-by-Side Extension on SAP BTP." },
+    { q: "The Software Distribution Diagram belongs to which ADM phase?",
+      opts: ["Phase B — Business Architecture","Phase C — Application & Data Architecture","Phase D — Technology Architecture","Phase E — Opportunities & Solutions"],
+      ans: 1, exp: "Software Distribution Diagram = Phase C (Application Architecture)." },
+    { q: "Which diagram in Technology Architecture evolves from the Software Distribution Diagram by adding physical data centre locations and network connectivity?",
+      opts: ["Network and Communications Diagram","Application Architecture Overview","Environments and Location Diagram","Solution Component Diagram"],
+      ans: 2, exp: "Environments & Location Diagram (Phase D) evolves from the Software Distribution Diagram (Phase C)." },
+    { q: "A company operates SAP infrastructure in a cloud environment used exclusively by them, managed by a third-party provider, and accessed via VPN. What deployment type is this?",
+      opts: ["On-Premise","Public Cloud","Private Cloud","Community Cloud"],
+      ans: 2, exp: "Exclusive use + third-party managed + VPN access = Private Cloud." },
+    { q: "Which of the four ISA-M integration domains covers the connection between operational systems and reporting/analytics platforms?",
+      opts: ["Process Integration","Data Integration","Analytics Integration","IoT Integration"],
+      ans: 2, exp: "Analytics Integration = connecting operational data to analytics/reporting." },
+    { q: "A company is migrating from SAP ECC to S/4HANA. They want maximum standardisation and are willing to re-configure everything from scratch. Which transformation strategy is appropriate?",
+      opts: ["Brownfield","Selective Data Transition","Greenfield","Lift and Shift"],
+      ans: 2, exp: "Max standardisation, fresh start = Greenfield." },
+    { q: "Which SAP product serves as the canonical data model defining the structure of Solution Data Objects?",
+      opts: ["SAP Master Data Governance (MDG)","SAP One Domain Model (ODM)","SAP Data Intelligence","SAP HANA Cloud"],
+      ans: 1, exp: "SAP One Domain Model (ODM) at api.sap.com/sap-one-domain-model." },
+    { q: "In the Solution Component Diagram, what is a 'Communication Channel'?",
+      opts: ["A business process that flows between two organisational units","A data transfer mechanism between two Deployment Units","An API endpoint published on SAP Business Accelerator Hub","A network connection described in the Environments & Location Diagram"],
+      ans: 1, exp: "Communication Channel = data transfer between two Deployment Units." },
+    { q: "An architect is producing the Conceptual Data Diagram. After defining entities, what is the NEXT step?",
+      opts: ["Define relationships between entities","Define attributes of each entity","Map entities to solution components","Create the Solution Data Flow Diagram"],
+      ans: 1, exp: "Conceptual Data Diagram steps: Entities → Attributes → Relationships." },
+    { q: "In an IaaS deployment, what does the customer control that they do NOT control in PaaS?",
+      opts: ["Deployed applications","Platform middleware","The operating system","User-specific configuration"],
+      ans: 2, exp: "IaaS = customer controls OS (plus storage + apps). In PaaS, the OS is managed by the provider." },
+    { q: "Which of the following BEST describes the purpose of the Product Map in Application Architecture?",
+      opts: ["A BPMN diagram showing step-by-step product delivery processes","A bill of materials showing recommended SAP products per Business Domain or Area","A landscape diagram showing all currently deployed SAP products","A roadmap showing planned SAP product upgrades over time"],
+      ans: 1, exp: "Product Map = bill of materials for recommended SAP products per domain/area." }
+  ]
+};
+
+// ── Quiz Engine ──────────────────────────────────────────────
+let qState = { domain: 'd1', idx: 0, score: 0, answered: [] };
+
+function startQuiz(domain, btn) {
+  document.querySelectorAll('.qt').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  qState = { domain, idx: 0, score: 0, answered: new Array(QUIZ[domain].length).fill(null) };
+  renderQ();
+}
+
+function renderQ() {
+  const box = document.getElementById('quiz-box');
+  const qs = QUIZ[qState.domain];
+  const total = qs.length;
+
+  if (qState.idx >= total) {
+    renderScore();
+    return;
+  }
+
+  const q = qs[qState.idx];
+  const answered = qState.answered[qState.idx];
+  const pct = Math.round((qState.idx / total) * 100);
+
+  box.innerHTML = `
+    <div class="qprog">
+      <div class="pbar"><div class="pfill" style="width:${pct}%"></div></div>
+      <span class="qnum">Q${qState.idx + 1} / ${total}</span>
+    </div>
+    <div class="qtext">${q.q}</div>
+    <div class="opts">
+      ${q.opts.map((o, i) => {
+        let cls = '';
+        if (answered !== null) {
+          if (i === q.ans) cls = 'correct';
+          else if (i === answered) cls = 'wrong';
+        }
+        return `<button class="opt ${cls}" onclick="selectOpt(${i})" ${answered !== null ? 'disabled' : ''}>${String.fromCharCode(65+i)}) ${o}</button>`;
+      }).join('')}
+    </div>
+    ${answered !== null ? `<div class="explain">💡 ${q.exp}</div>` : ''}
+    <div class="qnav">
+      <button class="btn btn-o" onclick="prevQ()" ${qState.idx === 0 ? 'disabled' : ''}>← Back</button>
+      <span style="font-size:13px;color:var(--muted)">Score: ${qState.score}</span>
+      <button class="btn btn-p" onclick="nextQ()" ${answered === null ? 'disabled' : ''}>
+        ${qState.idx === total - 1 ? 'See Results' : 'Next →'}
+      </button>
+    </div>`;
+}
+
+function selectOpt(i) {
+  if (qState.answered[qState.idx] !== null) return;
+  qState.answered[qState.idx] = i;
+  if (i === QUIZ[qState.domain][qState.idx].ans) qState.score++;
+  renderQ();
+}
+
+function nextQ() {
+  if (qState.idx < QUIZ[qState.domain].length - 1) { qState.idx++; renderQ(); }
+  else renderScore();
+}
+
+function prevQ() {
+  if (qState.idx > 0) { qState.idx--; renderQ(); }
+}
+
+function renderScore() {
+  const total = QUIZ[qState.domain].length;
+  const s = qState.score;
+  const pct = Math.round((s / total) * 100);
+  let cls = s >= 13 ? 's-pass' : s >= 10 ? 's-warn' : 's-fail';
+  let msg = s >= 13 ? '✅ Exam Ready' : s >= 10 ? '📖 Review flagged areas' : '🔄 Re-read domain notes';
+  document.getElementById('quiz-box').innerHTML = `
+    <div class="score-card">
+      <div class="score-ring ${cls}">
+        <span class="sn">${s}</span>
+        <span class="sd">out of ${total}</span>
+      </div>
+      <h3 style="margin-bottom:8px">${msg}</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:24px">${pct}% correct · ${s >= 13 ? 'Great work!' : 'Keep studying and try again.'}</p>
+      <button class="btn btn-p" onclick="startQuiz('${qState.domain}', null)">Retry Quiz</button>
+    </div>`;
+}
+
+// Start with Domain 1 quiz loaded
+startQuiz('d1', null);
+</script>
+</body>
+</html>
