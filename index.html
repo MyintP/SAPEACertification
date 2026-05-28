@@ -10,16 +10,44 @@
   --bg: #F5F7FA; --card: #fff; --text: #1D2433; --muted: #6B7280;
   --border: #E5E7EB; --success: #16A34A; --error: #DC2626; --warn: #D97706;
   --r: 8px; --shadow: 0 1px 3px rgba(0,0,0,.1);
+
+  /* VAF master design system tokens */
+  --vaf-bg:             var(--bg);
+  --vaf-surface:        var(--card);
+  --vaf-border:         var(--border);
+  --vaf-text:           var(--text);
+  --vaf-text-2:         var(--muted);
+  --vaf-accent:         #E8630A;
+  --vaf-accent-hover:   #CC5508;
+  --vaf-accent-subtle:  #FFF7ED;
+  --vaf-accent-border:  #FED7AA;
+  --vaf-navy:           #1E3A5F;
+  --vaf-navy-dark:      #162D4A;
+  --vaf-font-heading:   'Playfair Display', Georgia, serif;
+  --vaf-font-body:      -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --vaf-font-mono:      'DM Mono', ui-monospace, monospace;
+  --vaf-radius-sm:      4px;
+  --vaf-radius-md:      var(--r);
+  --vaf-radius-lg:      10px;
+  --vaf-shadow:         var(--shadow);
+  --vaf-transition:     200ms ease;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
 a { text-decoration:none; }
 
-nav { background:var(--dark); height:54px; display:flex; align-items:center; padding:0 20px; gap:24px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.25); }
-.nav-brand { color:#fff; font-weight:700; font-size:15px; cursor:pointer; white-space:nowrap; }
+nav { background:var(--dark); height:54px; display:flex; align-items:center; padding:0 20px; gap:16px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+.nav-brand { color:#fff; font-weight:700; font-size:15px; cursor:pointer; white-space:nowrap; line-height:1; }
+.nav-org { display:block; font-size:10px; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:2px; }
 .nav-links { display:flex; gap:2px; overflow-x:auto; flex:1; }
 .nl { color:rgba(255,255,255,.7); font-size:13px; padding:5px 11px; border-radius:4px; cursor:pointer; white-space:nowrap; }
 .nl:hover, .nl.active { background:rgba(255,255,255,.15); color:#fff; }
+.nav-vaf { color:rgba(255,255,255,.45); font-size:11px; text-decoration:none; white-space:nowrap; padding:4px 10px; border:1px solid rgba(255,255,255,.15); border-radius:4px; letter-spacing:.06em; transition:all .2s; flex-shrink:0; }
+.nav-vaf:hover { color:#fff; border-color:rgba(255,255,255,.35); background:rgba(255,255,255,.08); }
+.site-footer { background:var(--dark); border-top:1px solid rgba(255,255,255,.08); padding:14px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.site-footer p { font-size:11px; color:rgba(255,255,255,.3); letter-spacing:.06em; }
+.site-footer a { font-size:11px; color:rgba(255,255,255,.35); text-decoration:none; letter-spacing:.06em; transition:color .2s; }
+.site-footer a:hover { color:rgba(255,255,255,.7); }
 
 main { max-width:1080px; margin:0 auto; padding:28px 20px; }
 .page { display:none; }
@@ -142,7 +170,7 @@ h4 { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.
 <body>
 
 <nav>
-  <span class="nav-brand" onclick="go('home')">SAP EA Cert</span>
+  <span class="nav-brand" onclick="go('home')"><span class="nav-org">ZenCloud</span>SAP EA Cert</span>
   <div class="nav-links">
     <span class="nl" onclick="go('home')">Home</span>
     <span class="nl" onclick="go('overview')">Overview</span>
@@ -154,6 +182,7 @@ h4 { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.
     <span class="nl" onclick="go('traps')">Exam Traps</span>
     <span class="nl" onclick="go('tracker')">Tracker</span>
   </div>
+  <a href="https://velocityarchitectureframework.com" class="nav-vaf" target="_blank" rel="noopener">← VAF</a>
 </nav>
 
 <main>
@@ -1136,5 +1165,11 @@ function renderScore() {
 // Start with Domain 1 quiz loaded
 startQuiz('d1', null);
 </script>
+
+<footer class="site-footer">
+  <p>ZenCloud Global Consultants · Brisbane, Australia · © 2026</p>
+  <a href="https://velocityarchitectureframework.com" target="_blank" rel="noopener">← Velocity Architecture Framework</a>
+</footer>
+
 </body>
 </html>
