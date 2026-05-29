@@ -1,0 +1,13 @@
+name: Link Integrity
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  check:
+    uses: ZenCloudAU/velocity-architecture/.github/workflows/link-integrity.yml@main
+    with:
+      site_url: 'https://zencloudau.github.io/SAPEACertification/'
+      repo_name: 'SAPEACertification'
