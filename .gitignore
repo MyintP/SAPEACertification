@@ -1,0 +1,18 @@
+# Secrets / environment
+.env
+.env.*
+*.pem
+*.key
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+.cache/
+_site/
+
+# OS / editor
+.DS_Store
+Thumbs.db

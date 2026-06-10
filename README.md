@@ -15,6 +15,7 @@ SAPEACertification/
 │
 ├── docs/
 │   ├── exam-overview.md       ← Exam structure, domains, weightings
+│   ├── exam-overview-v2.md    ← Updated exam overview (revised structure)
 │   ├── study-plan.md          ← Week-by-week study schedule
 │   └── key-links.md           ← Official SAP learning links
 │
@@ -22,24 +23,37 @@ SAPEACertification/
 │   ├── 01-framework-toolset.md      ← Domain 1: SAP EA Framework & Toolset (20-30%)
 │   ├── 02-vision-roadmap.md         ← Domain 2: Architecture Vision & Roadmap (20-30%)
 │   ├── 03-business-architecture.md  ← Domain 3: Business Architecture (20-30%)
-│   └── 04-data-app-tech.md          ← Domain 4: Data, Application & Technology (20-30%)
+│   ├── 04-data-app-tech.md          ← Domain 4: Data, Application & Technology (20-30%)
+│   └── rba-deep-dive.md             ← Reference Business Architecture deep dive
 │
 ├── artifacts/
 │   ├── artifact-cheatsheet.md       ← All artifacts by phase, quick reference
-│   ├── metro-map-guide.md           ← Metro Map explained
+│   ├── artifact-map-complete.md     ← Complete artifact map across phases
 │   └── togaf-to-sap-mapping.md      ← TOGAF ADM → SAP EA phase mapping
 │
 ├── quiz/
-│   ├── domain-1-quiz.md       ← Practice questions: Framework & Toolset
-│   ├── domain-2-quiz.md       ← Practice questions: Vision & Roadmap
-│   ├── domain-3-quiz.md       ← Practice questions: Business Architecture
-│   ├── domain-4-quiz.md       ← Practice questions: Data, App & Tech
-│   └── wanderlust-prep.md     ← Case study preparation guide
+│   ├── domain-1-quiz.md                  ← Practice questions: Framework & Toolset
+│   ├── domain-2-quiz.md                  ← Practice questions: Vision & Roadmap
+│   ├── domain-3-quiz.md                  ← Practice questions: Business Architecture
+│   ├── domain-4-quiz.md                  ← Practice questions: Data, App & Tech
+│   ├── discovering-sap-ea-assessment.md  ← Discovering SAP EA assessment prep
+│   └── wanderlust-prep.md                ← Case study preparation guide
 │
-└── resources/
-    ├── glossary.md            ← Key terms decoded
-    ├── exam-traps.md          ← Common mistakes & how to avoid them
-    └── book-notes.md          ← Notes from SAP EA Blueprint book
+├── resources/
+│   ├── glossary.md                       ← Key terms decoded
+│   ├── exam-traps.md                     ← Common mistakes & how to avoid them
+│   ├── book-notes.md                     ← Notes from SAP EA Blueprint book
+│   ├── community-study-tips.md           ← Community study tips
+│   ├── ea-trends.md                      ← Enterprise architecture trends
+│   ├── official-diagrams-reference.md    ← Official SAP EA diagram reference
+│   └── use-cases-reference.md            ← Use-case reference material
+│
+├── SAP_EA_StudyBible_Final.docx                          ← Consolidated study bible
+├── SAP_Enterprise_Architecture_Methodology_Guide_Official.pdf  ← Official methodology guide
+├── index.html                            ← Single-page interactive study site (GitHub Pages)
+├── DEPLOYMENT.md                         ← GitHub Pages deployment notes
+├── AGENTS.md / CLAUDE.md                 ← AI-assisted authoring guidance
+└── LICENSE                               ← Proprietary — all rights reserved
 ```
 
 ---
@@ -106,3 +120,6 @@ SAPEACertification/
 ---
 
 *Built alongside the SAP IEA10 course. Background: IT (non-SAP). Goal: Certification.*
+
+---
+© 2026 ZenCloud Global Consultants. All rights reserved. Proprietary and confidential.
