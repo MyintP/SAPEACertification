@@ -1,125 +1,58 @@
-# SAP Enterprise Architecture Certification Study Repo
-> **Exam:** SAP Certified Professional – SAP Enterprise Architect  
-> **Pass Mark:** 80% (32/40 questions)  
-> **Format:** 22 MCQ + 18 Case Study (Wanderlust)  
-> **Duration:** 3 hours
+# OrdoAnimi — SAP Enterprise Architect (P_SAPEA) Certification Guide
 
----
+A decision-first study companion for the SAP Certified Professional – SAP Enterprise
+Architect certification: the four graded skill domains, the 2026 scenario-based exam
+format, a connected-case practice drill with a live defense mode, and a progress
+tracker.
 
-## 🗺️ Repo Structure
+Built by [OrdoAnimi](https://ordoanimi.com) — Phil Myint's enterprise architecture
+and technology strategy practice, Brisbane & global. The connected-case drill on
+Sheet Q1.0 runs on the same decision-first principle as the
+[OrdoAnimi Framework](https://framework.ordoanimi.com): the unit of study is the
+decision, not the isolated fact.
 
-```
-SAPEACertification/
-│
-├── README.md                  ← You are here
-│
-├── docs/
-│   ├── exam-overview.md       ← Exam structure, domains, weightings
-│   ├── exam-overview-v2.md    ← Updated exam overview (revised structure)
-│   ├── study-plan.md          ← Week-by-week study schedule
-│   └── key-links.md           ← Official SAP learning links
-│
-├── domains/
-│   ├── 01-framework-toolset.md      ← Domain 1: SAP EA Framework & Toolset (20-30%)
-│   ├── 02-vision-roadmap.md         ← Domain 2: Architecture Vision & Roadmap (20-30%)
-│   ├── 03-business-architecture.md  ← Domain 3: Business Architecture (20-30%)
-│   ├── 04-data-app-tech.md          ← Domain 4: Data, Application & Technology (20-30%)
-│   └── rba-deep-dive.md             ← Reference Business Architecture deep dive
-│
-├── artifacts/
-│   ├── artifact-cheatsheet.md       ← All artifacts by phase, quick reference
-│   ├── artifact-map-complete.md     ← Complete artifact map across phases
-│   └── togaf-to-sap-mapping.md      ← TOGAF ADM → SAP EA phase mapping
-│
-├── quiz/
-│   ├── domain-1-quiz.md                  ← Practice questions: Framework & Toolset
-│   ├── domain-2-quiz.md                  ← Practice questions: Vision & Roadmap
-│   ├── domain-3-quiz.md                  ← Practice questions: Business Architecture
-│   ├── domain-4-quiz.md                  ← Practice questions: Data, App & Tech
-│   ├── discovering-sap-ea-assessment.md  ← Discovering SAP EA assessment prep
-│   └── wanderlust-prep.md                ← Case study preparation guide
-│
-├── resources/
-│   ├── glossary.md                       ← Key terms decoded
-│   ├── exam-traps.md                     ← Common mistakes & how to avoid them
-│   ├── book-notes.md                     ← Notes from SAP EA Blueprint book
-│   ├── community-study-tips.md           ← Community study tips
-│   ├── ea-trends.md                      ← Enterprise architecture trends
-│   ├── official-diagrams-reference.md    ← Official SAP EA diagram reference
-│   └── use-cases-reference.md            ← Use-case reference material
-│
-├── SAP_EA_StudyBible_Final.docx                          ← Consolidated study bible
-├── SAP_Enterprise_Architecture_Methodology_Guide_Official.pdf  ← Official methodology guide
-├── index.html                            ← Single-page interactive study site (GitHub Pages)
-├── DEPLOYMENT.md                         ← GitHub Pages deployment notes
-├── AGENTS.md / CLAUDE.md                 ← AI-assisted authoring guidance
-└── LICENSE                               ← Proprietary — all rights reserved
-```
+**Not affiliated with, endorsed by, or reviewed by SAP SE.** All content here is
+original — written to explain publicly available exam-guide topic areas, not
+reproduced from any SAP or third-party source. "SAP" and "P_SAPEA" are used only
+to describe the certification this material helps prepare for.
 
----
+## What's inside
 
-## 📊 Exam Domain Breakdown
+- `index.html` — the full interactive site (open directly in a browser, or serve via GitHub Pages)
+- `SAP_EA_Student_Handbook.docx` / `.pdf` — a printable version of the same material
 
-| Domain | Weight | Questions (approx) |
-|--------|--------|-------------------|
-| SAP EA Framework & Toolset | 20–30% | 8–12 |
-| Architecture Vision & Roadmap | 20–30% | 8–12 |
-| Business Architecture | 20–30% | 8–12 |
-| Data, Application & Technology Architecture | 20–30% | 8–12 |
+The site covers:
 
-> ⚠️ **All domains are equal weight. You cannot afford to neglect any.**
+| Sheet | Content |
+|---|---|
+| A1.0 | What changed in the 2026 exam format |
+| A2.0–A2.3 | The four official skill domains |
+| A3.0 | The recurring case-study pattern the exam tests |
+| A4.0 | Free and paid resources, linked |
+| Q1.0 | A connected, six-decision case study with a running clock and a live defense step |
+| G1.0 | How to actually register and start, without assuming you need the paid subscription |
+| T1.0 | A progress tracker — persists in your browser via `localStorage` |
 
----
+## Viewing it
 
-## 🎯 Quick Start
+Open `index.html` in any browser. No build step, no dependencies.
 
-1. Read [`docs/exam-overview.md`](docs/exam-overview.md) first
-2. Work through each domain in [`domains/`](domains/) in order
-3. Use [`artifacts/artifact-cheatsheet.md`](artifacts/artifact-cheatsheet.md) as your daily reference
-4. Test yourself with quizzes in [`quiz/`](quiz/)
-5. Review [`resources/exam-traps.md`](resources/exam-traps.md) before exam day
+**Heads up on the tracker:** the checkboxes on sheet T1.0 save to `localStorage`,
+which is tied to the domain the page is served from. That means progress saved
+while viewing this on `github.io` won't show up if you later open the same file
+locally from disk, and vice versa — pick one place to actually use it.
 
----
+## Hosting this on GitHub Pages
 
-## 📚 Key Resources
+1. Push `index.html` to the root of this repository (main branch).
+2. In the repo, go to **Settings → Pages**.
+3. Under **Build and deployment**, set **Source** to "Deploy from a branch,"
+   branch `main`, folder `/ (root)`.
+4. Save. GitHub will publish it at `https://<your-username>.github.io/<repo-name>/`
+   — usually live within a minute or two.
 
-| Resource | Link |
-|----------|------|
-| SAP EA Certification Page | https://learning.sap.com/enterprise-architect |
-| SAP IEA10 Course | https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals |
-| Wanderlust Case Study | https://learning.sap.com/enterprise-architect |
-| SAP EA Framework Blog | https://groups.community.sap.com/t5/enterprise-architecture-blog |
-| SAP EA Community | https://groups.community.sap.com/t5/enterprise-architecture |
-| SAP Business Accelerator Hub | https://api.sap.com |
-| SAP Help Portal – EA Framework | https://help.sap.com/docs/SAP_ENTERPRISE_ARCHITECTURE_FRAMEWORK |
+## License / reuse
 
----
-
-## 🏆 Certification Facts
-
-- Launched by SAP to validate EA practitioners in SAP environments
-- Framework based on **TOGAF v10** tailored for SAP
-- Passing score: **80%** (unusually high — no weak areas allowed)
-- Case study: **Wanderlust** (18/40 questions = 45% of exam — read it BEFORE exam day)
-- Recommended pre-req: TOGAF certification (not mandatory but strongly advised)
-
----
-
-## ✅ Progress Tracker
-
-- [ ] Domain 1 – SAP EA Framework & Toolset
-- [ ] Domain 2 – Architecture Vision & Roadmap  
-- [ ] Domain 3 – Business Architecture
-- [ ] Domain 4 – Data, Application & Technology Architecture
-- [ ] Artifact Cheatsheet reviewed
-- [ ] All 4 domain quizzes completed
-- [ ] Wanderlust Case Study read
-- [ ] Exam traps reviewed
-- [ ] Mock exam completed
-
----
-
-*Built alongside the SAP IEA10 course. Background: IT (non-SAP). Goal: Certification.*
-
----
-© 2026 ZenCloud Global Consultants. All rights reserved. Proprietary and confidential.
+Original material, shared as-is for personal and community study use. If you
+adapt or redistribute it, a credit back to [OrdoAnimi](https://ordoanimi.com) is
+appreciated but not required.
