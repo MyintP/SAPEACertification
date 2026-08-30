@@ -34,7 +34,8 @@
   ::selection{ background:var(--amber); color:var(--navy-deep); }
   a{ color:var(--amber); }
 
-  .frame{ display:flex; min-height:100vh; }
+  html, body{ height:100%; overflow:hidden; }
+  .frame{ display:flex; height:100vh; }
 
   /* ---------- SIDEBAR ---------- */
   .sidebar{
@@ -84,17 +85,85 @@
     padding:18px 22px 0; margin-top:10px; border-top:1px solid var(--line-dim);
   }
 
-  /* ---------- MAIN ---------- */
-  main{ flex:1; min-width:0; }
+  /* ---------- MAIN / STAGE ---------- */
+  main{ flex:1; min-width:0; display:flex; flex-direction:column; height:100vh; overflow:hidden; }
+  .stage{ flex:1; overflow-y:auto; }
   .sheet{
-    padding:64px 64px 40px;
+    display:none;
+    padding:56px 64px 40px;
     max-width:880px;
-    border-bottom:1px dashed var(--line-dim);
   }
+  .sheet.active{ display:block; }
+
+  .slide-nav{
+    flex-shrink:0; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:12px 24px; border-top:1px solid var(--line-dim); background:var(--navy-deep);
+  }
+  .slide-nav button{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:.04em;
+    background:none; border:1px solid var(--line); color:var(--paper);
+    padding:9px 18px; cursor:pointer; transition:.15s ease;
+  }
+  .slide-nav button:hover:not(:disabled){ border-color:var(--amber); color:var(--amber); }
+  .slide-nav button:disabled{ opacity:.28; cursor:default; }
+  .slide-counter{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line); letter-spacing:.08em;
+  }
+
+  .notes-bar{ flex-shrink:0; border-top:1px solid var(--line-dim); background:rgba(0,0,0,0.18); }
+  .notes-bar-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 24px; cursor:pointer; user-select:none;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--amber);
+  }
+  .notes-bar-head .chev{ color:var(--line); transition:transform .15s ease; }
+  .notes-bar.open .notes-bar-head .chev{ transform:rotate(180deg); }
+  .notes-bar-body{ display:none; padding:0 24px 16px; }
+  .notes-bar.open .notes-bar-body{ display:block; }
+  .notes-bar textarea{
+    width:100%; min-height:70px; background:rgba(255,255,255,0.02); border:1px solid var(--line-dim);
+    color:var(--paper); font-family:'IBM Plex Sans', sans-serif; font-size:13.5px; padding:10px 12px; resize:vertical;
+  }
+  .notes-bar textarea:focus{ outline:none; border-color:var(--amber); }
+  .notes-bar-note{ font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--line-dim); margin-top:6px; }
+
+  .mobile-topbar{ display:none; }
+
   @media (max-width:720px){
-    .sheet{ padding:40px 22px 28px; }
-    .sidebar{ width:190px; }
+    .sheet{ padding:30px 18px 24px; }
     .brief-card, .task-card, .summary-card{ padding:20px 18px; }
+    .slide-nav{ padding:10px 14px; }
+    .slide-nav button{ padding:9px 12px; font-size:12px; }
+    .slide-counter{ font-size:11px; }
+    .notes-bar-head, .notes-bar-body{ padding-left:14px; padding-right:14px; }
+
+    .frame{ position:relative; }
+    .mobile-topbar{
+      display:flex; align-items:center; gap:12px;
+      padding:12px 16px; border-bottom:1px solid var(--line-dim); background:var(--navy-deep);
+      flex-shrink:0;
+    }
+    .mobile-topbar button{
+      background:none; border:1px solid var(--line); color:var(--paper);
+      font-family:'IBM Plex Mono', monospace; font-size:16px; padding:6px 11px; cursor:pointer; line-height:1;
+    }
+    .mobile-topbar .current-label{
+      font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line); letter-spacing:.04em;
+      overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    main{ height:calc(100vh - 49px); }
+
+    .sidebar{
+      position:fixed; top:0; left:0; height:100vh; width:250px; max-width:80vw;
+      z-index:20; transform:translateX(-100%); transition:transform .2s ease;
+      box-shadow:8px 0 24px rgba(0,0,0,0.4);
+    }
+    .sidebar.open{ transform:translateX(0); }
+    .sidebar-overlay{
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:19;
+    }
+    .sidebar-overlay.open{ display:block; }
   }
 
   .eyebrow{
@@ -351,7 +420,8 @@
 <body>
 
 <div class="frame">
-  <nav class="sidebar">
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <nav class="sidebar" id="sidebarNav">
     <div class="sidebar-title">
       <a href="https://ordoanimi.com" target="_blank" rel="noopener" class="oa-link">OrdoAnimi</a>
       <strong>P_SAPEA</strong>Drawing Set — Exam Prep
@@ -373,6 +443,11 @@
   </nav>
 
   <main>
+    <div class="mobile-topbar">
+      <button id="menuToggleBtn" aria-label="Open sheet index">☰</button>
+      <span class="current-label" id="mobileCurrentLabel">A0.1</span>
+    </div>
+    <div class="stage">
 
     <section class="sheet" id="cover">
       <div class="eyebrow">SAP Certified Professional</div>
@@ -578,27 +653,116 @@
       <p class="storage-note">Saved locally in this browser via localStorage. Inside a chat preview pane it may not persist between visits — once this is hosted on its own page (GitHub Pages or anywhere else), it will.</p>
       <div id="trackerRoot"></div>
       <button class="tracker-reset" id="trackerResetBtn">Reset all checks</button>
+
+      <footer class="end" style="padding:40px 0 0;">END OF SET — 11 SHEETS — P_SAPEA / AUG 2026
+        <span class="oa-footer-credit">© 2026 <a href="https://ordoanimi.com" target="_blank" rel="noopener">OrdoAnimi</a> · Phil Myint · Brisbane, Australia · Clarity. Governance. Execution.</span>
+      </footer>
     </section>
 
-    <footer class="end">END OF SET — 11 SHEETS — P_SAPEA / AUG 2026
-      <span class="oa-footer-credit">© 2026 <a href="https://ordoanimi.com" target="_blank" rel="noopener">OrdoAnimi</a> · Phil Myint · Brisbane, Australia · Clarity. Governance. Execution.</span>
-    </footer>
+    </div>
+
+    <div class="slide-nav">
+      <button id="prevSlideBtn">‹ Prev</button>
+      <span class="slide-counter" id="slideCounter">1 / 11</span>
+      <button id="nextSlideBtn">Next ›</button>
+    </div>
+
+    <div class="notes-bar" id="notesBar">
+      <div class="notes-bar-head" id="notesToggle">
+        <span>Notes for this sheet</span>
+        <span class="chev">▾</span>
+      </div>
+      <div class="notes-bar-body">
+        <textarea id="notesArea" placeholder="Jot anything here — saved per sheet, in this browser."></textarea>
+        <div class="notes-bar-note">Saved locally via localStorage, same as the progress tracker. Won't persist in a sandboxed preview pane — works once hosted or opened directly.</div>
+      </div>
+    </div>
   </main>
 </div>
 
 <script>
-  // ---- sidebar active-state on scroll ----
-  const links = document.querySelectorAll('.sheet-index a');
-  const sections = [...links].map(a => document.querySelector(a.getAttribute('href')));
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if(e.isIntersecting){
-        const id = '#' + e.target.id;
-        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
-      }
+  // ---- slide-deck navigation ----
+  const SLIDE_IDS = ['cover','format','framework','vision','business','datc','case','resources','quiz','getting-started','tracker'];
+  let currentSlide = 0;
+
+  const stageEl = document.querySelector('.stage');
+  const navLinks = document.querySelectorAll('.sheet-index a');
+  const prevSlideBtn = document.getElementById('prevSlideBtn');
+  const nextSlideBtn = document.getElementById('nextSlideBtn');
+  const slideCounterEl = document.getElementById('slideCounter');
+  const notesAreaEl = document.getElementById('notesArea');
+  const notesBarEl = document.getElementById('notesBar');
+  const notesToggleEl = document.getElementById('notesToggle');
+  const sidebarNavEl = document.getElementById('sidebarNav');
+  const sidebarOverlayEl = document.getElementById('sidebarOverlay');
+  const menuToggleBtn = document.getElementById('menuToggleBtn');
+  const mobileCurrentLabel = document.getElementById('mobileCurrentLabel');
+  const SLIDE_LABELS = ['A0.1','A1.0','A2.0','A2.1','A2.2','A2.3','A3.0','A4.0','Q1.0','G1.0','T1.0'];
+
+  function closeDrawer(){
+    sidebarNavEl.classList.remove('open');
+    sidebarOverlayEl.classList.remove('open');
+  }
+  if(menuToggleBtn){
+    menuToggleBtn.addEventListener('click', () => {
+      sidebarNavEl.classList.toggle('open');
+      sidebarOverlayEl.classList.toggle('open');
     });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(s => s && io.observe(s));
+  }
+  if(sidebarOverlayEl) sidebarOverlayEl.addEventListener('click', closeDrawer);
+
+  function loadNotesFor(slideId){
+    try{
+      notesAreaEl.value = localStorage.getItem('sapea-notes:' + slideId) || '';
+    }catch(e){ notesAreaEl.value = ''; }
+  }
+  function saveNotesFor(slideId, val){
+    try{ localStorage.setItem('sapea-notes:' + slideId, val); }catch(e){}
+  }
+
+  function goToSlide(i){
+    if(i < 0 || i >= SLIDE_IDS.length) return;
+    currentSlide = i;
+    const id = SLIDE_IDS[i];
+    document.querySelectorAll('.sheet').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById(id);
+    if(target) target.classList.add('active');
+    if(stageEl) stageEl.scrollTop = 0;
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    slideCounterEl.textContent = (i + 1) + ' / ' + SLIDE_IDS.length;
+    prevSlideBtn.disabled = i === 0;
+    nextSlideBtn.disabled = i === SLIDE_IDS.length - 1;
+    loadNotesFor(id);
+    if(mobileCurrentLabel) mobileCurrentLabel.textContent = SLIDE_LABELS[i] + ' — ' + (target ? (target.querySelector('h1,h2')?.textContent || '') : '');
+  }
+
+  navLinks.forEach((a, i) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToSlide(i);
+      closeDrawer();
+    });
+  });
+
+  prevSlideBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+  nextSlideBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+  document.addEventListener('keydown', (e) => {
+    const tag = document.activeElement ? document.activeElement.tagName : '';
+    if(tag === 'TEXTAREA' || tag === 'INPUT') return; // don't hijack arrows while typing
+    if(e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+    if(e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+  });
+
+  notesAreaEl.addEventListener('input', () => {
+    saveNotesFor(SLIDE_IDS[currentSlide], notesAreaEl.value);
+  });
+
+  notesToggleEl.addEventListener('click', () => {
+    notesBarEl.classList.toggle('open');
+  });
+
+  goToSlide(0);
 
   // =========================================================
   // CONNECTED CASE — MERIDIAN COLD CHAIN
