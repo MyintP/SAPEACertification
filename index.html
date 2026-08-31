@@ -1,257 +1,551 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A beginner-friendly, decision-first preparation guide for the SAP Enterprise Architect certification.">
-  <title>P_SAPEA — Enterprise Architect Study Guide</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Architect Study Guide</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="topbar">
-  <div class="brand">
-    <span class="eyebrow">ORDOANIMI • P_SAPEA</span>
-    <h1>Enterprise Architect Study Guide</h1>
-    <p>Learn the decisions, not the answer keys.</p>
-  </div>
-  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">☰</button>
-</header>
-
-<div class="layout">
-  <aside class="sidebar" id="nav">
-    <nav>
-      <a class="active" href="#start">00 · Start Here</a>
-      <a href="#exam">01 · Current Exam Model</a>
-      <a href="#method">02 · Decision Method</a>
-      <a href="#framework">03 · EA Framework</a>
-      <a href="#vision">04 · Vision & Roadmap</a>
-      <a href="#business">05 · Business Architecture</a>
-      <a href="#layers">06 · Data / App / Technology</a>
-      <a href="#case">07 · Connected Case</a>
-      <a href="#defense">08 · Defense Pattern</a>
-      <a href="#practice">09 · Practice & Scoring</a>
-      <a href="#resources">10 · Official Resources</a>
-      <a href="#checklist">11 · Exam-Day Checklist</a>
-      <a href="#tracker">12 · Progress Tracker</a>
+    <!-- Navigation -->
+    <nav id="mainNav" style="
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: #003366;
+        color: white;
+        padding: 10px 20px;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    ">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span style="font-weight: bold; font-size: 18px;">📘 EA Study Guide</span>
+            <button id="navToggle" style="
+                background: none;
+                border: 2px solid white;
+                color: white;
+                padding: 5px 15px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                display: none;
+            " aria-expanded="false">☰ Menu</button>
+        </div>
+        <ul id="navMenu" style="
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        ">
+            <li><a href="#sheet-00" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Start</a></li>
+            <li><a href="#sheet-01" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Exam</a></li>
+            <li><a href="#sheet-02" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Method</a></li>
+            <li><a href="#sheet-03" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Framework</a></li>
+            <li><a href="#sheet-04" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Vision</a></li>
+            <li><a href="#sheet-05" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Business</a></li>
+            <li><a href="#sheet-06" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Data/Tech</a></li>
+            <li><a href="#sheet-07" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Case</a></li>
+            <li><a href="#sheet-08" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Defense</a></li>
+            <li><a href="#sheet-09" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Scoring</a></li>
+            <li><a href="#sheet-10" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Resources</a></li>
+            <li><a href="#sheet-11" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Checklist</a></li>
+            <li><a href="#sheet-12" class="nav-link" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px;">Tracker</a></li>
+        </ul>
     </nav>
-  </aside>
 
-  <main>
-    <section class="hero" id="start">
-      <div class="sheet-label">SHEET 00 · BEGINNER START</div>
-      <h2>Prepare to think like an Enterprise Architect — even if you're starting from zero.</h2>
-      <p class="lead">This guide turns the P_SAPEA preparation journey into a sequence: understand the idea → recognise it in a messy business situation → make a decision → defend it.</p>
-      <div class="callout">
-        <strong>Core rule:</strong> the unit of study is the <em>decision</em>, not the isolated fact.
-      </div>
-      <div class="cards three">
-        <article><span>01</span><h3>Learn</h3><p>Understand the vocabulary, architecture layers and SAP methods.</p></article>
-        <article><span>02</span><h3>Apply</h3><p>Use the ideas on a connected enterprise scenario.</p></article>
-        <article><span>03</span><h3>Defend</h3><p>Explain why your recommendation is appropriate, including trade-offs and risks.</p></article>
-      </div>
-      <h3>How to use this site</h3>
-      <ol class="steps">
-        <li>Read the beginner sections in order.</li>
-        <li>Do the connected case without looking at the model answer.</li>
-        <li>Score yourself using the rubric.</li>
-        <li>Repeat until you can explain the reasoning clearly and efficiently.</li>
-      </ol>
-    </section>
+    <!-- Main Content -->
+    <main style="margin-top: 80px; padding: 20px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <!-- SHEET 00 -->
+        <section id="sheet-00" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: #f0f7ff; padding: 30px; border-radius: 12px; border-left: 6px solid #003366;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 00 · BEGINNER START</span>
+                <h1 style="color: #003366; margin: 10px 0 20px 0;">Prepare to think like an Enterprise Architect — even if you're starting from zero.</h1>
+                <p style="font-size: 18px; line-height: 1.6;">This guide turns the P_SAPEA preparation journey into a sequence: <strong>understand the idea → recognise it in a messy business situation → make a decision → defend it</strong>.</p>
+                <p style="font-size: 18px; line-height: 1.6;"><strong>Core rule:</strong> the unit of study is the decision, not the isolated fact.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h3 style="color: #003366; margin-top: 0;">📖 Learn</h3>
+                        <p style="margin: 0;">Understand the vocabulary, architecture layers and SAP methods.</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h3 style="color: #003366; margin-top: 0;">🔧 Apply</h3>
+                        <p style="margin: 0;">Use the ideas on a connected enterprise scenario.</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h3 style="color: #003366; margin-top: 0;">🛡️ Defend</h3>
+                        <p style="margin: 0;">Explain why your recommendation is appropriate, including trade-offs and risks.</p>
+                    </div>
+                </div>
+                
+                <div style="background: #e8f0fe; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h4 style="margin-top: 0;">How to use this site</h4>
+                    <ul style="font-size: 16px; line-height: 1.8;">
+                        <li>Read the beginner sections in order.</li>
+                        <li>Do the connected case without looking at the model answer.</li>
+                        <li>Score yourself using the rubric.</li>
+                        <li>Repeat until you can explain the reasoning clearly and efficiently.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    <section id="exam">
-      <div class="sheet-label">SHEET 01 · CURRENT EXAM MODEL</div>
-      <h2>What changed?</h2>
-      <p>SAP has moved its certification portfolio toward performance-based practical assessments. SAP describes two broad practical formats: system-based and scenario-based. Scenario-based assessments use a timeboxed roleplay; candidates may use the AI-guided path or, where offered, record a video for human review.</p>
-      <div class="warning"><strong>Do not hard-code exam mechanics.</strong> The exact format, duration, available languages and remaining attempts are shown on the individual certification page. Check the P_SAPEA page immediately before your exam.</div>
-      <div class="table-wrap">
-        <table>
-          <tr><th>Old study habit</th><th>Better habit now</th></tr>
-          <tr><td>Memorise answer keys</td><td>Learn how to reason from objectives and constraints</td></tr>
-          <tr><td>Study isolated definitions</td><td>Connect concepts across business, application, data and technology</td></tr>
-          <tr><td>Optimise for one “correct” design</td><td>Explain a defensible design and its trade-offs</td></tr>
-          <tr><td>Ignore the clock</td><td>Practise concise, structured responses</td></tr>
-        </table>
-      </div>
-      <p class="source-note">SAP says scenario-based candidates can access the AI roleplay using their SAP Universal ID; a separate roleplay account is not required. SAP also says human review can take time, so do not assume every result is immediate.</p>
-    </section>
+        <!-- SHEET 01 -->
+        <section id="sheet-01" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 01 · CURRENT EXAM MODEL</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">What changed?</h2>
+                <p style="font-size: 16px; line-height: 1.6;">SAP has moved its certification portfolio toward performance-based practical assessments. SAP describes two broad practical formats: system-based and scenario-based. Scenario-based assessments use a timeboxed roleplay; candidates may use the AI-guided path or, where offered, record a video for human review.</p>
+                
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 6px solid #ffc107; margin: 20px 0;">
+                    <p style="margin: 0; font-weight: bold;">⚠️ Do not hard-code exam mechanics.</p>
+                    <p style="margin: 5px 0 0 0; font-size: 15px;">The exact format, duration, available languages and remaining attempts are shown on the individual certification page. Check the P_SAPEA page immediately before your exam.</p>
+                </div>
 
-    <section id="method">
-      <div class="sheet-label">SHEET 02 · DECISION METHOD</div>
-      <h2>KNOW → RECOGNIZE → DECIDE → DEFEND</h2>
-      <p>Use the same mental loop for every topic.</p>
-      <div class="method-grid">
-        <article><b>KNOW</b><h3>What is it?</h3><p>Learn the concept, artifact, method or architecture layer.</p></article>
-        <article><b>RECOGNIZE</b><h3>When does it matter?</h3><p>Spot the signal in a scenario: duplication, risk, strategic change, integration complexity, regulatory constraint, and so on.</p></article>
-        <article><b>DECIDE</b><h3>What would you do?</h3><p>Select an approach that fits the business objective, constraints, maturity and target state.</p></article>
-        <article><b>DEFEND</b><h3>Why this choice?</h3><p>Explain rationale, alternatives, trade-offs, risks, sequencing and validation.</p></article>
-      </div>
-      <div class="quote">“Given <strong>[objective]</strong> and <strong>[constraints]</strong>, I recommend <strong>[decision]</strong> because <strong>[reason]</strong>. The main trade-off is <strong>[trade-off]</strong>. I would manage the risk by <strong>[mitigation]</strong> and validate it through <strong>[evidence]</strong>.”</div>
-    </section>
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px;">
+                    <thead>
+                        <tr style="background: #003366; color: white;">
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Old study habit</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Better habit now</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding: 10px; border: 1px solid #ddd;">Memorise answer keys</td><td style="padding: 10px; border: 1px solid #ddd;">Learn how to reason from objectives and constraints</td></tr>
+                        <tr style="background: #f9f9f9;"><td style="padding: 10px; border: 1px solid #ddd;">Study isolated definitions</td><td style="padding: 10px; border: 1px solid #ddd;">Connect concepts across business, application, data and technology</td></tr>
+                        <tr><td style="padding: 10px; border: 1px solid #ddd;">Optimise for one "correct" design</td><td style="padding: 10px; border: 1px solid #ddd;">Explain a defensible design and its trade-offs</td></tr>
+                        <tr style="background: #f9f9f9;"><td style="padding: 10px; border: 1px solid #ddd;">Ignore the clock</td><td style="padding: 10px; border: 1px solid #ddd;">Practise concise, structured responses</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-    <section id="framework">
-      <div class="sheet-label">SHEET 03 · SKILL AREA 1</div>
-      <h2>Enterprise Architecture Framework & Toolset</h2>
-      <p>Think of the framework as a way to move from business intent to a coherent, governable architecture and roadmap.</p>
-      <div class="flow">
-        <span>Vision</span><i>→</i><span>Requirements & Decisions</span><i>→</i><span>Business</span><i>→</i><span>Application / Data / Technology</span><i>→</i><span>Opportunities & Solutions</span><i>→</i><span>Roadmap</span>
-      </div>
-      <h3>Know these ideas</h3>
-      <ul>
-        <li>Business strategy must translate into explicit architecture requirements.</li>
-        <li>Architecture artifacts are communication and decision tools, not decoration.</li>
-        <li>SAP reference architecture content helps connect business needs to SAP solution possibilities.</li>
-        <li>SAP LeanIX and SAP Signavio can support different parts of the architecture and process picture.</li>
-        <li>Always ask: <strong>who needs this artifact, what decision does it support, and what evidence feeds it?</strong></li>
-      </ul>
-    </section>
+        <!-- SHEET 02 -->
+        <section id="sheet-02" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 02 · DECISION METHOD</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">KNOW → RECOGNIZE → DECIDE → DEFEND</h2>
+                <p style="font-size: 18px; font-weight: bold; color: #003366;">Use the same mental loop for every topic.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 25px 0;">
+                    <div style="background: #e8f0fe; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-top: 0;">❓ What is it?</h4>
+                        <p style="margin: 0; font-size: 15px;">Learn the concept, artifact, method or architecture layer.</p>
+                    </div>
+                    <div style="background: #e8f0fe; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-top: 0;">🔍 When does it matter?</h4>
+                        <p style="margin: 0; font-size: 15px;">Spot the signal in a scenario: duplication, risk, strategic change, integration complexity, regulatory constraint, and so on.</p>
+                    </div>
+                    <div style="background: #e8f0fe; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-top: 0;">⚡ What would you do?</h4>
+                        <p style="margin: 0; font-size: 15px;">Select an approach that fits the business objective, constraints, maturity and target state.</p>
+                    </div>
+                    <div style="background: #e8f0fe; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-top: 0;">💡 Why this choice?</h4>
+                        <p style="margin: 0; font-size: 15px;">Explain rationale, alternatives, trade-offs, risks, sequencing and validation.</p>
+                    </div>
+                </div>
+                
+                <div style="background: #f0f7ff; padding: 20px; border-radius: 8px; border-left: 6px solid #003366; margin-top: 20px;">
+                    <p style="font-style: italic; margin: 0; font-size: 16px;">"Given [objective] and [constraints], I recommend [decision] because [reason]. The main trade-off is [trade-off]. I would manage the risk by [mitigation] and validate it through [evidence]."</p>
+                </div>
+            </div>
+        </section>
 
-    <section id="vision">
-      <div class="sheet-label">SHEET 04 · SKILL AREA 2</div>
-      <h2>Architecture Vision & Roadmap</h2>
-      <p>The architect's job is not simply to draw a target state. The job is to create a credible path from the current situation to a better business outcome.</p>
-      <div class="split">
-        <div><h3>Vision</h3><ul><li>Business objectives</li><li>Stakeholders</li><li>Current-state pain</li><li>Target capabilities</li><li>Scope and constraints</li><li>Success measures</li></ul></div>
-        <div><h3>Roadmap</h3><ul><li>Prioritised initiatives</li><li>Dependencies</li><li>Sequencing</li><li>Value and risk</li><li>Transition states</li><li>Governance and decision points</li></ul></div>
-      </div>
-      <div class="callout"><strong>Exam lens:</strong> when the scenario gives you many problems, do not solve them all at once. Establish the strategic objective, identify dependencies, then sequence the work.</div>
-    </section>
+        <!-- SHEET 03 -->
+        <section id="sheet-03" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 03 · SKILL AREA 1</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">Enterprise Architecture Framework & Toolset</h2>
+                <p style="font-size: 16px; line-height: 1.6;">Think of the framework as a way to move from business intent to a coherent, governable architecture and roadmap.</p>
+                
+                <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; text-align: center; margin: 20px 0; font-weight: bold; font-size: 18px; color: #003366;">
+                    Vision → Requirements & Decisions → Business → Application / Data / Technology → Opportunities & Solutions → Roadmap
+                </div>
 
-    <section id="business">
-      <div class="sheet-label">SHEET 05 · SKILL AREA 3</div>
-      <h2>Business Architecture</h2>
-      <p>Start with what the business needs to be able to do before jumping to software.</p>
-      <div class="cards two">
-        <article><h3>Capability</h3><p><strong>What</strong> the business is able to do, independent of the detailed process used to do it.</p><p class="trap">Trap: confusing a capability with a process or application.</p></article>
-        <article><h3>Process</h3><p><strong>How</strong> work flows from one activity to another to create an outcome.</p><p class="trap">Trap: optimising a process without checking whether it supports the strategic objective.</p></article>
-      </div>
-      <h3>When reading a case, ask</h3>
-      <ol><li>What business outcome is changing?</li><li>Which capabilities must improve or appear?</li><li>Which processes are creating the problem?</li><li>Which stakeholders own the outcome?</li><li>What evidence would prove the architecture is working?</li></ol>
-    </section>
+                <ul style="font-size: 15px; line-height: 2;">
+                    <li><strong>Business strategy</strong> must translate into explicit architecture requirements.</li>
+                    <li><strong>Architecture artifacts</strong> are communication and decision tools, not decoration.</li>
+                    <li><strong>SAP reference architecture</strong> content helps connect business needs to SAP solution possibilities.</li>
+                    <li><strong>SAP LeanIX and SAP Signavio</strong> can support different parts of the architecture and process picture.</li>
+                    <li>Always ask: <em>who needs this artifact, what decision does it support, and what evidence feeds it?</em></li>
+                </ul>
+            </div>
+        </section>
 
-    <section id="layers">
-      <div class="sheet-label">SHEET 06 · SKILL AREA 4</div>
-      <h2>Data, Application & Technology Architecture</h2>
-      <div class="layers">
-        <article><span>DATA</span><h3>What information?</h3><p>Ownership, quality, lifecycle, privacy, residency, integration and access.</p></article>
-        <article><span>APPLICATION</span><h3>What capabilities are supported?</h3><p>Application responsibilities, boundaries, interfaces, duplication and fit with business capabilities.</p></article>
-        <article><span>TECHNOLOGY</span><h3>What enables it?</h3><p>Platforms, infrastructure, security, connectivity, operations and non-functional requirements.</p></article>
-      </div>
-      <h3>Clean Core</h3>
-      <p>Use the core product as intended and avoid unnecessary modifications that make upgrades and lifecycle management harder. Where appropriate, extensions can be designed outside or alongside the core using SAP's supported extensibility approaches.</p>
-      <h3>Public vs private cloud</h3>
-      <p>Do not memorise “public is good” or “private is good.” Evaluate standardisation, fit-to-standard expectations, required flexibility, operational model, integration, lifecycle and business constraints.</p>
-      <h3>Integration & regulatory thinking</h3>
-      <ul><li>Identify the business event or data exchange first.</li><li>Then decide the integration responsibility and pattern.</li><li>Check security, privacy, residency and regulatory constraints.</li><li>Prefer the simplest sustainable architecture that meets the requirement.</li></ul>
-    </section>
+        <!-- SHEET 04 -->
+        <section id="sheet-04" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 04 · SKILL AREA 2</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">Architecture Vision & Roadmap</h2>
+                <p style="font-size: 16px; line-height: 1.6;">The architect's job is not simply to draw a target state. The job is to create a credible path from the current situation to a better business outcome.</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                    <div style="background: #f0f7ff; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-top: 0;">Vision</h4>
+                        <ul style="font-size: 14px; line-height: 2; padding-left: 20px;">
+                            <li>Business objectives</li>
+                            <li>Stakeholders</li>
+                            <li>Current-state pain</li>
+                            <li>Target capabilities</li>
+                            <li>Scope and constraints</li>
+                            <li>Success measures</li>
+                        </ul>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-top: 0;">Roadmap</h4>
+                        <ul style="font-size: 14px; line-height: 2; padding-left: 20px;">
+                            <li>Prioritised initiatives</li>
+                            <li>Dependencies</li>
+                            <li>Sequencing</li>
+                            <li>Value and risk</li>
+                            <li>Transition states</li>
+                            <li>Governance and decision points</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 6px solid #ffc107;">
+                    <p style="margin: 0; font-weight: bold;">Exam lens:</p>
+                    <p style="margin: 5px 0 0 0;">When the scenario gives you many problems, do not solve them all at once. Establish the strategic objective, identify dependencies, then sequence the work.</p>
+                </div>
+            </div>
+        </section>
 
-    <section id="case">
-      <div class="sheet-label">SHEET 07 · CONNECTED CASE</div>
-      <h2>The Wanderlust-style case</h2>
-      <p>Use this fictional case to practise the same reasoning pattern without relying on memorised questions.</p>
-      <div class="case-box">
-        <h3>Scenario</h3>
-        <p>A global manufacturer wants to enter a fast-growing electric-vehicle market. Its business units operate independently, several ERP systems have evolved separately, customer data is duplicated, and leadership wants faster product launches without losing local regulatory control.</p>
-        <p>The CIO asks for an architecture recommendation and a realistic transformation roadmap.</p>
-      </div>
-      <h3>Six linked decisions</h3>
-      <ol class="decisions">
-        <li><strong>Objective:</strong> What is the primary business outcome?</li>
-        <li><strong>Constraints:</strong> Which business, technology, regulatory and organisational constraints matter most?</li>
-        <li><strong>Business:</strong> Which capabilities and processes must change?</li>
-        <li><strong>Architecture:</strong> What target-state principles and boundaries would you propose?</li>
-        <li><strong>Roadmap:</strong> What should happen first, and why?</li>
-        <li><strong>Governance:</strong> What decisions, stakeholders and measures keep the transformation on track?</li>
-      </ol>
-      <div class="warning"><strong>Do the case before reading examples.</strong> Your first objective is not to find a perfect architecture. It is to demonstrate coherent reasoning.</div>
-    </section>
+        <!-- SHEET 05 -->
+        <section id="sheet-05" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 05 · SKILL AREA 3</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">Business Architecture</h2>
+                <p style="font-size: 16px; line-height: 1.6;"><strong>Start with what the business needs to be able to do before jumping to software.</strong></p>
+                
+                <div style="background: #f0f7ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h4 style="color: #003366; margin-top: 0;">Capability</h4>
+                    <p style="margin: 0;">What the business is able to do, independent of the detailed process used to do it.</p>
+                    <p style="color: #dc3545; margin: 5px 0 0 0; font-style: italic;">⚠️ Trap: confusing a capability with a process or application.</p>
+                </div>
+                
+                <div style="background: #f0f7ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h4 style="color: #003366; margin-top: 0;">Process</h4>
+                    <p style="margin: 0;">How work flows from one activity to another to create an outcome.</p>
+                    <p style="color: #dc3545; margin: 5px 0 0 0; font-style: italic;">⚠️ Trap: optimising a process without checking whether it supports the strategic objective.</p>
+                </div>
 
-    <section id="defense">
-      <div class="sheet-label">SHEET 08 · DEFENSE PATTERN</div>
-      <h2>The 9-step architecture defense</h2>
-      <ol class="numbered">
-        <li><b>Context</b> — “The situation I understand is…”</li>
-        <li><b>Objective</b> — “The outcome we need is…”</li>
-        <li><b>Constraints</b> — “The constraints that shape the decision are…”</li>
-        <li><b>Recommendation</b> — “I would recommend…”</li>
-        <li><b>Architecture rationale</b> — “This fits because…”</li>
-        <li><b>Trade-off</b> — “The main trade-off is…”</li>
-        <li><b>Risk</b> — “The largest risk is…”</li>
-        <li><b>Roadmap</b> — “I would sequence the work as…”</li>
-        <li><b>Validation</b> — “I would validate the decision through…”</li>
-      </ol>
-      <div class="quote">If you get stuck, return to: <strong>business objective → constraints → decision → rationale → trade-off → next step.</strong></div>
-    </section>
+                <h4 style="color: #003366; margin: 25px 0 10px 0;">When reading a case, ask:</h4>
+                <ul style="font-size: 15px; line-height: 2.5;">
+                    <li>What business outcome is changing?</li>
+                    <li>Which capabilities must improve or appear?</li>
+                    <li>Which processes are creating the problem?</li>
+                    <li>Which stakeholders own the outcome?</li>
+                    <li>What evidence would prove the architecture is working?</li>
+                </ul>
+            </div>
+        </section>
 
-    <section id="practice">
-      <div class="sheet-label">SHEET 09 · PRACTICE & SCORING</div>
-      <h2>Score the quality of your reasoning</h2>
-      <p>Use this 16-point rubric after every connected-case response.</p>
-      <table>
-        <tr><th>Dimension</th><th>0</th><th>1</th><th>2</th></tr>
-        <tr><td>Business alignment</td><td>Missing</td><td>Partial</td><td>Explicit</td></tr>
-        <tr><td>Constraints</td><td>Missed</td><td>Some identified</td><td>Prioritised</td></tr>
-        <tr><td>Architecture</td><td>Unclear</td><td>Reasonable</td><td>Coherent</td></tr>
-        <tr><td>Artifacts / method</td><td>Absent</td><td>Named</td><td>Applied correctly</td></tr>
-        <tr><td>Trade-offs</td><td>None</td><td>Mentioned</td><td>Defended</td></tr>
-        <tr><td>Roadmap</td><td>Absent</td><td>Generic</td><td>Sequenced</td></tr>
-        <tr><td>Risk</td><td>Absent</td><td>Identified</td><td>Mitigated</td></tr>
-        <tr><td>Communication</td><td>Rambling</td><td>Clear</td><td>Executive-quality</td></tr>
-      </table>
-      <div class="score-guide">
-        <span><b>0–7</b> Learn the foundations</span>
-        <span><b>8–11</b> Apply with guidance</span>
-        <span><b>12–14</b> Strong reasoning</span>
-        <span><b>15–16</b> Excellent defense</span>
-      </div>
-    </section>
+        <!-- SHEET 06 -->
+        <section id="sheet-06" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 06 · SKILL AREA 4</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">Data, Application & Technology Architecture</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+                    <div style="background: #f0f7ff; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-top: 0;">📊 What information?</h4>
+                        <p style="margin: 0; font-size: 15px;">Ownership, quality, lifecycle, privacy, residency, integration and access.</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-top: 0;">⚙️ What capabilities are supported?</h4>
+                        <p style="margin: 0; font-size: 15px;">Application responsibilities, boundaries, interfaces, duplication and fit with business capabilities.</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-top: 0;">🖥️ What enables it?</h4>
+                        <p style="margin: 0; font-size: 15px;">Platforms, infrastructure, security, connectivity, operations and non-functional requirements.</p>
+                    </div>
+                </div>
 
-    <section id="resources">
-      <div class="sheet-label">SHEET 10 · OFFICIAL RESOURCES</div>
-      <h2>Study from primary sources first</h2>
-      <div class="resource-list">
-        <a href="https://learning.sap.com/get-certified" target="_blank" rel="noopener"><b>SAP — Get Certified</b><span>Current certification program and preparation overview.</span></a>
-        <a href="https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs" target="_blank" rel="noopener"><b>SAP — Scenario-based assessment FAQs</b><span>Current guidance on scenario assessments, AI roleplay, human review and exam launch.</span></a>
-        <a href="https://learning.sap.com/helpcenter/certification-support/exam-essentials" target="_blank" rel="noopener"><b>SAP — Practical exam essentials</b><span>Current overview of the performance-based approach and how to verify exam status.</span></a>
-        <a href="https://learning.sap.com/learning-journeys/becoming-an-sap-enterprise-architect" target="_blank" rel="noopener"><b>SAP Learning — Becoming an SAP Enterprise Architect</b><span>Use the official learning journey as the foundation for your study.</span></a>
-        <a href="https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals" target="_blank" rel="noopener"><b>SAP Learning — Architecture Fundamentals</b><span>Architecture fundamentals, vision, business/application/data/technology architecture and roadmap concepts.</span></a>
-      </div>
-      <div class="callout"><strong>Rule:</strong> if a third-party guide conflicts with SAP's current certification page, trust SAP's current page and update this guide.</div>
-    </section>
+                <div style="background: #e8f0fe; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h4 style="color: #003366; margin-top: 0;">Clean Core</h4>
+                    <p style="margin: 0;">Use the core product as intended and avoid unnecessary modifications that make upgrades and lifecycle management harder. Where appropriate, extensions can be designed outside or alongside the core using SAP's supported extensibility approaches.</p>
+                </div>
 
-    <section id="checklist">
-      <div class="sheet-label">SHEET 11 · EXAM-DAY CHECKLIST</div>
-      <h2>24 hours before</h2>
-      <div class="checklist">
-        <label><input type="checkbox"> Verify the P_SAPEA certification page and exact assessment format.</label>
-        <label><input type="checkbox"> Verify the time limit and available language.</label>
-        <label><input type="checkbox"> Verify your SAP Universal ID and certification attempt.</label>
-        <label><input type="checkbox"> Check microphone/browser permissions if your assessment is scenario-based.</label>
-        <label><input type="checkbox"> Prepare your approved/open-book reference tabs.</label>
-        <label><input type="checkbox"> Do one timed defense drill.</label>
-      </div>
-      <h2>At the start</h2>
-      <div class="checklist">
-        <label><input type="checkbox"> Read the scenario before jumping to a solution.</label>
-        <label><input type="checkbox"> Identify objective + constraints.</label>
-        <label><input type="checkbox"> Use the defense pattern.</label>
-        <label><input type="checkbox"> Keep answers concise and evidence-based.</label>
-      </div>
-    </section>
+                <div style="background: #e8f0fe; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h4 style="color: #003366; margin-top: 0;">Public vs private cloud</h4>
+                    <p style="margin: 0;">Do not memorise "public is good" or "private is good." Evaluate standardisation, fit-to-standard expectations, required flexibility, operational model, integration, lifecycle and business constraints.</p>
+                </div>
 
-    <section id="tracker">
-      <div class="sheet-label">SHEET 12 · PROGRESS TRACKER</div>
-      <h2>Track understanding, not page views</h2>
-      <p>These checks are saved in your browser.</p>
-      <div id="trackerList"></div>
-      <button class="secondary" id="resetTracker">Reset tracker</button>
-    </section>
+                <div style="background: #f0f7ff; padding: 20px; border-radius: 8px;">
+                    <h4 style="color: #003366; margin-top: 0;">Integration & regulatory thinking</h4>
+                    <ul style="font-size: 15px; line-height: 2.5;">
+                        <li>Identify the business event or data exchange first.</li>
+                        <li>Then decide the integration responsibility and pattern.</li>
+                        <li>Check security, privacy, residency and regulatory constraints.</li>
+                        <li>Prefer the simplest sustainable architecture that meets the requirement.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    <footer>
-      <p><strong>OrdoAnimi · P_SAPEA Study Guide</strong></p>
-      <p>Built as a companion study resource. SAP certification format and availability can change; always verify the current official certification page before relying on exam mechanics.</p>
-    </footer>
-  </main>
-</div>
-<script src="app.js"></script>
+        <!-- SHEET 07 -->
+        <section id="sheet-07" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 07 · CONNECTED CASE</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">The Wanderlust-style case</h2>
+                <p style="font-size: 16px; line-height: 1.6;">Use this fictional case to practise the same reasoning pattern without relying on memorised questions.</p>
+                
+                <div style="background: #f0f7ff; padding: 20px; border-radius: 8px; border-left: 6px solid #003366; margin: 20px 0;">
+                    <h4 style="color: #003366; margin-top: 0;">Scenario</h4>
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6;">A global manufacturer wants to enter a fast-growing electric-vehicle market. Its business units operate independently, several ERP systems have evolved separately, customer data is duplicated, and leadership wants faster product launches without losing local regulatory control.</p>
+                    <p style="margin: 10px 0 0 0; font-size: 15px; line-height: 1.6;">The CIO asks for an architecture recommendation and a realistic transformation roadmap.</p>
+                </div>
+
+                <h4 style="color: #003366; margin: 25px 0 10px 0;">Six linked decisions</h4>
+                <ul style="font-size: 15px; line-height: 2.5;">
+                    <li><strong>Objective:</strong> What is the primary business outcome?</li>
+                    <li><strong>Constraints:</strong> Which business, technology, regulatory and organisational constraints matter most?</li>
+                    <li><strong>Business:</strong> Which capabilities and processes must change?</li>
+                    <li><strong>Architecture:</strong> What target-state principles and boundaries would you propose?</li>
+                    <li><strong>Roadmap:</strong> What should happen first, and why?</li>
+                    <li><strong>Governance:</strong> What decisions, stakeholders and measures keep the transformation on track?</li>
+                </ul>
+                
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 6px solid #ffc107; margin-top: 20px;">
+                    <p style="margin: 0; font-weight: bold;">📌 Do the case before reading examples.</p>
+                    <p style="margin: 5px 0 0 0;">Your first objective is not to find a perfect architecture. It is to demonstrate coherent reasoning.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHEET 08 -->
+        <section id="sheet-08" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 08 · DEFENSE PATTERN</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">The 9-step architecture defense</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #003366;">
+                        <strong>1. Context</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">"The situation I understand is…"</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #003366;">
+                        <strong>2. Objective</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">"The outcome we need is…"</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #003366;">
+                        <strong>3. Constraints</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">"The constraints that shape the decision are…"</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #003366;">
+                        <strong>4. Recommendation</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">"I would recommend…"</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #003366;">
+                        <strong>5. Architecture rationale</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">"This fits because…"</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #003366;">
+                        <strong>6. Trade-off</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">"The main trade-off is…"</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #003366;">
+                        <strong>7. Risk</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">"The largest risk is…"</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #003366;">
+                        <strong>8. Roadmap</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">"I would sequence the work as…"</p>
+                    </div>
+                    <div style="background: #f0f7ff; padding: 15px; border-radius: 8px; border-left: 4px solid #003366;">
+                        <strong>9. Validation</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 14px;">"I would validate the decision through…"</p>
+                    </div>
+                </div>
+                
+                <div style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <p style="margin: 0; font-style: italic; font-size: 16px;">If you get stuck, return to: <strong>business objective → constraints → decision → rationale → trade-off → next step</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHEET 09 -->
+        <section id="sheet-09" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 09 · PRACTICE & SCORING</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">Score the quality of your reasoning</h2>
+                <p style="font-size: 16px;">Use this 16-point rubric after every connected-case response.</p>
+                
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px;">
+                    <thead>
+                        <tr style="background: #003366; color: white;">
+                            <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Dimension</th>
+                            <th style="padding: 12px; text-align: center; border: 1px solid #ddd;">0</th>
+                            <th style="padding: 12px; text-align: center; border: 1px solid #ddd;">1</th>
+                            <th style="padding: 12px; text-align: center; border: 1px solid #ddd;">2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding: 10px; border: 1px solid #ddd;">Business alignment</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Missing</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Partial</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Explicit</td></tr>
+                        <tr style="background: #f9f9f9;"><td style="padding: 10px; border: 1px solid #ddd;">Constraints</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Missed</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Some identified</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Prioritised</td></tr>
+                        <tr><td style="padding: 10px; border: 1px solid #ddd;">Architecture</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Unclear</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Reasonable</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Coherent</td></tr>
+                        <tr style="background: #f9f9f9;"><td style="padding: 10px; border: 1px solid #ddd;">Artifacts / method</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Absent</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Named</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Applied correctly</td></tr>
+                        <tr><td style="padding: 10px; border: 1px solid #ddd;">Trade-offs</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">None</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Mentioned</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Defended</td></tr>
+                        <tr style="background: #f9f9f9;"><td style="padding: 10px; border: 1px solid #ddd;">Roadmap</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Absent</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Generic</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Sequenced</td></tr>
+                        <tr><td style="padding: 10px; border: 1px solid #ddd;">Risk</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Absent</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Identified</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Mitigated</td></tr>
+                        <tr style="background: #f9f9f9;"><td style="padding: 10px; border: 1px solid #ddd;">Communication</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Rambling</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Clear</td><td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Executive-quality</td></tr>
+                    </tbody>
+                </table>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
+                    <div style="background: #dc3545; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 28px; font-weight: bold;">0–7</div>
+                        <div>Learn the foundations</div>
+                    </div>
+                    <div style="background: #ffc107; color: #000; padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 28px; font-weight: bold;">8–11</div>
+                        <div>Apply with guidance</div>
+                    </div>
+                    <div style="background: #17a2b8; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 28px; font-weight: bold;">12–14</div>
+                        <div>Strong reasoning</div>
+                    </div>
+                    <div style="background: #28a745; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 28px; font-weight: bold;">15–16</div>
+                        <div>Excellent defense</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHEET 10 -->
+        <section id="sheet-10" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 10 · OFFICIAL RESOURCES</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">Study from primary sources first</h2>
+                
+                <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 6px solid #ffc107; margin: 20px 0;">
+                    <p style="margin: 0; font-weight: bold; font-size: 18px;">📌 Rule:</p>
+                    <p style="margin: 5px 0 0 0; font-size: 16px;">if a third-party guide conflicts with SAP's current certification page, <strong>trust SAP's current page</strong> and update this guide.</p>
+                </div>
+
+                <div style="background: #f0f7ff; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h4 style="color: #003366; margin-top: 0;">Primary SAP Sources</h4>
+                    <ul style="font-size: 15px; line-height: 2.5;">
+                        <li><a href="https://learning.sap.com/get-certified" target="_blank" style="color: #003366; text-decoration: none; border-bottom: 1px solid #003366;">SAP Learning Certification</a></li>
+                        <li><a href="https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs" target="_blank" style="color: #003366; text-decoration: none; border-bottom: 1px solid #003366;">Scenario-Based Assessment FAQs</a></li>
+                        <li><a href="https://learning.sap.com/helpcenter/certification-support/exam-essentials" target="_blank" style="color: #003366; text-decoration: none; border-bottom: 1px solid #003366;">Exam Essentials</a></li>
+                        <li><a href="https://learning.sap.com/learning-journeys/becoming-an-sap-enterprise-architect" target="_blank" style="color: #003366; text-decoration: none; border-bottom: 1px solid #003366;">Becoming an SAP Enterprise Architect</a></li>
+                        <li><a href="https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals" target="_blank" style="color: #003366; text-decoration: none; border-bottom: 1px solid #003366;">Intelligent Enterprise Architecture Fundamentals</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHEET 11 -->
+        <section id="sheet-11" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 11 · EXAM-DAY CHECKLIST</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">24 hours before</h2>
+                <ul style="font-size: 16px; line-height: 2.5;">
+                    <li>✅ Verify the exam format and duration on the official P_SAPEA page</li>
+                    <li>✅ Check your SAP Universal ID and roleplay account access</li>
+                    <li>✅ Review the 9-step defense pattern</li>
+                    <li>✅ Practice one connected case response with the rubric</li>
+                    <li>✅ Ensure your system and internet connection meet requirements</li>
+                </ul>
+                
+                <h2 style="color: #003366; margin: 30px 0 20px 0;">At the start</h2>
+                <ul style="font-size: 16px; line-height: 2.5;">
+                    <li>✅ Read the scenario completely before answering</li>
+                    <li>✅ Identify the primary business objective first</li>
+                    <li>✅ Note key constraints</li>
+                    <li>✅ Structure your response using the defense pattern</li>
+                    <li>✅ Manage your time - prioritize clarity over perfection</li>
+                    <li>✅ Review your answer if time allows</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SHEET 12 -->
+        <section id="sheet-12" style="margin-bottom: 50px; padding-top: 20px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd;">
+                <span style="background: #003366; color: white; padding: 4px 12px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 10px;">SHEET 12 · PROGRESS TRACKER</span>
+                <h2 style="color: #003366; margin: 10px 0 20px 0;">Track understanding, not page views</h2>
+                <p style="font-size: 16px;">These checks are saved in your browser.</p>
+                
+                <div id="trackerContainer" style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 15px 0;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <input type="checkbox" class="progress-checkbox" data-tracker-key="foundation"> Foundation
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <input type="checkbox" class="progress-checkbox" data-tracker-key="framework"> EA Framework
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <input type="checkbox" class="progress-checkbox" data-tracker-key="vision"> Vision
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <input type="checkbox" class="progress-checkbox" data-tracker-key="business"> Business Architecture
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <input type="checkbox" class="progress-checkbox" data-tracker-key="dataTech"> Data / App / Tech
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <input type="checkbox" class="progress-checkbox" data-tracker-key="defense"> Defense
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <input type="checkbox" class="progress-checkbox" data-tracker-key="practice"> Practice
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px; background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                            <input type="checkbox" class="progress-checkbox" data-tracker-key="readiness"> Exam readiness
+                        </label>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 2px solid #ddd;">
+                        <div style="font-size: 16px;">
+                            <strong>Progress:</strong> <span id="progressDisplay">0/8 (0%)</span>
+                        </div>
+                        <button id="resetProgress" style="
+                            padding: 10px 20px;
+                            background: #dc3545;
+                            color: white;
+                            border: none;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            font-size: 14px;
+                            font-weight: bold;
+                            transition: background 0.3s;
+                        ">🔄 Reset Progress</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" style="
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #003366;
+        color: white;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        cursor: pointer;
+        font-size: 24px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    ">↑</button>
+
+    <script src="app.js"></script>
 </body>
 </html>
