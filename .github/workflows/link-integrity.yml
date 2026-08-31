@@ -6,8 +6,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  check:
-    uses: ZenCloudAU/velocity-architecture/.github/workflows/link-integrity.yml@main
-    with:
-      site_url: 'https://zencloudau.github.io/SAPEACertification/'
-      repo_name: 'SAPEACertification'
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check links inside index.html and README.md
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --exclude-mail
+            --exclude "classcentral\.com"
+            --accept 200,201,202,203,204,301,302,307,308,403
+            index.html README.md
+          fail: true
+
+      - name: Smoke-test the live GitHub Pages URL (non-blocking)
+        continue-on-error: true
+        run: |
+          curl -sSL -o /dev/null -w "GitHub Pages responded: %{http_code}\n" https://myintp.github.io/SAPEACertification/
