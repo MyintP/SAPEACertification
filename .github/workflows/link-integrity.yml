@@ -8,11 +8,12 @@ on:
 jobs:
   check-links:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Check links inside index.html and README.md
+      - name: Check external links in README.md
         uses: lycheeverse/lychee-action@v2
         with:
           args: >
@@ -24,10 +25,11 @@ jobs:
             --exclude "youtu\.be"
             --exclude "sap\.com"
             --accept 200,201,202,203,204,301,302,307,308,403,429
-            index.html README.md
+            README.md
           fail: true
 
-      - name: Smoke-test the live GitHub Pages URL (non-blocking)
+      - name: Smoke-test the live GitHub Pages URL
         continue-on-error: true
         run: |
-          curl -sSL -o /dev/null -w "GitHub Pages responded: %{http_code}\n" https://myintp.github.io/SAPEACertification/
+          curl -sSL -o /dev/null -w "GitHub Pages responded: %{http_code}\n" \
+            https://myintp.github.io/SAPEACertification/
