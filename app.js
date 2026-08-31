@@ -38,6 +38,46 @@
         }
     }
 
+    // --- Track Quiz Progress ---
+    function trackQuizProgress(score) {
+        const quizKey = 'sapEaQuizProgress';
+        try {
+            const current = JSON.parse(localStorage.getItem(quizKey) || '{}');
+            current.lastScore = score;
+            current.attempts = (current.attempts || 0) + 1;
+            current.lastAttempt = new Date().toISOString();
+            localStorage.setItem(quizKey, JSON.stringify(current));
+            console.log(`Quiz progress saved: ${score}%, ${current.attempts} attempts`);
+        } catch (e) {
+            console.log('Error tracking quiz progress:', e);
+        }
+    }
+
+    function getQuizProgress() {
+        const quizKey = 'sapEaQuizProgress';
+        try {
+            const data = localStorage.getItem(quizKey);
+            return data ? JSON.parse(data) : null;
+        } catch (e) {
+            console.log('Error getting quiz progress:', e);
+            return null;
+        }
+    }
+
+    function displayQuizProgress() {
+        const quizProgressDisplay = document.getElementById('quizProgressDisplay');
+        if (quizProgressDisplay) {
+            const progress = getQuizProgress();
+            if (progress) {
+                quizProgressDisplay.textContent = `📊 Quiz: ${progress.lastScore || 0}% (${progress.attempts || 0} attempts)`;
+                quizProgressDisplay.style.color = '#003366';
+            } else {
+                quizProgressDisplay.textContent = '📊 Quiz: Not started yet';
+                quizProgressDisplay.style.color = '#6c757d';
+            }
+        }
+    }
+
     // --- DOM Setup ---
     document.addEventListener('DOMContentLoaded', function() {
         // 1. Setup Progress Tracker
@@ -198,6 +238,9 @@
 
         // Initial highlight
         setTimeout(highlightActiveSection, 500);
+
+        // 5. Display quiz progress on page load
+        displayQuizProgress();
     });
 
 })();
