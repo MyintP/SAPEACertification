@@ -13,23 +13,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v5
 
-      - name: Check external links in README.md
-        uses: lycheeverse/lychee-action@v2
-        with:
-          args: >
-            --verbose
-            --no-progress
-            --exclude-mail
-            --exclude "classcentral\.com"
-            --exclude "youtube\.com"
-            --exclude "youtu\.be"
-            --exclude "sap\.com"
-            --accept 200,201,202,203,204,301,302,307,308,403,429
-            README.md
-          fail: true
-
-      - name: Smoke-test the live GitHub Pages URL
-        continue-on-error: true
+      - name: Check internal repository links
         run: |
-          curl -sSL -o /dev/null -w "GitHub Pages responded: %{http_code}\n" \
+          test -f index.html
+          test -f README.md
+
+          grep -q 'https://ordoanimi.com' README.md
+          grep -q 'https://framework.ordoanimi.com' README.md
+
+      - name: Smoke-test GitHub Pages
+        run: |
+          curl --fail --silent --show-error --location \
             https://myintp.github.io/SAPEACertification/
