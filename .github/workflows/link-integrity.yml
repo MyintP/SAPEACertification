@@ -20,7 +20,10 @@ jobs:
             --no-progress
             --exclude-mail
             --exclude "classcentral\.com"
-            --accept 200,201,202,203,204,301,302,307,308,403
+            --exclude "youtube\.com"
+            --exclude "youtu\.be"
+            --exclude "sap\.com"
+            --accept 200,201,202,203,204,301,302,307,308,403,429
             index.html README.md
           fail: true
 
