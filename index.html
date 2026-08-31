@@ -1,1214 +1,257 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OrdoAnimi — SAP Enterprise Architect Certification Guide</title>
-<meta name="description" content="A decision-first study companion for the SAP Certified Professional – SAP Enterprise Architect certification, from OrdoAnimi.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#0B2545;
-    --navy-deep:#081b34;
-    --paper:#EDF2F4;
-    --line:#6E90B0;
-    --line-dim:#2f4a68;
-    --amber:#E8A33D;
-    --rust:#C1440E;
-    --moss:#4F9D69;
-    --grid: rgba(237,242,244,0.06);
-    --sheet-radius: 2px;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:
-      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/32px 32px,
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/32px 32px,
-      var(--navy);
-    color:var(--paper);
-    font-family:'IBM Plex Sans', sans-serif;
-    line-height:1.6;
-  }
-  ::selection{ background:var(--amber); color:var(--navy-deep); }
-  a{ color:var(--amber); }
-
-  html, body{ height:100%; overflow:hidden; }
-  .frame{ display:flex; height:100vh; }
-
-  /* ---------- SIDEBAR ---------- */
-  .sidebar{
-    width:250px; flex-shrink:0;
-    background:var(--navy-deep);
-    border-right:1px solid var(--line-dim);
-    position:sticky; top:0; height:100vh; overflow-y:auto;
-    padding:28px 0 20px;
-  }
-  .sidebar-title{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px; letter-spacing:.12em; color:var(--line);
-    padding:0 22px 18px; border-bottom:1px solid var(--line-dim); margin-bottom:6px;
-  }
-  .sidebar-title strong{ display:block; color:var(--paper); font-size:13px; margin-bottom:4px; letter-spacing:.04em;}
-  .oa-link{
-    display:block; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.18em;
-    color:var(--amber); text-decoration:none; margin-bottom:12px; text-transform:uppercase;
-  }
-  .oa-link:hover{ text-decoration:underline; }
-  .oa-credit{
-    font-size:13.5px; color:var(--line); max-width:56ch; margin:-6px 0 24px;
-    border-left:2px solid var(--amber); padding-left:14px;
-  }
-  .oa-credit a{ color:var(--amber); text-decoration:none; border-bottom:1px dotted var(--amber); }
-  .oa-credit a:hover{ border-bottom-style:solid; }
-  .oa-footer-credit{ display:block; margin-top:10px; color:var(--line); }
-  .oa-footer-credit a{ color:var(--amber); text-decoration:none; }
-  .oa-footer-credit a:hover{ text-decoration:underline; }
-  .sheet-index{ list-style:none; }
-  .sheet-index li a{
-    display:flex; gap:10px; align-items:baseline;
-    padding:9px 22px; text-decoration:none;
-    font-family:'IBM Plex Mono', monospace; font-size:12px;
-    color:var(--line); border-left:2px solid transparent;
-    transition:.15s ease;
-  }
-  .sheet-index li a:hover{ color:var(--paper); background:rgba(232,163,61,0.06); }
-  .sheet-index li a.active{
-    color:var(--amber); border-left-color:var(--amber);
-    background:rgba(232,163,61,0.08);
-  }
-  .sheet-index .num{ color:var(--line-dim); font-weight:600; }
-  .sheet-index li a.active .num{ color:var(--amber); }
-  .sidebar-foot{
-    font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--line-dim);
-    padding:18px 22px 0; margin-top:10px; border-top:1px solid var(--line-dim);
-  }
-
-  /* ---------- MAIN / STAGE ---------- */
-  main{ flex:1; min-width:0; display:flex; flex-direction:column; height:100vh; overflow:hidden; }
-  .stage{ flex:1; overflow-y:auto; }
-  .sheet{
-    display:none;
-    padding:56px 64px 40px;
-    max-width:880px;
-  }
-  .sheet.active{ display:block; }
-
-  .slide-nav{
-    flex-shrink:0; display:flex; align-items:center; justify-content:space-between; gap:16px;
-    padding:12px 24px; border-top:1px solid var(--line-dim); background:var(--navy-deep);
-  }
-  .slide-nav button{
-    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:.04em;
-    background:none; border:1px solid var(--line); color:var(--paper);
-    padding:9px 18px; cursor:pointer; transition:.15s ease;
-  }
-  .slide-nav button:hover:not(:disabled){ border-color:var(--amber); color:var(--amber); }
-  .slide-nav button:disabled{ opacity:.28; cursor:default; }
-  .slide-counter{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line); letter-spacing:.08em;
-  }
-
-  .notes-bar{ flex-shrink:0; border-top:1px solid var(--line-dim); background:rgba(0,0,0,0.18); }
-  .notes-bar-head{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:10px 24px; cursor:pointer; user-select:none;
-    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--amber);
-  }
-  .notes-bar-head .chev{ color:var(--line); transition:transform .15s ease; }
-  .notes-bar.open .notes-bar-head .chev{ transform:rotate(180deg); }
-  .notes-bar-body{ display:none; padding:0 24px 16px; }
-  .notes-bar.open .notes-bar-body{ display:block; }
-  .notes-bar textarea{
-    width:100%; min-height:70px; background:rgba(255,255,255,0.02); border:1px solid var(--line-dim);
-    color:var(--paper); font-family:'IBM Plex Sans', sans-serif; font-size:13.5px; padding:10px 12px; resize:vertical;
-  }
-  .notes-bar textarea:focus{ outline:none; border-color:var(--amber); }
-  .notes-bar-note{ font-family:'IBM Plex Mono', monospace; font-size:10px; color:var(--line-dim); margin-top:6px; }
-
-  .mobile-topbar{ display:none; }
-
-  @media (max-width:720px){
-    .sheet{ padding:30px 18px 24px; }
-    .brief-card, .task-card, .summary-card{ padding:20px 18px; }
-    .slide-nav{ padding:10px 14px; }
-    .slide-nav button{ padding:9px 12px; font-size:12px; }
-    .slide-counter{ font-size:11px; }
-    .notes-bar-head, .notes-bar-body{ padding-left:14px; padding-right:14px; }
-
-    .frame{ position:relative; }
-    .mobile-topbar{
-      display:flex; align-items:center; gap:12px;
-      padding:12px 16px; border-bottom:1px solid var(--line-dim); background:var(--navy-deep);
-      flex-shrink:0;
-    }
-    .mobile-topbar button{
-      background:none; border:1px solid var(--line); color:var(--paper);
-      font-family:'IBM Plex Mono', monospace; font-size:16px; padding:6px 11px; cursor:pointer; line-height:1;
-    }
-    .mobile-topbar .current-label{
-      font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line); letter-spacing:.04em;
-      overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-    }
-    main{ height:calc(100vh - 49px); }
-
-    .sidebar{
-      position:fixed; top:0; left:0; height:100vh; width:250px; max-width:80vw;
-      z-index:20; transform:translateX(-100%); transition:transform .2s ease;
-      box-shadow:8px 0 24px rgba(0,0,0,0.4);
-    }
-    .sidebar.open{ transform:translateX(0); }
-    .sidebar-overlay{
-      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:19;
-    }
-    .sidebar-overlay.open{ display:block; }
-  }
-
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.14em;
-    color:var(--amber); text-transform:uppercase; margin-bottom:14px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--amber); display:inline-block; }
-
-  h1{
-    font-family:'Space Grotesk', sans-serif; font-weight:700;
-    font-size:clamp(32px,4.2vw,52px); line-height:1.05; letter-spacing:-.01em;
-    margin-bottom:18px;
-  }
-  h2{
-    font-family:'Space Grotesk', sans-serif; font-weight:600;
-    font-size:26px; margin:0 0 18px; letter-spacing:-.01em;
-  }
-  h3{
-    font-family:'Space Grotesk', sans-serif; font-weight:600;
-    font-size:18px; margin:26px 0 10px; color:var(--amber);
-  }
-  p{ color:#c8d6e0; max-width:62ch; margin-bottom:14px; }
-  p.lede{ font-size:17px; color:var(--paper); max-width:56ch; }
-
-  /* ---------- TITLE BLOCK (signature element) ---------- */
-  .titleblock{
-    margin-top:34px;
-    border:1px solid var(--line-dim);
-    display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
-    font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--line);
-    max-width:520px;
-  }
-  .titleblock div{ padding:8px 10px; border-right:1px solid var(--line-dim); }
-  .titleblock div:last-child{ border-right:none; }
-  .titleblock span{ display:block; color:var(--line-dim); text-transform:uppercase; letter-spacing:.06em; font-size:9px; margin-bottom:3px; }
-  .titleblock strong{ color:var(--paper); font-weight:500; }
-
-  /* ---------- REVISION CLOUD (warning) ---------- */
-  .revcloud{
-    position:relative;
-    border:2px solid var(--rust);
-    border-radius:38% 40% 36% 42% / 42% 38% 44% 36%;
-    padding:26px 30px 22px;
-    margin:22px 0 30px;
-    background:rgba(193,68,14,0.06);
-  }
-  .revcloud::before{
-    content:'△ REV A';
-    position:absolute; top:-13px; left:22px;
-    background:var(--navy); padding:0 8px;
-    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--rust); letter-spacing:.08em;
-  }
-  .revcloud p{ color:var(--paper); }
-  .revcloud p:last-child{ margin-bottom:0; }
-
-  /* ---------- COMPARISON TABLE ---------- */
-  table{ width:100%; border-collapse:collapse; margin:18px 0 8px; font-size:14px; }
-  th, td{ text-align:left; padding:10px 14px; border:1px solid var(--line-dim); }
-  th{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.06em; color:var(--amber); text-transform:uppercase; background:rgba(232,163,61,0.05); }
-  td{ color:#c8d6e0; }
-  tr td:first-child{ color:var(--paper); font-weight:500; }
-
-  /* ---------- SKILL AREA BARS ---------- */
-  .skillbar-row{ margin-bottom:20px; }
-  .skillbar-label{ display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:12px; margin-bottom:6px; color:var(--paper); }
-  .skillbar-label .wt{ color:var(--amber); }
-  .skillbar-track{ height:8px; background:var(--line-dim); position:relative; overflow:hidden; }
-  .skillbar-fill{ height:100%; background:repeating-linear-gradient(45deg, var(--amber), var(--amber) 6px, #c9862b 6px, #c9862b 12px); }
-
-  ul.plain{ list-style:none; margin:14px 0; }
-  ul.plain li{
-    padding-left:20px; position:relative; margin-bottom:8px; color:#c8d6e0; max-width:60ch;
-  }
-  ul.plain li::before{ content:'—'; position:absolute; left:0; color:var(--line); }
-
-  .callout{
-    border-left:3px solid var(--line); padding:4px 0 4px 18px; margin:18px 0; color:#c8d6e0; font-size:14.5px;
-  }
-  .callout strong{ color:var(--paper); }
-
-  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 6px; }
-  .tag{
-    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line);
-    border:1px solid var(--line-dim); padding:5px 10px; letter-spacing:.03em;
-  }
-
-  /* ---------- SHARED OPTION-CARD LOOK (used by the drill) ---------- */
-  .quiz-meta{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line); margin-bottom:10px; letter-spacing:.06em; }
-  .quiz-q{ font-family:'Space Grotesk', sans-serif; font-size:17px; color:var(--paper); margin-bottom:16px; font-weight:500; }
-  .quiz-opts{ display:flex; flex-direction:column; gap:8px; }
-  .quiz-opt{
-    display:flex; align-items:flex-start; gap:10px;
-    border:1px solid var(--line-dim); padding:11px 14px; cursor:pointer;
-    font-size:14px; color:#c8d6e0; transition:.15s ease; background:transparent;
-    font-family:'IBM Plex Sans', sans-serif; text-align:left; width:100%;
-  }
-  .quiz-opt:hover{ border-color:var(--line); background:rgba(255,255,255,0.02); }
-  .quiz-opt .glyph{
-    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim); flex-shrink:0; margin-top:1px;
-  }
-  .quiz-opt.selected{ border-color:var(--amber); background:rgba(232,163,61,0.06); }
-  .quiz-opt.correct{ border-color:var(--moss); background:rgba(79,157,105,0.1); color:var(--paper); }
-  .quiz-opt.correct .glyph{ color:var(--moss); }
-  .quiz-opt.incorrect{ border-color:var(--rust); background:rgba(193,68,14,0.1); color:var(--paper); }
-  .quiz-opt.incorrect .glyph{ color:var(--rust); }
-  .quiz-opt[disabled]{ cursor:default; }
-
-  .score-strip{
-    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;
-    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--paper);
-    border:1px solid var(--amber); padding:14px 20px; margin-bottom:24px;
-  }
-  .score-strip .num{ color:var(--amber); font-size:20px; font-weight:600; }
-
-  /* ---------- CONNECTED CASE DRILL ---------- */
-  .brief-card{ border:1px solid var(--amber); padding:28px 30px 26px; background:rgba(232,163,61,0.04); }
-  .brief-tag{
-    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.1em; color:var(--amber);
-    margin-bottom:14px; text-transform:uppercase;
-  }
-  .brief-meta{
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--line);
-    margin:18px 0 20px; padding-top:14px; border-top:1px dashed var(--line-dim);
-  }
-  .start-btn{
-    background:var(--amber); color:var(--navy-deep); border:none;
-    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:13px;
-    padding:13px 22px; cursor:pointer; letter-spacing:.04em;
-  }
-  .start-btn:hover{ background:#f0b25a; }
-
-  .timer-bar{
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;
-    border:1px solid var(--line-dim); padding:10px 18px; margin-bottom:14px;
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--paper);
-    position:sticky; top:0; background:var(--navy); z-index:5;
-  }
-  .timer-bar .timer-left #timerNum{ color:var(--amber); font-size:15px; font-weight:600; margin-left:6px; }
-  .timer-bar.timer-over #timerNum{ color:var(--rust); }
-  .timer-bar .timer-right{ color:var(--line); font-size:11px; }
-
-  .end-margin-banner{
-    border:1px solid var(--amber); background:rgba(232,163,61,0.08);
-    padding:10px 16px; margin-bottom:16px; font-size:13px; color:var(--paper);
-  }
-
-  .task-card{ border:1px solid var(--line-dim); padding:24px 26px; background:rgba(255,255,255,0.015); }
-
-  .consequence-banner{
-    border-left:3px solid var(--amber); padding:10px 14px; margin-bottom:18px;
-    background:rgba(232,163,61,0.05); font-size:13.5px; color:#c8d6e0;
-  }
-  .cb-tag{
-    display:block; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.08em;
-    color:var(--amber); margin-bottom:4px;
-  }
-
-  .defend-box{ margin:16px 0; }
-  .defend-label{
-    display:block; font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--line); margin-bottom:8px;
-  }
-  .defend-textarea{
-    width:100%; background:var(--navy-deep); border:1px solid var(--line-dim); color:var(--paper);
-    font-family:'IBM Plex Sans', sans-serif; font-size:14px; padding:12px 14px; resize:vertical;
-  }
-  .defend-textarea:focus{ outline:2px solid var(--amber); outline-offset:1px; border-color:var(--amber); }
-
-  .task-actions{ display:flex; gap:10px; margin-top:4px; flex-wrap:wrap; }
-  .lock-btn{
-    background:var(--amber); color:var(--navy-deep); border:none;
-    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:12px;
-    padding:11px 18px; cursor:pointer; letter-spacing:.03em;
-  }
-  .lock-btn:disabled{ background:var(--line-dim); color:var(--line); cursor:not-allowed; }
-  .lock-btn:not(:disabled):hover{ background:#f0b25a; }
-  .flag-btn{
-    background:none; border:1px solid var(--line-dim); color:var(--line);
-    font-family:'IBM Plex Mono', monospace; font-size:12px; padding:11px 16px; cursor:pointer;
-  }
-  .flag-btn:hover{ border-color:var(--line); color:var(--paper); }
-
-  .reveal-block{
-    margin-top:18px; padding-top:16px; border-top:1px dashed var(--line-dim);
-    display:grid; grid-template-columns:1fr 1fr; gap:18px;
-  }
-  @media (max-width:640px){ .reveal-block{ grid-template-columns:1fr; } }
-  .reveal-col .reveal-label{
-    display:block; font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.08em;
-    color:var(--line); text-transform:uppercase; margin-bottom:6px;
-  }
-  .reveal-col p{ font-size:13.5px; color:#c8d6e0; max-width:none; }
-  .reveal-col.model .reveal-label{ color:var(--amber); }
-  .reveal-col.model p{ color:var(--paper); }
-
-  .next-btn{ margin-top:18px; }
-
-  .summary-card{ border:1px solid var(--line-dim); padding:26px 28px; background:rgba(255,255,255,0.015); }
-  .summary-row{ border-top:1px dashed var(--line-dim); padding:16px 0; }
-  .summary-row:first-of-type{ border-top:none; }
-  .summary-row-head{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
-  .summary-tag{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.06em; padding:3px 8px; }
-  .summary-row.is-correct .summary-tag{ color:var(--moss); border:1px solid var(--moss); }
-  .summary-row.is-incorrect .summary-tag{ color:var(--rust); border:1px solid var(--rust); }
-  .summary-row.is-flagged .summary-tag{ color:var(--amber); border:1px solid var(--amber); }
-
-  footer.end{
-    padding:40px 64px 80px; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line-dim);
-  }
-  a:focus-visible, button:focus-visible, .quiz-opt:focus-visible{
-    outline:2px solid var(--amber); outline-offset:2px;
-  }
-  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
-
-  /* ---------- GETTING STARTED WARNING ---------- */
-  .warn-cloud{
-    position:relative;
-    border:2px solid var(--rust);
-    border-radius:38% 40% 36% 42% / 42% 38% 44% 36%;
-    padding:24px 28px 20px;
-    margin:20px 0 26px;
-    background:rgba(193,68,14,0.06);
-  }
-  .warn-cloud::before{
-    content:'△ REV C';
-    position:absolute; top:-13px; left:22px;
-    background:var(--navy); padding:0 8px;
-    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--rust); letter-spacing:.08em;
-  }
-  .warn-cloud p{ color:var(--paper); margin-bottom:8px; }
-  .warn-cloud p:last-child{ margin-bottom:0; }
-
-  /* ---------- PROGRESS TRACKER ---------- */
-  .storage-note{ font-size:12px; color:var(--line); font-style:italic; margin-top:-6px; margin-bottom:20px; }
-  .tracker-overall{ margin:4px 0 30px; max-width:520px; }
-  .tracker-overall .skillbar-label{ font-size:13px; }
-  .tracker-domain{ margin-bottom:24px; border-top:1px dashed var(--line-dim); padding-top:18px; }
-  .tracker-domain-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; }
-  .tracker-domain-head h3{ margin:0; }
-  .tracker-domain-pct{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line); }
-  .tracker-topic{ margin-bottom:14px; padding:14px 16px; border:1px solid var(--line-dim); background:rgba(255,255,255,0.01); }
-  .tracker-topic-name{ font-family:'Space Grotesk', sans-serif; font-size:14.5px; color:var(--paper); margin-bottom:4px; font-weight:500; }
-  .tracker-topic-note{ font-size:12.5px; color:var(--line); margin-bottom:10px; }
-  .tracker-checks{ display:flex; flex-wrap:wrap; gap:16px; }
-  .tracker-check-label{ display:flex; align-items:center; gap:7px; font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:#c8d6e0; cursor:pointer; }
-  .tracker-check-label input[type="checkbox"]{ accent-color: var(--amber); width:15px; height:15px; cursor:pointer; }
-  .tracker-reset{
-    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--line);
-    background:none; border:1px solid var(--line-dim); padding:9px 16px; cursor:pointer; margin-top:8px;
-  }
-  .tracker-reset:hover{ border-color:var(--rust); color:var(--rust); }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A beginner-friendly, decision-first preparation guide for the SAP Enterprise Architect certification.">
+  <title>P_SAPEA — Enterprise Architect Study Guide</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<header class="topbar">
+  <div class="brand">
+    <span class="eyebrow">ORDOANIMI • P_SAPEA</span>
+    <h1>Enterprise Architect Study Guide</h1>
+    <p>Learn the decisions, not the answer keys.</p>
+  </div>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">☰</button>
+</header>
 
-<div class="frame">
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-  <nav class="sidebar" id="sidebarNav">
-    <div class="sidebar-title">
-      <a href="https://ordoanimi.com" target="_blank" rel="noopener" class="oa-link">OrdoAnimi</a>
-      <strong>P_SAPEA</strong>Drawing Set — Exam Prep
-    </div>
-    <ul class="sheet-index" id="sheetIndex">
-      <li><a href="#cover" class="num">A0.1</a></li>
-      <li><a href="#format" data-num="A1.0"><span class="num">A1.0</span>Format Change</a></li>
-      <li><a href="#framework" data-num="A2.0"><span class="num">A2.0</span>Framework &amp; Toolset</a></li>
-      <li><a href="#vision" data-num="A2.1"><span class="num">A2.1</span>Vision &amp; Roadmap</a></li>
-      <li><a href="#business" data-num="A2.2"><span class="num">A2.2</span>Business Architecture</a></li>
-      <li><a href="#datc" data-num="A2.3"><span class="num">A2.3</span>Data/App/Tech Arch.</a></li>
-      <li><a href="#case" data-num="A3.0"><span class="num">A3.0</span>Case Study Pattern</a></li>
-      <li><a href="#resources" data-num="A4.0"><span class="num">A4.0</span>Resources</a></li>
-      <li><a href="#quiz" data-num="Q1.0"><span class="num">Q1.0</span>Live Defense Drill</a></li>
-      <li><a href="#getting-started" data-num="G1.0"><span class="num">G1.0</span>How to Start</a></li>
-      <li><a href="#tracker" data-num="T1.0"><span class="num">T1.0</span>Progress Tracker</a></li>
-    </ul>
-    <div class="sidebar-foot">SCALE: NTS<br>SHEET SET: 11<br>ISSUED: AUG 2026</div>
-  </nav>
+<div class="layout">
+  <aside class="sidebar" id="nav">
+    <nav>
+      <a class="active" href="#start">00 · Start Here</a>
+      <a href="#exam">01 · Current Exam Model</a>
+      <a href="#method">02 · Decision Method</a>
+      <a href="#framework">03 · EA Framework</a>
+      <a href="#vision">04 · Vision & Roadmap</a>
+      <a href="#business">05 · Business Architecture</a>
+      <a href="#layers">06 · Data / App / Technology</a>
+      <a href="#case">07 · Connected Case</a>
+      <a href="#defense">08 · Defense Pattern</a>
+      <a href="#practice">09 · Practice & Scoring</a>
+      <a href="#resources">10 · Official Resources</a>
+      <a href="#checklist">11 · Exam-Day Checklist</a>
+      <a href="#tracker">12 · Progress Tracker</a>
+    </nav>
+  </aside>
 
   <main>
-    <div class="mobile-topbar">
-      <button id="menuToggleBtn" aria-label="Open sheet index">☰</button>
-      <span class="current-label" id="mobileCurrentLabel">A0.1</span>
-    </div>
-    <div class="stage">
-
-    <section class="sheet" id="cover">
-      <div class="eyebrow">SAP Certified Professional</div>
-      <h1>Enterprise Architect<br>Exam Drawing Set</h1>
-      <p class="lede">A working set of reference sheets for P_SAPEA prep — the four graded skill areas, the 2026 assessment-format change, and a connected-case defense drill. Built for local, offline reading.</p>
-      <p class="oa-credit">An <a href="https://ordoanimi.com" target="_blank" rel="noopener">OrdoAnimi</a> resource, built on the same decision-first principle as the <a href="https://framework.ordoanimi.com" target="_blank" rel="noopener">OrdoAnimi Framework</a> — the unit of study here is the decision, not the isolated fact.</p>
-      <div class="titleblock">
-        <div><span>Practice</span><strong>OrdoAnimi</strong></div>
-        <div><span>Sheet</span><strong>A0.1 / Q1.0</strong></div>
-        <div><span>Scale</span><strong>Not to scale</strong></div>
-        <div><span>Rev</span><strong>D — Aug 2026</strong></div>
+    <section class="hero" id="start">
+      <div class="sheet-label">SHEET 00 · BEGINNER START</div>
+      <h2>Prepare to think like an Enterprise Architect — even if you're starting from zero.</h2>
+      <p class="lead">This guide turns the P_SAPEA preparation journey into a sequence: understand the idea → recognise it in a messy business situation → make a decision → defend it.</p>
+      <div class="callout">
+        <strong>Core rule:</strong> the unit of study is the <em>decision</em>, not the isolated fact.
       </div>
+      <div class="cards three">
+        <article><span>01</span><h3>Learn</h3><p>Understand the vocabulary, architecture layers and SAP methods.</p></article>
+        <article><span>02</span><h3>Apply</h3><p>Use the ideas on a connected enterprise scenario.</p></article>
+        <article><span>03</span><h3>Defend</h3><p>Explain why your recommendation is appropriate, including trade-offs and risks.</p></article>
+      </div>
+      <h3>How to use this site</h3>
+      <ol class="steps">
+        <li>Read the beginner sections in order.</li>
+        <li>Do the connected case without looking at the model answer.</li>
+        <li>Score yourself using the rubric.</li>
+        <li>Repeat until you can explain the reasoning clearly and efficiently.</li>
+      </ol>
     </section>
 
-    <section class="sheet" id="format">
-      <div class="eyebrow">Sheet A1.0</div>
-      <h2>Exam Format Change</h2>
-      <p>SAP replaced the legacy closed-book multiple-choice exam for this certification with an open-book <strong style="color:var(--paper)">Scenario-Based Assessment (SBA)</strong>, rolled out through 2025–2026. Old MCQ dumps no longer map to the actual test.</p>
-
-      <div class="revcloud">
-        <p><strong>Rev B correction —</strong> duration is not a reliable ~2 hrs across the board. It varies by exam, and some SBAs run as a live ~20–30 minute AI chat interview. Confirm P_SAPEA's current figure on its own SAP Learning page before you build pacing drills around any number here.</p>
-        <p>Grading criterion shifted from "selected the correct option" to <strong style="color:var(--paper)">quality and completeness of your architectural reasoning</strong>.</p>
+    <section id="exam">
+      <div class="sheet-label">SHEET 01 · CURRENT EXAM MODEL</div>
+      <h2>What changed?</h2>
+      <p>SAP has moved its certification portfolio toward performance-based practical assessments. SAP describes two broad practical formats: system-based and scenario-based. Scenario-based assessments use a timeboxed roleplay; candidates may use the AI-guided path or, where offered, record a video for human review.</p>
+      <div class="warning"><strong>Do not hard-code exam mechanics.</strong> The exact format, duration, available languages and remaining attempts are shown on the individual certification page. Check the P_SAPEA page immediately before your exam.</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Old study habit</th><th>Better habit now</th></tr>
+          <tr><td>Memorise answer keys</td><td>Learn how to reason from objectives and constraints</td></tr>
+          <tr><td>Study isolated definitions</td><td>Connect concepts across business, application, data and technology</td></tr>
+          <tr><td>Optimise for one “correct” design</td><td>Explain a defensible design and its trade-offs</td></tr>
+          <tr><td>Ignore the clock</td><td>Practise concise, structured responses</td></tr>
+        </table>
       </div>
-
-      <table>
-        <tr><th>Attribute</th><th>Legacy format</th><th>Current format (2026)</th></tr>
-        <tr><td>Style</td><td>80 closed-book MCQs</td><td>Scenario-based, open-book</td></tr>
-        <tr><td>Duration</td><td>~180 min</td><td>Varies by exam — confirm on SAP Learning</td></tr>
-        <tr><td>Interaction</td><td>Answer sheet</td><td>Live AI-guided interview (Yoodli-based)</td></tr>
-        <tr><td>Resources allowed</td><td>None</td><td>SAP Help, Learning, Community, Joule</td></tr>
-        <tr><td>Result timing</td><td>Immediate</td><td>Immediate (AI) or ≤20 days (human review)</td></tr>
-      </table>
-
-      <p class="callout"><strong>Exam-day mechanic:</strong> delivered as a live AI-guided virtual interview via your SAP Universal ID, embedded in SAP Learning — no separate install. Corporate Wi-Fi can block the domains it needs, so test your actual exam-day network beforehand or ask IT to allow it. A free account at yoodli.ai will get you used to talking to an AI interviewer beforehand — format only, not real exam content.</p>
-
-      <p class="callout"><strong>Implication:</strong> practice extracting constraints from a messy case fast, structuring answers with the framework's own artifact names, and defending trade-offs — not memorizing answer keys.</p>
+      <p class="source-note">SAP says scenario-based candidates can access the AI roleplay using their SAP Universal ID; a separate roleplay account is not required. SAP also says human review can take time, so do not assume every result is immediate.</p>
     </section>
 
-    <section class="sheet" id="framework">
-      <div class="eyebrow">Sheet A2.0 — Skill Area 1</div>
-      <h2>EA Framework &amp; Toolset</h2>
-      <div class="skillbar-row">
-        <div class="skillbar-label"><span>Weight in exam</span><span class="wt">11–20%</span></div>
-        <div class="skillbar-track"><div class="skillbar-fill" style="width:16%"></div></div>
+    <section id="method">
+      <div class="sheet-label">SHEET 02 · DECISION METHOD</div>
+      <h2>KNOW → RECOGNIZE → DECIDE → DEFEND</h2>
+      <p>Use the same mental loop for every topic.</p>
+      <div class="method-grid">
+        <article><b>KNOW</b><h3>What is it?</h3><p>Learn the concept, artifact, method or architecture layer.</p></article>
+        <article><b>RECOGNIZE</b><h3>When does it matter?</h3><p>Spot the signal in a scenario: duplication, risk, strategic change, integration complexity, regulatory constraint, and so on.</p></article>
+        <article><b>DECIDE</b><h3>What would you do?</h3><p>Select an approach that fits the business objective, constraints, maturity and target state.</p></article>
+        <article><b>DEFEND</b><h3>Why this choice?</h3><p>Explain rationale, alternatives, trade-offs, risks, sequencing and validation.</p></article>
       </div>
-      <ul class="plain">
-        <li>Translate business strategy into IT requirements</li>
-        <li>Apply SAP Reference Architecture Content to a scenario</li>
-        <li>Map business requirements to the SAP solution space</li>
-        <li>Use SAP EA Methodology artifacts across the phase sequence</li>
-        <li>Recommend and apply SAP EA tooling — SAP LeanIX, SAP Signavio Process Explorer</li>
+      <div class="quote">“Given <strong>[objective]</strong> and <strong>[constraints]</strong>, I recommend <strong>[decision]</strong> because <strong>[reason]</strong>. The main trade-off is <strong>[trade-off]</strong>. I would manage the risk by <strong>[mitigation]</strong> and validate it through <strong>[evidence]</strong>.”</div>
+    </section>
+
+    <section id="framework">
+      <div class="sheet-label">SHEET 03 · SKILL AREA 1</div>
+      <h2>Enterprise Architecture Framework & Toolset</h2>
+      <p>Think of the framework as a way to move from business intent to a coherent, governable architecture and roadmap.</p>
+      <div class="flow">
+        <span>Vision</span><i>→</i><span>Requirements & Decisions</span><i>→</i><span>Business</span><i>→</i><span>Application / Data / Technology</span><i>→</i><span>Opportunities & Solutions</span><i>→</i><span>Roadmap</span>
+      </div>
+      <h3>Know these ideas</h3>
+      <ul>
+        <li>Business strategy must translate into explicit architecture requirements.</li>
+        <li>Architecture artifacts are communication and decision tools, not decoration.</li>
+        <li>SAP reference architecture content helps connect business needs to SAP solution possibilities.</li>
+        <li>SAP LeanIX and SAP Signavio can support different parts of the architecture and process picture.</li>
+        <li>Always ask: <strong>who needs this artifact, what decision does it support, and what evidence feeds it?</strong></li>
       </ul>
-      <h3>Phase sequence to know cold</h3>
-      <p>Preliminary/Vision → Requirements &amp; Decision Management → Business Architecture → Application/Data/Technology Architecture → Opportunities, Solutions &amp; Migration Planning → Roadmap.</p>
-      <div class="tag-row">
-        <span class="tag">SAP LeanIX</span><span class="tag">SAP Signavio</span><span class="tag">TOGAF-aligned</span>
-      </div>
     </section>
 
-    <section class="sheet" id="vision">
-      <div class="eyebrow">Sheet A2.1 — Skill Area 2</div>
-      <h2>Architecture Vision &amp; Roadmap</h2>
-      <div class="skillbar-row">
-        <div class="skillbar-label"><span>Weight in exam</span><span class="wt">21–30%</span></div>
-        <div class="skillbar-track"><div class="skillbar-fill" style="width:26%"></div></div>
+    <section id="vision">
+      <div class="sheet-label">SHEET 04 · SKILL AREA 2</div>
+      <h2>Architecture Vision & Roadmap</h2>
+      <p>The architect's job is not simply to draw a target state. The job is to create a credible path from the current situation to a better business outcome.</p>
+      <div class="split">
+        <div><h3>Vision</h3><ul><li>Business objectives</li><li>Stakeholders</li><li>Current-state pain</li><li>Target capabilities</li><li>Scope and constraints</li><li>Success measures</li></ul></div>
+        <div><h3>Roadmap</h3><ul><li>Prioritised initiatives</li><li>Dependencies</li><li>Sequencing</li><li>Value and risk</li><li>Transition states</li><li>Governance and decision points</li></ul></div>
       </div>
-      <ul class="plain">
-        <li>Develop an architecture vision tailored to a company's context</li>
-        <li>Capture as-is and to-be business models and capabilities</li>
-        <li>Define a sequenced, prioritized target roadmap</li>
-      </ul>
-      <p class="callout">Practice going from <strong>messy stakeholder quotes</strong> → structured strategic objectives → phased roadmap. This transformation is the actual exercise the SBA will put you through.</p>
+      <div class="callout"><strong>Exam lens:</strong> when the scenario gives you many problems, do not solve them all at once. Establish the strategic objective, identify dependencies, then sequence the work.</div>
     </section>
 
-    <section class="sheet" id="business">
-      <div class="eyebrow">Sheet A2.2 — Skill Area 3</div>
+    <section id="business">
+      <div class="sheet-label">SHEET 05 · SKILL AREA 3</div>
       <h2>Business Architecture</h2>
-      <div class="skillbar-row">
-        <div class="skillbar-label"><span>Weight in exam</span><span class="wt">21–30%</span></div>
-        <div class="skillbar-track"><div class="skillbar-fill" style="width:26%"></div></div>
+      <p>Start with what the business needs to be able to do before jumping to software.</p>
+      <div class="cards two">
+        <article><h3>Capability</h3><p><strong>What</strong> the business is able to do, independent of the detailed process used to do it.</p><p class="trap">Trap: confusing a capability with a process or application.</p></article>
+        <article><h3>Process</h3><p><strong>How</strong> work flows from one activity to another to create an outcome.</p><p class="trap">Trap: optimising a process without checking whether it supports the strategic objective.</p></article>
       </div>
-      <ul class="plain">
-        <li>Recommend a business capability map</li>
-        <li>Model end-to-end business processes</li>
-      </ul>
-      <p><strong style="color:var(--paper)">Capability</strong> = what the business does, independent of how. <strong style="color:var(--paper)">Process</strong> = how work actually flows. Classic exam trap: capabilities built or duplicated in isolation across business units, so pieces don't reconcile (value proposition vs. cost structure vs. revenue streams).</p>
+      <h3>When reading a case, ask</h3>
+      <ol><li>What business outcome is changing?</li><li>Which capabilities must improve or appear?</li><li>Which processes are creating the problem?</li><li>Which stakeholders own the outcome?</li><li>What evidence would prove the architecture is working?</li></ol>
     </section>
 
-    <section class="sheet" id="datc">
-      <div class="eyebrow">Sheet A2.3 — Skill Area 4</div>
-      <h2>Data, Application &amp; Technology Architecture</h2>
-      <div class="skillbar-row">
-        <div class="skillbar-label"><span>Weight in exam</span><span class="wt">21–30%</span></div>
-        <div class="skillbar-track"><div class="skillbar-fill" style="width:26%"></div></div>
+    <section id="layers">
+      <div class="sheet-label">SHEET 06 · SKILL AREA 4</div>
+      <h2>Data, Application & Technology Architecture</h2>
+      <div class="layers">
+        <article><span>DATA</span><h3>What information?</h3><p>Ownership, quality, lifecycle, privacy, residency, integration and access.</p></article>
+        <article><span>APPLICATION</span><h3>What capabilities are supported?</h3><p>Application responsibilities, boundaries, interfaces, duplication and fit with business capabilities.</p></article>
+        <article><span>TECHNOLOGY</span><h3>What enables it?</h3><p>Platforms, infrastructure, security, connectivity, operations and non-functional requirements.</p></article>
       </div>
-      <ul class="plain">
-        <li>Describe artifact content, usage, and stakeholders across layers</li>
-        <li>Apply SAP Reference Architecture Content best practices</li>
-        <li>Apply the SAP Integration Solution Advisory Methodology</li>
-        <li>Evaluate regulatory impact — data privacy, cross-border flow</li>
-        <li>Apply SAP Clean Core principles and strategy</li>
-        <li>Evaluate S/4HANA Cloud public vs. private edition trade-offs</li>
-      </ul>
-      <h3>Clean Core, one line</h3>
-      <p>Keep the S/4HANA core standard; extend via BTP (side-by-side or in-app) so upgrades stay smooth.</p>
-      <h3>Public vs. private edition</h3>
+      <h3>Clean Core</h3>
+      <p>Use the core product as intended and avoid unnecessary modifications that make upgrades and lifecycle management harder. Where appropriate, extensions can be designed outside or alongside the core using SAP's supported extensibility approaches.</p>
+      <h3>Public vs private cloud</h3>
+      <p>Do not memorise “public is good” or “private is good.” Evaluate standardisation, fit-to-standard expectations, required flexibility, operational model, integration, lifecycle and business constraints.</p>
+      <h3>Integration & regulatory thinking</h3>
+      <ul><li>Identify the business event or data exchange first.</li><li>Then decide the integration responsibility and pattern.</li><li>Check security, privacy, residency and regulatory constraints.</li><li>Prefer the simplest sustainable architecture that meets the requirement.</li></ul>
+    </section>
+
+    <section id="case">
+      <div class="sheet-label">SHEET 07 · CONNECTED CASE</div>
+      <h2>The Wanderlust-style case</h2>
+      <p>Use this fictional case to practise the same reasoning pattern without relying on memorised questions.</p>
+      <div class="case-box">
+        <h3>Scenario</h3>
+        <p>A global manufacturer wants to enter a fast-growing electric-vehicle market. Its business units operate independently, several ERP systems have evolved separately, customer data is duplicated, and leadership wants faster product launches without losing local regulatory control.</p>
+        <p>The CIO asks for an architecture recommendation and a realistic transformation roadmap.</p>
+      </div>
+      <h3>Six linked decisions</h3>
+      <ol class="decisions">
+        <li><strong>Objective:</strong> What is the primary business outcome?</li>
+        <li><strong>Constraints:</strong> Which business, technology, regulatory and organisational constraints matter most?</li>
+        <li><strong>Business:</strong> Which capabilities and processes must change?</li>
+        <li><strong>Architecture:</strong> What target-state principles and boundaries would you propose?</li>
+        <li><strong>Roadmap:</strong> What should happen first, and why?</li>
+        <li><strong>Governance:</strong> What decisions, stakeholders and measures keep the transformation on track?</li>
+      </ol>
+      <div class="warning"><strong>Do the case before reading examples.</strong> Your first objective is not to find a perfect architecture. It is to demonstrate coherent reasoning.</div>
+    </section>
+
+    <section id="defense">
+      <div class="sheet-label">SHEET 08 · DEFENSE PATTERN</div>
+      <h2>The 9-step architecture defense</h2>
+      <ol class="numbered">
+        <li><b>Context</b> — “The situation I understand is…”</li>
+        <li><b>Objective</b> — “The outcome we need is…”</li>
+        <li><b>Constraints</b> — “The constraints that shape the decision are…”</li>
+        <li><b>Recommendation</b> — “I would recommend…”</li>
+        <li><b>Architecture rationale</b> — “This fits because…”</li>
+        <li><b>Trade-off</b> — “The main trade-off is…”</li>
+        <li><b>Risk</b> — “The largest risk is…”</li>
+        <li><b>Roadmap</b> — “I would sequence the work as…”</li>
+        <li><b>Validation</b> — “I would validate the decision through…”</li>
+      </ol>
+      <div class="quote">If you get stuck, return to: <strong>business objective → constraints → decision → rationale → trade-off → next step.</strong></div>
+    </section>
+
+    <section id="practice">
+      <div class="sheet-label">SHEET 09 · PRACTICE & SCORING</div>
+      <h2>Score the quality of your reasoning</h2>
+      <p>Use this 16-point rubric after every connected-case response.</p>
       <table>
-        <tr><th>Priority</th><th>Public edition</th><th>Private edition</th></tr>
-        <tr><td>Innovation cycle</td><td>Faster, standardized</td><td>Slower, more control</td></tr>
-        <tr><td>Customization</td><td>Limited</td><td>Deep headroom</td></tr>
+        <tr><th>Dimension</th><th>0</th><th>1</th><th>2</th></tr>
+        <tr><td>Business alignment</td><td>Missing</td><td>Partial</td><td>Explicit</td></tr>
+        <tr><td>Constraints</td><td>Missed</td><td>Some identified</td><td>Prioritised</td></tr>
+        <tr><td>Architecture</td><td>Unclear</td><td>Reasonable</td><td>Coherent</td></tr>
+        <tr><td>Artifacts / method</td><td>Absent</td><td>Named</td><td>Applied correctly</td></tr>
+        <tr><td>Trade-offs</td><td>None</td><td>Mentioned</td><td>Defended</td></tr>
+        <tr><td>Roadmap</td><td>Absent</td><td>Generic</td><td>Sequenced</td></tr>
+        <tr><td>Risk</td><td>Absent</td><td>Identified</td><td>Mitigated</td></tr>
+        <tr><td>Communication</td><td>Rambling</td><td>Clear</td><td>Executive-quality</td></tr>
       </table>
-    </section>
-
-    <section class="sheet" id="case">
-      <div class="eyebrow">Sheet A3.0</div>
-      <h2>The "Wanderlust" Case Pattern</h2>
-      <p>SAP's published sample case (a German auto manufacturer moving into EVs) is the template for what the SBA will hand you. Expect a similarly shaped scenario every time: business constraints, a new revenue initiative, a fragmented ECC landscape, and visible EA maturity gaps.</p>
-      <h3>Working order</h3>
-      <ul class="plain">
-        <li>Extract business constraints and strategic priorities from the narrative</li>
-        <li>Extract IT constraints and current-state landscape</li>
-        <li>Identify EA maturity gaps — e.g. no stakeholder map, no link between IT initiatives and strategy</li>
-        <li>Propose a prioritized roadmap, naming the artifact used at each phase</li>
-      </ul>
-      <p class="callout"><strong>Sequencing rule of thumb for low-maturity orgs:</strong> stakeholder involvement first, then business–IT alignment, then architecture development — starting with business architecture, not application or technology.</p>
-    </section>
-
-    <section class="sheet" id="resources">
-      <div class="eyebrow">Sheet A4.0</div>
-      <h2>Resources</h2>
-      <h3>Free</h3>
-      <ul class="plain">
-        <li><a href="https://learning.sap.com/learning-journeys/becoming-an-sap-enterprise-architect" target="_blank" rel="noopener">"Becoming an SAP Enterprise Architect" Learning Journey (IEA10)</a> — the core free, official path. Start here.</li>
-        <li><a href="https://learning.sap.com/get-certified/reimagining-certification" target="_blank" rel="noopener">SAP Certification — Get Certified overview</a> — SAP's own page on the 2026 performance-based format.</li>
-        <li><a href="https://www.classcentral.com/course/sap-learning-sap-enterprise-architects-300319" target="_blank" rel="noopener">SAP Enterprise Architects — free course (via Class Central)</a> — built for Stay-Certified renewal, but its Clean Core module lands squarely in Domain 4.</li>
-        <li><a href="https://www.youtube.com/watch?v=WK1U0BVexLE" target="_blank" rel="noopener">Simplify and Accelerate ERP with a Clean Core — RISE with SAP</a> — short official-style video on Clean Core principles.</li>
-        <li><a href="https://www.youtube.com/channel/UC3YCS71NjU1VaDhDDLwfWNA" target="_blank" rel="noopener">EA SAP Community — YouTube channel</a> — ongoing community content specific to this domain.</li>
-      </ul>
-      <h3>Paid</h3>
-      <ul class="plain">
-        <li><a href="https://www.sap.com/training-certification/learning-hub.html" target="_blank" rel="noopener">SAP Learning Hub subscription</a> — ~US$1,488/yr standard edition (confirm current price). 4 exam attempts, hands-on practice systems, streamlined Stay-Certified renewal.</li>
-        <li><a href="https://learning.sap.com" target="_blank" rel="noopener">Get Certified Live Session Series</a> — 15 hrs over 6 weeks, cohort-based, live Q&amp;A. Needs an active Learning Hub subscription or PartnerEdge access. Prerequisite: IEA10.</li>
-      </ul>
-      <h3>Recommended background</h3>
-      <ul class="plain">
-        <li>5+ years EA engagement experience</li>
-        <li>Current SAP Cloud ERP / Cloud platform certification(s)</li>
-        <li>TOGAF certification preferred</li>
-        <li>Basic SAP LeanIX familiarity</li>
-      </ul>
-      <p class="callout">These are historically <em>recommended</em>, not enforced at registration — nothing found suggests SAP added an admissions gate under the new format, but the registration flow itself is the final word.</p>
-    </section>
-
-    <section class="sheet" id="quiz">
-      <div class="eyebrow">Sheet Q1.0</div>
-      <h2>Connected Case — Live Defense Drill</h2>
-      <p>One linked scenario, six decisions that constrain each other, a running clock, and a defend-before-you-see-the-answer step for each one — closer to what the assessment actually measures than a question bank.</p>
-      <div id="caseRoot"></div>
-    </section>
-
-    <section class="sheet" id="getting-started">
-      <div class="eyebrow">Sheet G1.0</div>
-      <h2>How to Actually Start</h2>
-      <p>Nothing external gates you here — no waitlist, no enforced prerequisite check at registration, no test-center booking. It's on-demand and self-scheduled, taken from your own workspace once you're ready.</p>
-
-      <h3>Register without the subscription</h3>
-      <p>You need an SAP Universal ID and an SAP Training Shop account, plus a purchased exam attempt — a single try (CER001) or a six-attempt bundle (CER006). A full SAP Learning Hub subscription is <strong style="color:var(--paper)">not required</strong> to sit this exam.</p>
-      <table>
-        <tr><th>Path</th><th>Rough cost</th><th>What you get</th></tr>
-        <tr><td>Standalone exam attempt</td><td>Low hundreds USD — confirm current price on Training Shop</td><td>Just the attempt(s). No practice systems, no bundled Stay-Certified access</td></tr>
-        <tr><td>Learning Hub subscription</td><td>~$1,488 USD/yr, standard edition</td><td>4 exam attempts, hands-on practice systems, streamlined annual renewal</td></tr>
-      </table>
-
-      <div class="warn-cloud">
-        <p><strong>The one long-term catch:</strong> many SAP certifications now renew annually through a "Stay Certified" assessment, and that assessment has been reported to require an active Learning Hub subscription — without one, some candidates report needing to retake the full exam to stay current.</p>
-        <p>Validity terms are set per certification, not one blanket rule. None of this blocks starting or passing now — just confirm P_SAPEA's specific validity terms on its own certification page before treating "never subscribe" as a permanent stance.</p>
+      <div class="score-guide">
+        <span><b>0–7</b> Learn the foundations</span>
+        <span><b>8–11</b> Apply with guidance</span>
+        <span><b>12–14</b> Strong reasoning</span>
+        <span><b>15–16</b> Excellent defense</span>
       </div>
-
-      <h3>What's actually free</h3>
-      <ul class="plain">
-        <li>The "Becoming an SAP Enterprise Architect" Learning Journey (IEA10) at learning.sap.com — the core free training path</li>
-        <li>A 1-hour "Quick-Start" orientation session for self-directed learners, announced on SAP Community's Learning blog in August 2026 — check there for current sign-up</li>
-        <li>SAP Community's Enterprise Architecture blog space, for first-hand accounts from people who've recently sat it</li>
-      </ul>
-      <p class="callout">openSAP, SAP's older free MOOC platform, shut down in 2024 — skip any guide still pointing you there.</p>
-
-      <h3>Skip the dump sites</h3>
-      <p>Several vendors now sell "AI Role-Play" question banks and flashcards for this exam. The live format is a generative scenario, not a fixed question pool — a memorized answer key structurally can't match what you'll actually see. Save the money.</p>
-
-      <h3>Recommended sequence</h3>
-      <ul class="plain">
-        <li>Work the free IEA10 Learning Journey and the Quick-Start orientation — this sheet set is a companion to that, not a replacement</li>
-        <li>Check off each topic on the Progress Tracker (next sheet) as you go</li>
-        <li>Repeat the Live Defense Drill (Sheet Q1.0) until you're consistently landing the model reasoning and finishing inside the clock</li>
-        <li>Purchase a standalone exam attempt through SAP Training Shop and self-schedule</li>
-      </ul>
     </section>
 
-    <section class="sheet" id="tracker" style="border-bottom:none;">
-      <div class="eyebrow">Sheet T1.0</div>
-      <h2>Progress Tracker</h2>
-      <p>Organized around the four official skill domains, not a copy of IEA10's own lesson numbering — cross-reference titles once you're logged into the learning journey yourself. Three checks per topic: the core concept, an extra video or session, extra reading.</p>
-      <p class="storage-note">Saved locally in this browser via localStorage. Inside a chat preview pane it may not persist between visits — once this is hosted on its own page (GitHub Pages or anywhere else), it will.</p>
-      <div id="trackerRoot"></div>
-      <button class="tracker-reset" id="trackerResetBtn">Reset all checks</button>
-
-      <footer class="end" style="padding:40px 0 0;">END OF SET — 11 SHEETS — P_SAPEA / AUG 2026
-        <span class="oa-footer-credit">© 2026 <a href="https://ordoanimi.com" target="_blank" rel="noopener">OrdoAnimi</a> · Phil Myint · Brisbane, Australia · Clarity. Governance. Execution.</span>
-      </footer>
+    <section id="resources">
+      <div class="sheet-label">SHEET 10 · OFFICIAL RESOURCES</div>
+      <h2>Study from primary sources first</h2>
+      <div class="resource-list">
+        <a href="https://learning.sap.com/get-certified" target="_blank" rel="noopener"><b>SAP — Get Certified</b><span>Current certification program and preparation overview.</span></a>
+        <a href="https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs" target="_blank" rel="noopener"><b>SAP — Scenario-based assessment FAQs</b><span>Current guidance on scenario assessments, AI roleplay, human review and exam launch.</span></a>
+        <a href="https://learning.sap.com/helpcenter/certification-support/exam-essentials" target="_blank" rel="noopener"><b>SAP — Practical exam essentials</b><span>Current overview of the performance-based approach and how to verify exam status.</span></a>
+        <a href="https://learning.sap.com/learning-journeys/becoming-an-sap-enterprise-architect" target="_blank" rel="noopener"><b>SAP Learning — Becoming an SAP Enterprise Architect</b><span>Use the official learning journey as the foundation for your study.</span></a>
+        <a href="https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals" target="_blank" rel="noopener"><b>SAP Learning — Architecture Fundamentals</b><span>Architecture fundamentals, vision, business/application/data/technology architecture and roadmap concepts.</span></a>
+      </div>
+      <div class="callout"><strong>Rule:</strong> if a third-party guide conflicts with SAP's current certification page, trust SAP's current page and update this guide.</div>
     </section>
 
-    </div>
-
-    <div class="slide-nav">
-      <button id="prevSlideBtn">‹ Prev</button>
-      <span class="slide-counter" id="slideCounter">1 / 11</span>
-      <button id="nextSlideBtn">Next ›</button>
-    </div>
-
-    <div class="notes-bar" id="notesBar">
-      <div class="notes-bar-head" id="notesToggle">
-        <span>Notes for this sheet</span>
-        <span class="chev">▾</span>
+    <section id="checklist">
+      <div class="sheet-label">SHEET 11 · EXAM-DAY CHECKLIST</div>
+      <h2>24 hours before</h2>
+      <div class="checklist">
+        <label><input type="checkbox"> Verify the P_SAPEA certification page and exact assessment format.</label>
+        <label><input type="checkbox"> Verify the time limit and available language.</label>
+        <label><input type="checkbox"> Verify your SAP Universal ID and certification attempt.</label>
+        <label><input type="checkbox"> Check microphone/browser permissions if your assessment is scenario-based.</label>
+        <label><input type="checkbox"> Prepare your approved/open-book reference tabs.</label>
+        <label><input type="checkbox"> Do one timed defense drill.</label>
       </div>
-      <div class="notes-bar-body">
-        <textarea id="notesArea" placeholder="Jot anything here — saved per sheet, in this browser."></textarea>
-        <div class="notes-bar-note">Saved locally via localStorage, same as the progress tracker. Won't persist in a sandboxed preview pane — works once hosted or opened directly.</div>
+      <h2>At the start</h2>
+      <div class="checklist">
+        <label><input type="checkbox"> Read the scenario before jumping to a solution.</label>
+        <label><input type="checkbox"> Identify objective + constraints.</label>
+        <label><input type="checkbox"> Use the defense pattern.</label>
+        <label><input type="checkbox"> Keep answers concise and evidence-based.</label>
       </div>
-    </div>
+    </section>
+
+    <section id="tracker">
+      <div class="sheet-label">SHEET 12 · PROGRESS TRACKER</div>
+      <h2>Track understanding, not page views</h2>
+      <p>These checks are saved in your browser.</p>
+      <div id="trackerList"></div>
+      <button class="secondary" id="resetTracker">Reset tracker</button>
+    </section>
+
+    <footer>
+      <p><strong>OrdoAnimi · P_SAPEA Study Guide</strong></p>
+      <p>Built as a companion study resource. SAP certification format and availability can change; always verify the current official certification page before relying on exam mechanics.</p>
+    </footer>
   </main>
 </div>
-
-<script>
-  // ---- slide-deck navigation ----
-  const SLIDE_IDS = ['cover','format','framework','vision','business','datc','case','resources','quiz','getting-started','tracker'];
-  let currentSlide = 0;
-
-  const stageEl = document.querySelector('.stage');
-  const navLinks = document.querySelectorAll('.sheet-index a');
-  const prevSlideBtn = document.getElementById('prevSlideBtn');
-  const nextSlideBtn = document.getElementById('nextSlideBtn');
-  const slideCounterEl = document.getElementById('slideCounter');
-  const notesAreaEl = document.getElementById('notesArea');
-  const notesBarEl = document.getElementById('notesBar');
-  const notesToggleEl = document.getElementById('notesToggle');
-  const sidebarNavEl = document.getElementById('sidebarNav');
-  const sidebarOverlayEl = document.getElementById('sidebarOverlay');
-  const menuToggleBtn = document.getElementById('menuToggleBtn');
-  const mobileCurrentLabel = document.getElementById('mobileCurrentLabel');
-  const SLIDE_LABELS = ['A0.1','A1.0','A2.0','A2.1','A2.2','A2.3','A3.0','A4.0','Q1.0','G1.0','T1.0'];
-
-  function closeDrawer(){
-    sidebarNavEl.classList.remove('open');
-    sidebarOverlayEl.classList.remove('open');
-  }
-  if(menuToggleBtn){
-    menuToggleBtn.addEventListener('click', () => {
-      sidebarNavEl.classList.toggle('open');
-      sidebarOverlayEl.classList.toggle('open');
-    });
-  }
-  if(sidebarOverlayEl) sidebarOverlayEl.addEventListener('click', closeDrawer);
-
-  function loadNotesFor(slideId){
-    try{
-      notesAreaEl.value = localStorage.getItem('sapea-notes:' + slideId) || '';
-    }catch(e){ notesAreaEl.value = ''; }
-  }
-  function saveNotesFor(slideId, val){
-    try{ localStorage.setItem('sapea-notes:' + slideId, val); }catch(e){}
-  }
-
-  function goToSlide(i){
-    if(i < 0 || i >= SLIDE_IDS.length) return;
-    currentSlide = i;
-    const id = SLIDE_IDS[i];
-    document.querySelectorAll('.sheet').forEach(s => s.classList.remove('active'));
-    const target = document.getElementById(id);
-    if(target) target.classList.add('active');
-    if(stageEl) stageEl.scrollTop = 0;
-    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
-    slideCounterEl.textContent = (i + 1) + ' / ' + SLIDE_IDS.length;
-    prevSlideBtn.disabled = i === 0;
-    nextSlideBtn.disabled = i === SLIDE_IDS.length - 1;
-    loadNotesFor(id);
-    if(mobileCurrentLabel) mobileCurrentLabel.textContent = SLIDE_LABELS[i] + ' — ' + (target ? (target.querySelector('h1,h2')?.textContent || '') : '');
-  }
-
-  navLinks.forEach((a, i) => {
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      goToSlide(i);
-      closeDrawer();
-    });
-  });
-
-  prevSlideBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-  nextSlideBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
-
-  document.addEventListener('keydown', (e) => {
-    const tag = document.activeElement ? document.activeElement.tagName : '';
-    if(tag === 'TEXTAREA' || tag === 'INPUT') return; // don't hijack arrows while typing
-    if(e.key === 'ArrowRight') goToSlide(currentSlide + 1);
-    if(e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
-  });
-
-  notesAreaEl.addEventListener('input', () => {
-    saveNotesFor(SLIDE_IDS[currentSlide], notesAreaEl.value);
-  });
-
-  notesToggleEl.addEventListener('click', () => {
-    notesBarEl.classList.toggle('open');
-  });
-
-  goToSlide(0);
-
-  // =========================================================
-  // CONNECTED CASE — MERIDIAN COLD CHAIN
-  // Six linked tasks. Early choices change later consequences
-  // and, at Task 5, the actual options offered.
-  // =========================================================
-
-  const TASKS = [
-    {
-      skill: "Framework & Toolset",
-      budget: 5*60,
-      getConsequence: () => null,
-      getPrompt: () => "Given the maturity gap above, what's your very first move as Meridian's new enterprise architect?",
-      getOptions: () => [
-        "Start a technology architecture assessment of the three ECC customizations, so you know what you're migrating.",
-        "Build a stakeholder map and secure aligned sponsorship across the three brand GMs and the CFO before any architecture work begins.",
-        "Begin designing the target application architecture for the monitoring service, so engineering isn't blocked.",
-        "Launch a data-model unification project across the three ECC instances first."
-      ],
-      getCorrect: () => 1,
-      getReasoning: () => "No architecture output is trustworthy yet, because the people who'll fund and adopt it aren't aligned. SAP's own sequencing puts stakeholder involvement before business-IT alignment before any architecture development. Picking A, C, or D produces a technically plausible artifact that at least one brand GM can credibly veto later.",
-      setsFlag: (choiceIdx, flags) => { flags.stakeholderFirst = (choiceIdx === 1); }
-    },
-    {
-      skill: "Vision & Roadmap",
-      budget: 6*60,
-      getConsequence: (flags) => flags.stakeholderFirst
-        ? "Stakeholder map complete. The three brand GMs and the CFO have signed off on a shared one-paragraph vision for the monitoring service."
-        : "Three weeks in, the Halden-brand GM tells the steering committee she was never consulted on the monitoring rollout and wants it paused. You're doing the stakeholder alignment anyway — just later, and with less trust in the room.",
-      getPrompt: () => "With that resolved, how do you sequence the rollout?",
-      getOptions: () => [
-        "Big-bang: launch the monitoring service across all three brands simultaneously to hit the 12-month deadline with maximum impact.",
-        "Phased: pilot the service on one brand first, prove the value case, then extend to the other two.",
-        "Sequence by IT convenience — launch wherever the ECC customization is lightest, regardless of customer fit.",
-        "Delay the whole initiative a further quarter to finish full stakeholder buy-in first."
-      ],
-      getCorrect: () => 1,
-      getReasoning: () => "A phased pilot de-risks the deadline: it proves the value case on real customers before betting three brands' credibility on it at once, and hands you real usage data before the wider rollout. Big-bang maximizes exposure to a wrong assumption. Sequencing by IT convenience ignores the business goal entirely. Delaying further burns runway you don't have.",
-      setsFlag: (choiceIdx, flags) => { flags.pilotFirst = (choiceIdx === 1); }
-    },
-    {
-      skill: "Business Architecture",
-      budget: 6*60,
-      getConsequence: () => null,
-      getPrompt: () => "Sales, Product, and Finance have each drafted their own version of the monitoring service's business model — different customer segments, different pricing logic, different assumptions about who owns the customer relationship. What do you do?",
-      getOptions: () => [
-        "Let engineering start building against whichever draft arrived first, to protect the timeline.",
-        "Reconcile the three drafts into one shared capability map before anything gets scoped for build.",
-        "Fund all three versions in parallel and let the market decide which wins.",
-        "Ask the CFO to pick one team's version by executive decision."
-      ],
-      getCorrect: () => 1,
-      getReasoning: () => "This is the exact anti-pattern from the case study pattern sheet: business-model pieces built in isolation that don't reconcile. A capability map forces value proposition, revenue model, and channel assumptions to line up before a line of scope is written. Building against one draft ships the wrong thing fast. Funding all three triples the cost of finding out which model works. Having the CFO pick a winner resolves the symptom without touching why three teams disagreed in the first place — the same gap reappears on the next initiative.",
-      setsFlag: (choiceIdx, flags) => { flags.capabilityMapDone = (choiceIdx === 1); }
-    },
-    {
-      skill: "Data, Application & Technology Architecture",
-      budget: 8*60,
-      getConsequence: () => null,
-      getPrompt: () => "Board wants speed (12 months), the CFO wants the three-ECC cost duplication addressed, and compliance has flagged EU data residency for cold-chain tracking data. Where do you point the target platform?",
-      getOptions: () => [
-        "S/4HANA Cloud, public edition, for the new service and the eventual consolidated core — covering any short-term ECC-specific gaps via BTP extensions.",
-        "S/4HANA Cloud, private edition, so all three ECC instances' customizations can be lifted across largely as-is.",
-        "Stay on ECC, and bolt the new IoT monitoring data onto a side database outside the core.",
-        "Build the monitoring service on a new platform entirely outside the SAP landscape."
-      ],
-      getCorrect: () => 0,
-      getReasoning: () => "Public edition is the only option that serves both named constraints at once — a faster, standardized release cycle for speed, and no more three-way custom-code maintenance bill for cost. It's also the Clean Core-aligned choice: extend on BTP for anything genuinely brand-specific instead of dragging the customization forward. Private edition preserves the exact cost problem the CFO flagged. Staying on ECC doesn't touch the landscape fragmentation — it just adds a fourth system. Building outside SAP entirely throws away the existing investment and can't plausibly ship in 12 months.",
-      setsFlag: (choiceIdx, flags) => { flags.editionChoice = choiceIdx; }
-    },
-    {
-      skill: "Data/App/Tech — Compliance",
-      budget: 6*60,
-      getConsequence: (flags) => flags.editionChoice === 0
-        ? "Public edition confirmed. Compliance is now waiting on one specific answer before they'll sign off."
-        : "Compliance flags that your chosen path can technically isolate EU data, but every customization now needs its own compliance review — with three people covering that function.",
-      getPrompt: (flags) => flags.editionChoice === 0
-        ? "What do you tell compliance about the EU cold-chain data?"
-        : "With compliance review now a bottleneck against the 12-month deadline, what's your move?",
-      getOptions: (flags) => flags.editionChoice === 0
-        ? [
-            "Confirm the specific EU-region data center/tenant option at contract stage, and document the cross-border transfer path for any monitoring data that does leave the region as a named architecture decision.",
-            "Tell compliance public cloud is inherently non-compliant with EU data residency, so this can't proceed.",
-            "Say it's a legal question, not an architecture one, and move on.",
-            "Promise to revisit data residency after go-live, once the pilot proves the business case."
-          ]
-        : [
-            "Push to descope the customizations blocking the EU rollout, so the compliance review becomes tractable inside the timeline.",
-            "Ask compliance to fast-track the review without full detail, to hit the 12-month date.",
-            "Launch EU customers last and hope timeline pressure eases before it matters.",
-            "Escalate that the platform choice itself needs revisiting, since it's now the actual bottleneck."
-          ],
-      getCorrect: (flags) => flags.editionChoice === 0 ? 0 : 3,
-      getReasoning: (flags) => flags.editionChoice === 0
-        ? "Public edition can satisfy EU residency requirements, but only if the region/tenant choice and any cross-border data flow are explicit, documented architecture decisions rather than assumptions. Calling it non-compliant outright would have killed a viable, board-approved path for no reason. Handing it to legal alone skips the part that's squarely EA's to inform. 'Revisit after go-live' is the classic fix-compliance-later move that turns into a much more expensive retrofit."
-        : "Every option except revisiting the platform choice is a workaround for a decision that's now actively fighting the compliance and timeline constraints it was supposed to serve. This is what an unforced platform-choice error costs — not one bad task, but a chain of increasingly awkward downstream patches. The honest move is surfacing that the earlier decision needs revisiting, not defending it further.",
-      setsFlag: (choiceIdx, flags) => { flags.dataResidencyOk = (flags.editionChoice === 0 ? choiceIdx === 0 : choiceIdx === 3); }
-    },
-    {
-      skill: "Capstone — Roadmap",
-      budget: 5*60,
-      getConsequence: () => null,
-      getPrompt: () => "Pulling it together for the steering committee: what's the very next artifact you produce, and what does it name as the first milestone?",
-      getOptions: () => [
-        "A full five-year IT strategy document covering every future initiative, not just this one.",
-        "An Architecture Vision and Roadmap naming the pilot brand, the platform direction, and the data-residency decision as the first milestone.",
-        "A technical requirements document for engineering, skipping the business-facing artifact entirely.",
-        "A slide deck summarizing \"digital transformation\" themes with no named milestone."
-      ],
-      getCorrect: () => 1,
-      getReasoning: () => "This is the artifact the whole case has been building toward — specific (it names the pilot brand, the platform direction, and the compliance decision) and sequenced (a first milestone, not just a theme). A five-year strategy document is scope creep past what was actually asked for. A requirements document skips the business-facing translation this audience needs. A themes deck is the generic non-answer every steering committee has already learned to ignore.",
-      setsFlag: () => {}
-    }
-  ];
-
-  const state = {
-    taskIdx: 0,
-    flags: {},
-    answers: [],
-    flagged: [],
-    timerTotal: 45*60,
-    timerRemaining: 45*60,
-    timerId: null,
-    endMarginShown: false
-  };
-
-  const root = document.getElementById('caseRoot');
-
-  function fmtTime(sec){
-    sec = Math.max(0, Math.round(sec));
-    const m = Math.floor(sec/60).toString().padStart(2,'0');
-    const s = (sec%60).toString().padStart(2,'0');
-    return m+':'+s;
-  }
-
-  function renderBrief(){
-    if(state.timerId){ clearInterval(state.timerId); state.timerId = null; }
-    root.innerHTML = `
-      <div class="brief-card">
-        <div class="brief-tag">Case brief — read first, clock not running yet</div>
-        <h3 style="margin-top:0;">Meridian Cold Chain Logistics</h3>
-        <p>Meridian is a refrigerated transport and cold-storage operator formed by merging three regional carriers over six years. Each still runs its own customized SAP ECC6 instance, with different pricing logic and no shared customer master.</p>
-        <p>The board has approved a new subscription service — real-time cargo-condition monitoring, sold as an add-on across all three brands — and wants it live in 12 months.</p>
-        <p>The CFO wants this initiative to also start closing the cost gap from running three parallel ECC landscapes. On-prem hardware for all three reaches end-of-life in 14 months.</p>
-        <p>Compliance has flagged that a meaningful share of target customers are EU-based cold-chain shippers, and cargo condition data counts as commercially sensitive tracking data under data-residency terms in several existing contracts.</p>
-        <p style="margin-bottom:0;">Meridian hired its first-ever enterprise architect four weeks ago. That's you. No stakeholder map, no capability map, no roadmap exists yet.</p>
-        <div class="brief-meta">6 linked tasks · ~45 min total · defend each pick before you see the model reasoning · earlier answers change later ones</div>
-        <button class="start-btn" id="startCaseBtn">Start the clock →</button>
-      </div>
-    `;
-    document.getElementById('startCaseBtn').addEventListener('click', startCase);
-  }
-
-  function startCase(){
-    state.taskIdx = 0;
-    state.flags = {};
-    state.answers = new Array(TASKS.length).fill(null);
-    state.flagged = [];
-    state.timerRemaining = state.timerTotal;
-    state.endMarginShown = false;
-
-    root.innerHTML = `
-      <div class="timer-bar" id="timerBar">
-        <div class="timer-left">DRILL CLOCK <span id="timerNum">${fmtTime(state.timerRemaining)}</span></div>
-        <div class="timer-right" id="timerBudgetTag"></div>
-      </div>
-      <div class="end-margin-banner" id="endMarginBanner" style="display:none">⏳ Inside your last 5 minutes — stop deciding, start re-checking. Re-read your locked-in choices once for one consistent story.</div>
-      <div id="taskArea"></div>
-    `;
-    renderTask();
-    state.timerId = setInterval(tick, 1000);
-  }
-
-  function tick(){
-    state.timerRemaining -= 1;
-    const timerNum = document.getElementById('timerNum');
-    if(timerNum) timerNum.textContent = fmtTime(state.timerRemaining);
-    const bar = document.getElementById('timerBar');
-    if(state.timerRemaining <= 0){
-      if(bar) bar.classList.add('timer-over');
-    } else if(state.timerRemaining <= 300 && !state.endMarginShown){
-      state.endMarginShown = true;
-      const em = document.getElementById('endMarginBanner');
-      if(em) em.style.display = 'block';
-    }
-  }
-
-  function renderTask(){
-    const idx = state.taskIdx;
-    const t = TASKS[idx];
-    const taskArea = document.getElementById('taskArea');
-    const budgetTag = document.getElementById('timerBudgetTag');
-    if(budgetTag) budgetTag.textContent = `Task ${idx+1} budget: ${Math.round(t.budget/60)} min`;
-
-    const consequence = t.getConsequence(state.flags);
-    const prompt = t.getPrompt(state.flags);
-    const options = t.getOptions(state.flags);
-
-    taskArea.innerHTML = `
-      <div class="task-card">
-        <div class="quiz-meta">TASK ${idx+1} / ${TASKS.length} — ${t.skill.toUpperCase()}</div>
-        ${consequence ? `<div class="consequence-banner"><span class="cb-tag">Carried forward</span>${consequence}</div>` : ''}
-        <div class="quiz-q">${prompt}</div>
-        <div class="quiz-opts" id="optsWrap"></div>
-        <div class="defend-box" id="defendBox" style="display:none">
-          <label class="defend-label" for="defendInput">Defend this pick — why it serves the goal, and what's wrong with one option you didn't choose:</label>
-          <textarea id="defendInput" class="defend-textarea" rows="3" placeholder="Type your reasoning before you see mine..."></textarea>
-        </div>
-        <div class="task-actions" id="taskActions">
-          <button class="lock-btn" id="lockBtn" disabled>Lock in &amp; compare</button>
-          <button class="flag-btn" id="flagBtn">Flag &amp; skip for now</button>
-        </div>
-        <div class="reveal-block" id="revealBlock" style="display:none"></div>
-        <button class="start-btn next-btn" id="nextBtn" style="display:none">${idx === TASKS.length-1 ? 'See summary →' : 'Next task →'}</button>
-      </div>
-    `;
-
-    const optsWrap = document.getElementById('optsWrap');
-    let selected = null;
-
-    function updateLockState(){
-      const txt = document.getElementById('defendInput').value.trim();
-      document.getElementById('lockBtn').disabled = !(selected !== null && txt.length >= 10);
-    }
-
-    options.forEach((optText, oi) => {
-      const btn = document.createElement('button');
-      btn.className = 'quiz-opt';
-      btn.innerHTML = `<span class="glyph">${String.fromCharCode(65+oi)}</span><span>${optText}</span>`;
-      btn.addEventListener('click', () => {
-        selected = oi;
-        optsWrap.querySelectorAll('.quiz-opt').forEach((b,i)=> b.classList.toggle('selected', i===oi));
-        document.getElementById('defendBox').style.display = 'block';
-        updateLockState();
-      });
-      optsWrap.appendChild(btn);
-    });
-
-    document.getElementById('defendBox').addEventListener('input', updateLockState);
-
-    document.getElementById('lockBtn').addEventListener('click', () => {
-      const justification = document.getElementById('defendInput').value.trim();
-      const correctIdx = t.getCorrect(state.flags);
-      const isCorrect = selected === correctIdx;
-      t.setsFlag(selected, state.flags);
-      state.answers[idx] = { choiceIdx: selected, justification, correct: isCorrect, flagged:false };
-
-      optsWrap.querySelectorAll('.quiz-opt').forEach((b,i) => {
-        b.disabled = true;
-        b.classList.remove('selected');
-        if(i === correctIdx) b.classList.add('correct');
-        else if(i === selected) b.classList.add('incorrect');
-      });
-      document.getElementById('defendInput').disabled = true;
-      document.getElementById('taskActions').style.display = 'none';
-
-      const reveal = document.getElementById('revealBlock');
-      reveal.style.display = 'grid';
-      reveal.innerHTML = `
-        <div class="reveal-col">
-          <span class="reveal-label">Your defense</span>
-          <p>${justification.replace(/</g,'&lt;')}</p>
-        </div>
-        <div class="reveal-col model">
-          <span class="reveal-label">Model reasoning</span>
-          <p>${t.getReasoning(state.flags)}</p>
-        </div>
-      `;
-      document.getElementById('nextBtn').style.display = 'inline-block';
-    });
-
-    document.getElementById('flagBtn').addEventListener('click', () => {
-      const justification = document.getElementById('defendInput') ? document.getElementById('defendInput').value.trim() : '';
-      state.answers[idx] = { choiceIdx: selected, justification, correct:false, flagged:true };
-      if(!state.flagged.includes(idx)) state.flagged.push(idx);
-      advance();
-    });
-
-    document.getElementById('nextBtn').addEventListener('click', advance);
-  }
-
-  function advance(){
-    if(state.taskIdx < TASKS.length - 1){
-      state.taskIdx += 1;
-      renderTask();
-    } else {
-      finishCase();
-    }
-  }
-
-  function finishCase(){
-    if(state.timerId){ clearInterval(state.timerId); state.timerId = null; }
-    renderSummary();
-  }
-
-  function renderSummary(){
-    const taskArea = document.getElementById('taskArea');
-    const scored = state.answers.filter(a => a && a.correct).length;
-    const usedSec = state.timerTotal - Math.max(0,state.timerRemaining);
-
-    const rows = TASKS.map((t, i) => {
-      const a = state.answers[i] || {choiceIdx:null, justification:'', correct:false, flagged:true};
-      const opts = t.getOptions(state.flags);
-      const pickedText = a.choiceIdx !== null && a.choiceIdx !== undefined ? opts[a.choiceIdx] : '(flagged, not answered)';
-      const rowClass = a.flagged ? 'is-flagged' : (a.correct ? 'is-correct' : 'is-incorrect');
-      const tagText = a.flagged ? 'FLAGGED' : (a.correct ? 'CORRECT' : 'MISSED');
-      return `
-        <div class="summary-row ${rowClass}">
-          <div class="summary-row-head">
-            <span class="quiz-meta">TASK ${i+1} — ${t.skill.toUpperCase()}</span>
-            <span class="summary-tag">${tagText}</span>
-          </div>
-          <p style="color:var(--paper); font-size:14px;">${pickedText}</p>
-          ${a.justification ? `<p style="font-size:13px;"><strong style="color:var(--paper)">Your defense:</strong> ${a.justification.replace(/</g,'&lt;')}</p>` : ''}
-          <p style="font-size:13px; color:var(--line);"><strong style="color:var(--amber)">Model:</strong> ${t.getReasoning(state.flags)}</p>
-        </div>
-      `;
-    }).join('');
-
-    taskArea.innerHTML = `
-      <div class="summary-card">
-        <div class="score-strip">
-          <div>SCORE: <span class="num">${scored}</span> / ${TASKS.length}</div>
-          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px;">CLOCK USED: ${fmtTime(usedSec)} / ${fmtTime(state.timerTotal)}</div>
-        </div>
-        ${state.flagged.length ? `<p class="callout"><strong>Flagged:</strong> ${state.flagged.length} task(s) skipped under pressure — review the reasoning below before you call this drill done.</p>` : ''}
-        ${rows}
-        <button class="start-btn" id="restartBtn" style="margin-top:20px;">Run it again →</button>
-      </div>
-    `;
-    document.getElementById('restartBtn').addEventListener('click', startCase);
-  }
-
-  renderBrief();
-
-  // =========================================================
-  // PROGRESS TRACKER — persists via localStorage so it survives
-  // reloads once this page is hosted on its own (e.g. GitHub Pages).
-  // Inside a sandboxed chat preview, localStorage may be blocked or
-  // reset between visits — that's the preview, not this code.
-  // =========================================================
-
-  const TRACKER_DOMAINS = [
-    { name:"Framework & Toolset", topics:[
-      { id:"d1t1", name:"EA phase sequence (Vision → … → Roadmap)", note:"The exam expects the SAP artifact name, not just the concept." },
-      { id:"d1t2", name:"SAP LeanIX basics", note:"Named explicitly as a qualification criterion." },
-      { id:"d1t3", name:"SAP Signavio Process Explorer basics", note:"Where SAP Reference Architecture Content actually lives." }
-    ]},
-    { name:"Vision & Roadmap", topics:[
-      { id:"d2t1", name:"Stakeholder input → structured vision statement", note:"Practice this transformation directly — it's the tested skill." },
-      { id:"d2t2", name:"As-is / to-be capability capture", note:"Captured before any solutioning starts." },
-      { id:"d2t3", name:"Sequencing a phased roadmap", note:"Sequencing, not just listing initiatives." }
-    ]},
-    { name:"Business Architecture", topics:[
-      { id:"d3t1", name:"Business capability mapping", note:"What the business does, independent of how." },
-      { id:"d3t2", name:"End-to-end process modelling", note:"How the work actually flows." },
-      { id:"d3t3", name:"Spotting duplicated capabilities across units", note:"The single most common exam scenario pattern." }
-    ]},
-    { name:"Data / Application / Technology Architecture", topics:[
-      { id:"d4t1", name:"Clean Core principles", note:"Core stays standard; extend on BTP." },
-      { id:"d4t2", name:"S/4HANA Cloud public vs. private edition", note:"Standardisation and speed vs. customisation depth." },
-      { id:"d4t3", name:"SAP Integration Solution Advisory Methodology", note:"Different integration needs, deliberately different styles." },
-      { id:"d4t4", name:"Regulatory & data-residency impact", note:"Evaluated per scenario, not a fixed checklist." }
-    ]}
-  ];
-  const CHECK_TYPES = [ ["concept","Concept"], ["video","Video/session"], ["reading","Reading"] ];
-  const TRACKER_KEY = "sapea-tracker-v1";
-
-  function loadTracker(){
-    try{
-      const raw = localStorage.getItem(TRACKER_KEY);
-      return raw ? JSON.parse(raw) : {};
-    }catch(e){ return {}; }
-  }
-  function saveTracker(data){
-    try{ localStorage.setItem(TRACKER_KEY, JSON.stringify(data)); }
-    catch(e){ /* storage unavailable in this context — checks still work for the session */ }
-  }
-  let trackerData = loadTracker();
-
-  function renderTracker(){
-    const root = document.getElementById('trackerRoot');
-    if(!root) return;
-
-    let totalChecks = 0, doneChecks = 0;
-    TRACKER_DOMAINS.forEach(d => d.topics.forEach(t => CHECK_TYPES.forEach(([key]) => {
-      totalChecks++;
-      if(trackerData[t.id] && trackerData[t.id][key]) doneChecks++;
-    })));
-    const pct = totalChecks ? Math.round((doneChecks/totalChecks)*100) : 0;
-
-    let html = `
-      <div class="tracker-overall">
-        <div class="skillbar-label"><span>Overall progress</span><span class="wt">${doneChecks} / ${totalChecks} · ${pct}%</span></div>
-        <div class="skillbar-track"><div class="skillbar-fill" style="width:${pct}%"></div></div>
-      </div>
-    `;
-
-    TRACKER_DOMAINS.forEach(d => {
-      const domainTotal = d.topics.length * CHECK_TYPES.length;
-      let domainDone = 0;
-      d.topics.forEach(t => CHECK_TYPES.forEach(([key]) => { if(trackerData[t.id] && trackerData[t.id][key]) domainDone++; }));
-
-      html += `<div class="tracker-domain">
-        <div class="tracker-domain-head"><h3>${d.name}</h3><span class="tracker-domain-pct">${domainDone}/${domainTotal}</span></div>`;
-
-      d.topics.forEach(t => {
-        html += `<div class="tracker-topic">
-          <div class="tracker-topic-name">${t.name}</div>
-          <div class="tracker-topic-note">${t.note}</div>
-          <div class="tracker-checks">
-            ${CHECK_TYPES.map(([key,label]) => `
-              <label class="tracker-check-label">
-                <input type="checkbox" data-topic="${t.id}" data-check="${key}" ${trackerData[t.id] && trackerData[t.id][key] ? 'checked' : ''}>
-                ${label}
-              </label>
-            `).join('')}
-          </div>
-        </div>`;
-      });
-      html += `</div>`;
-    });
-
-    root.innerHTML = html;
-
-    root.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      cb.addEventListener('change', () => {
-        const topicId = cb.dataset.topic, checkKey = cb.dataset.check;
-        if(!trackerData[topicId]) trackerData[topicId] = {};
-        trackerData[topicId][checkKey] = cb.checked;
-        saveTracker(trackerData);
-        renderTracker();
-      });
-    });
-  }
-
-  const trackerResetBtn = document.getElementById('trackerResetBtn');
-  if(trackerResetBtn){
-    trackerResetBtn.addEventListener('click', () => {
-      trackerData = {};
-      saveTracker(trackerData);
-      renderTracker();
-    });
-  }
-
-  renderTracker();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
