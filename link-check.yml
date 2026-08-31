@@ -1,0 +1,34 @@
+name: Link Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Check HTML links
+      uses: lycheeverse/lychee-action@v1
+      with:
+        args: >
+          --verbose
+          --exclude-mail
+          --exclude "https://learning.sap.com/*"
+          --exclude "https://myintp.github.io/*"
+          --exclude "*.pdf"
+          --exclude "*.docx"
+          --exclude "*.md"
+          --exclude "*.yml"
+          --exclude "*.yaml"
+          --accept 200,206,429,403
+          index.html
+          quiz.html
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
