@@ -48,8 +48,8 @@ locally from disk, and vice versa — pick one place to actually use it.
 2. In the repo, go to **Settings → Pages**.
 3. Under **Build and deployment**, set **Source** to "Deploy from a branch,"
    branch `main`, folder `/ (root)`.
-4. Save. GitHub will publish it at `https://<your-username>.github.io/<repo-name>/`
-   — usually live within a minute or two.
+4. Save. GitHub will show you the live link on that same Pages settings screen
+   once it's built — usually within a minute or two.
 
 ## License / reuse
 
