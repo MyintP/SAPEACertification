@@ -272,7 +272,7 @@ A formally defined state of the architecture at a significant point in time duri
 ## W
 
 **Wanderlust**  
-The SAP EA certification case study. 18/40 exam questions are based on it. Read before exam day.
+SAP's fictional case-study company, used as reference material for the classic (pre-2026) multiple-choice version of the SAP EA certification exam. The current exam is a Scenario-Based Assessment (see `docs/exam-overview.md`); it is unconfirmed whether Wanderlust specifically still features. Still useful as case-study reasoning practice.
 
 **WBS (Work Breakdown Structure)**  
 Deliverable-oriented breakdown of a project into manageable sections. Basis for effort and cost estimation.

@@ -163,4 +163,4 @@ D) A roadmap showing planned SAP product upgrades over time
 
 ---
 
-**Score:** 13–15 = Exam ready | 10–12 = Review flagged areas | Below 10 = Re-read Domain 4
+**Score:** 13–15 = Domain mastered | 10–12 = Review flagged areas | Below 10 = Re-read Domain 4

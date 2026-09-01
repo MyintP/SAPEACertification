@@ -20,13 +20,16 @@ This repository hosts a complete study companion for the **SAP P_SAPEA Enterpris
 | File/Folder | Description |
 |-------------|-------------|
 | `index.html` | Complete static site with all study content |
-| `styles.css` | Responsive visual design |
-| `app.js` | Mobile navigation, section highlighting, progress tracker |
+| `quiz.html` | Scenario-based practice quizzes and full case studies |
+| `styles.css` | Shared design system for both pages |
+| `app.js` | Shared behaviour: navigation, progress tracker, quiz scoring |
 | `/quiz` | Self-assessment questions for each skill area |
 | `/resources` | Supplementary study materials and references |
 | `/domains` | Domain-specific architecture guides |
 | `/artifacts` | Sample architecture artifacts and templates |
+| `/docs` | Exam overview, 6-week study plan, key links |
 | `DEPLOYMENT.md` | Deployment instructions for GitHub Pages |
+| `.github/workflows/link-check.yml` | Automated dead-link check on every push |
 
 ## 🛠️ Local Development
 

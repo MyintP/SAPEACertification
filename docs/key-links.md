@@ -1,6 +1,7 @@
 # Key Links
 
 > All official SAP EA resources in one place.
+> Note: the P_SAPEA exam moved to a Scenario-Based Assessment format in 2026 — see `docs/exam-overview.md`. Rows marked *(legacy exam material)* describe the previous multiple-choice exam and may no longer reflect the live assessment.
 
 ---
 
@@ -10,7 +11,8 @@
 |----------|-----|
 | SAP EA Certification Page | https://learning.sap.com/enterprise-architect |
 | SAP IEA10 Course | https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals |
-| Wanderlust Case Study | https://learning.sap.com/enterprise-architect |
+| Scenario-Based Assessment FAQs | https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs |
+| Wanderlust Case Study *(legacy exam material — see note below)* | https://learning.sap.com/enterprise-architect |
 | SAP Certification Hub | https://training.sap.com/certification |
 
 ---

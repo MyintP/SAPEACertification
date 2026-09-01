@@ -93,15 +93,17 @@
 
 ---
 
-## Week 5 — Revision, Wanderlust & Cross-Domain
+## Week 5 — Revision, Case-Study Practice & Cross-Domain
+
+> Note: the current P_SAPEA exam is a Scenario-Based Assessment, not a fixed multiple-choice + Wanderlust split — see `docs/exam-overview.md`. The activities below still build the right skill (reasoning through a full scenario end-to-end); treat "Wanderlust" as classic practice material, not a guaranteed exam preview.
 
 | Day | Task |
 |-----|------|
 | Mon | Read `artifacts/artifact-cheatsheet.md` in full. Map every artifact to its phase. |
 | Tue | Read `resources/exam-traps.md` — all 31 traps. Mark any you didn't know. |
-| Wed | **Read the Wanderlust Case Study** (official SAP learning site) — full read |
+| Wed | Read a full connected case study (Wanderlust if still available on SAP's learning site, or the guide's own case in `index.html#sheet-07`) |
 | Thu | Work through `quiz/wanderlust-prep.md` questions while keeping case study notes open |
-| Fri | Re-read Wanderlust with architect's eye — annotate per domain |
+| Fri | Re-read the case with an architect's eye — annotate per domain |
 | Sat | Cross-domain connections: trace a full ADM cycle using the cheatsheet |
 | Sun | Re-take all 4 domain quizzes (60 questions total) |
 
@@ -112,9 +114,9 @@
 | Day | Task |
 |-----|------|
 | Mon | Re-read exam traps. Focus on ones you've been getting wrong. |
-| Tue | Complete full mock exam (use all 4 domain quizzes as one 60-question mock) |
+| Tue | Complete a full knowledge mock (use all 4 domain quizzes as one 60-question check), then say a full 9-step defense out loud against the clock to rehearse the actual scenario format |
 | Wed | Review glossary for any terms still unclear |
-| Thu | Re-read Wanderlust Case Study — final read |
+| Thu | Re-read the connected case study — final read |
 | Fri | Light review only. No new content. Rest. |
 | Sat | **Exam Day** (or final revision if exam is Sunday) |
 
@@ -148,6 +150,6 @@ Cloud ALM primary role              Project Execution + Operations Monitoring
 
 ## Pacing Notes
 
-- **Behind on a domain?** Spend an extra day before moving on. 80% pass mark means no weak domains.
-- **Ahead?** Use extra time for Wanderlust and cross-domain practice.
+- **Behind on a domain?** Spend an extra day before moving on. All four domains are weighted equally, so a weak one isn't compensated by a strong one — see `docs/exam-overview.md` for what's confirmed about current scoring.
+- **Ahead?** Use extra time for case-study practice and cross-domain practice.
 - **Exam delayed?** Return to quizzes weekly to maintain retention. Add a mock exam in week 7+.

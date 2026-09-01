@@ -160,10 +160,12 @@ The exam specifically tests this. The nine building blocks in order:
 
 ## Case Study (Wanderlust) Traps
 
-### ⚠️ Trap 27: Not reading the case study before exam day
-- 18/40 questions = 45% of the exam
-- The case study is published in advance
-- Read it BEFORE exam day so you're not learning the context under time pressure
+> Note: these traps describe the legacy multiple-choice exam's use of the Wanderlust case study. The current Scenario-Based Assessment format is different (see `docs/exam-overview.md`), but the underlying skill — reading a case cold, under time pressure, without prior context — is exactly what the new format tests, so the habit below is still worth building.
+
+### ⚠️ Trap 27: Walking into any scenario without practice reading cold
+- Whatever scenario you're given, you will not have unlimited time to absorb it
+- Practise reading a full case study (Wanderlust or any of the ones in `/quiz`) once, cold, under a timer
+- Read it BEFORE exam day so you're not learning to parse a case under time pressure for the first time in the exam itself
 
 ### ⚠️ Trap 28: Applying the wrong artifact to a scenario
 - Always ask: what phase are we in, and what does the stakeholder need to understand?

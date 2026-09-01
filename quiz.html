@@ -3,147 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice Quizzes - EA Study Guide</title>
+    <title>Practice Quizzes - SAP EA Study Guide</title>
+    <meta name="description" content="Scenario-based practice quizzes and full case studies for the SAP P_SAPEA Enterprise Architect certification, scored against a 16-point defense rubric.">
+    <meta name="theme-color" content="#003366">
+    <link rel="canonical" href="https://myintp.github.io/SAPEACertification/quiz.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://myintp.github.io/SAPEACertification/quiz.html">
+    <meta property="og:title" content="Practice Quizzes - SAP EA Study Guide">
+    <meta property="og:description" content="Scenario-based practice quizzes and full case studies for the SAP P_SAPEA Enterprise Architect certification.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23003366'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EEA%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .quiz-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .quiz-card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            border-left: 6px solid #003366;
-        }
-        .quiz-question {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #003366;
-        }
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        .quiz-options label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-            border: 2px solid transparent;
-        }
-        .quiz-options label:hover {
-            background: #e8f0fe;
-        }
-        .quiz-options label.selected {
-            border-color: #003366;
-            background: #e8f0fe;
-        }
-        .quiz-options label.correct {
-            border-color: #28a745;
-            background: #d4edda;
-        }
-        .quiz-options label.wrong {
-            border-color: #dc3545;
-            background: #f8d7da;
-        }
-        .quiz-submit {
-            background: #003366;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.2s;
-        }
-        .quiz-submit:hover {
-            background: #004d99;
-        }
-        .quiz-result {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 8px;
-            display: none;
-        }
-        .quiz-result.pass {
-            background: #d4edda;
-            border: 2px solid #28a745;
-            display: block;
-        }
-        .quiz-result.fail {
-            background: #f8d7da;
-            border: 2px solid #dc3545;
-            display: block;
-        }
-        .quiz-result.show {
-            display: block;
-        }
-        .feedback-text {
-            margin-top: 10px;
-            padding: 15px;
-            background: #f0f7ff;
-            border-radius: 8px;
-            border-left: 4px solid #003366;
-            display: none;
-        }
-        .feedback-text.show {
-            display: block;
-        }
-        .quiz-progress {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .quiz-progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        .quiz-progress-fill {
-            height: 100%;
-            background: #003366;
-            transition: width 0.3s ease;
-        }
-        .case-study {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 6px solid #ffc107;
-        }
-        .case-study h4 {
-            margin-top: 0;
-            color: #003366;
-        }
-        .tag {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-right: 5px;
-        }
-        .tag-easy { background: #d4edda; color: #155724; }
-        .tag-medium { background: #fff3cd; color: #856404; }
-        .tag-hard { background: #f8d7da; color: #721c24; }
-        .tag-architect { background: #cce5ff; color: #004085; }
-    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -151,7 +20,7 @@
         <div class="nav-container">
             <div class="nav-header">
                 <span class="nav-title">📘 EA Study Guide</span>
-                <button id="navToggle" aria-expanded="false">☰ Menu</button>
+                <button id="navToggle" aria-expanded="false" aria-controls="navMenu">☰ Menu</button>
             </div>
             <ul id="navMenu">
                 <li><a href="index.html#sheet-00" class="nav-link">Home</a></li>
@@ -164,13 +33,17 @@
 
     <main>
         <div class="quiz-container">
-            <h1 style="color: #003366; text-align: center; margin-bottom: 10px;">🎯 Practice Quizzes & Cases</h1>
-            <p style="text-align: center; color: #666; margin-bottom: 30px;">Test your Enterprise Architecture decision-making skills</p>
+            <div class="quiz-intro">
+                <h1>🎯 Practice Quizzes &amp; Cases</h1>
+                <p>Test your Enterprise Architecture decision-making skills</p>
+                <div id="quizProgressDisplay" style="color: var(--navy); font-weight: 600;">📊 Quiz: Not started yet</div>
+            </div>
 
             <!-- ================ QUIZ SECTION ================ -->
             <section id="quizzes">
-                <h2 style="color: #003366; border-bottom: 3px solid #003366; padding-bottom: 10px;">📝 Scenario-Based Quizzes</h2>
-                <p style="margin-bottom: 20px;">Each question presents a realistic scenario. Choose the <strong>best architectural decision</strong> based on the context.</p>
+                <h2 class="quiz-section-heading">📝 Scenario-Based Quizzes</h2>
+                <p style="margin-bottom: 10px;">Each question presents a realistic scenario. Choose the <strong>best architectural decision</strong> based on the context.</p>
+                <div id="quizLiveTally" class="quiz-score-banner">Answer questions below to track your score (0/6 answered)</div>
 
                 <!-- Quiz 1 -->
                 <div class="quiz-card" id="quiz1">
@@ -180,7 +53,7 @@
                             <div class="quiz-progress-fill" style="width: 16.6%;"></div>
                         </div>
                     </div>
-                    
+
                     <div class="case-study">
                         <h4>🏢 Scenario: Global Retailer Integration</h4>
                         <p>A global retailer with operations in 15 countries is struggling with customer data fragmentation. Each country has its own CRM system, and customer data is duplicated across systems. The company wants to launch a unified loyalty program, but data privacy regulations (GDPR, CCPA, etc.) vary by region.</p>
@@ -209,7 +82,7 @@
                             <div class="quiz-progress-fill" style="width: 33.3%;"></div>
                         </div>
                     </div>
-                    
+
                     <div class="case-study">
                         <h4>🏭 Scenario: Manufacturing Plant Modernization</h4>
                         <p>A manufacturing company has 12 plants globally. Each plant operates with custom-built MES (Manufacturing Execution Systems) that are 15+ years old. The systems are unreliable, hard to maintain, and don't integrate with newer ERP. The CIO wants to modernize but is concerned about operational disruption.</p>
@@ -238,7 +111,7 @@
                             <div class="quiz-progress-fill" style="width: 50%;"></div>
                         </div>
                     </div>
-                    
+
                     <div class="case-study">
                         <h4>🏦 Scenario: Bank Legacy Modernization</h4>
                         <p>A major bank has a core banking system built on COBOL that processes 80% of transactions. The system is stable but inflexible, making it hard to launch new digital products. The bank has a 2-year window to modernize before competitors gain significant advantage.</p>
@@ -267,7 +140,7 @@
                             <div class="quiz-progress-fill" style="width: 66.6%;"></div>
                         </div>
                     </div>
-                    
+
                     <div class="case-study">
                         <h4>🌍 Scenario: Global Supply Chain Disruption</h4>
                         <p>An automotive manufacturer has a complex global supply chain with 2,000+ suppliers. Recent disruptions have shown the company lacks visibility into its Tier 2 and Tier 3 suppliers. The board wants to improve supply chain resilience.</p>
@@ -296,7 +169,7 @@
                             <div class="quiz-progress-fill" style="width: 83.3%;"></div>
                         </div>
                     </div>
-                    
+
                     <div class="case-study">
                         <h4>🏥 Scenario: Healthcare Data Integration</h4>
                         <p>A healthcare provider has acquired three regional hospitals. Each hospital uses different EMR (Electronic Medical Record) systems. The CEO wants a unified patient view for improved care coordination, but each hospital has strong opinions about their current system.</p>
@@ -325,7 +198,7 @@
                             <div class="quiz-progress-fill" style="width: 100%;"></div>
                         </div>
                     </div>
-                    
+
                     <div class="case-study">
                         <h4>📱 Scenario: Digital Native vs Legacy Integration</h4>
                         <p>A 100-year-old insurance company has acquired a digital-native insurtech startup. The startup uses modern cloud-native architecture, while the parent company has mainframe-based systems. The goal is to offer combined products in 6 months.</p>
@@ -346,28 +219,28 @@
                     </div>
                 </div>
 
-                <div style="text-align: center; margin: 30px 0;">
-                    <button onclick="resetAllQuizzes()" style="padding: 12px 30px; background: #6c757d; color: white; border: none; border-radius: 8px; cursor: pointer;">🔄 Reset All Quizzes</button>
+                <div class="text-center" style="margin: 30px 0;">
+                    <button onclick="resetAllQuizzes()" class="btn btn-secondary">🔄 Reset All Quizzes</button>
                 </div>
             </section>
 
             <!-- ================ CASE STUDIES SECTION ================ -->
             <section id="cases" style="margin-top: 60px;">
-                <h2 style="color: #003366; border-bottom: 3px solid #003366; padding-bottom: 10px;">📋 Full Practice Cases</h2>
+                <h2 class="quiz-section-heading">📋 Full Practice Cases</h2>
                 <p style="margin-bottom: 20px;">Complete these cases using the <strong>9-step defense pattern</strong> from the main guide. Score yourself using the rubric.</p>
 
                 <!-- Case 1 -->
                 <div class="quiz-card">
-                    <h3 style="color: #003366;">Case 1: Electric Vehicle Manufacturer Transformation</h3>
+                    <h3>Case 1: Electric Vehicle Manufacturer Transformation</h3>
                     <span class="tag tag-architect">Architect Level</span>
                     <span class="tag tag-hard">Complex</span>
-                    
+
                     <div class="case-study">
                         <h4>📌 Scenario</h4>
                         <p>A traditional auto manufacturer is pivoting to electric vehicles. They have:</p>
                         <ul>
                             <li>Legacy ERP for internal combustion engine production</li>
-                            <li>New battery tech R&D that needs agile development</li>
+                            <li>New battery tech R&amp;D that needs agile development</li>
                             <li>Direct-to-consumer sales model (no dealers)</li>
                             <li>Software-defined vehicle features (OTA updates)</li>
                             <li>Global regulatory compliance requirements</li>
@@ -389,12 +262,12 @@
                         <li><strong>Validation</strong> — How to measure success</li>
                     </ol>
 
-                    <details>
-                        <summary style="cursor: pointer; color: #003366; font-weight: bold; padding: 10px; background: #f0f7ff; border-radius: 4px;">📖 View Model Answer</summary>
-                        <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; margin-top: 10px;">
+                    <details class="model-answer">
+                        <summary>📖 View Model Answer</summary>
+                        <div class="model-answer-body">
                             <p><strong>1. Context:</strong> Traditional manufacturer transitioning to EV with legacy systems and new business models.</p>
                             <p><strong>2. Objective:</strong> Launch EV product in 24 months with direct-to-consumer sales and OTA capabilities.</p>
-                            <p><strong>3. Constraints:</strong> Existing dealer agreements, regulatory approvals, R&D timeline, budget constraints.</p>
+                            <p><strong>3. Constraints:</strong> Existing dealer agreements, regulatory approvals, R&amp;D timeline, budget constraints.</p>
                             <p><strong>4. Recommendation:</strong> Two-speed IT - maintain legacy for core manufacturing, build new cloud-native platform for EV and D2C.</p>
                             <p><strong>5. Rationale:</strong> Allows innovation without destabilizing existing business.</p>
                             <p><strong>6. Trade-off:</strong> Higher short-term investment for long-term flexibility.</p>
@@ -407,10 +280,10 @@
 
                 <!-- Case 2 -->
                 <div class="quiz-card">
-                    <h3 style="color: #003366;">Case 2: Financial Services API Strategy</h3>
+                    <h3>Case 2: Financial Services API Strategy</h3>
                     <span class="tag tag-architect">Architect Level</span>
                     <span class="tag tag-medium">Medium</span>
-                    
+
                     <div class="case-study">
                         <h4>📌 Scenario</h4>
                         <p>A regional bank wants to become an "open bank" with APIs for third-party developers. They have:</p>
@@ -429,9 +302,9 @@
                         <li>Context → Objective → Constraints → Recommendation → Rationale → Trade-off → Risk → Roadmap → Validation</li>
                     </ol>
 
-                    <details>
-                        <summary style="cursor: pointer; color: #003366; font-weight: bold; padding: 10px; background: #f0f7ff; border-radius: 4px;">📖 View Model Answer</summary>
-                        <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; margin-top: 10px;">
+                    <details class="model-answer">
+                        <summary>📖 View Model Answer</summary>
+                        <div class="model-answer-body">
                             <p><strong>1. Context:</strong> Regional bank with legacy core, need to enable open banking.</p>
                             <p><strong>2. Objective:</strong> Launch secure developer APIs within 18 months.</p>
                             <p><strong>3. Constraints:</strong> Regulatory compliance, security, limited internal skills.</p>
@@ -447,10 +320,10 @@
 
                 <!-- Case 3 -->
                 <div class="quiz-card">
-                    <h3 style="color: #003366;">Case 3: Healthcare Provider Consolidation</h3>
+                    <h3>Case 3: Healthcare Provider Consolidation</h3>
                     <span class="tag tag-architect">Architect Level</span>
                     <span class="tag tag-hard">Complex</span>
-                    
+
                     <div class="case-study">
                         <h4>📌 Scenario</h4>
                         <p>A healthcare network has acquired 5 hospitals with different IT systems. They need to:</p>
@@ -469,9 +342,9 @@
                         <li>Context → Objective → Constraints → Recommendation → Rationale → Trade-off → Risk → Roadmap → Validation</li>
                     </ol>
 
-                    <details>
-                        <summary style="cursor: pointer; color: #003366; font-weight: bold; padding: 10px; background: #f0f7ff; border-radius: 4px;">📖 View Model Answer</summary>
-                        <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; margin-top: 10px;">
+                    <details class="model-answer">
+                        <summary>📖 View Model Answer</summary>
+                        <div class="model-answer-body">
                             <p><strong>1. Context:</strong> 5 hospitals, diverse IT systems, need consolidation.</p>
                             <p><strong>2. Objective:</strong> Unified patient records and billing within 3 years.</p>
                             <p><strong>3. Constraints:</strong> HIPAA compliance, physician buy-in, budget.</p>
@@ -487,11 +360,11 @@
             </section>
 
             <!-- ================ SCORING SECTION ================ -->
-            <section style="margin-top: 60px; background: #f8f9fa; border-radius: 12px; padding: 30px;">
-                <h2 style="color: #003366;">📊 How to Score Your Case Responses</h2>
+            <section class="scoring-section">
+                <h2>📊 How to Score Your Case Responses</h2>
                 <p>Use the <strong>16-point rubric</strong> from the main guide:</p>
-                
-                <table style="margin: 15px 0;">
+
+                <table class="table-standard">
                     <thead>
                         <tr>
                             <th>Dimension</th>
@@ -512,17 +385,17 @@
                     </tbody>
                 </table>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-                    <div style="background: #dc3545; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                <div class="score-band-grid">
+                    <div class="score-band score-band--red">
                         <strong>0–7</strong><br>Learn foundations
                     </div>
-                    <div style="background: #ffc107; color: #000; padding: 15px; border-radius: 8px; text-align: center;">
+                    <div class="score-band score-band--amber">
                         <strong>8–11</strong><br>Apply with guidance
                     </div>
-                    <div style="background: #17a2b8; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                    <div class="score-band score-band--teal">
                         <strong>12–14</strong><br>Strong reasoning
                     </div>
-                    <div style="background: #28a745; color: white; padding: 15px; border-radius: 8px; text-align: center;">
+                    <div class="score-band score-band--green">
                         <strong>15–16</strong><br>Excellent defense
                     </div>
                 </div>
@@ -530,154 +403,14 @@
         </div>
     </main>
 
+    <footer class="site-footer">
+        <p>Built as a self-study companion for the SAP P_SAPEA certification. Not affiliated with or endorsed by SAP SE.</p>
+        <p><a href="https://github.com/MyintP/SAPEACertification" target="_blank" rel="noopener">View source on GitHub</a> · <a href="index.html">Study Guide</a> · <a href="https://learning.sap.com/get-certified" target="_blank" rel="noopener">SAP Learning</a></p>
+    </footer>
+
     <!-- Back to Top Button -->
     <button id="backToTop" aria-label="Back to top">↑</button>
 
-    <script>
-        // --- Quiz Functions ---
-        function checkAnswer(questionName, correctAnswer, feedbackId) {
-            const selected = document.querySelector(`input[name="${questionName}"]:checked`);
-            const feedback = document.getElementById(feedbackId);
-            const options = document.querySelectorAll(`input[name="${questionName}"]`);
-            
-            if (!selected) {
-                alert('Please select an answer first.');
-                return;
-            }
-
-            // Clear previous styles
-            options.forEach(opt => {
-                opt.closest('label').classList.remove('selected', 'correct', 'wrong');
-            });
-
-            // Show feedback
-            feedback.classList.add('show');
-            
-            // Mark correct/wrong
-            options.forEach(opt => {
-                const label = opt.closest('label');
-                if (opt.value === correctAnswer) {
-                    label.classList.add('correct');
-                } else if (opt.checked && opt.value !== correctAnswer) {
-                    label.classList.add('wrong');
-                }
-            });
-
-            // Disable submit button
-            const submitBtn = document.querySelector(`#${feedbackId}`).closest('.quiz-card').querySelector('.quiz-submit');
-            submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.6';
-            submitBtn.style.cursor = 'not-allowed';
-        }
-
-        function resetAllQuizzes() {
-            if (!confirm('Reset all quiz answers? Your progress will be cleared.')) return;
-            
-            document.querySelectorAll('.quiz-card').forEach(card => {
-                // Reset radio buttons
-                card.querySelectorAll('input[type="radio"]').forEach(input => {
-                    input.checked = false;
-                    input.closest('label').classList.remove('selected', 'correct', 'wrong');
-                });
-                
-                // Hide feedback
-                card.querySelectorAll('.feedback-text').forEach(fb => {
-                    fb.classList.remove('show');
-                });
-                
-                // Enable submit buttons
-                const submitBtn = card.querySelector('.quiz-submit');
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-                submitBtn.style.cursor = 'pointer';
-            });
-
-            // Scroll to top of quizzes
-            document.getElementById('quizzes').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // --- Navigation Toggle ---
-        document.addEventListener('DOMContentLoaded', function() {
-            const navToggle = document.getElementById('navToggle');
-            const navMenu = document.getElementById('navMenu');
-
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', function() {
-                    const isOpen = navMenu.style.display === 'flex' && window.innerWidth <= 768;
-                    if (window.innerWidth <= 768) {
-                        navMenu.style.display = isOpen ? 'none' : 'flex';
-                        navMenu.style.flexDirection = 'column';
-                        navMenu.style.position = 'absolute';
-                        navMenu.style.top = '60px';
-                        navMenu.style.left = '0';
-                        navMenu.style.right = '0';
-                        navMenu.style.background = '#003366';
-                        navMenu.style.padding = '20px';
-                        navMenu.style.gap = '10px';
-                        this.setAttribute('aria-expanded', !isOpen);
-                    }
-                });
-
-                window.addEventListener('resize', function() {
-                    if (window.innerWidth > 768) {
-                        navMenu.style.display = 'flex';
-                        navMenu.style.position = 'static';
-                        navMenu.style.flexDirection = 'row';
-                        navMenu.style.padding = '0';
-                        navMenu.style.gap = '15px';
-                        navMenu.style.background = 'transparent';
-                    } else {
-                        navMenu.style.display = 'none';
-                    }
-                });
-
-                if (window.innerWidth <= 768) {
-                    navMenu.style.display = 'none';
-                    navToggle.style.display = 'block';
-                } else {
-                    navToggle.style.display = 'none';
-                    navMenu.style.display = 'flex';
-                }
-            }
-
-            // --- Back to Top ---
-            const backToTop = document.getElementById('backToTop');
-            if (backToTop) {
-                window.addEventListener('scroll', function() {
-                    backToTop.style.display = window.scrollY > 300 ? 'flex' : 'none';
-                });
-                backToTop.addEventListener('click', function() {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-
-            // --- Active Nav Link ---
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section[id]');
-            
-            function highlightNav() {
-                let current = '';
-                sections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= 150) {
-                        current = section.id;
-                    }
-                });
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-
-            let scrollTimeout;
-            window.addEventListener('scroll', function() {
-                if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
-                scrollTimeout = requestAnimationFrame(highlightNav);
-            });
-            setTimeout(highlightNav, 500);
-        });
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>

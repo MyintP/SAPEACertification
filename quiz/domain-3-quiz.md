@@ -163,4 +163,4 @@ D) A non-functional requirement to be added to the Requirements Catalog
 
 ---
 
-**Score:** 13–15 = Exam ready | 10–12 = Review flagged areas | Below 10 = Re-read Domain 3
+**Score:** 13–15 = Domain mastered | 10–12 = Review flagged areas | Below 10 = Re-read Domain 3

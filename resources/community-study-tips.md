@@ -46,7 +46,7 @@ Based on community advice, work through these in sequence:
 | 3 | **Exploring the SAP Enterprise Architecture Framework Foundation** (Learning Journey) | Core framework knowledge |
 | 4 | **Becoming an SAP Enterprise Architect** (Learning Journey) | Advanced application |
 | 5 | SAP Business Accelerator Hub | Explore "to-be" architectures by industry |
-| 6 | Case Study live sessions | Do this **twice** — practice the Wanderlust scenario |
+| 6 | Case Study live sessions | Do this **twice** — practice reasoning through a full connected scenario (community advice predates the 2026 Scenario-Based Assessment format change, but the skill still transfers) |
 | 7 | SAP EAF Press Book | Deeper detail — merger/acquisition scenarios, two-tier SAP landscapes |
 | 8 | BTP Solution Architect Learning Journey | Integration patterns and platform architecture |
 | 9 | LeanIX certification learning journey | Tooling depth |
@@ -90,7 +90,7 @@ What changed after failing:
 - Focus on **understanding over speed**
 - Apply concepts to **real customer scenarios** as you learn
 - Consistency beats cramming
-- The 80% pass mark means no weak areas — every domain matters equally
+- All domains are weighted equally, so no weak areas — see `docs/exam-overview.md` for what SAP currently confirms about scoring on the Scenario-Based Assessment
 
 ---
 

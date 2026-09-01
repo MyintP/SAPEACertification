@@ -1,7 +1,6 @@
 # Wanderlust Case Study — Exam Preparation Guide
 
-> 18 out of 40 exam questions = **45% of your exam** comes from this case study.  
-> Read the official case study on the SAP learning site BEFORE exam day.
+> ⚠️ **Format note (2026):** the "18/40 questions" figure below describes the older multiple-choice version of the P_SAPEA exam. The current exam is a **Scenario-Based Assessment** (AI-guided roleplay or video review) — see `docs/exam-overview.md`. It is unconfirmed whether the live assessment still references Wanderlust by name. Treat this file as **reasoning practice using SAP's classic case-study material**, not a guaranteed preview of your actual exam content. The skill it builds — reading a messy scenario and reasoning through it end-to-end — is exactly what the new scenario format tests, so it is still worth doing.
 
 ---
 
@@ -9,7 +8,7 @@
 
 Wanderlust is SAP's fictional travel and tourism company used as the reference case study for the SAP EA Certification exam. It is published on the SAP learning portal and is publicly available to read before sitting the exam.
 
-**This is not a trick — SAP wants you to read it in advance.** The 18 case study questions test whether you can apply the SAP EA Framework to a real-world scenario, not just recall facts.
+**This is not a trick — SAP wants you to read it in advance.** Case-study material like this tests whether you can apply the SAP EA Framework to a real-world scenario, not just recall facts — which is exactly the skill the current scenario-based exam evaluates.
 
 ---
 
@@ -71,7 +70,7 @@ For each major artifact, ask: "How would this apply to Wanderlust?"
 
 ## Case Study Question Patterns
 
-The 18 case study questions typically follow these patterns:
+Classic case-study questions typically follow these patterns:
 
 ### Pattern 1: Artifact Selection
 > "Given the Wanderlust scenario, which artifact would BEST communicate X to stakeholder Y?"

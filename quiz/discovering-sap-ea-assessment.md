@@ -1,7 +1,7 @@
 # Assessment: Discovering SAP Enterprise Architecture
 ## 30 Questions — Answers & Explanations
 
-> **Score target:** 80%+ (same standard as the certification exam)
+> **Score target:** 80%+ (a reasonable bar for solid mastery of this Learning Journey's content — SAP's confirmed pass criteria for the certification itself have changed under the 2026 Scenario-Based Assessment format; see `docs/exam-overview.md`)
 > **Format:** Single correct answer (✦) and multiple correct answers (✦✦)
 
 ---

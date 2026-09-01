@@ -163,4 +163,4 @@ D) Application-based
 
 ---
 
-**Score:** 13–15 = Exam ready | 10–12 = Review flagged areas | Below 10 = Re-read Domain 2
+**Score:** 13–15 = Domain mastered | 10–12 = Review flagged areas | Below 10 = Re-read Domain 2

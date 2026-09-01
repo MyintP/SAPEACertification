@@ -163,4 +163,4 @@ D) After the architecture engagement is complete, as a historical record
 
 ---
 
-**Score:** 13–15 = Exam ready | 10–12 = Review flagged areas | Below 10 = Re-read Domain 1
+**Score:** 13–15 = Domain mastered | 10–12 = Review flagged areas | Below 10 = Re-read Domain 1
