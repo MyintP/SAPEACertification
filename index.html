@@ -49,6 +49,13 @@
                 </ul>
             </details>
 
+            <details class="nav-group" open data-group-id="review">
+                <summary>Review</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-review"><span class="nav-item__code">R</span><span class="nav-item__label">Review Queue</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
+                </ul>
+            </details>
+
             <details class="nav-group" open data-group-id="exam">
                 <summary>Exam</summary>
                 <ul>
@@ -150,6 +157,26 @@
                         <li>Repeat until you can explain the reasoning clearly and efficiently.</li>
                         <li>Use <a href="#sheet-practice">Practice</a> to check domain knowledge as you go, and the Study Desk below to keep notes per sheet.</li>
                     </ul>
+                </div>
+            </article>
+
+            <!-- SHEET: REVIEW -->
+            <article class="sheet" id="sheet-review" data-title="Review" data-group="Study" data-code="R">
+                <div class="sheet-inner">
+                    <div class="sheet-header">
+                        <div class="sheet-kicker"><span class="sheet-kicker__code">R</span><span>Study</span></div>
+                        <h1 class="sheet-title">Review</h1>
+                        <p class="sheet-lede">Your study queue — what you've bookmarked, where you've left notes, and where to pick practice back up.</p>
+                    </div>
+
+                    <div class="review-filters" role="group" aria-label="Filter review queue">
+                        <button type="button" class="review-filter is-active" data-filter="all" aria-pressed="true">All</button>
+                        <button type="button" class="review-filter" data-filter="bookmarked" aria-pressed="false">Bookmarked</button>
+                        <button type="button" class="review-filter" data-filter="notes" aria-pressed="false">Has Notes</button>
+                        <button type="button" class="review-filter" data-filter="practice" aria-pressed="false">Practice</button>
+                    </div>
+
+                    <div id="reviewHubContent"></div>
                 </div>
             </article>
 
@@ -903,6 +930,7 @@
                 <span class="study-desk__title"><span aria-hidden="true">✎</span> Study Desk</span>
                 <span class="study-desk__scope" id="studyDeskScope">Notes for 00 · Start</span>
                 <span class="study-desk__spacer"></span>
+                <a href="#sheet-review" id="studyDeskReviewLink" class="study-desk__review-link">View my review queue →</a>
                 <span class="study-desk__saved" id="studyDeskSaved" aria-live="polite"></span>
                 <button id="studyDeskToggle" class="icon-btn" aria-expanded="true" aria-controls="studyDeskBody">Collapse ↓</button>
             </div>

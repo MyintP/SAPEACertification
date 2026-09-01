@@ -879,6 +879,175 @@ code, kbd {
     white-space: nowrap;
 }
 
+.study-desk__review-link {
+    font-size: 11.5px;
+    color: var(--shell-text);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.study-desk__review-link:hover { color: var(--accent-on-dark); }
+
+/* ============================================================
+   Review Hub
+   ============================================================ */
+.review-filters {
+    display: flex;
+    gap: 6px;
+    margin: 4px 0 28px;
+    flex-wrap: wrap;
+}
+
+.review-filter {
+    background: var(--paper);
+    border: 1px solid var(--paper-border);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.12s var(--ease), color 0.12s var(--ease), border-color 0.12s var(--ease);
+}
+
+.review-filter:hover { border-color: var(--accent); color: var(--text); }
+
+.review-filter.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.review-continue {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--navy-pale);
+    border: 1px solid #d7e0f5;
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    margin-bottom: 30px;
+}
+
+.review-continue__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.review-continue__link {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.review-continue__cta {
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+.review-empty-state {
+    padding: 24px 0 30px;
+    color: var(--text-muted);
+}
+
+.review-empty-state p { margin: 0 0 6px; }
+
+.review-section { margin-bottom: 32px; }
+
+.review-section__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    border-bottom: 1px solid var(--paper-border);
+    padding-bottom: 8px;
+    margin: 0 0 12px;
+}
+
+.review-section__count {
+    background: var(--paper-border);
+    color: var(--text-muted);
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.review-empty {
+    color: var(--text-faint);
+    font-size: 14px;
+    margin: 0 0 4px !important;
+}
+
+.review-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+}
+
+.review-item:hover { background: var(--paper); border-color: var(--paper-border); }
+.review-item + .review-item { margin-top: 2px; }
+
+.review-item__code {
+    font-size: 11.5px;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.review-item__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.review-item__title { font-weight: 600; font-size: 14.5px; }
+.review-item__meta { font-size: 12.5px; color: var(--text-muted); }
+.review-item__flag { margin-left: 8px; }
+.review-item__note { font-size: 13px; color: var(--text-muted); font-style: italic; }
+
+.review-item__cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+    align-self: center;
+}
+
+.review-item-link {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+}
+
 /* ============================================================
    Search dialog - command-palette presentation
    ============================================================ */
@@ -1207,6 +1376,7 @@ h2.quiz-section-heading {
     body.study-desk-open #studyDesk { transform: translateY(0); }
     #studyDesk.is-collapsed { transform: translateY(100%); }
     .study-desk__resize-handle { display: none; }
+    .study-desk__review-link { display: none; }
 }
 
 /* --- Print Styles --- */

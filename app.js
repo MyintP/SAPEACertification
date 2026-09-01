@@ -206,6 +206,22 @@
         } catch (e) { console.log('Error saving note:', e); }
     }
 
+    function hasNote(sheetId) {
+        const notes = loadNotes();
+        return !!(notes[sheetId] && notes[sheetId].trim());
+    }
+
+    function noteExcerpt(text) {
+        const oneLine = text.trim().replace(/\s+/g, ' ');
+        return oneLine.length > 90 ? oneLine.slice(0, 90) + '…' : oneLine;
+    }
+
+    function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
     function loadStudyDeskState() {
         try { return JSON.parse(localStorage.getItem(studyDeskStateKey) || '{}'); }
         catch (e) { return {}; }
@@ -232,6 +248,125 @@
     }
 
     // ------------------------------------------------------------------
+    // Last visited sheet (drives "Continue Studying" in Review)
+    // ------------------------------------------------------------------
+    const lastVisitedKey = 'sapEaLastVisited';
+    const REVIEW_SHEET_ID = 'sheet-review';
+
+    function saveLastVisited(sheetId) {
+        try { localStorage.setItem(lastVisitedKey, sheetId); }
+        catch (e) { console.log('Error saving last-visited sheet:', e); }
+    }
+
+    function getLastVisitedSheet() {
+        try { return localStorage.getItem(lastVisitedKey); }
+        catch (e) { return null; }
+    }
+
+    // ------------------------------------------------------------------
+    // Review Hub: derives its state from the same sheet index, bookmarks,
+    // notes and quiz progress everything else already uses - no second
+    // list of sheets, no fabricated metrics.
+    // ------------------------------------------------------------------
+    function getBookmarkedSheets(sheetIndex) {
+        const bookmarks = loadBookmarks();
+        return sheetIndex.filter(s => s.id !== REVIEW_SHEET_ID && bookmarks[s.id]);
+    }
+
+    function getNotedSheets(sheetIndex) {
+        const notes = loadNotes();
+        return sheetIndex
+            .filter(s => s.id !== REVIEW_SHEET_ID && notes[s.id] && notes[s.id].trim())
+            .map(s => ({ sheet: s, excerpt: noteExcerpt(notes[s.id]) }));
+    }
+
+    function renderReviewSection(title, count, bodyHtml) {
+        const badge = count === null ? '' : `<span class="review-section__count">${count}</span>`;
+        return `<section class="review-section">
+            <h2 class="review-section__title">${title}${badge}</h2>
+            <div class="review-section__body">${bodyHtml}</div>
+        </section>`;
+    }
+
+    function renderReviewItem(sheet, metaHtml, ctaHtml) {
+        return `<a class="review-item" href="#${sheet.id}">
+            <span class="review-item__code">${escapeHtml(sheet.code)}</span>
+            <span class="review-item__body">
+                <span class="review-item__title">${escapeHtml(sheet.title)}</span>
+                ${metaHtml}
+            </span>
+            ${ctaHtml || ''}
+        </a>`;
+    }
+
+    function renderReviewHub(sheetIndex, filter) {
+        const container = document.getElementById('reviewHubContent');
+        if (!container) return;
+
+        const bookmarked = getBookmarkedSheets(sheetIndex);
+        const noted = getNotedSheets(sheetIndex);
+        const practice = getQuizProgress();
+        const lastVisitedId = getLastVisitedSheet();
+        const lastVisited = lastVisitedId ? sheetIndex.find(s => s.id === lastVisitedId) : null;
+
+        const showAll = filter === 'all';
+        const isEmpty = bookmarked.length === 0 && noted.length === 0 && !practice;
+        let html = '';
+
+        if (lastVisited) {
+            html += `<div class="review-continue">
+                <span class="review-continue__label">Continue Studying</span>
+                <a class="review-continue__link" href="#${lastVisited.id}">
+                    <span class="review-item__code">${escapeHtml(lastVisited.code)}</span> ${escapeHtml(lastVisited.title)}
+                    <span class="review-continue__cta">Continue where you left off →</span>
+                </a>
+            </div>`;
+        }
+
+        if (isEmpty) {
+            html += `<div class="review-empty-state">
+                <p><strong>Nothing here yet.</strong></p>
+                <p>Bookmark a sheet or add a Study Desk note while studying and it will appear here.</p>
+            </div>`;
+        } else {
+            if (showAll || filter === 'bookmarked') {
+                const body = bookmarked.length
+                    ? bookmarked.map(s => renderReviewItem(
+                        s,
+                        `<span class="review-item__meta">★ Bookmarked${hasNote(s.id) ? ' <span class="review-item__flag">✎ Has notes</span>' : ''}</span>`
+                    )).join('')
+                    : '<p class="review-empty">No bookmarks yet — star a sheet while studying to add it here.</p>';
+                html += renderReviewSection('Bookmarked', bookmarked.length, body);
+            }
+
+            if (showAll || filter === 'notes') {
+                const body = noted.length
+                    ? noted.map(n => renderReviewItem(
+                        n.sheet,
+                        `<span class="review-item__note">"${escapeHtml(n.excerpt)}"</span>`
+                    )).join('')
+                    : '<p class="review-empty">No notes yet — jot something in the Study Desk while studying.</p>';
+                html += renderReviewSection('Your Notes', noted.length, body);
+            }
+
+            if (showAll || filter === 'practice') {
+                const body = practice
+                    ? `<a class="review-item" href="#sheet-practice">
+                        <span class="review-item__body">
+                            <span class="review-item__title">Live Defense</span>
+                            <span class="review-item__meta">Last attempt: ${practice.lastScore}% · ${practice.attempts} attempt${practice.attempts === 1 ? '' : 's'}</span>
+                        </span>
+                        <span class="review-item__cta">Continue →</span>
+                    </a>`
+                    : '<p class="review-empty">No practice attempts yet.</p><a class="review-item-link" href="#sheet-practice">Start practice →</a>';
+                html += renderReviewSection('Practice', null, body);
+            }
+        }
+
+        container.innerHTML = html;
+    }
+
+    // ------------------------------------------------------------------
     // App shell wiring
     // ------------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', function() {
@@ -255,12 +390,15 @@
 
         // Real, derived signal only: which nav items have a saved note
         function refreshNoteIndicators() {
-            const notes = loadNotes();
             document.querySelectorAll('.nav-item').forEach(a => {
                 const id = (a.getAttribute('href') || '').replace(/^#/, '');
-                const hasNote = !!(notes[id] && notes[id].trim());
-                a.classList.toggle('has-note', hasNote);
+                a.classList.toggle('has-note', hasNote(id));
             });
+        }
+
+        let currentReviewFilter = 'all';
+        function refreshReviewHubIfVisible() {
+            if (currentSheetId === REVIEW_SHEET_ID) renderReviewHub(sheetIndex, currentReviewFilter);
         }
 
         function updateReadingProgress() {
@@ -290,14 +428,24 @@
                 a.classList.toggle('is-active', a.getAttribute('href') === `#${target}`);
             });
 
-            // Bookmark star
+            // Bookmark star - bookmarking the Review hub itself isn't meaningful
             const bookmarks = loadBookmarks();
             const isBookmarked = !!bookmarks[target];
             if (bookmarkToggle) {
+                bookmarkToggle.hidden = target === REVIEW_SHEET_ID;
                 bookmarkToggle.textContent = isBookmarked ? '★' : '☆';
                 bookmarkToggle.classList.toggle('is-active', isBookmarked);
                 bookmarkToggle.setAttribute('aria-pressed', String(isBookmarked));
             }
+
+            // Track the last real sheet visited (Review's own "Continue Studying")
+            if (target !== REVIEW_SHEET_ID) saveLastVisited(target);
+
+            // Study Desk's "review queue" link only makes sense off the review sheet
+            const reviewLink = document.getElementById('studyDeskReviewLink');
+            if (reviewLink) reviewLink.hidden = target === REVIEW_SHEET_ID;
+
+            if (target === REVIEW_SHEET_ID) renderReviewHub(sheetIndex, currentReviewFilter);
 
             // Study Desk scope + note
             if (studyDeskScope) studyDeskScope.textContent = `Notes for ${meta.code ? meta.code + ' · ' : ''}${meta.title}`;
@@ -343,6 +491,19 @@
                 this.setAttribute('aria-pressed', String(isBookmarked));
             });
         }
+
+        // --- Review Hub filters ---
+        const reviewFilters = document.querySelectorAll('.review-filter');
+        reviewFilters.forEach(btn => {
+            btn.addEventListener('click', function() {
+                currentReviewFilter = this.dataset.filter;
+                reviewFilters.forEach(b => {
+                    b.classList.toggle('is-active', b === this);
+                    b.setAttribute('aria-pressed', String(b === this));
+                });
+                renderReviewHub(sheetIndex, currentReviewFilter);
+            });
+        });
 
         // --- Study Desk: note autosave (debounced) ---
         if (studyDeskEditor) {
