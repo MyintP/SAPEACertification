@@ -6,27 +6,28 @@
     /* Single accent hue, two lightness steps for light/dark surfaces */
     --accent: #2454c9;
     --accent-on-dark: #6ea1ff;
-    --accent-pale: #e8f0fe;
+    --accent-pale: #e8eefb;
 
-    /* Legacy alias - content components below still reference --navy */
+    /* Legacy alias - some content rules still reference --navy */
     --navy: var(--accent);
-    --navy-pale: #f0f7ff;
+    --navy-pale: #eef2fa;
     --blue-pale: var(--accent-pale);
 
-    --amber: #b8860b;
-    --amber-pale: #fdf3dc;
-    --red: #b3261e;
-    --red-pale: #fbe9e7;
-    --green: #1e7d4b;
-    --green-pale: #e3f3ea;
-    --teal: #146c7a;
+    --amber: #93650a;
+    --amber-pale: #f7efdd;
+    --red: #a1281f;
+    --red-pale: #f8ebe9;
+    --green: #1e6b42;
+    --green-pale: #e7f1ea;
+    --teal: #12616d;
 
     /* Light reading canvas */
-    --canvas-bg: #f6f4ef;
+    --canvas-bg: #f5f3ee;
     --paper: #ffffff;
     --paper-border: #e2ddd2;
-    --text: #22262e;
-    --text-muted: #5b6270;
+    --text: #1c1f26;
+    --text-muted: #565c6b;
+    --text-faint: #83889a;
 
     /* Dark app shell */
     --shell-bg: #12151c;
@@ -44,8 +45,12 @@
 
     --sidebar-width: 264px;
     --context-bar-height: 52px;
-    --study-desk-height: 240px;
-    --study-desk-collapsed-height: 44px;
+    --study-desk-height: 220px;
+    --study-desk-collapsed-height: 42px;
+    --prose-width: 700px;
+    --wide-width: 1040px;
+
+    --ease: cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* --- Reset & Base --- */
@@ -65,14 +70,35 @@ body {
     color: var(--text);
     line-height: 1.6;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-a {
-    color: inherit;
+a { color: inherit; }
+button { font-family: inherit; }
+
+code, kbd {
+    font-family: ui-monospace, 'SF Mono', Consolas, Menlo, monospace;
 }
 
-button {
-    font-family: inherit;
+/* Visible keyboard focus everywhere, invisible for mouse users */
+:focus { outline: none; }
+
+:focus-visible {
+    outline: 2px solid var(--accent-on-dark);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+.sheet :focus-visible,
+.quiz-card :focus-visible {
+    outline-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
 }
 
 /* ============================================================
@@ -93,9 +119,10 @@ button {
 #workspace { grid-area: workspace; }
 
 /* ============================================================
-   Context Bar
+   Context Bar - a workspace toolbar, not a website header
    ============================================================ */
 #contextBar {
+    position: relative;
     background: var(--shell-panel);
     border-bottom: 1px solid var(--shell-border);
     color: var(--shell-text);
@@ -116,6 +143,7 @@ button {
     cursor: pointer;
     font-size: 16px;
     line-height: 1;
+    transition: background-color 0.12s var(--ease);
 }
 
 .context-crumb {
@@ -128,28 +156,26 @@ button {
 .context-crumb__title {
     color: var(--shell-text-strong);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13.5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .context-crumb__path {
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--shell-text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.context-bar__spacer {
-    flex: 1;
-}
+.context-bar__spacer { flex: 1; }
 
 .context-bar__actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-size: 13px;
     white-space: nowrap;
 }
@@ -159,6 +185,7 @@ button {
     align-items: center;
     gap: 6px;
     color: var(--shell-text);
+    font-size: 12px;
 }
 
 .context-progress__value {
@@ -172,10 +199,11 @@ button {
     border: none;
     color: var(--shell-text);
     cursor: pointer;
-    font-size: 16px;
-    padding: 4px 6px;
+    font-size: 15px;
+    padding: 5px 7px;
     border-radius: var(--radius-sm);
     line-height: 1;
+    transition: background-color 0.12s var(--ease), color 0.12s var(--ease);
 }
 
 .icon-btn:hover {
@@ -183,9 +211,7 @@ button {
     color: var(--shell-text-strong);
 }
 
-.icon-btn.is-active {
-    color: var(--accent-on-dark);
-}
+.icon-btn.is-active { color: var(--accent-on-dark); }
 
 .search-trigger {
     display: flex;
@@ -197,7 +223,8 @@ button {
     border-radius: var(--radius-sm);
     padding: 6px 10px;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 12.5px;
+    transition: border-color 0.12s var(--ease), color 0.12s var(--ease);
 }
 
 .search-trigger:hover {
@@ -210,12 +237,24 @@ button {
     border: 1px solid var(--shell-border);
     border-radius: 4px;
     padding: 1px 5px;
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--shell-text);
 }
 
+/* Reading position - subtle, purely reflects scroll within the active sheet */
+#readingProgress {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    height: 2px;
+    width: 0%;
+    background: var(--accent-on-dark);
+    opacity: 0.55;
+    transition: width 0.1s linear;
+}
+
 /* ============================================================
-   Sidebar Navigation
+   Sidebar Navigation - the certification map
    ============================================================ */
 #sidebarNav {
     background: var(--shell-panel);
@@ -227,24 +266,19 @@ button {
 }
 
 .sidebar-brand {
-    padding: 16px 16px 8px;
+    padding: 16px 16px 10px;
     font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.06em;
+    font-size: 12.5px;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
     color: var(--shell-text-strong);
     border-bottom: 1px solid var(--shell-border);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
-.nav-groups {
-    flex: 1;
-    padding: 6px 8px 12px;
-}
+.nav-groups { flex: 1; padding: 4px 8px 12px; }
 
-.nav-group {
-    margin-bottom: 2px;
-}
+.nav-group { margin-bottom: 1px; }
 
 .nav-group summary {
     list-style: none;
@@ -252,12 +286,13 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 8px;
-    font-size: 11px;
+    padding: 7px 8px;
+    font-size: 10.5px;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: var(--shell-text);
+    color: var(--text-faint);
+    color: #7d8496;
     border-radius: var(--radius-sm);
 }
 
@@ -269,31 +304,32 @@ button {
 }
 
 .nav-group summary::after {
-    content: '▾';
-    font-size: 10px;
-    transition: transform 0.15s ease;
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.15s var(--ease);
+    opacity: 0.7;
 }
 
-.nav-group:not([open]) summary::after {
-    transform: rotate(-90deg);
-}
+.nav-group:not([open]) summary::after { transform: rotate(-45deg); }
 
-.nav-group ul {
-    list-style: none;
-    margin: 2px 0 8px;
-    padding: 0;
-}
+.nav-group ul { list-style: none; margin: 1px 0 10px; padding: 0; }
 
 .nav-item {
     display: flex;
     align-items: baseline;
     gap: 8px;
-    padding: 7px 12px 7px 20px;
+    padding: 6px 10px 6px 18px;
     border-radius: var(--radius-sm);
     color: var(--shell-text);
     text-decoration: none;
-    font-size: 13.5px;
+    font-size: 13px;
     border-left: 2px solid transparent;
+    position: relative;
+    transition: background-color 0.12s var(--ease), color 0.12s var(--ease);
 }
 
 .nav-item:hover {
@@ -311,8 +347,9 @@ button {
 .nav-item__code {
     font-variant-numeric: tabular-nums;
     color: var(--shell-text);
-    font-size: 11.5px;
-    opacity: 0.75;
+    font-size: 11px;
+    opacity: 0.7;
+    flex-shrink: 0;
 }
 
 .nav-item.is-active .nav-item__code {
@@ -320,11 +357,30 @@ button {
     opacity: 1;
 }
 
+.nav-item__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Real, derived signal only: dot shows when a sheet has a saved Study Desk note */
+.nav-item__note-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-on-dark);
+    margin-left: auto;
+    flex-shrink: 0;
+    opacity: 0;
+}
+
+.nav-item.has-note .nav-item__note-dot { opacity: 0.85; }
+
 .sidebar-footer {
     border-top: 1px solid var(--shell-border);
     padding: 10px 16px;
-    font-size: 12px;
-    color: var(--shell-text);
+    font-size: 11.5px;
+    color: var(--text-faint);
 }
 
 .sidebar-footer a {
@@ -332,14 +388,10 @@ button {
     text-decoration: none;
 }
 
-.sidebar-footer a:hover {
-    color: var(--accent-on-dark);
-}
+.sidebar-footer a:hover { color: var(--accent-on-dark); }
 
 /* Mobile nav drawer backdrop */
-#navBackdrop {
-    display: none;
-}
+#navBackdrop { display: none; }
 
 /* ============================================================
    Workspace = Content Canvas + Study Desk
@@ -356,89 +408,134 @@ button {
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
-    padding: 32px 24px 60px;
+    padding: 40px 28px 72px;
 }
 
-.sheet {
-    display: none;
-}
+.sheet { display: none; }
+.sheet.is-active { display: block; }
 
-.sheet.is-active {
-    display: block;
-}
-
-/* Breakout grid: narrow prose column, wide elements can break out */
+/* Breakout grid: narrow prose column by default; .breakout elements span wider */
 .sheet-inner {
     display: grid;
-    grid-template-columns: 1fr min(760px, 100%) 1fr;
+    grid-template-columns: 1fr min(var(--prose-width), 100%) 1fr;
     row-gap: 0;
 }
 
-.sheet-inner > * {
-    grid-column: 2;
-}
+.sheet-inner > * { grid-column: 2; }
 
 .sheet-inner > .breakout {
     grid-column: 1 / 4;
     width: 100%;
-    max-width: 1080px;
+    max-width: var(--wide-width);
     justify-self: center;
 }
 
 /* ============================================================
-   Sheet / Card content (reused across all sheets)
+   Sheet header - the title is the dominant element, the code is not
    ============================================================ */
-.sheet-card {
-    background: var(--paper);
-    padding: 28px 30px;
-    border-radius: var(--radius);
-    border: 1px solid var(--paper-border);
-    box-shadow: var(--shadow);
-}
+.sheet-header { margin-bottom: 30px; }
 
-.sheet-card--hero {
-    background: var(--navy-pale);
-    border: none;
-    border-left: 4px solid var(--accent);
-}
-
-.sheet-badge {
-    background: var(--accent);
-    color: white;
-    padding: 3px 11px;
-    border-radius: 20px;
+.sheet-kicker {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
     font-size: 12px;
-    letter-spacing: 0.03em;
-    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
     margin-bottom: 10px;
 }
 
-.sheet-card h1,
-.sheet-card h2 {
-    color: var(--text);
-    margin: 10px 0 20px 0;
+.sheet-kicker__code {
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
 }
 
-.sheet-card h3,
-.sheet-card h4 {
+.sheet-title {
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.01em;
     color: var(--text);
-    margin-top: 0;
+    margin: 0 0 12px 0;
 }
-
-.sheet-card h1 { font-size: 26px; }
-.sheet-card h2 { font-size: 21px; }
 
 .sheet-lede {
     font-size: 17px;
     line-height: 1.65;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 62ch;
 }
 
-/* --- Grids of info cards --- */
+.sheet-divider {
+    border: none;
+    border-top: 1px solid var(--paper-border);
+    margin: 22px 0 28px;
+}
+
+/* ============================================================
+   Prose & section rhythm
+   ============================================================ */
+.sheet-inner h2 {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 40px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--paper-border);
+}
+
+.sheet-inner > .sheet-header + h2,
+.sheet-inner > h2:first-child { margin-top: 0; }
+
+.sheet-inner h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 26px 0 8px;
+}
+
+.sheet-inner h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 20px 0 6px;
+}
+
+.sheet-inner p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+    margin: 0 0 14px;
+}
+
+.sheet-inner ul,
+.sheet-inner ol {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text);
+    margin: 0 0 14px;
+    padding-left: 22px;
+}
+
+.sheet-inner li { margin-bottom: 6px; }
+
+.sheet-inner strong { font-weight: 700; }
+
+.sheet-footnote {
+    margin-top: 18px;
+    font-size: 13.5px;
+    color: var(--text-faint);
+}
+
+/* --- Grids of info cards (used only for genuinely parallel items) --- */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin: 24px 0;
+    gap: 14px;
+    margin: 20px 0 28px;
 }
 
 .card-grid--narrow { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
@@ -457,32 +554,101 @@ button {
 }
 
 .info-card p { margin: 0; }
+.info-card h3, .info-card h4 { margin-top: 0 !important; }
 .info-card--flat { background: var(--navy-pale); border-color: transparent; }
 .info-card--flat-blue { background: var(--blue-pale); border-color: transparent; }
 
-/* --- Callouts --- */
-.callout {
-    padding: 14px 18px;
-    border-radius: var(--radius-sm);
-    margin: 18px 0;
+/* ============================================================
+   Content patterns: definition / tip / important / example / scenario
+   Consistent eyebrow + left border, no heavy card chrome
+   ============================================================ */
+.pattern {
+    margin: 20px 0 26px;
+    padding: 14px 18px 16px;
+    border-left: 3px solid var(--paper-border);
+    background: transparent;
 }
 
-.callout p { margin: 0; }
-.callout p + p { margin-top: 5px; }
+.pattern__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
 
-.callout--warning { background: var(--amber-pale); border-left: 4px solid var(--amber); }
-.callout--accent { background: var(--navy-pale); border-left: 4px solid var(--accent); }
-.callout--soft { background: var(--blue-pale); }
+.pattern p:last-child { margin-bottom: 0; }
 
-.callout-title { font-weight: 700; margin: 0; }
+.pattern--definition {
+    border-left-color: var(--accent);
+    background: var(--navy-pale);
+}
+.pattern--definition .pattern__label { color: var(--accent); }
 
-.trap-text { color: var(--red); margin: 5px 0 0 0; font-style: italic; }
+.pattern--tip {
+    border-left-color: var(--teal);
+    background: #eef5f5;
+}
+.pattern--tip .pattern__label { color: var(--teal); }
+
+.pattern--important {
+    border-left-color: var(--amber);
+    background: var(--amber-pale);
+}
+.pattern--important .pattern__label { color: var(--amber); }
+
+.pattern--example {
+    border-left-color: var(--text-faint);
+    background: #f1f0eb;
+}
+.pattern--example .pattern__label { color: var(--text-muted); }
+.pattern--example p { font-style: italic; }
+
+.pattern--scenario {
+    border-left-color: var(--accent);
+    background: var(--paper);
+    border: 1px solid var(--paper-border);
+    border-left-width: 3px;
+}
+.pattern--scenario .pattern__label { color: var(--accent); }
+
+/* Compact architecture-model flow banner (e.g. Vision -> ... -> Roadmap) */
+.flow-diagram {
+    background: var(--navy-pale);
+    border: 1px solid #d7e0f5;
+    border-radius: var(--radius-sm);
+    padding: 18px 24px;
+    margin: 8px 0 28px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--accent);
+    line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+    .flow-diagram { font-size: 14.5px; padding: 14px 16px; }
+}
+
+.trap-text {
+    color: var(--red);
+    margin: 6px 0 0 0;
+    font-size: 14.5px;
+    font-style: italic;
+}
 
 /* --- Tables --- */
+.table-scroll {
+    overflow-x: auto;
+    margin: 18px 0;
+    -webkit-overflow-scrolling: touch;
+}
+
 .table-standard {
     width: 100%;
     border-collapse: collapse;
-    margin: 18px 0;
+    margin: 0;
     font-size: 14.5px;
     background: var(--paper);
 }
@@ -495,16 +661,14 @@ button {
 }
 
 .table-standard th {
-    background: var(--accent);
+    background: #1e2a4d;
     color: white;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .table-standard td.center { text-align: center; }
 .table-standard tbody tr:nth-child(even) { background: #faf9f5; }
-
-.table-scroll {
-    overflow-x: auto;
-}
 
 /* --- Defense pattern grid --- */
 .defense-step {
@@ -514,8 +678,8 @@ button {
     border-left: 3px solid var(--accent);
 }
 
-.defense-step strong { display: block; margin-bottom: 5px; }
-.defense-step p { margin: 5px 0 0 0; font-size: 14px; }
+.defense-step strong { display: block; margin-bottom: 5px; font-size: 14.5px; }
+.defense-step p { margin: 5px 0 0 0 !important; font-size: 14px; }
 
 /* --- Score bands --- */
 .score-band {
@@ -527,14 +691,14 @@ button {
 
 .score-band .score-band__value { font-size: 26px; font-weight: 700; }
 .score-band--red { background: var(--red); }
-.score-band--amber { background: var(--amber); color: #1a1305; }
+.score-band--amber { background: var(--amber); }
 .score-band--teal { background: var(--teal); }
 .score-band--green { background: var(--green); }
 
 /* --- Resource links --- */
 .resource-list {
     font-size: 15.5px;
-    line-height: 2.6;
+    line-height: 2.5;
     list-style: none;
     padding-left: 0;
 }
@@ -551,8 +715,8 @@ button {
 
 /* --- Progress Tracker --- */
 .tracker-box {
-    background: var(--canvas-bg);
-    padding: 18px;
+    background: var(--paper);
+    padding: 20px;
     border-radius: var(--radius-sm);
     margin: 18px 0;
     border: 1px solid var(--paper-border);
@@ -562,7 +726,7 @@ button {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px;
-    margin: 15px 0;
+    margin: 4px 0 15px;
 }
 
 .tracker-item {
@@ -571,7 +735,7 @@ button {
     gap: 8px;
     cursor: pointer;
     padding: 8px;
-    background: var(--paper);
+    background: var(--canvas-bg);
     border-radius: 4px;
     border: 1px solid var(--paper-border);
 }
@@ -603,19 +767,12 @@ button {
     cursor: pointer;
     font-size: 13.5px;
     font-weight: 600;
-    transition: opacity 0.15s;
+    transition: opacity 0.15s var(--ease);
 }
 
 .btn:hover { opacity: 0.88; }
 .btn-danger { background: var(--red); color: white; }
-.btn-secondary { background: #6c7280; color: white; }
-
-/* --- Footer note inside a sheet --- */
-.sheet-footnote {
-    margin-top: 10px;
-    font-size: 14px;
-    color: var(--text-muted);
-}
+.btn-secondary { background: #565c6b; color: white; }
 
 /* ============================================================
    Study Desk (bottom panel)
@@ -631,9 +788,7 @@ button {
     position: relative;
 }
 
-#studyDesk.is-collapsed {
-    flex-basis: var(--study-desk-collapsed-height);
-}
+#studyDesk.is-collapsed { flex-basis: var(--study-desk-collapsed-height); }
 
 .study-desk__resize-handle {
     height: 6px;
@@ -647,7 +802,7 @@ button {
     position: absolute;
     left: 50%;
     top: 2px;
-    width: 36px;
+    width: 32px;
     height: 3px;
     border-radius: 2px;
     background: var(--shell-border);
@@ -663,11 +818,14 @@ button {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 4px 16px 8px;
+    padding: 3px 16px 8px;
     flex: 0 0 auto;
 }
 
 .study-desk__title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -692,9 +850,7 @@ button {
     display: flex;
 }
 
-#studyDesk.is-collapsed .study-desk__body {
-    display: none;
-}
+#studyDesk.is-collapsed .study-desk__body { display: none; }
 
 .study-desk__editor {
     flex: 1;
@@ -707,12 +863,12 @@ button {
     padding: 12px 14px;
     font-family: inherit;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.65;
 }
 
 .study-desk__editor::placeholder { color: var(--shell-text); }
 
-.study-desk__editor:focus {
+.study-desk__editor:focus-visible {
     outline: none;
     border-color: var(--accent-on-dark);
 }
@@ -724,7 +880,7 @@ button {
 }
 
 /* ============================================================
-   Search dialog
+   Search dialog - command-palette presentation
    ============================================================ */
 #searchDialog {
     border: 1px solid var(--paper-border);
@@ -736,63 +892,82 @@ button {
     color: var(--text);
 }
 
-#searchDialog::backdrop {
-    background: rgba(10, 12, 18, 0.55);
+#searchDialog::backdrop { background: rgba(10, 12, 18, 0.55); }
+
+.search-dialog__input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 6px 4px 16px;
+    border-bottom: 1px solid var(--paper-border);
 }
 
+.search-dialog__icon { color: var(--text-faint); font-size: 15px; }
+
 .search-dialog__input {
-    width: 100%;
+    flex: 1;
     border: none;
-    border-bottom: 1px solid var(--paper-border);
-    padding: 16px 18px;
+    padding: 14px 0;
     font-size: 16px;
     font-family: inherit;
     color: var(--text);
     background: transparent;
 }
 
-.search-dialog__input:focus { outline: none; }
+.search-dialog__input:focus-visible { outline: none; }
 
 .search-dialog__results {
     list-style: none;
     margin: 0;
     padding: 6px;
-    max-height: 340px;
+    max-height: 360px;
     overflow-y: auto;
+}
+
+.search-dialog__group-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 10px 12px 4px;
 }
 
 .search-dialog__result {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    align-items: baseline;
+    gap: 8px;
     padding: 9px 12px;
     border-radius: var(--radius-sm);
     cursor: pointer;
 }
 
+.search-dialog__result-code {
+    font-size: 11.5px;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
 .search-dialog__result-title { font-weight: 600; font-size: 14.5px; }
-.search-dialog__result-group { font-size: 12px; color: var(--text-muted); }
-
-.search-dialog__result.is-selected {
-    background: var(--accent-pale);
-}
-
-.search-dialog__empty {
-    padding: 18px;
+.search-dialog__result--heading .search-dialog__result-title {
+    font-weight: 400;
     color: var(--text-muted);
-    font-size: 14px;
 }
+.search-dialog__result--heading { padding-left: 22px; }
+
+.search-dialog__result.is-selected { background: var(--accent-pale); }
+
+.search-dialog__empty { padding: 18px; color: var(--text-muted); font-size: 14px; }
 
 /* ============================================================
-   Quiz sheet (reused from former quiz.html)
+   Quiz sheet (Practice)
    ============================================================ */
-.quiz-intro { text-align: center; color: var(--text-muted); margin-bottom: 22px; }
-.quiz-intro h2 { color: var(--text); margin-bottom: 8px; }
-
-.quiz-section-heading {
+h2.quiz-section-heading {
     color: var(--text);
     border-bottom: 2px solid var(--accent);
     padding-bottom: 8px;
+    margin-top: 0;
 }
 
 .quiz-card {
@@ -804,7 +979,7 @@ button {
     border-left: 3px solid var(--accent);
 }
 
-.quiz-card h3 { color: var(--text); }
+.quiz-card h3 { color: var(--text); margin-top: 0; }
 
 .quiz-question {
     font-size: 17px;
@@ -829,6 +1004,7 @@ button {
     border-radius: var(--radius-sm);
     cursor: pointer;
     border: 1px solid var(--paper-border);
+    transition: background-color 0.12s var(--ease), border-color 0.12s var(--ease);
 }
 
 .quiz-options label:hover { background: var(--accent-pale); }
@@ -845,6 +1021,7 @@ button {
     font-size: 15px;
     cursor: pointer;
     margin-top: 8px;
+    transition: opacity 0.12s var(--ease);
 }
 
 .quiz-submit:hover { opacity: 0.9; }
@@ -893,7 +1070,7 @@ button {
     border-left: 3px solid var(--amber);
 }
 
-.case-study h4 { margin-top: 0; color: var(--text); }
+.case-study h4 { margin-top: 0 !important; color: var(--text); }
 
 .tag {
     display: inline-block;
@@ -929,13 +1106,13 @@ button {
 
 .scoring-section {
     margin-top: 50px;
-    background: var(--canvas-bg);
+    background: var(--paper);
     border-radius: var(--radius);
     padding: 26px;
     border: 1px solid var(--paper-border);
 }
 
-.scoring-section h2 { color: var(--text); }
+.scoring-section h2 { color: var(--text); border: none; margin-top: 0; padding-bottom: 0; }
 
 .score-band-grid {
     display: grid;
@@ -949,14 +1126,21 @@ button {
 .text-center { text-align: center; }
 .mt-20 { margin-top: 20px; }
 .mb-20 { margin-bottom: 20px; }
+.sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
 
 /* ============================================================
    Responsive: Tablet + Mobile
    ============================================================ */
 @media (max-width: 1023px) {
-    #appShell {
-        grid-template-columns: 0 1fr;
-    }
+    #appShell { grid-template-columns: 0 1fr; }
 
     #navDrawerToggle { display: inline-flex; align-items: center; }
 
@@ -967,14 +1151,12 @@ button {
         bottom: 0;
         width: min(300px, 84vw);
         transform: translateX(-100%);
-        transition: transform 0.2s ease;
+        transition: transform 0.2s var(--ease);
         z-index: 1200;
         box-shadow: var(--shadow-lg);
     }
 
-    body.nav-open #sidebarNav {
-        transform: translateX(0);
-    }
+    body.nav-open #sidebarNav { transform: translateX(0); }
 
     body.nav-open #navBackdrop {
         display: block;
@@ -987,18 +1169,24 @@ button {
     .context-crumb__path { display: none; }
 }
 
+@media (max-width: 640px) {
+    .search-trigger__text { display: none; }
+    .search-trigger { padding: 6px 8px; }
+}
+
 @media (max-width: 767px) {
-    #contentCanvas { padding: 18px 14px 40px; }
+    #contentCanvas { padding: 22px 16px 48px; }
 
     .sheet-inner { grid-template-columns: 1fr; }
     .sheet-inner > *,
     .sheet-inner > .breakout { grid-column: 1; max-width: 100%; }
 
-    .sheet-card { padding: 18px; }
-    .sheet-card h1 { font-size: 21px; }
+    .sheet-title { font-size: 24px; }
+    .sheet-lede { font-size: 15.5px; }
+    .sheet-inner h2 { font-size: 18px; margin-top: 32px; }
 
     .table-standard { font-size: 13px; }
-    .table-standard th, .table-standard td { padding: 8px; }
+    .table-standard th, .table-standard td { padding: 8px 10px; }
 
     .tracker-grid { grid-template-columns: 1fr; }
 
@@ -1011,19 +1199,13 @@ button {
         flex-basis: auto;
         height: 60vh;
         transform: translateY(100%);
-        transition: transform 0.2s ease;
+        transition: transform 0.2s var(--ease);
         z-index: 1300;
         border-top: 1px solid var(--shell-border);
     }
 
-    body.study-desk-open #studyDesk {
-        transform: translateY(0);
-    }
-
-    #studyDesk.is-collapsed {
-        transform: translateY(100%);
-    }
-
+    body.study-desk-open #studyDesk { transform: translateY(0); }
+    #studyDesk.is-collapsed { transform: translateY(100%); }
     .study-desk__resize-handle { display: none; }
 }
 

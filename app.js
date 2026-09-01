@@ -7,17 +7,40 @@
 
     const DEFAULT_SHEET = 'sheet-00';
 
+    function slugify(text) {
+        return text.toLowerCase().trim()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .slice(0, 60);
+    }
+
     // ------------------------------------------------------------------
-    // Sheet index (built from the DOM - not duplicated as separate data)
+    // Sheet + heading index (derived from the DOM - not duplicated data)
     // ------------------------------------------------------------------
     function buildSheetIndex() {
-        return [...document.querySelectorAll('.sheet')].map(el => ({
+        const sheets = [...document.querySelectorAll('.sheet')].map(el => ({
             id: el.id,
             title: el.dataset.title || el.id,
             group: el.dataset.group || '',
             code: el.dataset.code || '',
             el
         }));
+
+        // Assign deterministic, URL-safe anchor IDs to in-sheet headings
+        // (h2/h3/h4) so search can jump to a subsection and links stay stable.
+        sheets.forEach(sheet => {
+            sheet.headings = [];
+            sheet.el.querySelectorAll('h2, h3, h4').forEach(h => {
+                if (!h.id) {
+                    const slug = slugify(h.textContent);
+                    if (slug) h.id = `${sheet.id}-${slug}`;
+                }
+                if (h.id) sheet.headings.push({ id: h.id, text: h.textContent.trim(), el: h });
+            });
+        });
+
+        return sheets;
     }
 
     // ------------------------------------------------------------------
@@ -178,7 +201,7 @@
     function saveNote(sheetId, text) {
         try {
             const notes = loadNotes();
-            notes[sheetId] = text;
+            if (text) notes[sheetId] = text; else delete notes[sheetId];
             localStorage.setItem(notesKey, JSON.stringify(notes));
         } catch (e) { console.log('Error saving note:', e); }
     }
@@ -222,6 +245,7 @@
         const studyDeskEditor = document.getElementById('studyDeskEditor');
         const studyDeskScope = document.getElementById('studyDeskScope');
         const studyDeskSaved = document.getElementById('studyDeskSaved');
+        const readingProgress = document.getElementById('readingProgress');
 
         let currentSheetId = null;
 
@@ -229,10 +253,28 @@
             return id && sheetsById.has(id) ? id : DEFAULT_SHEET;
         }
 
+        // Real, derived signal only: which nav items have a saved note
+        function refreshNoteIndicators() {
+            const notes = loadNotes();
+            document.querySelectorAll('.nav-item').forEach(a => {
+                const id = (a.getAttribute('href') || '').replace(/^#/, '');
+                const hasNote = !!(notes[id] && notes[id].trim());
+                a.classList.toggle('has-note', hasNote);
+            });
+        }
+
+        function updateReadingProgress() {
+            if (!readingProgress || !contentCanvas) return;
+            const scrollable = contentCanvas.scrollHeight - contentCanvas.clientHeight;
+            const pct = scrollable > 0 ? Math.min(100, Math.max(0, (contentCanvas.scrollTop / scrollable) * 100)) : 0;
+            readingProgress.style.width = `${pct}%`;
+        }
+
         function showSheet(id, opts) {
             opts = opts || {};
             const target = validSheetId(id);
-            if (target === currentSheetId && !opts.force) return;
+            const targetHeadingId = opts.headingId || null;
+            if (target === currentSheetId && !opts.force && !targetHeadingId) return;
             currentSheetId = target;
             const meta = sheetsById.get(target);
 
@@ -265,7 +307,15 @@
             }
             if (studyDeskSaved) studyDeskSaved.textContent = '';
 
-            if (contentCanvas && !opts.skipScroll) contentCanvas.scrollTop = 0;
+            if (contentCanvas && !opts.skipScroll) {
+                if (targetHeadingId) {
+                    const headingEl = document.getElementById(targetHeadingId);
+                    if (headingEl) headingEl.scrollIntoView({ block: 'start' });
+                } else {
+                    contentCanvas.scrollTop = 0;
+                }
+            }
+            updateReadingProgress();
 
             // Close mobile nav drawer after navigating
             document.body.classList.remove('nav-open');
@@ -302,6 +352,7 @@
                 clearTimeout(saveTimeout);
                 saveTimeout = setTimeout(() => {
                     saveNote(sheetId, studyDeskEditor.value);
+                    refreshNoteIndicators();
                     if (studyDeskSaved) {
                         studyDeskSaved.textContent = 'Saved';
                         setTimeout(() => { if (studyDeskSaved.textContent === 'Saved') studyDeskSaved.textContent = ''; }, 1500);
@@ -407,8 +458,14 @@
             if (e.key === 'Escape') setNavOpen(false);
         });
 
-        // --- Mobile: floating Study Desk open trigger lives on the toggle itself ---
-        // (Collapsed state doubles as "closed"; expanding opens the bottom sheet.)
+        // --- Reading position (reflects real scroll within the active sheet) ---
+        if (contentCanvas) {
+            let scrollTimeout;
+            contentCanvas.addEventListener('scroll', function() {
+                if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+                scrollTimeout = requestAnimationFrame(updateReadingProgress);
+            });
+        }
 
         // --- Progress Tracker checkboxes (Sheet 12) ---
         const checkboxes = document.querySelectorAll('.progress-checkbox');
@@ -452,8 +509,9 @@
         applyProgressState();
         displayQuizProgress();
         updateLiveQuizTally();
+        refreshNoteIndicators();
 
-        // --- Search dialog ---
+        // --- Search dialog (command palette: sheets + in-sheet headings) ---
         const searchDialog = document.getElementById('searchDialog');
         const searchTrigger = document.getElementById('searchTrigger');
         const searchInput = document.getElementById('searchInput');
@@ -461,36 +519,52 @@
         let selectedIndex = 0;
         let currentMatches = [];
 
-        function renderSearchResults(query) {
+        function buildSearchEntries(query) {
             const q = query.trim().toLowerCase();
-            currentMatches = q
-                ? sheetIndex.filter(s => (s.title + ' ' + s.group).toLowerCase().includes(q))
-                : sheetIndex.slice();
+            const entries = [];
+            sheetIndex.forEach(s => {
+                const sheetMatches = !q || (s.title + ' ' + s.group).toLowerCase().includes(q);
+                if (sheetMatches) {
+                    entries.push({ type: 'sheet', sheetId: s.id, code: s.code, title: s.title, group: s.group });
+                }
+                if (q) {
+                    s.headings.forEach(h => {
+                        if (h.text.toLowerCase().includes(q)) {
+                            entries.push({ type: 'heading', sheetId: s.id, code: s.code, sheetTitle: s.title, title: h.text, headingId: h.id });
+                        }
+                    });
+                }
+            });
+            return entries;
+        }
+
+        function renderSearchResults(query) {
+            currentMatches = buildSearchEntries(query);
             selectedIndex = 0;
 
             if (currentMatches.length === 0) {
-                searchResults.innerHTML = '<li class="search-dialog__empty">No matching sheets.</li>';
+                searchResults.innerHTML = '<li class="search-dialog__empty">No matches. Try a different term.</li>';
                 return;
             }
 
-            searchResults.innerHTML = currentMatches.map((s, i) => `
-                <li class="search-dialog__result${i === 0 ? ' is-selected' : ''}" data-id="${s.id}" data-index="${i}">
-                    <span class="search-dialog__result-title">${s.code ? s.code + ' · ' : ''}${s.title}</span>
-                    <span class="search-dialog__result-group">${s.group}</span>
-                </li>
-            `).join('');
+            searchResults.innerHTML = currentMatches.map((m, i) => {
+                const cls = `search-dialog__result${m.type === 'heading' ? ' search-dialog__result--heading' : ''}${i === 0 ? ' is-selected' : ''}`;
+                const code = m.code ? `<span class="search-dialog__result-code">${m.code}</span>` : '';
+                if (m.type === 'sheet') {
+                    return `<li class="${cls}" data-index="${i}">${code}<span class="search-dialog__result-title">${m.title}</span></li>`;
+                }
+                return `<li class="${cls}" data-index="${i}"><span class="search-dialog__result-title">${m.title}</span></li>`;
+            }).join('');
         }
 
         function highlightSelected() {
-            [...searchResults.children].forEach((li, i) => {
-                li.classList.toggle('is-selected', i === selectedIndex);
-            });
+            [...searchResults.children].forEach((li, i) => li.classList.toggle('is-selected', i === selectedIndex));
         }
 
         function openSearch() {
             if (!searchDialog) return;
-            renderSearchResults('');
             searchInput.value = '';
+            renderSearchResults('');
             searchDialog.showModal();
             searchInput.focus();
         }
@@ -502,7 +576,14 @@
         function goToMatch(index) {
             const match = currentMatches[index];
             if (!match) return;
-            location.hash = `#${match.id}`;
+            if (match.type === 'heading') {
+                showSheet(match.sheetId, { headingId: match.headingId, force: currentSheetId === match.sheetId });
+                if (location.hash !== `#${match.sheetId}`) {
+                    history.replaceState(null, '', `#${match.sheetId}`);
+                }
+            } else {
+                location.hash = `#${match.sheetId}`;
+            }
             closeSearch();
         }
 
