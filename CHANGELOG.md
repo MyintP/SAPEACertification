@@ -2,6 +2,43 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 domain knowledge checks wired into Practice
+
+### Added
+- **Domain Knowledge Checks** (new section on the Practice sheet, above the existing
+  scenario quizzes): all 60 questions from `quiz/domain-1-quiz.md` through
+  `quiz/domain-4-quiz.md` (15 per skill area) are now live, scoreable quiz cards, matching
+  the same interaction pattern as the existing scenario quizzes (immediate correct/wrong
+  marking, explanation, contributes to the shared quiz tally and progress tracker). These
+  files existed in the repo but were never rendered anywhere in the app — `README.md`
+  already described `/quiz` as "source material for the Practice sheet," which wasn't true
+  until now.
+- Each Architecture Domain sheet (03–06) now links directly to its matching quiz section
+  on the Practice sheet ("Test yourself: Domain N quiz →"), next to the existing "Full
+  domain deep-dive" link.
+- The original 6 scenario quizzes are relabelled "🏢 Applied Scenario Practice" (was
+  "📝 Scenario-Based Quizzes") to distinguish them from the new domain checks — they test
+  general architectural judgment across industries, not SAP-specific recall, and that
+  distinction wasn't visible before.
+
+### Verified
+- Cross-checked several of the more checkable claims already sitting in the domain quiz
+  content against public sources before wiring it in: the SAP EA Framework's 2007 Sapphire
+  launch, the five building blocks' current official naming (Methodology / Reference
+  Architecture Content / Tooling / Practice / Services), and SAP One Domain Model as the
+  canonical Solution Data Object model. No corrections needed. The Metro Map's three
+  selection variants (Business-Centric / IT-Centric / Holistic) aren't confirmed by public
+  SAP pages (the relevant SAP Learning course content requires a login), but they're
+  consistent with every other file already in this repo (`resources/glossary.md`,
+  `artifacts/artifact-cheatsheet.md`, `domains/01-framework-toolset.md`) — not something
+  introduced by this change.
+
+### Not in scope
+- `quiz/discovering-sap-ea-assessment.md` (30 questions, several multi-select) and
+  `quiz/wanderlust-prep.md` (a study guide, not a quiz) are still unwired. The multi-select
+  format needs different scoring logic than the existing single-answer `checkAnswer()`
+  pattern reused here — left for a follow-up rather than bolted on.
+
 ## [Unreleased] - September 2026 study companions and a real markdown viewer
 
 ### Added
