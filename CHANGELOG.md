@@ -2,6 +2,25 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 certification workspace shell
+
+### Added
+- Rebuilt the site as a single-page app shell: a persistent context bar (current sheet, breadcrumb, checklist progress, bookmark, search), a collapsible sidebar navigation grouped into Get Started / Exam / Method / Architecture Domains / Case Study / Practice / Reference / Progress, and a bottom Study Desk for per-sheet notes
+- Study Desk: resizable, collapsible, autosaves a separate note per sheet to `localStorage`
+- Global search (`Ctrl`/`Cmd`+`K`) over all sheet titles, with keyboard navigation
+- Per-sheet bookmark toggle in the context bar
+- Merged the former `quiz.html` page into the shell as the `Practice` sheet; `quiz.html` now redirects to `index.html#sheet-practice` so existing links keep working
+- Mobile: sidebar becomes an off-canvas drawer, Study Desk becomes a bottom sheet; only one region is shown at a time
+
+### Changed
+- One-page navigation: switching sheets updates the workspace in place via `location.hash`, without a full page reload
+- Visual theme: dark app shell (sidebar, context bar, Study Desk) with a light, constrained-width reading canvas for content; tables and multi-column layouts can break out to the full canvas width
+- Unified all accent colours (badges, links, active states, progress) to one accent colour used at two lightness levels for light vs. dark surfaces
+
+### Preserved
+- All existing certification content, domain notes, quiz questions, case studies and links carried over unchanged — this was a layout/interaction rebuild, not a content rewrite
+- Progress tracker and quiz scoring (`localStorage`-based) continue to work exactly as before, now also surfaced in the context bar
+
 ## [Unreleased] - September 2026 site & content cleanup
 
 ### Fixed

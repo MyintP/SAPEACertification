@@ -3,535 +3,920 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAP EA Certification Study Guide</title>
-    <meta name="description" content="A decision-focused study companion for the SAP Certified Professional - Enterprise Architect (P_SAPEA) certification. Learn the reasoning, not the answer key.">
-    <meta name="theme-color" content="#003366">
+    <title>SAP EA Certification Workspace</title>
+    <meta name="description" content="A certification workspace for the SAP Certified Professional - Enterprise Architect (P_SAPEA) exam: study content, decision method, practice scenarios and notes in one place.">
+    <meta name="theme-color" content="#12151c">
     <link rel="canonical" href="https://myintp.github.io/SAPEACertification/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://myintp.github.io/SAPEACertification/">
-    <meta property="og:title" content="SAP EA Certification Study Guide">
-    <meta property="og:description" content="A decision-focused study companion for the SAP Certified Professional - Enterprise Architect (P_SAPEA) certification. Learn the reasoning, not the answer key.">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="SAP EA Certification Study Guide">
-    <meta name="twitter:description" content="A decision-focused study companion for the SAP P_SAPEA certification.">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23003366'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EEA%3C/text%3E%3C/svg%3E">
+    <meta property="og:title" content="SAP EA Certification Workspace">
+    <meta property="og:description" content="A certification workspace for the SAP P_SAPEA exam: study content, decision method, practice scenarios and notes in one place.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%232454c9'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EEA%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="mainNav">
-        <div class="nav-container">
-            <div class="nav-header">
-                <span class="nav-title">📘 EA Study Guide</span>
-                <button id="navToggle" aria-expanded="false" aria-controls="navMenu">☰ Menu</button>
-            </div>
-            <ul id="navMenu">
-                <li><a href="#sheet-00" class="nav-link">Start</a></li>
-                <li><a href="#sheet-01" class="nav-link">Exam</a></li>
-                <li><a href="#sheet-02" class="nav-link">Method</a></li>
-                <li><a href="#sheet-03" class="nav-link">Framework</a></li>
-                <li><a href="#sheet-04" class="nav-link">Vision</a></li>
-                <li><a href="#sheet-05" class="nav-link">Business</a></li>
-                <li><a href="#sheet-06" class="nav-link">Data/Tech</a></li>
-                <li><a href="#sheet-07" class="nav-link">Case</a></li>
-                <li><a href="#sheet-08" class="nav-link">Defense</a></li>
-                <li><a href="#sheet-09" class="nav-link">Scoring</a></li>
-                <li><a href="#sheet-10" class="nav-link">Resources</a></li>
-                <li><a href="#sheet-11" class="nav-link">Checklist</a></li>
-                <li><a href="#sheet-12" class="nav-link">Tracker</a></li>
-                <li><a href="quiz.html" class="nav-link nav-cta">🎯 Practice</a></li>
-            </ul>
+<div id="appShell">
+
+    <!-- ================= CONTEXT BAR ================= -->
+    <header id="contextBar">
+        <button id="navDrawerToggle" class="icon-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebarNav">☰</button>
+        <div class="context-crumb">
+            <span class="context-crumb__title" id="ctxTitle">Beginner Start</span>
+            <span class="context-crumb__path" id="ctxPath">Get Started</span>
+        </div>
+        <div class="context-bar__spacer"></div>
+        <div class="context-bar__actions">
+            <span class="context-progress" title="Checklist progress (Sheet 12)">
+                <span class="context-progress__value" id="ctxProgressValue">0%</span>
+            </span>
+            <button id="bookmarkToggle" class="icon-btn" aria-pressed="false" aria-label="Bookmark this sheet" title="Bookmark this sheet">☆</button>
+            <button id="searchTrigger" class="search-trigger" aria-haspopup="dialog" aria-controls="searchDialog">
+                🔍 Search <kbd>Ctrl K</kbd>
+            </button>
+        </div>
+    </header>
+
+    <!-- ================= SIDEBAR NAVIGATION ================= -->
+    <nav id="sidebarNav" aria-label="Certification map">
+        <div class="sidebar-brand">📘 SAPEA Certification</div>
+        <div class="nav-groups">
+
+            <details class="nav-group" open data-group-id="get-started">
+                <summary>Get Started</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-00"><span class="nav-item__code">00</span> Start</a></li>
+                </ul>
+            </details>
+
+            <details class="nav-group" open data-group-id="exam">
+                <summary>Exam</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-01"><span class="nav-item__code">01</span> Exam Model &amp; Format</a></li>
+                    <li><a class="nav-item" href="#sheet-11"><span class="nav-item__code">11</span> Exam-Day Checklist</a></li>
+                </ul>
+            </details>
+
+            <details class="nav-group" open data-group-id="method">
+                <summary>Method</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-02"><span class="nav-item__code">02</span> Decision Method</a></li>
+                    <li><a class="nav-item" href="#sheet-08"><span class="nav-item__code">08</span> Defense Pattern</a></li>
+                    <li><a class="nav-item" href="#sheet-09"><span class="nav-item__code">09</span> Scoring Rubric</a></li>
+                </ul>
+            </details>
+
+            <details class="nav-group" open data-group-id="architecture">
+                <summary>Architecture Domains</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-03"><span class="nav-item__code">03</span> Framework &amp; Toolset</a></li>
+                    <li><a class="nav-item" href="#sheet-04"><span class="nav-item__code">04</span> Vision &amp; Roadmap</a></li>
+                    <li><a class="nav-item" href="#sheet-05"><span class="nav-item__code">05</span> Business Architecture</a></li>
+                    <li><a class="nav-item" href="#sheet-06"><span class="nav-item__code">06</span> Data / App / Tech</a></li>
+                </ul>
+            </details>
+
+            <details class="nav-group" open data-group-id="case-study">
+                <summary>Case Study</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-07"><span class="nav-item__code">07</span> Connected Case</a></li>
+                </ul>
+            </details>
+
+            <details class="nav-group" open data-group-id="practice">
+                <summary>Practice</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-practice"><span class="nav-item__code">Q</span> Scenario Quizzes &amp; Cases</a></li>
+                </ul>
+            </details>
+
+            <details class="nav-group" open data-group-id="reference">
+                <summary>Reference</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-10"><span class="nav-item__code">10</span> Official Resources</a></li>
+                </ul>
+            </details>
+
+            <details class="nav-group" open data-group-id="tracker">
+                <summary>Progress</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-12"><span class="nav-item__code">12</span> Tracker</a></li>
+                </ul>
+            </details>
+
+        </div>
+        <div class="sidebar-footer">
+            <a href="https://github.com/MyintP/SAPEACertification" target="_blank" rel="noopener">View source on GitHub</a>
+            &nbsp;·&nbsp;
+            <a href="https://learning.sap.com/get-certified" target="_blank" rel="noopener">SAP Learning</a>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main>
-        <!-- SHEET 00 -->
-        <section id="sheet-00">
-            <div class="sheet-card sheet-card--hero">
-                <span class="sheet-badge">SHEET 00 · BEGINNER START</span>
-                <h1>Prepare to think like an Enterprise Architect — even if you're starting from zero.</h1>
-                <p class="sheet-lede">This guide turns the P_SAPEA preparation journey into a sequence: <strong>understand the idea → recognise it in a messy business situation → make a decision → defend it</strong>.</p>
-                <p class="sheet-lede"><strong>Core rule:</strong> the unit of study is the decision, not the isolated fact.</p>
+    <div id="navBackdrop"></div>
 
-                <div class="card-grid">
-                    <div class="info-card">
-                        <h3>📖 Learn</h3>
-                        <p>Understand the vocabulary, architecture layers and SAP methods.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>🔧 Apply</h3>
-                        <p>Use the ideas on a connected enterprise scenario.</p>
-                    </div>
-                    <div class="info-card">
-                        <h3>🛡️ Defend</h3>
-                        <p>Explain why your recommendation is appropriate, including trade-offs and risks.</p>
-                    </div>
-                </div>
+    <!-- ================= WORKSPACE ================= -->
+    <div id="workspace">
+        <main id="contentCanvas">
 
-                <div class="callout callout--soft">
-                    <h4>How to use this site</h4>
-                    <ul style="font-size: 16px; line-height: 1.8;">
-                        <li>Read the beginner sections in order.</li>
-                        <li>Do the connected case without looking at the model answer.</li>
-                        <li>Score yourself using the rubric.</li>
-                        <li>Repeat until you can explain the reasoning clearly and efficiently.</li>
-                        <li>Use the <a href="quiz.html">Practice quizzes</a> to check domain knowledge as you go.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+            <!-- SHEET 00 -->
+            <article class="sheet" id="sheet-00" data-title="Start" data-group="Get Started" data-code="00">
+                <div class="sheet-inner">
+                    <div class="sheet-card sheet-card--hero breakout">
+                        <span class="sheet-badge">SHEET 00 · BEGINNER START</span>
+                        <h1>Prepare to think like an Enterprise Architect — even if you're starting from zero.</h1>
+                        <p class="sheet-lede">This guide turns the P_SAPEA preparation journey into a sequence: <strong>understand the idea → recognise it in a messy business situation → make a decision → defend it</strong>.</p>
+                        <p class="sheet-lede"><strong>Core rule:</strong> the unit of study is the decision, not the isolated fact.</p>
 
-        <!-- SHEET 01 -->
-        <section id="sheet-01">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 01 · CURRENT EXAM MODEL</span>
-                <h2>What changed?</h2>
-                <p>Since 2026, SAP has been moving its certification portfolio from multiple-choice recognition tests toward performance-based practical assessments. SAP describes two broad practical formats: <strong>System-Based Assessment</strong> (execute and validate tasks in a live system) and <strong>Scenario-Based Assessment</strong> (reason through a connected business situation). P_SAPEA uses the Scenario-Based Assessment format — typically completed either through an AI-guided roleplay interview or by recording a video for human review.</p>
-
-                <div class="callout callout--warning">
-                    <p class="callout-title">⚠️ Do not hard-code exam mechanics.</p>
-                    <p>Question counts, timing, and pass marks for the <em>legacy</em> multiple-choice version of this exam (40 questions, 3 hours, 80% pass mark, Wanderlust case study) do <strong>not</strong> reliably describe the current Scenario-Based Assessment. The exact structure, duration, attempt limits and scoring method are shown on the official P_SAPEA certification page and the <a href="https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs" target="_blank" rel="noopener">Scenario-Based Assessment FAQ</a>. Check both immediately before your exam.</p>
-                </div>
-
-                <table class="table-standard">
-                    <thead>
-                        <tr>
-                            <th>Old study habit</th>
-                            <th>Better habit now</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Memorise answer keys</td><td>Learn how to reason from objectives and constraints</td></tr>
-                        <tr><td>Study isolated definitions</td><td>Connect concepts across business, application, data and technology</td></tr>
-                        <tr><td>Optimise for one "correct" design</td><td>Explain a defensible design and its trade-offs</td></tr>
-                        <tr><td>Ignore the clock</td><td>Practise concise, structured responses out loud — the scenario format rewards articulate reasoning, not just a written answer</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- SHEET 02 -->
-        <section id="sheet-02">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 02 · DECISION METHOD</span>
-                <h2>KNOW → RECOGNIZE → DECIDE → DEFEND</h2>
-                <p style="font-size: 18px; font-weight: bold; color: var(--navy);">Use the same mental loop for every topic.</p>
-
-                <div class="card-grid card-grid--narrow">
-                    <div class="info-card info-card--flat">
-                        <h4>❓ What is it?</h4>
-                        <p style="font-size: 15px;">Learn the concept, artifact, method or architecture layer.</p>
-                    </div>
-                    <div class="info-card info-card--flat">
-                        <h4>🔍 When does it matter?</h4>
-                        <p style="font-size: 15px;">Spot the signal in a scenario: duplication, risk, strategic change, integration complexity, regulatory constraint, and so on.</p>
-                    </div>
-                    <div class="info-card info-card--flat">
-                        <h4>⚡ What would you do?</h4>
-                        <p style="font-size: 15px;">Select an approach that fits the business objective, constraints, maturity and target state.</p>
-                    </div>
-                    <div class="info-card info-card--flat">
-                        <h4>💡 Why this choice?</h4>
-                        <p style="font-size: 15px;">Explain rationale, alternatives, trade-offs, risks, sequencing and validation.</p>
-                    </div>
-                </div>
-
-                <div class="callout callout--accent">
-                    <p style="font-style: italic; font-size: 16px;">"Given [objective] and [constraints], I recommend [decision] because [reason]. The main trade-off is [trade-off]. I would manage the risk by [mitigation] and validate it through [evidence]."</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SHEET 03 -->
-        <section id="sheet-03">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 03 · SKILL AREA 1</span>
-                <h2>Enterprise Architecture Framework &amp; Toolset</h2>
-                <p>Think of the framework as a way to move from business intent to a coherent, governable architecture and roadmap.</p>
-
-                <div class="callout callout--accent text-center" style="font-weight: bold; font-size: 18px; color: var(--navy);">
-                    Vision → Requirements &amp; Decisions → Business → Application / Data / Technology → Opportunities &amp; Solutions → Roadmap
-                </div>
-
-                <ul style="font-size: 15px; line-height: 2;">
-                    <li><strong>Business strategy</strong> must translate into explicit architecture requirements.</li>
-                    <li><strong>Architecture artifacts</strong> are communication and decision tools, not decoration.</li>
-                    <li><strong>SAP reference architecture</strong> content helps connect business needs to SAP solution possibilities.</li>
-                    <li><strong>SAP LeanIX and SAP Signavio</strong> can support different parts of the architecture and process picture.</li>
-                    <li>Always ask: <em>who needs this artifact, what decision does it support, and what evidence feeds it?</em></li>
-                </ul>
-
-                <p style="margin-top: 10px;">Full domain deep-dive: <a href="domains/01-framework-toolset.md">domains/01-framework-toolset.md</a></p>
-            </div>
-        </section>
-
-        <!-- SHEET 04 -->
-        <section id="sheet-04">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 04 · SKILL AREA 2</span>
-                <h2>Architecture Vision &amp; Roadmap</h2>
-                <p>The architect's job is not simply to draw a target state. The job is to create a credible path from the current situation to a better business outcome.</p>
-
-                <div class="card-grid card-grid--2col">
-                    <div class="info-card info-card--flat">
-                        <h4>Vision</h4>
-                        <ul style="font-size: 14px; line-height: 2; padding-left: 20px;">
-                            <li>Business objectives</li>
-                            <li>Stakeholders</li>
-                            <li>Current-state pain</li>
-                            <li>Target capabilities</li>
-                            <li>Scope and constraints</li>
-                            <li>Success measures</li>
-                        </ul>
-                    </div>
-                    <div class="info-card info-card--flat">
-                        <h4>Roadmap</h4>
-                        <ul style="font-size: 14px; line-height: 2; padding-left: 20px;">
-                            <li>Prioritised initiatives</li>
-                            <li>Dependencies</li>
-                            <li>Sequencing</li>
-                            <li>Value and risk</li>
-                            <li>Transition states</li>
-                            <li>Governance and decision points</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="callout callout--warning">
-                    <p class="callout-title">Exam lens:</p>
-                    <p>When the scenario gives you many problems, do not solve them all at once. Establish the strategic objective, identify dependencies, then sequence the work.</p>
-                </div>
-
-                <p style="margin-top: 10px;">Full domain deep-dive: <a href="domains/02-vision-roadmap.md">domains/02-vision-roadmap.md</a></p>
-            </div>
-        </section>
-
-        <!-- SHEET 05 -->
-        <section id="sheet-05">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 05 · SKILL AREA 3</span>
-                <h2>Business Architecture</h2>
-                <p><strong>Start with what the business needs to be able to do before jumping to software.</strong></p>
-
-                <div class="info-card info-card--flat mb-20">
-                    <h4>Capability</h4>
-                    <p>What the business is able to do, independent of the detailed process used to do it.</p>
-                    <p class="trap-text">⚠️ Trap: confusing a capability with a process or application.</p>
-                </div>
-
-                <div class="info-card info-card--flat mb-20">
-                    <h4>Process</h4>
-                    <p>How work flows from one activity to another to create an outcome.</p>
-                    <p class="trap-text">⚠️ Trap: optimising a process without checking whether it supports the strategic objective.</p>
-                </div>
-
-                <h4 style="margin: 25px 0 10px 0;">When reading a case, ask:</h4>
-                <ul style="font-size: 15px; line-height: 2.5;">
-                    <li>What business outcome is changing?</li>
-                    <li>Which capabilities must improve or appear?</li>
-                    <li>Which processes are creating the problem?</li>
-                    <li>Which stakeholders own the outcome?</li>
-                    <li>What evidence would prove the architecture is working?</li>
-                </ul>
-
-                <p style="margin-top: 10px;">Full domain deep-dive: <a href="domains/03-business-architecture.md">domains/03-business-architecture.md</a></p>
-            </div>
-        </section>
-
-        <!-- SHEET 06 -->
-        <section id="sheet-06">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 06 · SKILL AREA 4</span>
-                <h2>Data, Application &amp; Technology Architecture</h2>
-
-                <div class="card-grid card-grid--wide">
-                    <div class="info-card info-card--flat">
-                        <h4>📊 What information?</h4>
-                        <p style="font-size: 15px;">Ownership, quality, lifecycle, privacy, residency, integration and access.</p>
-                    </div>
-                    <div class="info-card info-card--flat">
-                        <h4>⚙️ What capabilities are supported?</h4>
-                        <p style="font-size: 15px;">Application responsibilities, boundaries, interfaces, duplication and fit with business capabilities.</p>
-                    </div>
-                    <div class="info-card info-card--flat">
-                        <h4>🖥️ What enables it?</h4>
-                        <p style="font-size: 15px;">Platforms, infrastructure, security, connectivity, operations and non-functional requirements.</p>
-                    </div>
-                </div>
-
-                <div class="info-card info-card--flat-blue mb-20 mt-20">
-                    <h4>Clean Core</h4>
-                    <p>Use the core product as intended and avoid unnecessary modifications that make upgrades and lifecycle management harder. Where appropriate, extensions can be designed outside or alongside the core using SAP's supported extensibility approaches.</p>
-                </div>
-
-                <div class="info-card info-card--flat-blue mb-20">
-                    <h4>Public vs private cloud</h4>
-                    <p>Do not memorise "public is good" or "private is good." Evaluate standardisation, fit-to-standard expectations, required flexibility, operational model, integration, lifecycle and business constraints.</p>
-                </div>
-
-                <div class="info-card info-card--flat">
-                    <h4>Integration &amp; regulatory thinking</h4>
-                    <ul style="font-size: 15px; line-height: 2.5;">
-                        <li>Identify the business event or data exchange first.</li>
-                        <li>Then decide the integration responsibility and pattern.</li>
-                        <li>Check security, privacy, residency and regulatory constraints.</li>
-                        <li>Prefer the simplest sustainable architecture that meets the requirement.</li>
-                    </ul>
-                </div>
-
-                <p style="margin-top: 10px;">Full domain deep-dive: <a href="domains/04-data-app-tech.md">domains/04-data-app-tech.md</a></p>
-            </div>
-        </section>
-
-        <!-- SHEET 07 -->
-        <section id="sheet-07">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 07 · CONNECTED CASE</span>
-                <h2>The Wanderlust-style case</h2>
-                <p>Use this fictional case to practise the same reasoning pattern without relying on memorised questions. It is inspired by SAP's classic case-study format, not a reproduction of any current exam content.</p>
-
-                <div class="callout callout--accent">
-                    <h4>Scenario</h4>
-                    <p style="font-size: 15px; line-height: 1.6;">A global manufacturer wants to enter a fast-growing electric-vehicle market. Its business units operate independently, several ERP systems have evolved separately, customer data is duplicated, and leadership wants faster product launches without losing local regulatory control.</p>
-                    <p style="font-size: 15px; line-height: 1.6; margin-top: 10px;">The CIO asks for an architecture recommendation and a realistic transformation roadmap.</p>
-                </div>
-
-                <h4 style="margin: 25px 0 10px 0;">Six linked decisions</h4>
-                <ul style="font-size: 15px; line-height: 2.5;">
-                    <li><strong>Objective:</strong> What is the primary business outcome?</li>
-                    <li><strong>Constraints:</strong> Which business, technology, regulatory and organisational constraints matter most?</li>
-                    <li><strong>Business:</strong> Which capabilities and processes must change?</li>
-                    <li><strong>Architecture:</strong> What target-state principles and boundaries would you propose?</li>
-                    <li><strong>Roadmap:</strong> What should happen first, and why?</li>
-                    <li><strong>Governance:</strong> What decisions, stakeholders and measures keep the transformation on track?</li>
-                </ul>
-
-                <div class="callout callout--warning">
-                    <p class="callout-title">📌 Do the case before reading examples.</p>
-                    <p>Your first objective is not to find a perfect architecture. It is to demonstrate coherent reasoning.</p>
-                </div>
-
-                <p style="margin-top: 10px;">More practice cases with model answers: <a href="quiz.html#cases">Practice → Full Practice Cases</a></p>
-            </div>
-        </section>
-
-        <!-- SHEET 08 -->
-        <section id="sheet-08">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 08 · DEFENSE PATTERN</span>
-                <h2>The 9-step architecture defense</h2>
-
-                <div class="card-grid card-grid--wide" style="gap: 15px;">
-                    <div class="defense-step">
-                        <strong>1. Context</strong>
-                        <p>"The situation I understand is…"</p>
-                    </div>
-                    <div class="defense-step">
-                        <strong>2. Objective</strong>
-                        <p>"The outcome we need is…"</p>
-                    </div>
-                    <div class="defense-step">
-                        <strong>3. Constraints</strong>
-                        <p>"The constraints that shape the decision are…"</p>
-                    </div>
-                    <div class="defense-step">
-                        <strong>4. Recommendation</strong>
-                        <p>"I would recommend…"</p>
-                    </div>
-                    <div class="defense-step">
-                        <strong>5. Architecture rationale</strong>
-                        <p>"This fits because…"</p>
-                    </div>
-                    <div class="defense-step">
-                        <strong>6. Trade-off</strong>
-                        <p>"The main trade-off is…"</p>
-                    </div>
-                    <div class="defense-step">
-                        <strong>7. Risk</strong>
-                        <p>"The largest risk is…"</p>
-                    </div>
-                    <div class="defense-step">
-                        <strong>8. Roadmap</strong>
-                        <p>"I would sequence the work as…"</p>
-                    </div>
-                    <div class="defense-step">
-                        <strong>9. Validation</strong>
-                        <p>"I would validate the decision through…"</p>
-                    </div>
-                </div>
-
-                <div class="callout callout--soft mt-20">
-                    <p style="font-style: italic; font-size: 16px;">If you get stuck, return to: <strong>business objective → constraints → decision → rationale → trade-off → next step</strong>.</p>
-                </div>
-
-                <p class="mt-20">Since the current exam is a spoken/recorded roleplay, practise saying this pattern out loud against the clock — not just writing it down.</p>
-            </div>
-        </section>
-
-        <!-- SHEET 09 -->
-        <section id="sheet-09">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 09 · PRACTICE &amp; SCORING</span>
-                <h2>Score the quality of your reasoning</h2>
-                <p style="font-size: 16px;">Use this 16-point rubric after every connected-case response.</p>
-
-                <table class="table-standard" style="font-size: 14px;">
-                    <thead>
-                        <tr>
-                            <th>Dimension</th>
-                            <th class="center">0</th>
-                            <th class="center">1</th>
-                            <th class="center">2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Business alignment</td><td class="center">Missing</td><td class="center">Partial</td><td class="center">Explicit</td></tr>
-                        <tr><td>Constraints</td><td class="center">Missed</td><td class="center">Some identified</td><td class="center">Prioritised</td></tr>
-                        <tr><td>Architecture</td><td class="center">Unclear</td><td class="center">Reasonable</td><td class="center">Coherent</td></tr>
-                        <tr><td>Artifacts / method</td><td class="center">Absent</td><td class="center">Named</td><td class="center">Applied correctly</td></tr>
-                        <tr><td>Trade-offs</td><td class="center">None</td><td class="center">Mentioned</td><td class="center">Defended</td></tr>
-                        <tr><td>Roadmap</td><td class="center">Absent</td><td class="center">Generic</td><td class="center">Sequenced</td></tr>
-                        <tr><td>Risk</td><td class="center">Absent</td><td class="center">Identified</td><td class="center">Mitigated</td></tr>
-                        <tr><td>Communication</td><td class="center">Rambling</td><td class="center">Clear</td><td class="center">Executive-quality</td></tr>
-                    </tbody>
-                </table>
-
-                <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: 20px;">
-                    <div class="score-band score-band--red">
-                        <div class="score-band__value">0–7</div>
-                        <div>Learn the foundations</div>
-                    </div>
-                    <div class="score-band score-band--amber">
-                        <div class="score-band__value">8–11</div>
-                        <div>Apply with guidance</div>
-                    </div>
-                    <div class="score-band score-band--teal">
-                        <div class="score-band__value">12–14</div>
-                        <div>Strong reasoning</div>
-                    </div>
-                    <div class="score-band score-band--green">
-                        <div class="score-band__value">15–16</div>
-                        <div>Excellent defense</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SHEET 10 -->
-        <section id="sheet-10">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 10 · OFFICIAL RESOURCES</span>
-                <h2>Study from primary sources first</h2>
-
-                <div class="callout callout--warning">
-                    <p class="callout-title">📌 Rule:</p>
-                    <p style="font-size: 16px;">If a third-party guide conflicts with SAP's current certification page, <strong>trust SAP's current page</strong> and update this guide.</p>
-                </div>
-
-                <div class="info-card info-card--flat mt-20">
-                    <h4>📚 Primary SAP Sources</h4>
-                    <ul class="resource-list">
-                        <li>📄 <a href="https://learning.sap.com/get-certified" target="_blank" rel="noopener">SAP Learning Certification</a></li>
-                        <li>📄 <a href="https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs" target="_blank" rel="noopener">Scenario-Based Assessment FAQs</a></li>
-                        <li>📄 <a href="https://learning.sap.com/helpcenter/certification-support/exam-essentials" target="_blank" rel="noopener">Exam Essentials</a></li>
-                        <li>📄 <a href="https://learning.sap.com/learning-journeys/becoming-an-sap-enterprise-architect" target="_blank" rel="noopener">Becoming an SAP Enterprise Architect</a></li>
-                        <li>📄 <a href="https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals" target="_blank" rel="noopener">Intelligent Enterprise Architecture Fundamentals</a></li>
-                    </ul>
-                </div>
-
-                <div class="info-card info-card--flat mt-20">
-                    <h4>🗂️ Repository Study Materials</h4>
-                    <ul class="resource-list" style="line-height: 2.2;">
-                        <li>📁 <a href="domains/01-framework-toolset.md">Domain deep-dives</a> — full notes per skill area, plus <a href="domains/rba-deep-dive.md">RBA deep dive</a></li>
-                        <li>📁 <a href="artifacts/artifact-cheatsheet.md">Artifact cheatsheet</a> and <a href="artifacts/togaf-to-sap-mapping.md">TOGAF → SAP mapping</a></li>
-                        <li>📁 <a href="resources/glossary.md">Glossary</a>, <a href="resources/exam-traps.md">exam traps</a> and <a href="resources/official-diagrams-reference.md">official diagrams reference</a></li>
-                        <li>📁 <a href="docs/study-plan.md">6-week study plan</a> and <a href="docs/exam-overview.md">exam overview</a></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- SHEET 11 -->
-        <section id="sheet-11">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 11 · EXAM-DAY CHECKLIST</span>
-                <h2>24 hours before</h2>
-                <ul style="font-size: 16px; line-height: 2.5;">
-                    <li>✅ Verify the exam format and duration on the official P_SAPEA page</li>
-                    <li>✅ Check your SAP Universal ID and roleplay account access</li>
-                    <li>✅ Review the 9-step defense pattern</li>
-                    <li>✅ Practice one connected case response with the rubric — say it out loud, not just written</li>
-                    <li>✅ Ensure your system, camera, microphone and internet connection meet requirements</li>
-                </ul>
-
-                <h2 style="margin-top: 30px;">At the start</h2>
-                <ul style="font-size: 16px; line-height: 2.5;">
-                    <li>✅ Read the scenario completely before answering</li>
-                    <li>✅ Identify the primary business objective first</li>
-                    <li>✅ Note key constraints</li>
-                    <li>✅ Structure your response using the defense pattern</li>
-                    <li>✅ Manage your time - prioritize clarity over perfection</li>
-                    <li>✅ Review your answer if time allows</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SHEET 12 -->
-        <section id="sheet-12">
-            <div class="sheet-card">
-                <span class="sheet-badge">SHEET 12 · PROGRESS TRACKER</span>
-                <h2>Track understanding, not page views</h2>
-                <p style="font-size: 16px;">These checks are saved in your browser.</p>
-
-                <div class="tracker-box">
-                    <div class="tracker-grid">
-                        <label class="tracker-item">
-                            <input type="checkbox" class="progress-checkbox" data-tracker-key="foundation"> Foundation
-                        </label>
-                        <label class="tracker-item">
-                            <input type="checkbox" class="progress-checkbox" data-tracker-key="framework"> EA Framework
-                        </label>
-                        <label class="tracker-item">
-                            <input type="checkbox" class="progress-checkbox" data-tracker-key="vision"> Vision
-                        </label>
-                        <label class="tracker-item">
-                            <input type="checkbox" class="progress-checkbox" data-tracker-key="business"> Business Architecture
-                        </label>
-                        <label class="tracker-item">
-                            <input type="checkbox" class="progress-checkbox" data-tracker-key="dataTech"> Data / App / Tech
-                        </label>
-                        <label class="tracker-item">
-                            <input type="checkbox" class="progress-checkbox" data-tracker-key="defense"> Defense
-                        </label>
-                        <label class="tracker-item">
-                            <input type="checkbox" class="progress-checkbox" data-tracker-key="practice"> Practice
-                        </label>
-                        <label class="tracker-item">
-                            <input type="checkbox" class="progress-checkbox" data-tracker-key="readiness"> Exam readiness
-                        </label>
-                    </div>
-
-                    <div class="tracker-footer">
-                        <div class="tracker-summary">
-                            <div><strong>Checklist:</strong> <span id="progressDisplay">0/8 (0%)</span></div>
-                            <div id="quizProgressDisplay" style="margin-top: 4px; color: var(--navy);">📊 Quiz: Not started yet</div>
+                        <div class="card-grid">
+                            <div class="info-card">
+                                <h3>📖 Learn</h3>
+                                <p>Understand the vocabulary, architecture layers and SAP methods.</p>
+                            </div>
+                            <div class="info-card">
+                                <h3>🔧 Apply</h3>
+                                <p>Use the ideas on a connected enterprise scenario.</p>
+                            </div>
+                            <div class="info-card">
+                                <h3>🛡️ Defend</h3>
+                                <p>Explain why your recommendation is appropriate, including trade-offs and risks.</p>
+                            </div>
                         </div>
-                        <button id="resetProgress" class="btn btn-danger">🔄 Reset Progress</button>
+
+                        <div class="callout callout--soft">
+                            <h4>How to use this workspace</h4>
+                            <ul style="font-size: 16px; line-height: 1.8;">
+                                <li>Read the beginner sections in order using the left-hand map.</li>
+                                <li>Do the connected case without looking at the model answer.</li>
+                                <li>Score yourself using the rubric.</li>
+                                <li>Repeat until you can explain the reasoning clearly and efficiently.</li>
+                                <li>Use <a href="#sheet-practice">Practice</a> to check domain knowledge as you go, and the Study Desk below to keep notes per sheet.</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
+            </article>
+
+            <!-- SHEET 01 -->
+            <article class="sheet" id="sheet-01" data-title="Exam Model &amp; Format" data-group="Exam" data-code="01">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 01 · CURRENT EXAM MODEL</span>
+                        <h2>What changed?</h2>
+                        <p>Since 2026, SAP has been moving its certification portfolio from multiple-choice recognition tests toward performance-based practical assessments. SAP describes two broad practical formats: <strong>System-Based Assessment</strong> (execute and validate tasks in a live system) and <strong>Scenario-Based Assessment</strong> (reason through a connected business situation). P_SAPEA uses the Scenario-Based Assessment format — typically completed either through an AI-guided roleplay interview or by recording a video for human review.</p>
+
+                        <div class="callout callout--warning">
+                            <p class="callout-title">⚠️ Do not hard-code exam mechanics.</p>
+                            <p>Question counts, timing, and pass marks for the <em>legacy</em> multiple-choice version of this exam (40 questions, 3 hours, 80% pass mark, Wanderlust case study) do <strong>not</strong> reliably describe the current Scenario-Based Assessment. The exact structure, duration, attempt limits and scoring method are shown on the official P_SAPEA certification page and the <a href="https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs" target="_blank" rel="noopener">Scenario-Based Assessment FAQ</a>. Check both immediately before your exam.</p>
+                        </div>
+                    </div>
+                    <table class="table-standard breakout">
+                        <thead>
+                            <tr>
+                                <th>Old study habit</th>
+                                <th>Better habit now</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Memorise answer keys</td><td>Learn how to reason from objectives and constraints</td></tr>
+                            <tr><td>Study isolated definitions</td><td>Connect concepts across business, application, data and technology</td></tr>
+                            <tr><td>Optimise for one "correct" design</td><td>Explain a defensible design and its trade-offs</td></tr>
+                            <tr><td>Ignore the clock</td><td>Practise concise, structured responses out loud — the scenario format rewards articulate reasoning, not just a written answer</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <!-- SHEET 02 -->
+            <article class="sheet" id="sheet-02" data-title="Decision Method" data-group="Method" data-code="02">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 02 · DECISION METHOD</span>
+                        <h2>KNOW → RECOGNIZE → DECIDE → DEFEND</h2>
+                        <p style="font-size: 17px; font-weight: bold;">Use the same mental loop for every topic.</p>
+                    </div>
+
+                    <div class="card-grid card-grid--narrow breakout">
+                        <div class="info-card info-card--flat">
+                            <h4>❓ What is it?</h4>
+                            <p style="font-size: 15px;">Learn the concept, artifact, method or architecture layer.</p>
+                        </div>
+                        <div class="info-card info-card--flat">
+                            <h4>🔍 When does it matter?</h4>
+                            <p style="font-size: 15px;">Spot the signal in a scenario: duplication, risk, strategic change, integration complexity, regulatory constraint, and so on.</p>
+                        </div>
+                        <div class="info-card info-card--flat">
+                            <h4>⚡ What would you do?</h4>
+                            <p style="font-size: 15px;">Select an approach that fits the business objective, constraints, maturity and target state.</p>
+                        </div>
+                        <div class="info-card info-card--flat">
+                            <h4>💡 Why this choice?</h4>
+                            <p style="font-size: 15px;">Explain rationale, alternatives, trade-offs, risks, sequencing and validation.</p>
+                        </div>
+                    </div>
+
+                    <div class="callout callout--accent">
+                        <p style="font-style: italic; font-size: 16px;">"Given [objective] and [constraints], I recommend [decision] because [reason]. The main trade-off is [trade-off]. I would manage the risk by [mitigation] and validate it through [evidence]."</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 03 -->
+            <article class="sheet" id="sheet-03" data-title="Framework &amp; Toolset" data-group="Architecture Domains" data-code="03">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 03 · SKILL AREA 1</span>
+                        <h2>Enterprise Architecture Framework &amp; Toolset</h2>
+                        <p>Think of the framework as a way to move from business intent to a coherent, governable architecture and roadmap.</p>
+                    </div>
+
+                    <div class="callout callout--accent breakout text-center" style="font-weight: bold; font-size: 18px;">
+                        Vision → Requirements &amp; Decisions → Business → Application / Data / Technology → Opportunities &amp; Solutions → Roadmap
+                    </div>
+
+                    <div class="sheet-card">
+                        <ul style="font-size: 15px; line-height: 2;">
+                            <li><strong>Business strategy</strong> must translate into explicit architecture requirements.</li>
+                            <li><strong>Architecture artifacts</strong> are communication and decision tools, not decoration.</li>
+                            <li><strong>SAP reference architecture</strong> content helps connect business needs to SAP solution possibilities.</li>
+                            <li><strong>SAP LeanIX and SAP Signavio</strong> can support different parts of the architecture and process picture.</li>
+                            <li>Always ask: <em>who needs this artifact, what decision does it support, and what evidence feeds it?</em></li>
+                        </ul>
+                        <p class="sheet-footnote">Full domain deep-dive: <a href="domains/01-framework-toolset.md">domains/01-framework-toolset.md</a></p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 04 -->
+            <article class="sheet" id="sheet-04" data-title="Vision &amp; Roadmap" data-group="Architecture Domains" data-code="04">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 04 · SKILL AREA 2</span>
+                        <h2>Architecture Vision &amp; Roadmap</h2>
+                        <p>The architect's job is not simply to draw a target state. The job is to create a credible path from the current situation to a better business outcome.</p>
+                    </div>
+
+                    <div class="card-grid card-grid--2col breakout">
+                        <div class="info-card info-card--flat">
+                            <h4>Vision</h4>
+                            <ul style="font-size: 14px; line-height: 2; padding-left: 20px;">
+                                <li>Business objectives</li>
+                                <li>Stakeholders</li>
+                                <li>Current-state pain</li>
+                                <li>Target capabilities</li>
+                                <li>Scope and constraints</li>
+                                <li>Success measures</li>
+                            </ul>
+                        </div>
+                        <div class="info-card info-card--flat">
+                            <h4>Roadmap</h4>
+                            <ul style="font-size: 14px; line-height: 2; padding-left: 20px;">
+                                <li>Prioritised initiatives</li>
+                                <li>Dependencies</li>
+                                <li>Sequencing</li>
+                                <li>Value and risk</li>
+                                <li>Transition states</li>
+                                <li>Governance and decision points</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sheet-card">
+                        <div class="callout callout--warning">
+                            <p class="callout-title">Exam lens:</p>
+                            <p>When the scenario gives you many problems, do not solve them all at once. Establish the strategic objective, identify dependencies, then sequence the work.</p>
+                        </div>
+                        <p class="sheet-footnote">Full domain deep-dive: <a href="domains/02-vision-roadmap.md">domains/02-vision-roadmap.md</a></p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 05 -->
+            <article class="sheet" id="sheet-05" data-title="Business Architecture" data-group="Architecture Domains" data-code="05">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 05 · SKILL AREA 3</span>
+                        <h2>Business Architecture</h2>
+                        <p><strong>Start with what the business needs to be able to do before jumping to software.</strong></p>
+
+                        <div class="info-card info-card--flat mb-20">
+                            <h4>Capability</h4>
+                            <p>What the business is able to do, independent of the detailed process used to do it.</p>
+                            <p class="trap-text">⚠️ Trap: confusing a capability with a process or application.</p>
+                        </div>
+
+                        <div class="info-card info-card--flat mb-20">
+                            <h4>Process</h4>
+                            <p>How work flows from one activity to another to create an outcome.</p>
+                            <p class="trap-text">⚠️ Trap: optimising a process without checking whether it supports the strategic objective.</p>
+                        </div>
+
+                        <h4 style="margin: 20px 0 10px 0;">When reading a case, ask:</h4>
+                        <ul style="font-size: 15px; line-height: 2.5;">
+                            <li>What business outcome is changing?</li>
+                            <li>Which capabilities must improve or appear?</li>
+                            <li>Which processes are creating the problem?</li>
+                            <li>Which stakeholders own the outcome?</li>
+                            <li>What evidence would prove the architecture is working?</li>
+                        </ul>
+                        <p class="sheet-footnote">Full domain deep-dive: <a href="domains/03-business-architecture.md">domains/03-business-architecture.md</a></p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 06 -->
+            <article class="sheet" id="sheet-06" data-title="Data / App / Tech" data-group="Architecture Domains" data-code="06">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 06 · SKILL AREA 4</span>
+                        <h2>Data, Application &amp; Technology Architecture</h2>
+                    </div>
+
+                    <div class="card-grid card-grid--wide breakout">
+                        <div class="info-card info-card--flat">
+                            <h4>📊 What information?</h4>
+                            <p style="font-size: 15px;">Ownership, quality, lifecycle, privacy, residency, integration and access.</p>
+                        </div>
+                        <div class="info-card info-card--flat">
+                            <h4>⚙️ What capabilities are supported?</h4>
+                            <p style="font-size: 15px;">Application responsibilities, boundaries, interfaces, duplication and fit with business capabilities.</p>
+                        </div>
+                        <div class="info-card info-card--flat">
+                            <h4>🖥️ What enables it?</h4>
+                            <p style="font-size: 15px;">Platforms, infrastructure, security, connectivity, operations and non-functional requirements.</p>
+                        </div>
+                    </div>
+
+                    <div class="sheet-card">
+                        <div class="info-card info-card--flat-blue mb-20">
+                            <h4>Clean Core</h4>
+                            <p>Use the core product as intended and avoid unnecessary modifications that make upgrades and lifecycle management harder. Where appropriate, extensions can be designed outside or alongside the core using SAP's supported extensibility approaches.</p>
+                        </div>
+
+                        <div class="info-card info-card--flat-blue mb-20">
+                            <h4>Public vs private cloud</h4>
+                            <p>Do not memorise "public is good" or "private is good." Evaluate standardisation, fit-to-standard expectations, required flexibility, operational model, integration, lifecycle and business constraints.</p>
+                        </div>
+
+                        <div class="info-card info-card--flat">
+                            <h4>Integration &amp; regulatory thinking</h4>
+                            <ul style="font-size: 15px; line-height: 2.5;">
+                                <li>Identify the business event or data exchange first.</li>
+                                <li>Then decide the integration responsibility and pattern.</li>
+                                <li>Check security, privacy, residency and regulatory constraints.</li>
+                                <li>Prefer the simplest sustainable architecture that meets the requirement.</li>
+                            </ul>
+                        </div>
+                        <p class="sheet-footnote">Full domain deep-dive: <a href="domains/04-data-app-tech.md">domains/04-data-app-tech.md</a></p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 07 -->
+            <article class="sheet" id="sheet-07" data-title="Connected Case" data-group="Case Study" data-code="07">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 07 · CONNECTED CASE</span>
+                        <h2>The Wanderlust-style case</h2>
+                        <p>Use this fictional case to practise the same reasoning pattern without relying on memorised questions. It is inspired by SAP's classic case-study format, not a reproduction of any current exam content.</p>
+
+                        <div class="callout callout--accent">
+                            <h4>Scenario</h4>
+                            <p style="font-size: 15px; line-height: 1.6;">A global manufacturer wants to enter a fast-growing electric-vehicle market. Its business units operate independently, several ERP systems have evolved separately, customer data is duplicated, and leadership wants faster product launches without losing local regulatory control.</p>
+                            <p style="font-size: 15px; line-height: 1.6; margin-top: 10px;">The CIO asks for an architecture recommendation and a realistic transformation roadmap.</p>
+                        </div>
+
+                        <h4 style="margin: 20px 0 10px 0;">Six linked decisions</h4>
+                        <ul style="font-size: 15px; line-height: 2.5;">
+                            <li><strong>Objective:</strong> What is the primary business outcome?</li>
+                            <li><strong>Constraints:</strong> Which business, technology, regulatory and organisational constraints matter most?</li>
+                            <li><strong>Business:</strong> Which capabilities and processes must change?</li>
+                            <li><strong>Architecture:</strong> What target-state principles and boundaries would you propose?</li>
+                            <li><strong>Roadmap:</strong> What should happen first, and why?</li>
+                            <li><strong>Governance:</strong> What decisions, stakeholders and measures keep the transformation on track?</li>
+                        </ul>
+
+                        <div class="callout callout--warning">
+                            <p class="callout-title">📌 Do the case before reading examples.</p>
+                            <p>Your first objective is not to find a perfect architecture. It is to demonstrate coherent reasoning.</p>
+                        </div>
+
+                        <p class="sheet-footnote">More practice cases with model answers: <a href="#sheet-practice">Practice → Full Practice Cases</a></p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 08 -->
+            <article class="sheet" id="sheet-08" data-title="Defense Pattern" data-group="Method" data-code="08">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 08 · DEFENSE PATTERN</span>
+                        <h2>The 9-step architecture defense</h2>
+                    </div>
+
+                    <div class="card-grid card-grid--wide breakout" style="gap: 12px;">
+                        <div class="defense-step"><strong>1. Context</strong><p>"The situation I understand is…"</p></div>
+                        <div class="defense-step"><strong>2. Objective</strong><p>"The outcome we need is…"</p></div>
+                        <div class="defense-step"><strong>3. Constraints</strong><p>"The constraints that shape the decision are…"</p></div>
+                        <div class="defense-step"><strong>4. Recommendation</strong><p>"I would recommend…"</p></div>
+                        <div class="defense-step"><strong>5. Architecture rationale</strong><p>"This fits because…"</p></div>
+                        <div class="defense-step"><strong>6. Trade-off</strong><p>"The main trade-off is…"</p></div>
+                        <div class="defense-step"><strong>7. Risk</strong><p>"The largest risk is…"</p></div>
+                        <div class="defense-step"><strong>8. Roadmap</strong><p>"I would sequence the work as…"</p></div>
+                        <div class="defense-step"><strong>9. Validation</strong><p>"I would validate the decision through…"</p></div>
+                    </div>
+
+                    <div class="sheet-card">
+                        <div class="callout callout--soft">
+                            <p style="font-style: italic; font-size: 16px;">If you get stuck, return to: <strong>business objective → constraints → decision → rationale → trade-off → next step</strong>.</p>
+                        </div>
+                        <p>Since the current exam is a spoken/recorded roleplay, practise saying this pattern out loud against the clock — not just writing it down.</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 09 -->
+            <article class="sheet" id="sheet-09" data-title="Scoring Rubric" data-group="Method" data-code="09">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 09 · PRACTICE &amp; SCORING</span>
+                        <h2>Score the quality of your reasoning</h2>
+                        <p>Use this 16-point rubric after every connected-case response.</p>
+                    </div>
+
+                    <table class="table-standard breakout" style="font-size: 14px;">
+                        <thead>
+                            <tr>
+                                <th>Dimension</th>
+                                <th class="center">0</th>
+                                <th class="center">1</th>
+                                <th class="center">2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Business alignment</td><td class="center">Missing</td><td class="center">Partial</td><td class="center">Explicit</td></tr>
+                            <tr><td>Constraints</td><td class="center">Missed</td><td class="center">Some identified</td><td class="center">Prioritised</td></tr>
+                            <tr><td>Architecture</td><td class="center">Unclear</td><td class="center">Reasonable</td><td class="center">Coherent</td></tr>
+                            <tr><td>Artifacts / method</td><td class="center">Absent</td><td class="center">Named</td><td class="center">Applied correctly</td></tr>
+                            <tr><td>Trade-offs</td><td class="center">None</td><td class="center">Mentioned</td><td class="center">Defended</td></tr>
+                            <tr><td>Roadmap</td><td class="center">Absent</td><td class="center">Generic</td><td class="center">Sequenced</td></tr>
+                            <tr><td>Risk</td><td class="center">Absent</td><td class="center">Identified</td><td class="center">Mitigated</td></tr>
+                            <tr><td>Communication</td><td class="center">Rambling</td><td class="center">Clear</td><td class="center">Executive-quality</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="card-grid breakout" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                        <div class="score-band score-band--red"><div class="score-band__value">0–7</div><div>Learn the foundations</div></div>
+                        <div class="score-band score-band--amber"><div class="score-band__value">8–11</div><div>Apply with guidance</div></div>
+                        <div class="score-band score-band--teal"><div class="score-band__value">12–14</div><div>Strong reasoning</div></div>
+                        <div class="score-band score-band--green"><div class="score-band__value">15–16</div><div>Excellent defense</div></div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 10 -->
+            <article class="sheet" id="sheet-10" data-title="Official Resources" data-group="Reference" data-code="10">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 10 · OFFICIAL RESOURCES</span>
+                        <h2>Study from primary sources first</h2>
+
+                        <div class="callout callout--warning">
+                            <p class="callout-title">📌 Rule:</p>
+                            <p style="font-size: 16px;">If a third-party guide conflicts with SAP's current certification page, <strong>trust SAP's current page</strong> and update this guide.</p>
+                        </div>
+
+                        <div class="info-card info-card--flat mt-20">
+                            <h4>📚 Primary SAP Sources</h4>
+                            <ul class="resource-list">
+                                <li>📄 <a href="https://learning.sap.com/get-certified" target="_blank" rel="noopener">SAP Learning Certification</a></li>
+                                <li>📄 <a href="https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs" target="_blank" rel="noopener">Scenario-Based Assessment FAQs</a></li>
+                                <li>📄 <a href="https://learning.sap.com/helpcenter/certification-support/exam-essentials" target="_blank" rel="noopener">Exam Essentials</a></li>
+                                <li>📄 <a href="https://learning.sap.com/learning-journeys/becoming-an-sap-enterprise-architect" target="_blank" rel="noopener">Becoming an SAP Enterprise Architect</a></li>
+                                <li>📄 <a href="https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals" target="_blank" rel="noopener">Intelligent Enterprise Architecture Fundamentals</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="info-card info-card--flat mt-20">
+                            <h4>🗂️ Repository Study Materials</h4>
+                            <ul class="resource-list" style="line-height: 2.2;">
+                                <li>📁 <a href="domains/01-framework-toolset.md">Domain deep-dives</a> — full notes per skill area, plus <a href="domains/rba-deep-dive.md">RBA deep dive</a></li>
+                                <li>📁 <a href="artifacts/artifact-cheatsheet.md">Artifact cheatsheet</a> and <a href="artifacts/togaf-to-sap-mapping.md">TOGAF → SAP mapping</a></li>
+                                <li>📁 <a href="resources/glossary.md">Glossary</a>, <a href="resources/exam-traps.md">exam traps</a> and <a href="resources/official-diagrams-reference.md">official diagrams reference</a></li>
+                                <li>📁 <a href="docs/study-plan.md">6-week study plan</a> and <a href="docs/exam-overview.md">exam overview</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 11 -->
+            <article class="sheet" id="sheet-11" data-title="Exam-Day Checklist" data-group="Exam" data-code="11">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 11 · EXAM-DAY CHECKLIST</span>
+                        <h2>24 hours before</h2>
+                        <ul style="font-size: 16px; line-height: 2.5;">
+                            <li>✅ Verify the exam format and duration on the official P_SAPEA page</li>
+                            <li>✅ Check your SAP Universal ID and roleplay account access</li>
+                            <li>✅ Review the 9-step defense pattern</li>
+                            <li>✅ Practice one connected case response with the rubric — say it out loud, not just written</li>
+                            <li>✅ Ensure your system, camera, microphone and internet connection meet requirements</li>
+                        </ul>
+
+                        <h2 style="margin-top: 26px;">At the start</h2>
+                        <ul style="font-size: 16px; line-height: 2.5;">
+                            <li>✅ Read the scenario completely before answering</li>
+                            <li>✅ Identify the primary business objective first</li>
+                            <li>✅ Note key constraints</li>
+                            <li>✅ Structure your response using the defense pattern</li>
+                            <li>✅ Manage your time - prioritize clarity over perfection</li>
+                            <li>✅ Review your answer if time allows</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET 12 -->
+            <article class="sheet" id="sheet-12" data-title="Progress Tracker" data-group="Progress" data-code="12">
+                <div class="sheet-inner">
+                    <div class="sheet-card">
+                        <span class="sheet-badge">SHEET 12 · PROGRESS TRACKER</span>
+                        <h2>Track understanding, not page views</h2>
+                        <p>These checks are saved in your browser and drive the progress indicator in the context bar above.</p>
+                    </div>
+
+                    <div class="tracker-box breakout">
+                        <div class="tracker-grid">
+                            <label class="tracker-item"><input type="checkbox" class="progress-checkbox" data-tracker-key="foundation"> Foundation</label>
+                            <label class="tracker-item"><input type="checkbox" class="progress-checkbox" data-tracker-key="framework"> EA Framework</label>
+                            <label class="tracker-item"><input type="checkbox" class="progress-checkbox" data-tracker-key="vision"> Vision</label>
+                            <label class="tracker-item"><input type="checkbox" class="progress-checkbox" data-tracker-key="business"> Business Architecture</label>
+                            <label class="tracker-item"><input type="checkbox" class="progress-checkbox" data-tracker-key="dataTech"> Data / App / Tech</label>
+                            <label class="tracker-item"><input type="checkbox" class="progress-checkbox" data-tracker-key="defense"> Defense</label>
+                            <label class="tracker-item"><input type="checkbox" class="progress-checkbox" data-tracker-key="practice"> Practice</label>
+                            <label class="tracker-item"><input type="checkbox" class="progress-checkbox" data-tracker-key="readiness"> Exam readiness</label>
+                        </div>
+
+                        <div class="tracker-footer">
+                            <div class="tracker-summary">
+                                <div><strong>Checklist:</strong> <span id="progressDisplay">0/8 (0%)</span></div>
+                                <div class="js-quiz-progress-display" style="margin-top: 4px; color: var(--accent);">📊 Quiz: Not started yet</div>
+                            </div>
+                            <button id="resetProgress" class="btn btn-danger">🔄 Reset Progress</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- SHEET: PRACTICE (merged from former quiz.html) -->
+            <article class="sheet" id="sheet-practice" data-title="Scenario Quizzes &amp; Cases" data-group="Practice" data-code="Q">
+                <div class="sheet-inner">
+                    <div class="quiz-intro">
+                        <span class="sheet-badge">PRACTICE · LIVE DEFENSE</span>
+                        <h2>🎯 Practice Quizzes &amp; Cases</h2>
+                        <p>Test your Enterprise Architecture decision-making skills</p>
+                        <div class="js-quiz-progress-display" style="color: var(--accent); font-weight: 600;">📊 Quiz: Not started yet</div>
+                    </div>
+
+                    <!-- ================ QUIZ SECTION ================ -->
+                    <section id="quizzes">
+                        <h2 class="quiz-section-heading">📝 Scenario-Based Quizzes</h2>
+                        <p style="margin-bottom: 10px;">Each question presents a realistic scenario. Choose the <strong>best architectural decision</strong> based on the context.</p>
+                        <div id="quizLiveTally" class="quiz-score-banner">Answer questions below to track your score (0/6 answered)</div>
+
+                        <!-- Quiz 1 -->
+                        <div class="quiz-card" id="quiz1">
+                            <div class="quiz-progress">
+                                <span>Question 1 of 6</span>
+                                <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 16.6%;"></div></div>
+                            </div>
+                            <div class="case-study">
+                                <h4>🏢 Scenario: Global Retailer Integration</h4>
+                                <p>A global retailer with operations in 15 countries is struggling with customer data fragmentation. Each country has its own CRM system, and customer data is duplicated across systems. The company wants to launch a unified loyalty program, but data privacy regulations (GDPR, CCPA, etc.) vary by region.</p>
+                                <p><strong>Your task:</strong> Recommend the best architectural approach.</p>
+                            </div>
+                            <div class="quiz-question">What is the most appropriate architectural decision?</div>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="q1" value="A"> A) Build a single global CRM system and force all countries to use it</label>
+                                <label><input type="radio" name="q1" value="B"> B) Keep regional CRMs but implement a master data management (MDM) layer with data sovereignty controls</label>
+                                <label><input type="radio" name="q1" value="C"> C) Delay the loyalty program until all countries agree on a single system</label>
+                                <label><input type="radio" name="q1" value="D"> D) Outsource customer data management to a third-party vendor</label>
+                            </div>
+                            <button class="quiz-submit" onclick="checkAnswer('q1', 'B', 'feedback1')">Submit Answer</button>
+                            <div id="feedback1" class="feedback-text">
+                                <strong>✅ Correct answer: B</strong><br>
+                                <em>Why:</em> MDM with data sovereignty respects regional privacy laws while enabling a unified customer view. Option A ignores local regulations, C delays value, and D introduces unnecessary risk and complexity.
+                            </div>
+                        </div>
+
+                        <!-- Quiz 2 -->
+                        <div class="quiz-card" id="quiz2">
+                            <div class="quiz-progress">
+                                <span>Question 2 of 6</span>
+                                <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 33.3%;"></div></div>
+                            </div>
+                            <div class="case-study">
+                                <h4>🏭 Scenario: Manufacturing Plant Modernization</h4>
+                                <p>A manufacturing company has 12 plants globally. Each plant operates with custom-built MES (Manufacturing Execution Systems) that are 15+ years old. The systems are unreliable, hard to maintain, and don't integrate with newer ERP. The CIO wants to modernize but is concerned about operational disruption.</p>
+                                <p><strong>Your task:</strong> What's the best roadmap approach?</p>
+                            </div>
+                            <div class="quiz-question">How should the modernization be sequenced?</div>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="q2" value="A"> A) Replace all systems simultaneously in a single "big bang" project</label>
+                                <label><input type="radio" name="q2" value="B"> B) Pilot at one plant, learn, then roll out in phases based on readiness and risk</label>
+                                <label><input type="radio" name="q2" value="C"> C) Wait for a major industry disruption before making any changes</label>
+                                <label><input type="radio" name="q2" value="D"> D) Only upgrade the oldest plant and leave others as-is</label>
+                            </div>
+                            <button class="quiz-submit" onclick="checkAnswer('q2', 'B', 'feedback2')">Submit Answer</button>
+                            <div id="feedback2" class="feedback-text">
+                                <strong>✅ Correct answer: B</strong><br>
+                                <em>Why:</em> A phased, risk-based approach reduces operational disruption, allows learning, and builds confidence. Big bang (A) is too risky, C is passive, and D doesn't address the full problem.
+                            </div>
+                        </div>
+
+                        <!-- Quiz 3 -->
+                        <div class="quiz-card" id="quiz3">
+                            <div class="quiz-progress">
+                                <span>Question 3 of 6</span>
+                                <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 50%;"></div></div>
+                            </div>
+                            <div class="case-study">
+                                <h4>🏦 Scenario: Bank Legacy Modernization</h4>
+                                <p>A major bank has a core banking system built on COBOL that processes 80% of transactions. The system is stable but inflexible, making it hard to launch new digital products. The bank has a 2-year window to modernize before competitors gain significant advantage.</p>
+                                <p><strong>Your task:</strong> What architectural strategy should the bank pursue?</p>
+                            </div>
+                            <div class="quiz-question">What is the recommended modernization strategy?</div>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="q3" value="A"> A) Strangler pattern - gradually replace functionality while keeping core running</label>
+                                <label><input type="radio" name="q3" value="B"> B) Complete rewrite of the entire system</label>
+                                <label><input type="radio" name="q3" value="C"> C) Keep the COBOL system and add a modern API layer on top</label>
+                                <label><input type="radio" name="q3" value="D"> D) Outsource the entire IT operation to a cloud provider</label>
+                            </div>
+                            <button class="quiz-submit" onclick="checkAnswer('q3', 'A', 'feedback3')">Submit Answer</button>
+                            <div id="feedback3" class="feedback-text">
+                                <strong>✅ Correct answer: A</strong><br>
+                                <em>Why:</em> The strangler pattern reduces risk by incremental replacement. B is too risky, C doesn't solve inflexibility, and D loses strategic control.
+                            </div>
+                        </div>
+
+                        <!-- Quiz 4 -->
+                        <div class="quiz-card" id="quiz4">
+                            <div class="quiz-progress">
+                                <span>Question 4 of 6</span>
+                                <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 66.6%;"></div></div>
+                            </div>
+                            <div class="case-study">
+                                <h4>🌍 Scenario: Global Supply Chain Disruption</h4>
+                                <p>An automotive manufacturer has a complex global supply chain with 2,000+ suppliers. Recent disruptions have shown the company lacks visibility into its Tier 2 and Tier 3 suppliers. The board wants to improve supply chain resilience.</p>
+                                <p><strong>Your task:</strong> What architecture should be prioritized?</p>
+                            </div>
+                            <div class="quiz-question">What is the most important architectural capability to build first?</div>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="q4" value="A"> A) Replace the entire ERP system</label>
+                                <label><input type="radio" name="q4" value="B"> B) Build a supply chain control tower with supplier data federation</label>
+                                <label><input type="radio" name="q4" value="C"> C) Implement blockchain for all supplier transactions</label>
+                                <label><input type="radio" name="q4" value="D"> D) Increase inventory levels across all plants</label>
+                            </div>
+                            <button class="quiz-submit" onclick="checkAnswer('q4', 'B', 'feedback4')">Submit Answer</button>
+                            <div id="feedback4" class="feedback-text">
+                                <strong>✅ Correct answer: B</strong><br>
+                                <em>Why:</em> A control tower provides visibility and analytics, addressing the core problem. A is too broad, C is overkill, and D is an operational fix not architectural.
+                            </div>
+                        </div>
+
+                        <!-- Quiz 5 -->
+                        <div class="quiz-card" id="quiz5">
+                            <div class="quiz-progress">
+                                <span>Question 5 of 6</span>
+                                <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 83.3%;"></div></div>
+                            </div>
+                            <div class="case-study">
+                                <h4>🏥 Scenario: Healthcare Data Integration</h4>
+                                <p>A healthcare provider has acquired three regional hospitals. Each hospital uses different EMR (Electronic Medical Record) systems. The CEO wants a unified patient view for improved care coordination, but each hospital has strong opinions about their current system.</p>
+                                <p><strong>Your task:</strong> What should the architectural approach be?</p>
+                            </div>
+                            <div class="quiz-question">What is the recommended integration strategy?</div>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="q5" value="A"> A) Force everyone to adopt the most capable EMR system</label>
+                                <label><input type="radio" name="q5" value="B"> B) Build a FHIR-based integration hub to harmonize data across systems</label>
+                                <label><input type="radio" name="q5" value="C"> C) Maintain separate systems and use manual data reconciliation</label>
+                                <label><input type="radio" name="q5" value="D"> D) Delay integration until the hospitals agree on a single system</label>
+                            </div>
+                            <button class="quiz-submit" onclick="checkAnswer('q5', 'B', 'feedback5')">Submit Answer</button>
+                            <div id="feedback5" class="feedback-text">
+                                <strong>✅ Correct answer: B</strong><br>
+                                <em>Why:</em> FHIR integration provides a standards-based, flexible approach. A creates resistance, C is inefficient, and D delays value.
+                            </div>
+                        </div>
+
+                        <!-- Quiz 6 -->
+                        <div class="quiz-card" id="quiz6">
+                            <div class="quiz-progress">
+                                <span>Question 6 of 6</span>
+                                <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 100%;"></div></div>
+                            </div>
+                            <div class="case-study">
+                                <h4>📱 Scenario: Digital Native vs Legacy Integration</h4>
+                                <p>A 100-year-old insurance company has acquired a digital-native insurtech startup. The startup uses modern cloud-native architecture, while the parent company has mainframe-based systems. The goal is to offer combined products in 6 months.</p>
+                                <p><strong>Your task:</strong> What's the best integration approach?</p>
+                            </div>
+                            <div class="quiz-question">How should these two worlds be integrated?</div>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="q6" value="A"> A) Force the startup to migrate to the mainframe</label>
+                                <label><input type="radio" name="q6" value="B"> B) Build API gateways to bridge systems with clear bounded contexts</label>
+                                <label><input type="radio" name="q6" value="C"> C) Keep systems separate and share data through CSV file transfers</label>
+                                <label><input type="radio" name="q6" value="D"> D) Rewrite the mainframe systems to match the startup's stack</label>
+                            </div>
+                            <button class="quiz-submit" onclick="checkAnswer('q6', 'B', 'feedback6')">Submit Answer</button>
+                            <div id="feedback6" class="feedback-text">
+                                <strong>✅ Correct answer: B</strong><br>
+                                <em>Why:</em> API gateways enable loose coupling and rapid delivery. A kills innovation, C is fragile, and D is unrealistic within 6 months.
+                            </div>
+                        </div>
+
+                        <div class="text-center" style="margin: 26px 0;">
+                            <button onclick="resetAllQuizzes()" class="btn btn-secondary">🔄 Reset All Quizzes</button>
+                        </div>
+                    </section>
+
+                    <!-- ================ CASE STUDIES SECTION ================ -->
+                    <section id="cases" style="margin-top: 50px;">
+                        <h2 class="quiz-section-heading">📋 Full Practice Cases</h2>
+                        <p style="margin-bottom: 18px;">Complete these cases using the <strong>9-step defense pattern</strong> from <a href="#sheet-08">Sheet 08</a>. Score yourself using the rubric in <a href="#sheet-09">Sheet 09</a>.</p>
+
+                        <!-- Case 1 -->
+                        <div class="quiz-card">
+                            <h3>Case 1: Electric Vehicle Manufacturer Transformation</h3>
+                            <span class="tag tag-architect">Architect Level</span>
+                            <span class="tag tag-hard">Complex</span>
+                            <div class="case-study">
+                                <h4>📌 Scenario</h4>
+                                <p>A traditional auto manufacturer is pivoting to electric vehicles. They have:</p>
+                                <ul>
+                                    <li>Legacy ERP for internal combustion engine production</li>
+                                    <li>New battery tech R&amp;D that needs agile development</li>
+                                    <li>Direct-to-consumer sales model (no dealers)</li>
+                                    <li>Software-defined vehicle features (OTA updates)</li>
+                                    <li>Global regulatory compliance requirements</li>
+                                    <li>Existing dealer network pushing back</li>
+                                </ul>
+                            </div>
+                            <h4>Your Task</h4>
+                            <p>Using the 9-step defense pattern, provide a complete architecture recommendation:</p>
+                            <ol style="line-height: 2; padding-left: 20px;">
+                                <li><strong>Context</strong> — Describe the situation</li>
+                                <li><strong>Objective</strong> — Define the business outcome</li>
+                                <li><strong>Constraints</strong> — List key constraints</li>
+                                <li><strong>Recommendation</strong> — Your architectural approach</li>
+                                <li><strong>Architecture rationale</strong> — Why it fits</li>
+                                <li><strong>Trade-off</strong> — What you're sacrificing</li>
+                                <li><strong>Risk</strong> — Biggest risk and mitigation</li>
+                                <li><strong>Roadmap</strong> — Sequence of work</li>
+                                <li><strong>Validation</strong> — How to measure success</li>
+                            </ol>
+                            <details class="model-answer">
+                                <summary>📖 View Model Answer</summary>
+                                <div class="model-answer-body">
+                                    <p><strong>1. Context:</strong> Traditional manufacturer transitioning to EV with legacy systems and new business models.</p>
+                                    <p><strong>2. Objective:</strong> Launch EV product in 24 months with direct-to-consumer sales and OTA capabilities.</p>
+                                    <p><strong>3. Constraints:</strong> Existing dealer agreements, regulatory approvals, R&amp;D timeline, budget constraints.</p>
+                                    <p><strong>4. Recommendation:</strong> Two-speed IT - maintain legacy for core manufacturing, build new cloud-native platform for EV and D2C.</p>
+                                    <p><strong>5. Rationale:</strong> Allows innovation without destabilizing existing business.</p>
+                                    <p><strong>6. Trade-off:</strong> Higher short-term investment for long-term flexibility.</p>
+                                    <p><strong>7. Risk:</strong> Cultural resistance from legacy IT teams.</p>
+                                    <p><strong>8. Roadmap:</strong> Phase 1: Stand up cloud platform; Phase 2: EV customer portal; Phase 3: Integration with manufacturing; Phase 4: Full transition.</p>
+                                    <p><strong>9. Validation:</strong> Time-to-market for new features, customer satisfaction scores, cost per vehicle.</p>
+                                </div>
+                            </details>
+                        </div>
+
+                        <!-- Case 2 -->
+                        <div class="quiz-card">
+                            <h3>Case 2: Financial Services API Strategy</h3>
+                            <span class="tag tag-architect">Architect Level</span>
+                            <span class="tag tag-medium">Medium</span>
+                            <div class="case-study">
+                                <h4>📌 Scenario</h4>
+                                <p>A regional bank wants to become an "open bank" with APIs for third-party developers. They have:</p>
+                                <ul>
+                                    <li>Core banking system from the 1990s</li>
+                                    <li>Strong regulatory compliance culture</li>
+                                    <li>Limited internal API expertise</li>
+                                    <li>Competitors moving faster</li>
+                                    <li>High security requirements</li>
+                                </ul>
+                            </div>
+                            <h4>Your Task</h4>
+                            <p>Use the 9-step defense pattern for an API strategy recommendation:</p>
+                            <ol style="line-height: 2; padding-left: 20px;">
+                                <li>Context → Objective → Constraints → Recommendation → Rationale → Trade-off → Risk → Roadmap → Validation</li>
+                            </ol>
+                            <details class="model-answer">
+                                <summary>📖 View Model Answer</summary>
+                                <div class="model-answer-body">
+                                    <p><strong>1. Context:</strong> Regional bank with legacy core, need to enable open banking.</p>
+                                    <p><strong>2. Objective:</strong> Launch secure developer APIs within 18 months.</p>
+                                    <p><strong>3. Constraints:</strong> Regulatory compliance, security, limited internal skills.</p>
+                                    <p><strong>4. Recommendation:</strong> Build API gateway with security-first design, start with read-only APIs.</p>
+                                    <p><strong>5. Rationale:</strong> Reduces risk while building internal capability.</p>
+                                    <p><strong>6. Trade-off:</strong> Slower initial feature set for better security.</p>
+                                    <p><strong>7. Risk:</strong> Security breach or regulatory compliance failure.</p>
+                                    <p><strong>8. Roadmap:</strong> Phase 1: Internal APIs; Phase 2: Partner APIs; Phase 3: Public APIs.</p>
+                                    <p><strong>9. Validation:</strong> Number of developers using APIs, API uptime, security audit results.</p>
+                                </div>
+                            </details>
+                        </div>
+
+                        <!-- Case 3 -->
+                        <div class="quiz-card">
+                            <h3>Case 3: Healthcare Provider Consolidation</h3>
+                            <span class="tag tag-architect">Architect Level</span>
+                            <span class="tag tag-hard">Complex</span>
+                            <div class="case-study">
+                                <h4>📌 Scenario</h4>
+                                <p>A healthcare network has acquired 5 hospitals with different IT systems. They need to:</p>
+                                <ul>
+                                    <li>Share patient records securely</li>
+                                    <li>Unify billing and claims processing</li>
+                                    <li>Comply with HIPAA and patient privacy</li>
+                                    <li>Reduce IT operational costs</li>
+                                    <li>Maintain hospital autonomy where needed</li>
+                                </ul>
+                            </div>
+                            <h4>Your Task</h4>
+                            <p>Use the 9-step defense pattern for a consolidation architecture:</p>
+                            <ol style="line-height: 2; padding-left: 20px;">
+                                <li>Context → Objective → Constraints → Recommendation → Rationale → Trade-off → Risk → Roadmap → Validation</li>
+                            </ol>
+                            <details class="model-answer">
+                                <summary>📖 View Model Answer</summary>
+                                <div class="model-answer-body">
+                                    <p><strong>1. Context:</strong> 5 hospitals, diverse IT systems, need consolidation.</p>
+                                    <p><strong>2. Objective:</strong> Unified patient records and billing within 3 years.</p>
+                                    <p><strong>3. Constraints:</strong> HIPAA compliance, physician buy-in, budget.</p>
+                                    <p><strong>4. Recommendation:</strong> FHIR-based integration hub with central data warehouse.</p>
+                                    <p><strong>5. Rationale:</strong> Preserves hospital autonomy while enabling unification.</p>
+                                    <p><strong>6. Trade-off:</strong> Integration complexity vs. system replacement cost.</p>
+                                    <p><strong>7. Risk:</strong> Data quality and standardization issues.</p>
+                                    <p><strong>8. Roadmap:</strong> Phase 1: Patient index; Phase 2: Clinical data; Phase 3: Billing; Phase 4: Full analytics.</p>
+                                    <p><strong>9. Validation:</strong> Patient data accuracy, billing error reduction, cost savings.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </section>
+
+                    <!-- ================ SCORING SECTION ================ -->
+                    <section class="scoring-section">
+                        <h2>📊 How to Score Your Case Responses</h2>
+                        <p>Use the <strong>16-point rubric</strong> from <a href="#sheet-09">Sheet 09</a>:</p>
+                        <table class="table-standard">
+                            <thead>
+                                <tr><th>Dimension</th><th>0</th><th>1</th><th>2</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Business alignment</td><td>Missing</td><td>Partial</td><td>Explicit</td></tr>
+                                <tr><td>Constraints</td><td>Missed</td><td>Some identified</td><td>Prioritised</td></tr>
+                                <tr><td>Architecture</td><td>Unclear</td><td>Reasonable</td><td>Coherent</td></tr>
+                                <tr><td>Artifacts / method</td><td>Absent</td><td>Named</td><td>Applied correctly</td></tr>
+                                <tr><td>Trade-offs</td><td>None</td><td>Mentioned</td><td>Defended</td></tr>
+                                <tr><td>Roadmap</td><td>Absent</td><td>Generic</td><td>Sequenced</td></tr>
+                                <tr><td>Risk</td><td>Absent</td><td>Identified</td><td>Mitigated</td></tr>
+                                <tr><td>Communication</td><td>Rambling</td><td>Clear</td><td>Executive-quality</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="score-band-grid">
+                            <div class="score-band score-band--red"><strong>0–7</strong><br>Learn foundations</div>
+                            <div class="score-band score-band--amber"><strong>8–11</strong><br>Apply with guidance</div>
+                            <div class="score-band score-band--teal"><strong>12–14</strong><br>Strong reasoning</div>
+                            <div class="score-band score-band--green"><strong>15–16</strong><br>Excellent defense</div>
+                        </div>
+                    </section>
+                </div>
+            </article>
+
+        </main>
+
+        <!-- ================= STUDY DESK ================= -->
+        <section id="studyDesk" aria-label="Study desk">
+            <div class="study-desk__resize-handle" id="studyDeskResizeHandle"></div>
+            <div class="study-desk__header">
+                <span class="study-desk__title">Study Desk</span>
+                <span class="study-desk__scope" id="studyDeskScope">Notes for Sheet 00 · Start</span>
+                <span class="study-desk__spacer"></span>
+                <span class="study-desk__saved" id="studyDeskSaved"></span>
+                <button id="studyDeskToggle" class="icon-btn" aria-expanded="true" aria-controls="studyDeskBody">Collapse ↓</button>
+            </div>
+            <div class="study-desk__body" id="studyDeskBody">
+                <textarea class="study-desk__editor" id="studyDeskEditor" placeholder="Notes for this sheet — thoughts, questions, things to revisit..."></textarea>
             </div>
         </section>
-    </main>
+    </div>
+</div>
 
-    <footer class="site-footer">
-        <p>Built as a self-study companion for the SAP P_SAPEA certification. Not affiliated with or endorsed by SAP SE.</p>
-        <p><a href="https://github.com/MyintP/SAPEACertification" target="_blank" rel="noopener">View source on GitHub</a> · <a href="quiz.html">Practice Quizzes</a> · <a href="https://learning.sap.com/get-certified" target="_blank" rel="noopener">SAP Learning</a></p>
-    </footer>
+<dialog id="searchDialog" aria-label="Search the certification workspace">
+    <input type="text" class="search-dialog__input" id="searchInput" placeholder="Search SAPEA certification...">
+    <ul class="search-dialog__results" id="searchResults"></ul>
+</dialog>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" aria-label="Back to top">↑</button>
-
-    <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

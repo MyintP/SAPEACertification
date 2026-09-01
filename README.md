@@ -1,29 +1,30 @@
-# SAP Enterprise Architect Study Guide
+# SAP Enterprise Architect Certification Workspace
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://myintp.github.io/SAPEACertification/)
 [![License](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
 
 > **Learn the decisions, not the answer keys.**
 
-This repository hosts a complete study companion for the **SAP P_SAPEA Enterprise Architect certification**. The guide focuses on developing architectural decision-making skills through a structured approach: **KNOW → RECOGNIZE → DECIDE → DEFEND**.
+This repository hosts a certification workspace for the **SAP P_SAPEA Enterprise Architect certification**: a single-page app shell with a persistent certification map (left), a reading canvas (centre), and a per-sheet Study Desk for notes (bottom). The content develops architectural decision-making skills through a structured approach: **KNOW → RECOGNIZE → DECIDE → DEFEND**.
 
 ## 🚀 Getting Started
 
 1. **Visit the live site**: [https://myintp.github.io/SAPEACertification/](https://myintp.github.io/SAPEACertification/)
-2. **Read the beginner sections** (Sheets 00-06) in order
-3. **Practice with the Connected Case** (Sheet 07) without looking at model answers
-4. **Score yourself** using the rubric (Sheet 09)
-5. **Repeat** until you can clearly explain your reasoning
+2. **Use the left-hand map** to move through Get Started → Exam → Method → Architecture Domains → Case Study → Practice → Reference → Progress
+3. **Practice with the Connected Case** (`07 Connected Case`) without looking at model answers, then use `Practice` for scenario quizzes and full cases
+4. **Score yourself** using the rubric (`09 Scoring Rubric`)
+5. **Jot notes as you go** in the Study Desk at the bottom — it remembers a separate note per sheet
+6. Press <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+<kbd>K</kbd> anywhere to jump straight to a sheet by name
 
 ## 📁 Repository Structure
 
 | File/Folder | Description |
 |-------------|-------------|
-| `index.html` | Complete static site with all study content |
-| `quiz.html` | Scenario-based practice quizzes and full case studies |
-| `styles.css` | Shared design system for both pages |
-| `app.js` | Shared behaviour: navigation, progress tracker, quiz scoring |
-| `/quiz` | Self-assessment questions for each skill area |
+| `index.html` | The app shell: context bar, sidebar navigation, content workspace and Study Desk, containing every sheet (including Practice) |
+| `quiz.html` | Redirect stub to `index.html#sheet-practice`, kept so old links/bookmarks still resolve |
+| `styles.css` | Design system: dark app shell, light reading canvas, one accent colour |
+| `app.js` | Shell behaviour: sheet routing, sidebar/context bar sync, Study Desk notes, progress tracker, quiz scoring, search |
+| `/quiz` | Self-assessment questions for each skill area (source material for the Practice sheet) |
 | `/resources` | Supplementary study materials and references |
 | `/domains` | Domain-specific architecture guides |
 | `/artifacts` | Sample architecture artifacts and templates |
