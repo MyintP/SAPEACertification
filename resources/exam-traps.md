@@ -29,6 +29,16 @@
 - All 8 are individually testable
 - Don't confuse them with the 5 building blocks or the ADM phases
 
+### ⚠️ Trap 5a: Origin is IndRA, not TOGAF
+- SAP built and validated the methodology internally on its own IT landscape as **IndRA** (Industry Reference Architecture)
+- It was *then* aligned with TOGAF as the industry-standard ADM
+- "What is the SAP EA Methodology built on?" → TOGAF. "Where did it originate?" → IndRA. Different questions.
+
+### ⚠️ Trap 5b: Metro Map's 7 domains vs the Methodology's 3 core domains
+- **Metro Map** (full engagement flow) = 7 domains: Architecture Vision, Strategy & Motivation, Business Architecture, Solution Architecture, Technology Architecture, Roadmap & Transition, Requirements & Governance
+- **SAP EA Methodology** (the core model) = 3 domains + 1 connection: Business Strategy & Model, Business Architecture, Solution Architecture — connecting to the IT Landscape Domain
+- Both counts are correct. They answer different questions — don't collapse them into one number.
+
 ---
 
 ## Domain 2 Traps
@@ -156,6 +166,11 @@ The exam specifically tests this. The nine building blocks in order:
 - IoT Integration
 - All four are individually testable
 
+### ⚠️ Trap 26a: TIME vs 6R
+- **TIME** assesses an existing application's fit (Tolerate/Invest/Migrate/Eliminate) — Technical Fit × Functional Fit
+- **6R** decides *how* to move an application to the cloud (Rehost/Retire/Replatform/Repurchase/Refactor/Retain)
+- They're sequential lenses, not alternatives — a TIME-assessed "Invest" application can still go through any of the 6R paths
+
 ---
 
 ## Case Study (Wanderlust) Traps
@@ -189,3 +204,16 @@ The exam specifically tests this. The nine building blocks in order:
 - Requirements Management runs through ALL ADM phases
 - It is NOT confined to the Preliminary Phase or Phase A
 - Same for Governance (Risk, Decisions, Principles)
+
+### ⚠️ Trap 32: Technique vs Artifact
+- A **technique** is a verb — what you *do* (capability mapping, gap analysis, heat mapping)
+- An **artifact** is a noun — what you *produce* (Business Capability Map, Gap Diagram, heat-mapped BCM)
+- "Data Flow" is a concept, "tracing data flows" is the technique, the **Solution Data Flow Diagram** is the artifact — three different things offered as if interchangeable is a classic trap
+- See `artifacts/artifact-cheatsheet.md` for the full technique → artifact mapping
+
+---
+
+## Sources
+
+- SAP Enterprise Architecture Methodology Guide (Official, 2023) — `SAP_Enterprise_Architecture_Methodology_Guide_Official.pdf` in this repository
+- SAP EA Certification Study Bible — `SAP_EA_StudyBible_Final.docx` in this repository

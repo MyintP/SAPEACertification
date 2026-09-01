@@ -5,6 +5,15 @@
 
 ---
 
+## Primary Source Documents (in this repository)
+
+| Resource | Path |
+|----------|------|
+| SAP Enterprise Architecture Methodology Guide (Official, 2023) | `SAP_Enterprise_Architecture_Methodology_Guide_Official.pdf` |
+| SAP EA Certification Study Bible (18-part personal compilation) | `SAP_EA_StudyBible_Final.docx` |
+
+---
+
 ## Certification
 
 | Resource | URL |

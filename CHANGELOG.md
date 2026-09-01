@@ -2,6 +2,37 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 content enrichment from primary sources
+
+Two source documents were already sitting in the repo root, untracked and unlinked from
+anywhere in the site: `SAP_Enterprise_Architecture_Methodology_Guide_Official.pdf` (SAP's
+own 2023 methodology guide) and `SAP_EA_StudyBible_Final.docx` (an 18-part personal
+exam-prep compilation). Extracted both and mined genuinely new, sourced material that
+wasn't in the repo at all:
+
+### Added
+- `domains/01-framework-toolset.md`: IndRA origin + the 3D-ADM (methodology used in Product
+  Engineering, Customer Engagements, and SAP's own IT), the full ADM phase table
+  (Preliminary through H — previously stopped at Phase E), and the Metro Map's 7 domains
+  vs the Methodology's 3 core domains distinction.
+- `domains/04-data-app-tech.md`: the 6R cloud migration framework (Rehost/Retire/
+  Replatform/Repurchase/Refactor/Retain), paired against the existing TIME model.
+- `artifacts/artifact-cheatsheet.md`: a new "Technique vs Artifact" section (verb vs noun —
+  capability mapping produces a Business Capability Map, tracing data flows produces a
+  Solution Data Flow Diagram) as a foundational distinction ahead of the phase-by-phase list.
+- `resources/glossary.md`: seven missing official-SAP terms (Application Role, Architecture
+  Model, Business Role, Business Scenario, Data Flow, Message Flow, Solution Process) plus
+  IndRA and the 6R Framework.
+- `resources/exam-traps.md`: five new trap entries covering the above (IndRA origin, 7-vs-3
+  domains, TIME vs 6R, Technique vs Artifact).
+- Both source documents are now directly linked from Sheet 10 (Official Resources) and
+  `docs/key-links.md`, and are actually servable as static assets — no build step required.
+- Sources sections added to every file touched, citing which document each addition came from.
+
+### Preserved
+- No existing content was rewritten or removed — every addition is new material inserted
+  alongside what was already there.
+
 ## [Unreleased] - September 2026 certification workspace shell
 
 ### Added

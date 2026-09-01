@@ -12,6 +12,12 @@ TOGAF's process engine. The cycle of phases from Preliminary through to Architec
 **ADR (Architecture Decision Record)**  
 A document recording a significant architecture decision, the context in which it was made, and its consequences. Must be created BEFORE decisions are made by leaders.
 
+**Application Role**  
+Implements a complete or partial Business Role within a specific SAP software product or Solution Component. Reflects the tasks of a general, commonly known job profile and gives users access to the applications they need. *(Official SAP definition.)*
+
+**Architecture Model**  
+A system of abstractions describing selected aspects of an architecture domain relevant in a specific context. Includes a list of entities, associations between entities, and diagrams. *(Official SAP definition — distinct from Architecture Vision or Architecture Principle.)*
+
 **Architecture Principle**  
 A fundamental rule or guideline that constrains how the architecture must be designed. Has 4 components: Name, Statement, Rationale, Implications. Max 10–20.
 
@@ -64,6 +70,12 @@ Level 2 of the BPM. Named `<A to B>`. Covers execution from one point to another
 **Business Process Segment**  
 Level 3 of the BPM. Named same as corresponding Business Area in BCM.
 
+**Business Role**  
+Defines a general job profile. Product-agnostic — implemented by one or more Application Roles within a specific SAP software product. Examples: Internal Sales Representative, Billing Clerk, Purchaser.
+
+**Business Scenario**  
+Defines a significant business need or problem, specified using business architecture entities (business processes and capabilities). Typically embraces one or multiple business processes.
+
 **Business Strategy Map**  
 Artifact capturing Strategic Priorities → Goals → Value Drivers → Capabilities → Initiatives.
 
@@ -92,6 +104,9 @@ Entity-Relationship style diagram describing data entities, attributes, and rela
 ---
 
 ## D
+
+**Data Flow**  
+The transfer of data between two Solution Data Objects in different Solution Components. A concept, not an artifact — the **Solution Data Flow Diagram** is the artifact that depicts it. Message Flows bundle multiple Data Flows and add technical detail (protocol, authentication).
 
 **Deployment Unit**  
 The smallest solution component that can be deployed and operated independently.
@@ -143,6 +158,9 @@ Visual technique applying colour coding to business capabilities (or technology)
 **IaaS (Infrastructure as a Service)**  
 Cloud model where the provider manages physical hardware only. Customer controls OS, storage, deployed applications.
 
+**IndRA (Industry Reference Architecture)**  
+SAP's internal project that the SAP EA Methodology actually evolved from — built and validated on SAP's own IT landscape before being aligned with TOGAF. Basis for the **3D-ADM**: the same methodology used in Product Engineering, Customer Engagements, and SAP's own IT. Exam trap: the methodology's origin is IndRA, not TOGAF — TOGAF is the industry-standard ADM it's tailored to align with.
+
 **ISA-M (Integration Solution Advisory Methodology)**  
 SAP's methodology for defining integration architecture. Four domains: Process, Data, Analytics, IoT Integration.
 
@@ -159,6 +177,9 @@ SAP's Enterprise Architecture Management tool (acquired by SAP). Used for applic
 
 **MECE**  
 Mutually Exclusive, Collectively Exhaustive. The structuring principle for Business Capability Models. No overlap, no gaps.
+
+**Message Flow**  
+Describes the interaction between two Deployment Units as participants in a Solution Process — the protocol or API used can be specified in detail. Bundles one or more Data Flows.
 
 **Metro Map**  
 SAP EA's visual representation of the full methodology. Three variants: Business-Centric, IT-Centric, Holistic.
@@ -236,6 +257,9 @@ Shows proposed solution vs. organisational units and business functions. 10-minu
 **Solution Data Flow Diagram**  
 Shows data flows between solution components. Uses Solution Data Objects.
 
+**Solution Process**  
+The realisation of a Business Process in an IT environment — a defined set of solution components combined to meet the business process's needs. Described using four architecture views: Solution Component Diagram, Solution Value Flow Diagram, Solution Data Flow Diagram, Solution Process Flow Diagram.
+
 **Solution Process Flow Diagram**  
 Detailed BPMN 2.0 diagram showing step-by-step process flows through solution components. Behaviour view.
 
@@ -261,6 +285,9 @@ The "to-be" — the desired future state of the enterprise's architecture.
 **TIME Model**  
 Application Portfolio Assessment framework: Tolerate, Invest, Migrate, Eliminate. Based on Technical Fit × Functional Fit.
 
+**6R Framework**  
+Cloud migration decision framework, complementary to TIME: **R**ehost, **R**etire, **R**eplatform, **R**epurchase, **R**efactor/Re-architect, **R**etain. TIME assesses an application's fit; 6R decides how to actually move it to the cloud — different questions, easy to conflate.
+
 **TOGAF**  
 The Open Group Architecture Framework. Global EA standard. SAP EA is built on TOGAF v10.
 
@@ -276,3 +303,10 @@ SAP's fictional case-study company, used as reference material for the classic (
 
 **WBS (Work Breakdown Structure)**  
 Deliverable-oriented breakdown of a project into manageable sections. Basis for effort and cost estimation.
+
+---
+
+## Sources
+
+- SAP Enterprise Architecture Methodology Guide (Official, 2023) — `SAP_Enterprise_Architecture_Methodology_Guide_Official.pdf` in this repository (official glossary terms: Application Role, Architecture Model, Business Role, Business Scenario, Data Flow, Message Flow, Solution Process)
+- SAP EA Certification Study Bible — `SAP_EA_StudyBible_Final.docx` in this repository (IndRA, 6R Framework)

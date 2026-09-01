@@ -196,6 +196,19 @@ Know these three migration strategies — they appear in exam scenarios:
 
 ---
 
+## Application Rationalisation — TIME & 6R
+
+Two complementary frameworks for deciding what happens to an existing application portfolio. They answer different questions — don't confuse them.
+
+| Framework | Question it answers | Options |
+|-----------|---------------------|---------|
+| **TIME** (see `domains/02-vision-roadmap.md`) | "What should we do with this application, in place?" | Tolerate (high tech/low functional fit), Invest (high/high), Migrate (low tech/high functional), Eliminate (low/low) |
+| **6R** | "How do we move this to the cloud?" | **Rehost**, **Retire**, **Replatform**, **Repurchase**, **Refactor/Re-architect**, **Retain** |
+
+> **Trap:** TIME assesses an application's *fit*; 6R is a *cloud migration* decision. A TIME-assessed "Invest" application might still be moved via any of the 6R options depending on cost, risk, and target platform — they're sequential lenses, not alternatives to each other.
+
+---
+
 ## Exam Traps — Domain 4
 
 1. **Component vs Process Flow diagrams** — Structure vs Behaviour. Most commonly confused pair.
@@ -206,6 +219,7 @@ Know these three migration strategies — they appear in exam scenarios:
 6. **Software Distribution → Environments & Location** — the first feeds the second. SD = Phase C. E&L = Phase D.
 7. **ISA-M has four domains** — Process, Data, Analytics, IoT. All four testable.
 8. **S/4HANA migration strategies** — Greenfield, Brownfield, Selective. Know when to recommend each.
+9. **TIME vs 6R** — TIME assesses application fit. 6R decides how to move it to the cloud. Different questions, often confused.
 
 ---
 
@@ -221,3 +235,10 @@ Know these three migration strategies — they appear in exam scenarios:
 8. Name the three S/4HANA transformation strategies and when to recommend each
 9. What is SAP BTP and what role does it play in the extension architecture?
 10. What is the SAP One Domain Model and where is it used?
+11. What is the difference between the TIME model and the 6R framework?
+
+---
+
+## Sources
+
+- SAP EA Certification Study Bible — `SAP_EA_StudyBible_Final.docx` in this repository

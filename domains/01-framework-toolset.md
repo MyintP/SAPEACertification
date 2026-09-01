@@ -19,6 +19,22 @@
 
 ---
 
+## Origin: IndRA, Not TOGAF
+
+> **Trap:** The methodology's *origin* is not TOGAF. SAP built and validated it internally on its own IT landscape as **IndRA (Industry Reference Architecture)**, then aligned it with TOGAF as the industry-standard ADM foundation. TOGAF is what it's *built on*; IndRA is *where it came from*.
+
+This is why SAP can apply the same methodology in three places at once — the **3D-ADM**:
+
+1. **Product Engineering** — SAP architects use it to design and document new products
+2. **Customer Engagements** — SAP Customer Success services apply it in transformation engagements
+3. **SAP's Own IT** — SAP IT uses it for its own internal enterprise architecture
+
+The three pillars — Methodology, Reference Architecture Content, and Tooling — are interrelated, not independent: reference content is developed *following* the methodology and made available *in* the tooling. When SAP Product Engineering documents a new product's capabilities, processes, and technologies, it does so according to the methodology, and that becomes what you see when you browse the Business Accelerator Hub.
+
+> Source: SAP Enterprise Architecture Methodology Guide (Official, 2023), Getting Started.
+
+---
+
 ## TOGAF Foundation
 
 - Developed by The Open Group from **1995**
@@ -53,6 +69,25 @@ Running through ALL phases:
 
 > ⚠️ **Critical: NOT a waterfall. Iterations happen within phases, between phases, and between full cycles.**
 
+### The Full ADM — All Phases (Preliminary Through H)
+
+The simplified diagram above covers the phases SAP EA content is organised around, but the underlying TOGAF ADM has three further phases most study material skips. Know all of them:
+
+| Phase | Purpose |
+|-------|---------|
+| **Preliminary** | Tailor the framework. Establish principles. Three types: Terminology, Content, Process. |
+| **A — Architecture Vision** | Define scope. Identify stakeholders. Create the Statement of Architecture Work. |
+| **B — Business Architecture** | Define capabilities, processes, data, org structure. |
+| **C — Information Systems** | Application and Data architecture. |
+| **D — Technology Architecture** | Infrastructure, deployment, environments. |
+| **E — Opportunities & Solutions** | Identify projects and transition plans to **realise** the target architecture. |
+| **F — Migration Planning** | Prioritise projects. Create the detailed roadmap. |
+| **G — Implementation Governance** | Oversee implementation contracts. |
+| **H — Architecture Change Management** | Monitor for change triggers, manage updates. |
+| **Requirements Management** | Cross-cutting — runs through all phases above. |
+
+> **Trap:** Phase E *identifies* projects and transition plans to realise the target architecture — it does not itself define the target (that's Phases B–D). This exact distinction has appeared as a direct exam question.
+
 ---
 
 ## Three Types of Tailoring (Preliminary Phase)
@@ -83,6 +118,17 @@ SAP's visual representation of the entire methodology — like a tube/subway map
 | **Holistic** | Full end-to-end. All domains from strategy through technology. |
 
 > **Key rule:** Artifacts are selected for the **stakeholders**, not for the sake of architectural completeness.
+
+### Metro Map's 7 Domains vs the Methodology's 3 Core Domains
+
+Two different counts appear depending on which question you're answering — both are correct:
+
+| View | Count | Domains |
+|------|-------|---------|
+| **Metro Map** (the full engagement flow) | **7** | Architecture Vision, Strategy & Motivation, Business Architecture, Solution Architecture, Technology Architecture, Roadmap & Transition, Requirements & Governance |
+| **SAP EA Methodology** (the core model) | **3** core (+1 connection) | Business Strategy & Model Domain, Business Architecture Domain, Solution Architecture Domain — connecting to the IT Landscape Domain (Technology Architecture) |
+
+> **Trap:** Don't collapse these into one number. "How many domains does the Metro Map have?" and "How many domains does the SAP EA Methodology define?" are different questions with different correct answers.
 
 ---
 
@@ -173,6 +219,8 @@ SAP's visual representation of the entire methodology — like a tube/subway map
 4. **Artifact selection** = always for stakeholder needs, not for architecture completeness.
 5. **LeanIX vs Signavio** — LeanIX = architecture/applications. Signavio = processes. Don't swap them.
 6. **Maturity model has 8 dimensions** — all eight are testable individually.
+7. **Origin is IndRA, not TOGAF.** SAP built the methodology internally, then aligned it with TOGAF.
+8. **7 vs 3 domains.** Metro Map = 7 domains. SAP EA Methodology core model = 3 domains (+ IT Landscape connection). Both correct, different questions.
 
 ---
 
@@ -185,5 +233,15 @@ SAP's visual representation of the entire methodology — like a tube/subway map
 5. Why is the ADM described as iterative rather than sequential?
 6. What is the difference between Initial Risk and Residual Risk?
 7. Name the 8 dimensions of the EA Practice Maturity Model
+8. What is IndRA, and how does it relate to TOGAF?
+9. Name all 9 ADM phases from Preliminary through H
+10. How many domains does the Metro Map have? How many does the SAP EA Methodology itself define?
 
 > Answers: review the sections above 👆
+
+---
+
+## Sources
+
+- SAP Enterprise Architecture Methodology Guide (Official, 2023) — `SAP_Enterprise_Architecture_Methodology_Guide_Official.pdf` in this repository
+- SAP EA Certification Study Bible — `SAP_EA_StudyBible_Final.docx` in this repository

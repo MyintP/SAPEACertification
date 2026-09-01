@@ -4,6 +4,33 @@
 
 ---
 
+## First: Technique vs Artifact
+
+Before the phase-by-phase list, know this distinction cold — it's a recurring exam trap in its own right.
+
+| Entity | Definition |
+|--------|-----------|
+| **Technique** (a VERB — what you *do*) | A method used during an architectural activity, describing *how* to develop artifacts. Examples: gap analysis, capability mapping, roadmap creation, heat mapping. |
+| **Artifact** (a NOUN — what you *produce*) | The deliverable or work product created as a result. Examples: Business Capability Map, Solution Component Diagram, Stakeholder Map. |
+
+A technique produces an artifact — they are never the same thing:
+
+| Technique (verb) | Artifact it produces (noun) |
+|-------------------|------------------------------|
+| Capability mapping | Business Capability Map |
+| Gap analysis | Gap / Solution Overview Diagram |
+| Roadmap creation | Business Architecture Roadmap |
+| Heat mapping | Heat-mapped Business Capability Map |
+| Stakeholder analysis | Stakeholder Map |
+| Canvas workshop | Business Model Canvas |
+| Tracing data flows | Solution Data Flow Diagram |
+
+> **Trap:** "Data Flow" is not an artifact — it's a *concept* (the transfer of data between two Solution Data Objects). "Tracing data flows" is the *technique*. The **Solution Data Flow Diagram** is the artifact that results. Three different things, easy to collapse into one on exam day.
+
+> Source: SAP EA Certification Study Bible — `SAP_EA_StudyBible_Final.docx` in this repository.
+
+---
+
 ## Preliminary Phase
 
 | Artifact | Purpose | Exam Trap |
