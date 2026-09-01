@@ -263,6 +263,6 @@ Initiatives & Roadmap
 ---
 
 ## Sources
-- SAP EA Book Webcast — "Enterprise Architecture with SAP" Virtual Master Class
+- SAP EA Book Webcast — "Enterprise Architecture with SAP" Virtual Master Class: [watch on YouTube](https://www.youtube.com/watch?v=Bbh8glKpmmk) (see also `index.html#sheet-companions`)
 - Authors: Anup Das, Peter Klee, Johannes Reichel (SAP Transformation Hub)
-- Book: "Enterprise Architecture with SAP" — SAP Press
+- Book: [Enterprise Architecture with SAP: Planning, Management, and Transformation](https://www.sap-press.com/enterprise-architecture-with-sap-planning-management-and-transformation_5863/) — SAP Press

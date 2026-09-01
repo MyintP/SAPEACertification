@@ -2,7 +2,40 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
-## [Unreleased] - September 2026 content enrichment from primary sources
+## [Unreleased] - September 2026 study companions and a real markdown viewer
+
+### Added
+- **Study Companions** (new sheet, `Reference` group): the AI-generated audio overview
+  (`podcast/SAP_Enterprise_Architecture_bridges_strategy_and_IT.m4a`, via Google NotebookLM)
+  is now tracked in git and linked from the workspace as an intentional multi-modal study
+  companion, alongside a verified video ("The Enterprise Architecture with SAP Masterclass"),
+  its companion book, and three official YouTube channels (SAP PRESS, EA SAP Community, SAP
+  Community). Every link was checked against the live page before being added.
+- A proper markdown viewer (`docs.html` + `docs.js`): every `.md` link across the site
+  (domain deep-dives, artifact cheatsheet, glossary, exam traps, official diagrams reference,
+  study plan, exam overview) now opens as a rendered, styled page instead of raw plain text.
+  Vanilla JS, no dependencies - a small custom parser for the markdown subset these files
+  actually use (headers, tables, lists, blockquotes, fenced code, inline formatting). Access
+  is restricted to `docs/`, `domains/`, `artifacts/`, `resources/` and `quiz/` - root-level
+  files such as `CLAUDE.md`/`AGENTS.md` are not servable through it.
+
+### Fixed
+- `.gitignore` no longer excludes `podcast/`/`*.m4a` - that exclusion was added in a prior
+  pass before this was confirmed to be intentional site content, not scratch media.
+- Two real bugs surfaced by building the markdown viewer, both now fixed in `styles.css` and
+  benefiting the main app shell too: (1) CRLF line endings on several repo files were
+  silently defeating every `$`-anchored regex in the parser (headers, rules, table
+  separators) - markdown is now normalised to LF before parsing; (2) CSS Grid's implicit
+  `min-width: auto` on `.sheet-inner` children let wide tables and ASCII-diagram code blocks
+  stretch the whole page instead of scrolling within themselves, and a long unbroken
+  filename used as inline `` `code` `` had no wrap point and pushed the page wide on mobile.
+- `resources/ea-trends.md` and `resources/use-cases-reference.md`: their existing "SAP EA
+  Book Webcast" and book citations now link to the actual verified YouTube video and SAP
+  PRESS product page instead of being unlinked text.
+
+### Preserved
+- No existing content rewritten. All markdown files render through the same source file
+  used elsewhere - no duplicated content to drift out of sync.
 
 Two source documents were already sitting in the repo root, untracked and unlinked from
 anywhere in the site: `SAP_Enterprise_Architecture_Methodology_Guide_Official.pdf` (SAP's
