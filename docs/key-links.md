@@ -24,7 +24,7 @@
 | SAP Help Portal – EA Framework | https://help.sap.com/docs/SAP_ENTERPRISE_ARCHITECTURE_FRAMEWORK |
 | SAP Business Accelerator Hub | https://api.sap.com |
 | SAP One Domain Model | https://api.sap.com/sap-one-domain-model |
-| SAP Signavio Process Explorer | https://www.signavio.com/products/process-explorer/ |
+| SAP Signavio Process Explorer | https://support.sap.com/en/product/onboarding-resource-center/sap-signavio/spx.html |
 
 ---
 
@@ -53,7 +53,7 @@
 | Resource | URL |
 |----------|-----|
 | The Open Group – TOGAF | https://www.opengroup.org/togaf |
-| TOGAF Standard Overview | https://www.opengroup.org/togaf/standard |
+| TOGAF Standard, 10th Edition | https://www.opengroup.org/open-group-announces-launch-togaf-standard-10th-edition |
 
 ---
 
