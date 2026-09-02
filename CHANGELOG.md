@@ -2,6 +2,56 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 concepts adapted from the sister Salesforce Architect workspace
+
+A sibling study workspace (github.com/MyintP/SalesForceArchitect, same author) was reviewed for
+patterns worth porting over. Six of the seven identified concepts are implemented here; the
+seventh (a full content-as-data rewrite of every sheet) was deliberately scoped down — see
+"Not in scope" below.
+
+### Added
+- **Domain Knowledge Checks is now content-as-data.** The 60 questions added in the previous
+  entry were hand-authored HTML; they're now a `DOMAIN_QUIZ_BANK` array in `app.js`, rendered
+  at runtime. This is what makes the next two items possible without hand-editing 60 quiz cards.
+- **Domain filter + live score gauge** on the Domain Knowledge Checks section: a dropdown
+  narrows the view to one domain, and a circular SVG progress ring (new `svgGauge()` helper,
+  shared with the Tracker sheet below) shows correct/attempted for whatever's currently in view.
+- **"Discover the Enterprise Architect Role"** (new sheet, new "The Role" nav group, right after
+  Start): orients to what an EA actually does before any platform mechanics — the EA-vs-technical-
+  architect distinction, the traits that create business value, T-shaped/I-shaped expertise, and
+  the three C-suite perspectives (CEO/CFO/CIO) EA serves. Content is drawn from and cross-checked
+  against `quiz/discovering-sap-ea-assessment.md` (SAP's own "Discovering SAP Enterprise
+  Architecture" assessment) and this repo's Study Bible extract — surfaces a file that was
+  previously linked from nowhere in the app.
+- **"Certification Track"** (new sheet, new "Certification" nav group, code 13): maps P_SAPEA
+  against the wider SAP certification landscape — a commonly-cited associate-to-professional path
+  and complementary credentials (SAP LeanIX, TOGAF). Explicitly flagged as third-party-observed,
+  not a confirmed prerequisite chain from SAP's own certification page, since SAP Learning does
+  not publish one — checked directly before writing this sheet.
+- **"How this workspace and SAP Learning fit together"** on the Start sheet: a two-column
+  comparison table (SAP Learning does / this site does) plus a one-paragraph "practically, do
+  things in this order" note, so the relationship between this workspace and the official
+  platform is stated once, plainly, instead of implied.
+- **Sharper Connected Case scenarios.** Sheet 07 and all three Full Practice Cases in Practice
+  now include a "Push your reasoning further" list of pointed trade-off questions (in the style
+  of "what happens to the 201st event if the platform is mid-deployment") before the task, not
+  just an open "what would you do."
+- **Self-scorable rubric checklists** on the three Full Practice Cases: each model-answer reveal
+  now ends with the 8 scoring-rubric dimensions as actual checkboxes (new `sapEaCaseChecklist`
+  localStorage key, generic id→bool store, independent of the fixed 8-key Tracker on sheet 12).
+- **Circular progress gauge on the Tracker sheet** (sheet 12): the checklist percentage now also
+  renders as the same SVG ring used in Domain Knowledge Checks.
+
+### Not in scope
+- Rewriting every sheet as content-as-data (the sister site's `SHEETS` array + `render()`
+  pattern). That's a full-shell rewrite touching all 18 sheets' bespoke layouts for a personal,
+  already-working site — disproportionate risk for the benefit here. Scoped down to just the
+  quiz bank, where the content-as-data pattern earns its keep (filtering, no more hand-duplicated
+  markup per question).
+- The 30-question "Discovering SAP Enterprise Architecture" assessment is referenced (Role sheet,
+  Official Resources) but still not wired in as a live scored quiz — several of its questions are
+  multiple-answer, which needs different scoring logic than `checkAnswer()`.
+
 ## [Unreleased] - September 2026 domain knowledge checks wired into Practice
 
 ### Added

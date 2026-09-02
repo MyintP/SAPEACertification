@@ -10,7 +10,7 @@ This repository hosts a certification workspace for the **SAP P_SAPEA Enterprise
 ## 🚀 Getting Started
 
 1. **Visit the live site**: [https://myintp.github.io/SAPEACertification/](https://myintp.github.io/SAPEACertification/)
-2. **Use the left-hand map** to move through Get Started → Exam → Method → Architecture Domains → Case Study → Practice → Reference → Progress
+2. **Use the left-hand map** to move through Get Started → The Role → Exam → Method → Architecture Domains → Case Study → Practice → Reference → Certification → Progress
 3. **Practice with the Connected Case** (`07 Connected Case`) without looking at model answers, then use `Practice` for scenario quizzes and full cases
 4. **Score yourself** using the rubric (`09 Scoring Rubric`)
 5. **Jot notes as you go** in the Study Desk at the bottom — it remembers a separate note per sheet
@@ -23,8 +23,8 @@ This repository hosts a certification workspace for the **SAP P_SAPEA Enterprise
 | `index.html` | The app shell: context bar, sidebar navigation, content workspace and Study Desk, containing every sheet (including Practice) |
 | `quiz.html` | Redirect stub to `index.html#sheet-practice`, kept so old links/bookmarks still resolve |
 | `styles.css` | Design system: dark app shell, light reading canvas, one accent colour |
-| `app.js` | Shell behaviour: sheet routing, sidebar/context bar sync, Study Desk notes, progress tracker, quiz scoring, search |
-| `/quiz` | Self-assessment questions for each skill area (source material for the Practice sheet) |
+| `app.js` | Shell behaviour: sheet routing, sidebar/context bar sync, Study Desk notes, progress tracker, quiz scoring, search. The Domain Knowledge Checks quiz bank (60 questions) is content-as-data here — a `DOMAIN_QUIZ_BANK` array rendered and filtered at runtime, not hand-authored HTML |
+| `/quiz` | Self-assessment questions for each skill area. `domain-1..4-quiz.md` are the source for the Practice sheet's Domain Knowledge Checks; `discovering-sap-ea-assessment.md` and `wanderlust-prep.md` are referenced from other sheets but not yet wired in as live quizzes (multiple-answer format needs different scoring logic) |
 | `/resources` | Supplementary study materials and references |
 | `/domains` | Domain-specific architecture guides |
 | `/artifacts` | Sample architecture artifacts and templates |

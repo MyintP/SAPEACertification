@@ -1262,6 +1262,66 @@ h2.quiz-section-heading {
     font-weight: 600;
 }
 
+/* --- Domain quiz bank: filter + gauge controls --- */
+.quiz-bank-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    background: var(--navy-pale);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 22px;
+}
+
+.quiz-bank-controls__filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.quiz-bank-controls__filter select {
+    font: inherit;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--paper-border);
+    background: var(--paper);
+    color: var(--text);
+}
+
+.quiz-bank-controls__score {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    flex: 1;
+}
+
+.quiz-bank-controls .btn { margin-left: auto; }
+
+/* --- Circular progress gauge (shared: quiz score, tracker checklist) --- */
+.gauge-tile__gauge {
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.gauge-ring circle { transition: stroke-dashoffset 0.3s var(--ease); }
+
+/* --- Case rubric self-score checklist (inside a model-answer reveal) --- */
+.case-checklist {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--paper-border);
+}
+
+.case-checklist__label { font-weight: 600; margin: 0 0 8px; }
+
+.case-checklist .tracker-item { margin-bottom: 6px; font-size: 14px; }
+
 .case-study {
     background: var(--canvas-bg);
     padding: 18px;

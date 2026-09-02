@@ -49,6 +49,13 @@
                 </ul>
             </details>
 
+            <details class="nav-group" open data-group-id="the-role">
+                <summary>The Role</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-role"><span class="nav-item__code">A</span><span class="nav-item__label">Discover the Architect Role</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
+                </ul>
+            </details>
+
             <details class="nav-group" open data-group-id="review">
                 <summary>Review</summary>
                 <ul>
@@ -105,6 +112,13 @@
                 </ul>
             </details>
 
+            <details class="nav-group" open data-group-id="certification">
+                <summary>Certification</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-cert"><span class="nav-item__code">13</span><span class="nav-item__label">Certification Track</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
+                </ul>
+            </details>
+
             <details class="nav-group" open data-group-id="tracker">
                 <summary>Progress</summary>
                 <ul>
@@ -150,14 +164,87 @@
                         </div>
                     </div>
 
+                    <h4>How this workspace and SAP Learning fit together</h4>
+                    <p>This workspace does not replace SAP Learning — it can't. SAP Learning is the system of record: it hosts the official courses, issues the certification, and is where the exam is actually booked and sat. Nothing here duplicates that.</p>
+                    <div class="table-scroll">
+                        <table class="table-standard">
+                            <thead>
+                                <tr><th>SAP Learning does</th><th>This site does</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Official courses, the Learning Journey, exam registration and delivery, the current Scenario-Based Assessment FAQ.</td><td>The synthesis layer SAP Learning doesn't: one page per domain explaining the "so what," a scored quiz bank, decide-then-defend case practice, and a single tracker across all of it.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="sheet-footnote">Practically: read a sheet here first for the shape of the domain, do the linked <a href="#sheet-10">official resource</a> for the primary-source depth, then come back and prove it stuck in <a href="#sheet-practice">Practice</a>. Book and sit the exam on SAP Learning — always check the live <a href="https://learning.sap.com/certifications/sap-certified-professional-sap-enterprise-architect" target="_blank" rel="noopener">P_SAPEA certification page</a> before relying on anything here for exam mechanics.</p>
+
                     <h4>How to use this workspace</h4>
                     <ul>
+                        <li>Start with <a href="#sheet-role">Discover the Enterprise Architect Role</a> to orient to the job itself before the platform mechanics.</li>
                         <li>Read the beginner sections in order using the left-hand map.</li>
                         <li>Do the connected case without looking at the model answer.</li>
                         <li>Score yourself using the rubric.</li>
                         <li>Repeat until you can explain the reasoning clearly and efficiently.</li>
                         <li>Use <a href="#sheet-practice">Practice</a> to check domain knowledge as you go, and the Study Desk below to keep notes per sheet.</li>
                     </ul>
+                </div>
+            </article>
+
+            <!-- SHEET: THE ROLE -->
+            <article class="sheet" id="sheet-role" data-title="Discover the Enterprise Architect Role" data-group="The Role" data-code="A">
+                <div class="sheet-inner">
+                    <div class="sheet-header">
+                        <div class="sheet-kicker"><span class="sheet-kicker__code">A</span><span>The Role</span></div>
+                        <h1 class="sheet-title">What an Enterprise Architect actually does</h1>
+                        <p class="sheet-lede">Orient to the job before the platform mechanics. One sentence frames almost everything that follows: <strong>business and IT speak different languages and make decisions independently — an Enterprise Architect exists to force alignment between them.</strong></p>
+                    </div>
+
+                    <h2>Enterprise Architect vs. Technical Architect</h2>
+                    <p>The two roles get conflated constantly — including on the exam. The distinction that actually matters:</p>
+                    <div class="table-scroll">
+                        <table class="table-standard">
+                            <thead><tr><th></th><th>Enterprise Architect</th><th>Technical Architect</th></tr></thead>
+                            <tbody>
+                                <tr><td>Level</td><td>Strategic — aligns IT strategy with business transformation goals</td><td>Implementation — the technical details of delivery</td></tr>
+                                <tr><td>Scope</td><td>Cross-org, cross-cloud, cross-platform</td><td>One system, one project, one domain</td></tr>
+                                <tr><td>In tech-heavy orgs</td><td>Can take on more technical responsibility — the boundary blurs</td><td>Does not take on EA's strategic or governance responsibilities</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pattern pattern--important">
+                        <span class="pattern__label">Trap</span>
+                        <p>The exam tests this distinction directly: end-to-end IT governance and driving corporate vision belong to EA, never to a technical architect — no matter how senior.</p>
+                    </div>
+
+                    <h2>The traits that actually create business value</h2>
+                    <ul>
+                        <li><strong>Tech-savvy</strong> — advocates for approaches like cloud-native and DevOps to improve efficiency, without chasing technology for its own sake.</li>
+                        <li><strong>Data-driven</strong> — decisions are based on data and evidence, not intuition or seniority.</li>
+                        <li><strong>Agile mindset</strong> — balances fast development cycles with the compliance and security the business actually needs.</li>
+                        <li><strong>Large scope</strong> — makes decentralised and centralised architectures work together, rather than picking one dogmatically.</li>
+                        <li><strong>Evangelistic</strong> — champions and drives change; resisting change to protect stability is the opposite of this trait.</li>
+                    </ul>
+
+                    <h2>T-shaped and I-shaped, at the same time</h2>
+                    <p><strong>T-shaped</strong> — broad enough to connect every business domain and hold a conversation with anyone from finance to infrastructure. <strong>I-shaped</strong> — deep enough in at least one area to lead a focused project without needing a translator. An EA needs both: broad enough for cross-domain alignment, deep enough to stay credible on at least one thing.</p>
+
+                    <h2>The three C-suite perspectives EA must serve</h2>
+                    <div class="table-scroll">
+                        <table class="table-standard">
+                            <thead><tr><th>Executive</th><th>Their focus</th><th>What EA delivers for them</th></tr></thead>
+                            <tbody>
+                                <tr><td>CEO</td><td>Evolving the business, adopting innovation</td><td>Business transformation, M&amp;A support, capability gap closure</td></tr>
+                                <tr><td>CFO</td><td>Reducing complexity, optimising cost</td><td>Landscape rationalisation, TCO reduction, public cloud strategy</td></tr>
+                                <tr><td>CIO</td><td>Managing complexity, enabling the future state</td><td>Simplification, clean architecture, landscape consolidation</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Every architecture decision worth defending should be traceable back to at least one of these three. If it isn't, ask why it's being made at all.</p>
+
+                    <h2>Influence without authority</h2>
+                    <p>An Enterprise Architect rarely has the authority to make a business unit do anything. The job runs on stakeholder mapping, credibility built through reasoning rather than job title, and artifacts like an Architecture Point of View that make a recommendation stick without a mandate. See <a href="#sheet-04">04 Vision &amp; Roadmap</a> for the Stakeholder Map artifact this depends on.</p>
+
+                    <p class="sheet-footnote">This sheet's role-vs-technical-architect distinction, EA traits, and T/I-shaped framing are drawn from and cross-checked against SAP's own "Discovering SAP Enterprise Architecture" assessment content — read the full <a href="docs.html?file=quiz/discovering-sap-ea-assessment.md" target="_blank" rel="noopener">30-question assessment with explanations →</a> (not yet wired in as a live scored quiz — several of its questions are multiple-answer, which needs different scoring logic than the single-answer quizzes in <a href="#sheet-practice">Practice</a>). The C-suite table is this repository's own synthesis.</p>
                 </div>
             </article>
 
@@ -420,6 +507,15 @@
                         <li><strong>Governance:</strong> What decisions, stakeholders and measures keep the transformation on track?</li>
                     </ul>
 
+                    <h4>Push your reasoning further</h4>
+                    <p>Before you write anything down, be ready to defend your call against these — this is the kind of pointed follow-up a review board or an AI-guided roleplay will actually ask:</p>
+                    <ul>
+                        <li>The CIO wants one global ERP for speed; regional leaders want to keep local systems for regulatory control. Which one gives, and what do you tell the side that loses?</li>
+                        <li>Customer data is duplicated across the separate ERPs today — does unifying it require a single system, or can duplication be resolved a different way?</li>
+                        <li>"Faster product launches" and "no loss of local regulatory control" can pull in opposite directions. Where exactly is that tension, and what's your first sequencing move to relieve it?</li>
+                        <li>Six months after you present this roadmap, what's the one metric that would tell the CIO it's working — and what would tell them to stop and reconsider?</li>
+                    </ul>
+
                     <div class="pattern pattern--important">
                         <span class="pattern__label">Important</span>
                         <p>📌 Do the case before reading examples. Your first objective is not to find a perfect architecture. It is to demonstrate coherent reasoning.</p>
@@ -585,6 +681,50 @@
                 </div>
             </article>
 
+            <!-- SHEET: CERTIFICATION TRACK -->
+            <article class="sheet" id="sheet-cert" data-title="Certification Track" data-group="Certification" data-code="13">
+                <div class="sheet-inner">
+                    <div class="sheet-header">
+                        <div class="sheet-kicker"><span class="sheet-kicker__code">13</span><span>Certification</span></div>
+                        <h1 class="sheet-title">Certification track</h1>
+                        <p class="sheet-lede">P_SAPEA isn't an entry-level credential — SAP positions it for architects who already have real enterprise-architecture engagement experience. This sheet maps where it sits relative to other SAP certifications, not just the one exam.</p>
+                    </div>
+
+                    <div class="pattern pattern--important">
+                        <span class="pattern__label">Important</span>
+                        <p>📌 The path below is a commonly observed sequence from third-party SAP training providers, <strong>not a confirmed prerequisite chain published on SAP's own certification page</strong>. SAP Learning does not currently show a hard prerequisite gate for P_SAPEA. Verify the current requirements and any recommended prior credentials on the live <a href="https://learning.sap.com/certifications/sap-certified-professional-sap-enterprise-architect" target="_blank" rel="noopener">P_SAPEA certification page</a> before treating this as a fixed route.</p>
+                    </div>
+
+                    <h2>A commonly cited path</h2>
+                    <div class="table-scroll">
+                        <table class="table-standard">
+                            <thead><tr><th>Step</th><th>Certification</th><th>What it establishes</th></tr></thead>
+                            <tbody>
+                                <tr><td>1 — Associate</td><td>SAP Certified Associate – SAP BTP Administrator (C_ADBTP)</td><td>Hands-on platform grounding on SAP BTP</td></tr>
+                                <tr><td>2 — Professional</td><td>SAP Certified Professional – Solution Architect, SAP BTP (P_BTPA)</td><td>Designing end-to-end solutions on BTP</td></tr>
+                                <tr><td>3 — Professional</td><td>SAP Certified Professional – Enterprise Architect (P_SAPEA)</td><td>Aligning architecture with business strategy across the whole enterprise landscape — this workspace's target</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="sheet-footnote">Source: this sequence is described by SAP training partners (e.g. ERPPrep's SAP architect certification path) — treat it as a sensible on-ramp, not a rule.</p>
+
+                    <h2>Complementary credentials architects often pair with this one</h2>
+                    <ul>
+                        <li><strong>SAP LeanIX certification (C_LIXEA_2404 or current equivalent)</strong> — hands-on proof for the EA management tool named throughout this workspace's toolchain content. Check the current code on <a href="https://learning.sap.com/get-certified" target="_blank" rel="noopener">SAP Learning</a>, as exam codes are re-versioned periodically.</li>
+                        <li><strong>The Open Group TOGAF certification</strong> — since the SAP EA Methodology is explicitly built on TOGAF, a TOGAF credential demonstrates the underlying framework knowledge independent of SAP's tailoring of it.</li>
+                        <li><strong>SAP Cloud ERP / SAP Cloud Platform associate-level certifications</strong> — general SAP product depth that architecture engagements assume you already have, per the same third-party guidance above.</li>
+                    </ul>
+
+                    <h2>What SAP Learning actually confirms</h2>
+                    <ul>
+                        <li>P_SAPEA scope: the Preliminary and Vision phases, Requirements &amp; Decision Management, Business Architecture, Application &amp; Data Architecture, Technology Architecture, and the transition to Opportunities, Solutions and Roadmap — see <a href="#sheet-01">01 Exam Model &amp; Format</a>.</li>
+                        <li>Delivery format: the 2026 Scenario-Based Assessment, built around an extended scenario rather than isolated multiple-choice recall — see the <a href="https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs" target="_blank" rel="noopener">official FAQ</a>.</li>
+                    </ul>
+
+                    <p class="sheet-footnote">Register and sit every exam on SAP Learning — this workspace only prepares the reasoning, it never issues or tracks the credential itself.</p>
+                </div>
+            </article>
+
             <!-- SHEET 11 -->
             <article class="sheet" id="sheet-11" data-title="Exam-Day Checklist" data-group="Exam" data-code="11">
                 <div class="sheet-inner">
@@ -636,6 +776,7 @@
                         </div>
 
                         <div class="tracker-footer">
+                            <span id="trackerGauge" class="gauge-tile__gauge"></span>
                             <div class="tracker-summary">
                                 <div><strong>Checklist:</strong> <span id="progressDisplay">0/8 (0%)</span></div>
                                 <div class="js-quiz-progress-display" style="margin-top: 4px; color: var(--accent);">📊 Quiz: Not started yet</div>
@@ -660,801 +801,25 @@
                         <h2 class="quiz-section-heading">🧠 Domain Knowledge Checks</h2>
                         <p>60 questions, 15 per skill area, testing the vocabulary and mechanics from the <a href="#sheet-03">Architecture Domains</a> sheets — not case-study reasoning, straight domain knowledge. <strong>13–15 correct = domain mastered. Below 10 = go back and re-read.</strong></p>
 
-                        <h3>Domain 1 — SAP EA Framework &amp; Toolset</h3>
-                        <p class="sheet-footnote">Tests <a href="#sheet-03">03 Framework &amp; Toolset</a> · <a href="docs.html?file=domains/01-framework-toolset.md" target="_blank" rel="noopener">full deep-dive →</a></p>
-
-                        <div class="quiz-card" id="d1-q1">
-                            <div class="quiz-progress"><span>Domain 1 · Question 1 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 6.7%;"></div></div></div>
-                            <div class="quiz-question">Which of the following best describes the relationship between TOGAF and the SAP EA Methodology?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q1" value="A"> A) SAP EA replaces TOGAF entirely with a proprietary approach</label>
-                                <label><input type="radio" name="d1q1" value="B"> B) SAP EA is built on TOGAF and tailors it for SAP-specific contexts</label>
-                                <label><input type="radio" name="d1q1" value="C"> C) TOGAF and SAP EA are parallel frameworks with no relationship</label>
-                                <label><input type="radio" name="d1q1" value="D"> D) SAP EA is a simplified subset of TOGAF with fewer phases</label>
+                        <div class="quiz-bank-controls">
+                            <label class="quiz-bank-controls__filter">
+                                Filter by domain
+                                <select id="domainQuizFilter">
+                                    <option value="all">All domains</option>
+                                    <option value="d1">Domain 1 — Framework &amp; Toolset</option>
+                                    <option value="d2">Domain 2 — Vision &amp; Roadmap</option>
+                                    <option value="d3">Domain 3 — Business Architecture</option>
+                                    <option value="d4">Domain 4 — Data / App / Tech</option>
+                                </select>
+                            </label>
+                            <div class="quiz-bank-controls__score">
+                                <span id="domainQuizGauge" class="gauge-tile__gauge"></span>
+                                <span id="domainQuizScoreLine">Score: 0/0 attempted · 60 in view</span>
                             </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q1', 'B', 'fb-d1-1')">Submit Answer</button>
-                            <div id="fb-d1-1" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> SAP EA is built on TOGAF and tailors it — it does not replace it.</div>
+                            <button id="domainQuizReset" type="button" class="btn btn-secondary">🔄 Reset</button>
                         </div>
 
-                        <div class="quiz-card" id="d1-q2">
-                            <div class="quiz-progress"><span>Domain 1 · Question 2 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 13.3%;"></div></div></div>
-                            <div class="quiz-question">An organisation is planning an architecture engagement primarily focused on their upcoming cloud migration. Which Metro Map variant would be most appropriate?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q2" value="A"> A) Business-Centric Metro Map</label>
-                                <label><input type="radio" name="d1q2" value="B"> B) Holistic Metro Map</label>
-                                <label><input type="radio" name="d1q2" value="C"> C) IT-Centric Metro Map</label>
-                                <label><input type="radio" name="d1q2" value="D"> D) Standard TOGAF ADM</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q2', 'C', 'fb-d1-2')">Submit Answer</button>
-                            <div id="fb-d1-2" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Cloud migration is an IT-driven engagement, which calls for the IT-Centric Metro Map.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q3">
-                            <div class="quiz-progress"><span>Domain 1 · Question 3 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 20%;"></div></div></div>
-                            <div class="quiz-question">A company has just hired their first enterprise architect and has no formal EA governance in place. Which EA organisational model best describes this situation?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q3" value="A"> A) Informal</label>
-                                <label><input type="radio" name="d1q3" value="B"> B) Separated</label>
-                                <label><input type="radio" name="d1q3" value="C"> C) Federated</label>
-                                <label><input type="radio" name="d1q3" value="D"> D) Centralised</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q3', 'A', 'fb-d1-3')">Submit Answer</button>
-                            <div id="fb-d1-3" class="feedback-text"><strong>✅ Correct answer: A</strong><br><em>Why:</em> No dedicated EA team and no formalised EA skills describes the Informal model.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q4">
-                            <div class="quiz-progress"><span>Domain 1 · Question 4 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 26.7%;"></div></div></div>
-                            <div class="quiz-question">Which SAP tool would you use to analyse the performance of business processes and identify areas of improvement using built-in metrics?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q4" value="A"> A) SAP LeanIX</label>
-                                <label><input type="radio" name="d1q4" value="B"> B) SAP Cloud ALM</label>
-                                <label><input type="radio" name="d1q4" value="C"> C) SAP Signavio</label>
-                                <label><input type="radio" name="d1q4" value="D"> D) SAP Business Accelerator Hub</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q4', 'C', 'fb-d1-4')">Submit Answer</button>
-                            <div id="fb-d1-4" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Signavio handles process analysis, with 1,000+ built-in metrics and a live 24-hour system connection.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q5">
-                            <div class="quiz-progress"><span>Domain 1 · Question 5 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 33.3%;"></div></div></div>
-                            <div class="quiz-question">In the SAP EA integrated toolchain, what happens in Step 4 — the "Plan" step?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q5" value="A"> A) SAP Signavio connects to the live SAP system to extract process data</label>
-                                <label><input type="radio" name="d1q5" value="B"> B) SAP LeanIX ingests the current system landscape from Cloud ALM</label>
-                                <label><input type="radio" name="d1q5" value="C"> C) Roadmaps defined in LeanIX are handed over to Cloud ALM, generating implementation projects</label>
-                                <label><input type="radio" name="d1q5" value="D"> D) Process designs in Signavio are approved and transferred for execution</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q5', 'C', 'fb-d1-5')">Submit Answer</button>
-                            <div id="fb-d1-5" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Step 4 is where LeanIX roadmaps are handed to Cloud ALM, which generates implementation projects.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q6">
-                            <div class="quiz-progress"><span>Domain 1 · Question 6 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 40%;"></div></div></div>
-                            <div class="quiz-question">Which of the following is NOT one of the five SAP EA Framework building blocks?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q6" value="A"> A) Methodology</label>
-                                <label><input type="radio" name="d1q6" value="B"> B) Reference Architecture Content</label>
-                                <label><input type="radio" name="d1q6" value="C"> C) Tooling</label>
-                                <label><input type="radio" name="d1q6" value="D"> D) Governance</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q6', 'D', 'fb-d1-6')">Submit Answer</button>
-                            <div id="fb-d1-6" class="feedback-text"><strong>✅ Correct answer: D</strong><br><em>Why:</em> The five blocks are Methodology, Reference Architecture Content, Tooling, Practice and Services. Governance sits inside Practice — it isn't a block of its own.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q7">
-                            <div class="quiz-progress"><span>Domain 1 · Question 7 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 46.7%;"></div></div></div>
-                            <div class="quiz-question">An architect is assessing an organisation's EA maturity. They notice that architecture deliverables are comprehensive, use reference models, and follow standards, but EA rarely influences actual investment decisions. Which two maturity dimensions are most relevant here?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q7" value="A"> A) Business-IT Alignment and Stakeholder Involvement</label>
-                                <label><input type="radio" name="d1q7" value="B"> B) Architecture Development and Action &amp; Impact</label>
-                                <label><input type="radio" name="d1q7" value="C"> C) Communication and People Enablement</label>
-                                <label><input type="radio" name="d1q7" value="D"> D) Organisation &amp; Governance and Architecture Process</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q7', 'B', 'fb-d1-7')">Submit Answer</button>
-                            <div id="fb-d1-7" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> Comprehensive deliverables map to Architecture Development; not influencing investment decisions maps to Action &amp; Impact.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q8">
-                            <div class="quiz-progress"><span>Domain 1 · Question 8 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 53.3%;"></div></div></div>
-                            <div class="quiz-question">Which statement about the ADM is correct?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q8" value="A"> A) The ADM is a sequential waterfall process that must be followed in order</label>
-                                <label><input type="radio" name="d1q8" value="B"> B) The ADM is iterative within phases, between phases, and between full cycles</label>
-                                <label><input type="radio" name="d1q8" value="C"> C) The ADM requires completing all phases in every architecture engagement</label>
-                                <label><input type="radio" name="d1q8" value="D"> D) The ADM phases can be skipped if the stakeholder does not require them</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q8', 'B', 'fb-d1-8')">Submit Answer</button>
-                            <div id="fb-d1-8" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> The ADM is iterative — within phases, between phases, and between full cycles. Never a one-pass waterfall.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q9">
-                            <div class="quiz-progress"><span>Domain 1 · Question 9 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 60%;"></div></div></div>
-                            <div class="quiz-question">What is the primary purpose of the Preliminary Phase in the SAP EA Methodology?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q9" value="A"> A) To develop the Architecture Vision and obtain stakeholder buy-in</label>
-                                <label><input type="radio" name="d1q9" value="B"> B) To set the ground for the architecture engagement by selecting and tailoring the ADM</label>
-                                <label><input type="radio" name="d1q9" value="C"> C) To conduct a gap analysis between the baseline and target architectures</label>
-                                <label><input type="radio" name="d1q9" value="D"> D) To create the roadmap and implementation plan</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q9', 'B', 'fb-d1-9')">Submit Answer</button>
-                            <div id="fb-d1-9" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> The Preliminary Phase is setup — selecting and tailoring the ADM before any real architecture work begins.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q10">
-                            <div class="quiz-progress"><span>Domain 1 · Question 10 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 66.7%;"></div></div></div>
-                            <div class="quiz-question">A company has multiple divisions with very different business models and architectures that operate largely independently. Which EA organisational model is MOST appropriate?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q10" value="A"> A) Informal</label>
-                                <label><input type="radio" name="d1q10" value="B"> B) Separated</label>
-                                <label><input type="radio" name="d1q10" value="C"> C) Federated</label>
-                                <label><input type="radio" name="d1q10" value="D"> D) Centralised</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q10', 'B', 'fb-d1-10')">Submit Answer</button>
-                            <div id="fb-d1-10" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> Loosely coupled divisions with genuinely different architectures describes the Separated model.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q11">
-                            <div class="quiz-progress"><span>Domain 1 · Question 11 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 73.3%;"></div></div></div>
-                            <div class="quiz-question">The SAP EA Framework was officially launched in which year?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q11" value="A"> A) 1995</label>
-                                <label><input type="radio" name="d1q11" value="B"> B) 2001</label>
-                                <label><input type="radio" name="d1q11" value="C"> C) 2007</label>
-                                <label><input type="radio" name="d1q11" value="D"> D) 2015</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q11', 'C', 'fb-d1-11')">Submit Answer</button>
-                            <div id="fb-d1-11" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> SAP introduced the Enterprise Architecture Framework at Sapphire in 2007, as an extension of TOGAF.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q12">
-                            <div class="quiz-progress"><span>Domain 1 · Question 12 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 80%;"></div></div></div>
-                            <div class="quiz-question">An architect is selecting which Metro Map artifacts to include in an engagement. What should be the PRIMARY driver for artifact selection?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q12" value="A"> A) Covering all architecture domains for completeness</label>
-                                <label><input type="radio" name="d1q12" value="B"> B) Following the full Metro Map to ensure methodology compliance</label>
-                                <label><input type="radio" name="d1q12" value="C"> C) The needs and concerns of the stakeholders involved</label>
-                                <label><input type="radio" name="d1q12" value="D"> D) The timeline and budget available for the engagement</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q12', 'C', 'fb-d1-12')">Submit Answer</button>
-                            <div id="fb-d1-12" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Artifacts are selected for the stakeholders who need them — never for architectural completeness.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q13">
-                            <div class="quiz-progress"><span>Domain 1 · Question 13 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 86.7%;"></div></div></div>
-                            <div class="quiz-question">What is the difference between Initial Risk and Residual Risk?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q13" value="A"> A) Initial Risk is documented, Residual Risk is undocumented</label>
-                                <label><input type="radio" name="d1q13" value="B"> B) Initial Risk is before mitigation, Residual Risk is after mitigation</label>
-                                <label><input type="radio" name="d1q13" value="C"> C) Initial Risk applies to business domains, Residual Risk applies to IT domains</label>
-                                <label><input type="radio" name="d1q13" value="D"> D) Initial Risk is high impact, Residual Risk is low impact</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q13', 'B', 'fb-d1-13')">Submit Answer</button>
-                            <div id="fb-d1-13" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> Initial Risk is assessed before mitigation; Residual Risk is what remains after mitigation actions are applied.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q14">
-                            <div class="quiz-progress"><span>Domain 1 · Question 14 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 93.3%;"></div></div></div>
-                            <div class="quiz-question">Which unique value proposition of the SAP integrated toolchain describes the ability to understand the effect of an architectural change on business processes?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q14" value="A"> A) Enabling continuous adoption and operational stability</label>
-                                <label><input type="radio" name="d1q14" value="B"> B) Connecting business process models to real-world execution</label>
-                                <label><input type="radio" name="d1q14" value="C"> C) Linking applications and processes for better impact analysis</label>
-                                <label><input type="radio" name="d1q14" value="D"> D) Integration of planning and implementation views across tools</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q14', 'C', 'fb-d1-14')">Submit Answer</button>
-                            <div id="fb-d1-14" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> "Linking applications and processes for better impact analysis" is the toolchain value proposition that matches.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d1-q15">
-                            <div class="quiz-progress"><span>Domain 1 · Question 15 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 100%;"></div></div></div>
-                            <div class="quiz-question">Architecture Decision Records (ADRs) should be created at which point in the decision-making process?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d1q15" value="A"> A) After the decision has been made and approved by leadership</label>
-                                <label><input type="radio" name="d1q15" value="B"> B) During implementation to document decisions made by the project team</label>
-                                <label><input type="radio" name="d1q15" value="C"> C) Before significant decisions are made, to inform and influence them</label>
-                                <label><input type="radio" name="d1q15" value="D"> D) After the architecture engagement is complete, as a historical record</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d1q15', 'C', 'fb-d1-15')">Submit Answer</button>
-                            <div id="fb-d1-15" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> ADRs must be created before decisions are taken, to inform them — documenting after the fact is too late to serve their purpose.</div>
-                        </div>
-
-                        <h3>Domain 2 — Architecture Vision &amp; Roadmap</h3>
-                        <p class="sheet-footnote">Tests <a href="#sheet-04">04 Vision &amp; Roadmap</a> · <a href="docs.html?file=domains/02-vision-roadmap.md" target="_blank" rel="noopener">full deep-dive →</a></p>
-
-                        <div class="quiz-card" id="d2-q1">
-                            <div class="quiz-progress"><span>Domain 2 · Question 1 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 6.7%;"></div></div></div>
-                            <div class="quiz-question">An enterprise architect has just been engaged by a new client. The CEO has provided a high-level strategy document outlining the company's goals for the next five years. What is the FIRST artifact the architect should produce?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q1" value="A"> A) Business Capability Map</label>
-                                <label><input type="radio" name="d2q1" value="B"> B) Stakeholder Map</label>
-                                <label><input type="radio" name="d2q1" value="C"> C) Statement of Architecture Work</label>
-                                <label><input type="radio" name="d2q1" value="D"> D) Business Model Canvas</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q1', 'B', 'fb-d2-1')">Submit Answer</button>
-                            <div id="fb-d2-1" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> Always start with a Stakeholder Map — you need to know who matters before producing anything else.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q2">
-                            <div class="quiz-progress"><span>Domain 2 · Question 2 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 13.3%;"></div></div></div>
-                            <div class="quiz-question">A CFO has serious concerns about the proposed architecture transformation and has the authority to cancel the project. Which stakeholder quadrant do they fall into, and what is the recommended action?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q2" value="A"> A) Resisters — Monitor and respond</label>
-                                <label><input type="radio" name="d2q2" value="B"> B) Opponents — Satisfy</label>
-                                <label><input type="radio" name="d2q2" value="C"> C) Enthusiasts — Inform</label>
-                                <label><input type="radio" name="d2q2" value="D"> D) Opponents — Actively engage</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q2', 'B', 'fb-d2-2')">Submit Answer</button>
-                            <div id="fb-d2-2" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> High influence plus negative attitude places them in Opponents — the recommended action is to Satisfy, not fight or ignore.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q3">
-                            <div class="quiz-progress"><span>Domain 2 · Question 3 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 20%;"></div></div></div>
-                            <div class="quiz-question">In the Business Model Canvas, which block comes IMMEDIATELY after "Customer Segments"?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q3" value="A"> A) Revenue Streams</label>
-                                <label><input type="radio" name="d2q3" value="B"> B) Key Resources</label>
-                                <label><input type="radio" name="d2q3" value="C"> C) Channels</label>
-                                <label><input type="radio" name="d2q3" value="D"> D) Customer Relationships</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q3', 'C', 'fb-d2-3')">Submit Answer</button>
-                            <div id="fb-d2-3" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> The BMC sequence runs Value Proposition → Customer Segments → Channels → Customer Relationships.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q4">
-                            <div class="quiz-progress"><span>Domain 2 · Question 4 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 26.7%;"></div></div></div>
-                            <div class="quiz-question">What is the SAP EA term for what TOGAF calls a "Driver"?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q4" value="A"> A) Business Goal</label>
-                                <label><input type="radio" name="d2q4" value="B"> B) Value Driver</label>
-                                <label><input type="radio" name="d2q4" value="C"> C) Strategic Priority</label>
-                                <label><input type="radio" name="d2q4" value="D"> D) Architecture Objective</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q4', 'C', 'fb-d2-4')">Submit Answer</button>
-                            <div id="fb-d2-4" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> SAP EA maps TOGAF's "Driver" to "Strategic Priority" — a common terminology swap trap.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q5">
-                            <div class="quiz-progress"><span>Domain 2 · Question 5 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 33.3%;"></div></div></div>
-                            <div class="quiz-question">An architect has just completed the Architecture Principles workshop. The team has produced 35 principles covering every possible scenario. What should the architect do?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q5" value="A"> A) Accept all 35 — comprehensive coverage reduces risk</label>
-                                <label><input type="radio" name="d2q5" value="B"> B) Reduce to 10–20 principles — too many limits architectural flexibility</label>
-                                <label><input type="radio" name="d2q5" value="C"> C) Submit for leadership approval before reducing</label>
-                                <label><input type="radio" name="d2q5" value="D"> D) Convert the extra principles into requirements</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q5', 'B', 'fb-d2-5')">Submit Answer</button>
-                            <div id="fb-d2-5" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> 10–20 principles is the practical ceiling. More principles means less architectural flexibility, not less risk.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q6">
-                            <div class="quiz-progress"><span>Domain 2 · Question 6 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 40%;"></div></div></div>
-                            <div class="quiz-question">Which of the following statements about the Statement of Architecture Work is CORRECT?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q6" value="A"> A) It is produced at the end of Phase B after the Business Architecture is complete</label>
-                                <label><input type="radio" name="d2q6" value="B"> B) It is a living document that evolves throughout all ADM phases</label>
-                                <label><input type="radio" name="d2q6" value="C"> C) It is produced at the end of Phase A and must be approved before Phase B begins</label>
-                                <label><input type="radio" name="d2q6" value="D"> D) It is an optional artifact for smaller engagements</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q6', 'C', 'fb-d2-6')">Submit Answer</button>
-                            <div id="fb-d2-6" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> The Statement of Architecture Work is the output of Phase A and must be approved before Phase B can begin.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q7">
-                            <div class="quiz-progress"><span>Domain 2 · Question 7 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 46.7%;"></div></div></div>
-                            <div class="quiz-question">A stakeholder looks at the Solution Context Diagram and says "I've been staring at this for 15 minutes and I still don't understand what we're building." What should the architect do?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q7" value="A"> A) Provide additional training to the stakeholder</label>
-                                <label><input type="radio" name="d2q7" value="B"> B) Simplify the diagram — it has failed the 10-minute test</label>
-                                <label><input type="radio" name="d2q7" value="C"> C) Replace it with a Solution Concept Diagram</label>
-                                <label><input type="radio" name="d2q7" value="D"> D) Schedule a walkthrough session to explain the complexity</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q7', 'B', 'fb-d2-7')">Submit Answer</button>
-                            <div id="fb-d2-7" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> The 10-minute rule: if a stakeholder can't understand a diagram in 10 minutes, it's too complex — simplify it.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q8">
-                            <div class="quiz-progress"><span>Domain 2 · Question 8 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 53.3%;"></div></div></div>
-                            <div class="quiz-question">Which component of an Architecture Principle explains WHY the principle benefits the business?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q8" value="A"> A) Name</label>
-                                <label><input type="radio" name="d2q8" value="B"> B) Statement</label>
-                                <label><input type="radio" name="d2q8" value="C"> C) Rationale</label>
-                                <label><input type="radio" name="d2q8" value="D"> D) Implications</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q8', 'C', 'fb-d2-8')">Submit Answer</button>
-                            <div id="fb-d2-8" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Rationale is the component that explains the business benefit of adhering to the principle.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q9">
-                            <div class="quiz-progress"><span>Domain 2 · Question 9 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 60%;"></div></div></div>
-                            <div class="quiz-question">A business roadmap shows initiatives, capabilities, and outcomes mixed together across a 5-year timeline. What is wrong with this approach?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q9" value="A"> A) The time horizon is too long — roadmaps should be 1–2 years</label>
-                                <label><input type="radio" name="d2q9" value="B"> B) Roadmaps should use calendar years, not fiscal years</label>
-                                <label><input type="radio" name="d2q9" value="C"> C) Only one entity type should be used per roadmap — don't mix</label>
-                                <label><input type="radio" name="d2q9" value="D"> D) Nothing is wrong — mixing entity types gives richer context</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q9', 'C', 'fb-d2-9')">Submit Answer</button>
-                            <div id="fb-d2-9" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> A roadmap should use one entity type consistently — don't mix Initiatives, Capabilities, and Outcomes on the same view.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q10">
-                            <div class="quiz-progress"><span>Domain 2 · Question 10 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 66.7%;"></div></div></div>
-                            <div class="quiz-question">What is the PRIMARY difference between a Solution Context Diagram and a Solution Concept Diagram?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q10" value="A"> A) Solution Context is for technical stakeholders; Solution Concept is for business stakeholders</label>
-                                <label><input type="radio" name="d2q10" value="B"> B) Solution Context shows organisational relationships; Solution Concept shows technical building blocks</label>
-                                <label><input type="radio" name="d2q10" value="C"> C) Solution Context is produced in Phase B; Solution Concept is produced in Phase A</label>
-                                <label><input type="radio" name="d2q10" value="D"> D) Solution Context is mandatory; Solution Concept is optional</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q10', 'B', 'fb-d2-10')">Submit Answer</button>
-                            <div id="fb-d2-10" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> Context shows organisational relationships; Concept is the technical "pencil sketch" of building blocks.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q11">
-                            <div class="quiz-progress"><span>Domain 2 · Question 11 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 73.3%;"></div></div></div>
-                            <div class="quiz-question">In the Business Strategy Map, which level sits directly below "Value Drivers"?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q11" value="A"> A) Strategic Priorities</label>
-                                <label><input type="radio" name="d2q11" value="B"> B) Business Goals</label>
-                                <label><input type="radio" name="d2q11" value="C"> C) Business Capabilities</label>
-                                <label><input type="radio" name="d2q11" value="D"> D) Initiatives</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q11', 'C', 'fb-d2-11')">Submit Answer</button>
-                            <div id="fb-d2-11" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> The Strategy Map runs Strategic Priority → Goals → Value Drivers → Business Capabilities → Initiatives.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q12">
-                            <div class="quiz-progress"><span>Domain 2 · Question 12 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 80%;"></div></div></div>
-                            <div class="quiz-question">An application has high technical quality but provides very little functional value to the business. According to the TIME model, what category does this fall into?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q12" value="A"> A) Invest</label>
-                                <label><input type="radio" name="d2q12" value="B"> B) Migrate</label>
-                                <label><input type="radio" name="d2q12" value="C"> C) Tolerate</label>
-                                <label><input type="radio" name="d2q12" value="D"> D) Eliminate</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q12', 'C', 'fb-d2-12')">Submit Answer</button>
-                            <div id="fb-d2-12" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> High technical fit combined with low functional fit is exactly the Tolerate quadrant.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q13">
-                            <div class="quiz-progress"><span>Domain 2 · Question 13 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 86.7%;"></div></div></div>
-                            <div class="quiz-question">Which of the following is a Transition Architecture?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q13" value="A"> A) The final desired state of the enterprise architecture</label>
-                                <label><input type="radio" name="d2q13" value="B"> B) A formally defined intermediate state between Baseline and Target architectures</label>
-                                <label><input type="radio" name="d2q13" value="C"> C) A high-level vision of the architecture produced in Phase A</label>
-                                <label><input type="radio" name="d2q13" value="D"> D) The architecture at the point of go-live</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q13', 'B', 'fb-d2-13')">Submit Answer</button>
-                            <div id="fb-d2-13" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> A Transition Architecture is a formally defined intermediate state on the journey to the Target.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q14">
-                            <div class="quiz-progress"><span>Domain 2 · Question 14 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 93.3%;"></div></div></div>
-                            <div class="quiz-question">An architect is creating Architecture Principles with the team. Which attendee is MOST critical to ensure business alignment?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q14" value="A"> A) Head of Solutions Development</label>
-                                <label><input type="radio" name="d2q14" value="B"> B) Head of IT Operations</label>
-                                <label><input type="radio" name="d2q14" value="C"> C) Chief Information Officer (CIO)</label>
-                                <label><input type="radio" name="d2q14" value="D"> D) External SAP Consultant</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q14', 'C', 'fb-d2-14')">Submit Answer</button>
-                            <div id="fb-d2-14" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> The CIO is critical here — they bridge business and IT at the executive level.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d2-q15">
-                            <div class="quiz-progress"><span>Domain 2 · Question 15 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 100%;"></div></div></div>
-                            <div class="quiz-question">Which roadmap entity type is described as MOST effective for business stakeholder engagement?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d2q15" value="A"> A) Initiative-based</label>
-                                <label><input type="radio" name="d2q15" value="B"> B) Capability-based</label>
-                                <label><input type="radio" name="d2q15" value="C"> C) Outcome-based</label>
-                                <label><input type="radio" name="d2q15" value="D"> D) Application-based</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d2q15', 'C', 'fb-d2-15')">Submit Answer</button>
-                            <div id="fb-d2-15" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Outcome-based roadmaps resonate best with business stakeholders — they speak in results, not deliverables.</div>
-                        </div>
-
-                        <h3>Domain 3 — Business Architecture</h3>
-                        <p class="sheet-footnote">Tests <a href="#sheet-05">05 Business Architecture</a> · <a href="docs.html?file=domains/03-business-architecture.md" target="_blank" rel="noopener">full deep-dive →</a></p>
-
-                        <div class="quiz-card" id="d3-q1">
-                            <div class="quiz-progress"><span>Domain 3 · Question 1 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 6.7%;"></div></div></div>
-                            <div class="quiz-question">Which statement BEST distinguishes a Business Capability from a Business Process?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q1" value="A"> A) Business Capabilities describe HOW the business operates; Business Processes describe WHAT it must do</label>
-                                <label><input type="radio" name="d3q1" value="B"> B) Business Capabilities describe WHAT the business must be able to do; Business Processes describe HOW it does it</label>
-                                <label><input type="radio" name="d3q1" value="C"> C) Business Capabilities are owned by IT; Business Processes are owned by the business</label>
-                                <label><input type="radio" name="d3q1" value="D"> D) Business Capabilities change frequently; Business Processes are stable</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q1', 'B', 'fb-d3-1')">Submit Answer</button>
-                            <div id="fb-d3-1" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> Capabilities are WHAT (stable); Processes are HOW (continually improved).</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q2">
-                            <div class="quiz-progress"><span>Domain 3 · Question 2 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 13.3%;"></div></div></div>
-                            <div class="quiz-question">A company's Business Capability Map includes "Sales," "Marketing," and "Customer Service" all as Level 1 items under the same domain. An architect notices that "Customer Service" partially overlaps with "Sales" in terms of the capabilities it contains. Which principle has been violated?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q2" value="A"> A) APQC PCF compliance</label>
-                                <label><input type="radio" name="d3q2" value="B"> B) MECE — Mutually Exclusive condition</label>
-                                <label><input type="radio" name="d3q2" value="C"> C) MECE — Collectively Exhaustive condition</label>
-                                <label><input type="radio" name="d3q2" value="D"> D) Business Footprint alignment</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q2', 'B', 'fb-d3-2')">Submit Answer</button>
-                            <div id="fb-d3-2" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> Overlap between capabilities violates the Mutually Exclusive half of MECE.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q3">
-                            <div class="quiz-progress"><span>Domain 3 · Question 3 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 20%;"></div></div></div>
-                            <div class="quiz-question">Which of the following is the CORRECT naming convention for a Level 2 Business Process Module?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q3" value="A"> A) "Manage Customer Relationships"</label>
-                                <label><input type="radio" name="d3q3" value="B"> B) "Customer to Cash"</label>
-                                <label><input type="radio" name="d3q3" value="C"> C) "Sales Process Segment"</label>
-                                <label><input type="radio" name="d3q3" value="D"> D) "Plan to Optimise Sales"</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q3', 'B', 'fb-d3-3')">Submit Answer</button>
-                            <div id="fb-d3-3" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> Level 2 modules follow an "&lt;A&gt; to &lt;B&gt;" pattern, e.g. "Customer to Cash." Level 1 uses phrasing like "Plan to Optimise…".</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q4">
-                            <div class="quiz-progress"><span>Domain 3 · Question 4 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 26.7%;"></div></div></div>
-                            <div class="quiz-question">A Business Architect is conducting a heat mapping exercise. Which party should PRIMARILY own and name the business capabilities?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q4" value="A"> A) The enterprise architect</label>
-                                <label><input type="radio" name="d3q4" value="B"> B) The IT department</label>
-                                <label><input type="radio" name="d3q4" value="C"> C) The business stakeholders</label>
-                                <label><input type="radio" name="d3q4" value="D"> D) The SAP implementation partner</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q4', 'C', 'fb-d3-4')">Submit Answer</button>
-                            <div id="fb-d3-4" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Business stakeholders own and name capabilities — the naming has to resonate with the business, not IT.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q5">
-                            <div class="quiz-progress"><span>Domain 3 · Question 5 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 33.3%;"></div></div></div>
-                            <div class="quiz-question">The Business Footprint Diagram is described as a "cross-domain X-ray." What makes it unique compared to other Business Architecture artifacts?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q5" value="A"> A) It is the only artifact that uses colour coding</label>
-                                <label><input type="radio" name="d3q5" value="B"> B) It links strategic objectives, capabilities, solution components, and technology in a single view</label>
-                                <label><input type="radio" name="d3q5" value="C"> C) It is the only mandatory artifact in Phase B</label>
-                                <label><input type="radio" name="d3q5" value="D"> D) It replaces both the Capability Map and the Process Model</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q5', 'B', 'fb-d3-5')">Submit Answer</button>
-                            <div id="fb-d3-5" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> The Business Footprint is the only artifact that links strategy → capabilities → solutions → technology in one view.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q6">
-                            <div class="quiz-progress"><span>Domain 3 · Question 6 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 40%;"></div></div></div>
-                            <div class="quiz-question">Which approach to Business Architecture should be used when the architecture engagement is driven by a new SAP S/4HANA implementation covering multiple business functions?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q6" value="A"> A) Experience-Based</label>
-                                <label><input type="radio" name="d3q6" value="B"> B) Process-Centric</label>
-                                <label><input type="radio" name="d3q6" value="C"> C) Capability-Centric</label>
-                                <label><input type="radio" name="d3q6" value="D"> D) Technology-Centric</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q6', 'C', 'fb-d3-6')">Submit Answer</button>
-                            <div id="fb-d3-6" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> A new implementation spanning multiple functions calls for the Capability-Centric approach.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q7">
-                            <div class="quiz-progress"><span>Domain 3 · Question 7 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 46.7%;"></div></div></div>
-                            <div class="quiz-question">A Level 3 Business Process Segment for "Customer Management" shares its name with a Business Area in the Business Capability Map. An architect questions whether this is an error. What is the correct response?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q7" value="A"> A) It is an error — they must have different names to avoid confusion</label>
-                                <label><input type="radio" name="d3q7" value="B"> B) It is intentional — the shared naming creates synergy between capability and process models</label>
-                                <label><input type="radio" name="d3q7" value="C"> C) It is acceptable practice but not recommended by SAP</label>
-                                <label><input type="radio" name="d3q7" value="D"> D) The process segment should be renamed to reflect the solution, not the business</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q7', 'B', 'fb-d3-7')">Submit Answer</button>
-                            <div id="fb-d3-7" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> This is intentional — shared naming across capability and process models creates synergy, even though the objects are distinct.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q8">
-                            <div class="quiz-progress"><span>Domain 3 · Question 8 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 53.3%;"></div></div></div>
-                            <div class="quiz-question">Which SAP tool provides access to the Reference Business Architecture process content?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q8" value="A"> A) SAP LeanIX</label>
-                                <label><input type="radio" name="d3q8" value="B"> B) SAP Cloud ALM</label>
-                                <label><input type="radio" name="d3q8" value="C"> C) SAP Signavio Process Explorer</label>
-                                <label><input type="radio" name="d3q8" value="D"> D) SAP Business Application Studio</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q8', 'C', 'fb-d3-8')">Submit Answer</button>
-                            <div id="fb-d3-8" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> SAP Signavio Process Explorer is the entry point to RBA process content.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q9">
-                            <div class="quiz-progress"><span>Domain 3 · Question 9 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 60%;"></div></div></div>
-                            <div class="quiz-question">In the Business Process Model, at which level are all entries stored in ONE central repository?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q9" value="A"> A) Level 1 — E2E Business Process</label>
-                                <label><input type="radio" name="d3q9" value="B"> B) Level 2 — Business Process Module</label>
-                                <label><input type="radio" name="d3q9" value="C"> C) Level 3 — Business Process Segment</label>
-                                <label><input type="radio" name="d3q9" value="D"> D) Level 4 — Business Activity</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q9', 'D', 'fb-d3-9')">Submit Answer</button>
-                            <div id="fb-d3-9" class="feedback-text"><strong>✅ Correct answer: D</strong><br><em>Why:</em> Level 4 Business Activities all sit in one central Business Activity Repository.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q10">
-                            <div class="quiz-progress"><span>Domain 3 · Question 10 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 66.7%;"></div></div></div>
-                            <div class="quiz-question">An architect produces an Organisation Map showing the reporting lines between the CEO, regional directors, and department heads. A colleague says this is not an Organisation Map in the SAP EA sense. Why?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q10" value="A"> A) Organisation Maps should only show external stakeholders</label>
-                                <label><input type="radio" name="d3q10" value="B"> B) Organisation Maps show networks of working relationships, not hierarchical reporting lines</label>
-                                <label><input type="radio" name="d3q10" value="C"> C) Organisation Maps are not produced until Phase C</label>
-                                <label><input type="radio" name="d3q10" value="D"> D) Organisation Maps should be based on the Business Capability structure</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q10', 'B', 'fb-d3-10')">Submit Answer</button>
-                            <div id="fb-d3-10" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> An EA Organisation Map shows a network of working relationships — it is explicitly not a hierarchical org chart.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q11">
-                            <div class="quiz-progress"><span>Domain 3 · Question 11 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 73.3%;"></div></div></div>
-                            <div class="quiz-question">Which of the following is the PRIMARY purpose of the Business Data Catalog?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q11" value="A"> A) To document the database schema of the target SAP system</label>
-                                <label><input type="radio" name="d3q11" value="B"> B) To summarise business-relevant information objects and their relationships</label>
-                                <label><input type="radio" name="d3q11" value="C"> C) To define data migration requirements from legacy systems</label>
-                                <label><input type="radio" name="d3q11" value="D"> D) To map solution data objects to infrastructure storage locations</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q11', 'B', 'fb-d3-11')">Submit Answer</button>
-                            <div id="fb-d3-11" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> The Business Data Catalog summarises business-relevant information objects and how they relate — not database schema.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q12">
-                            <div class="quiz-progress"><span>Domain 3 · Question 12 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 80%;"></div></div></div>
-                            <div class="quiz-question">What does the APQC PCF provide in the context of SAP Business Architecture?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q12" value="A"> A) A technology reference model for SAP infrastructure</label>
-                                <label><input type="radio" name="d3q12" value="B"> B) A process classification framework used as the basis for the Business Process Model</label>
-                                <label><input type="radio" name="d3q12" value="C"> C) A capability maturity assessment framework</label>
-                                <label><input type="radio" name="d3q12" value="D"> D) A set of SAP-specific integration patterns</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q12', 'B', 'fb-d3-12')">Submit Answer</button>
-                            <div id="fb-d3-12" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> The APQC Process Classification Framework is the industry-standard basis for the SAP Business Process Model.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q13">
-                            <div class="quiz-progress"><span>Domain 3 · Question 13 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 86.7%;"></div></div></div>
-                            <div class="quiz-question">Which of the following BEST describes the bottom-up approach to Business Capability Assessment?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q13" value="A"> A) Start from strategic goals and link them to capabilities via the Strategy Map</label>
-                                <label><input type="radio" name="d3q13" value="B"> B) Start from the current state and use heat mapping to identify gaps and priorities</label>
-                                <label><input type="radio" name="d3q13" value="C"> C) Start from the SAP Reference Business Architecture and map to current capabilities</label>
-                                <label><input type="radio" name="d3q13" value="D"> D) Start from identified IT investments and trace them back to business capabilities</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q13', 'B', 'fb-d3-13')">Submit Answer</button>
-                            <div id="fb-d3-13" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> Bottom-up starts from the current state and heat-maps gaps; top-down starts from strategy instead.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q14">
-                            <div class="quiz-progress"><span>Domain 3 · Question 14 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 93.3%;"></div></div></div>
-                            <div class="quiz-question">In which domain of the four Enterprise Domains would "Financial Planning and Analysis" most likely be classified?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q14" value="A"> A) Product &amp; Services</label>
-                                <label><input type="radio" name="d3q14" value="B"> B) Customer</label>
-                                <label><input type="radio" name="d3q14" value="C"> C) Supply</label>
-                                <label><input type="radio" name="d3q14" value="D"> D) Corporate</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q14', 'D', 'fb-d3-14')">Submit Answer</button>
-                            <div id="fb-d3-14" class="feedback-text"><strong>✅ Correct answer: D</strong><br><em>Why:</em> Financial Planning and Analysis sits in the Corporate domain, alongside finance, HR, legal, IT and risk.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d3-q15">
-                            <div class="quiz-progress"><span>Domain 3 · Question 15 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 100%;"></div></div></div>
-                            <div class="quiz-question">A Business Architect is mapping business capabilities to solution capabilities. They find that a Business Capability has no corresponding Solution Capability in the target architecture. What does this represent?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d3q15" value="A"> A) A requirement to customise the SAP solution</label>
-                                <label><input type="radio" name="d3q15" value="B"> B) A gap — this capability must be addressed in the roadmap</label>
-                                <label><input type="radio" name="d3q15" value="C"> C) A capability that should be eliminated from the Business Capability Map</label>
-                                <label><input type="radio" name="d3q15" value="D"> D) A non-functional requirement to be added to the Requirements Catalog</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d3q15', 'B', 'fb-d3-15')">Submit Answer</button>
-                            <div id="fb-d3-15" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> A missing Solution Capability is a gap that has to be addressed in the architecture roadmap.</div>
-                        </div>
-
-                        <h3>Domain 4 — Data, Application &amp; Technology Architecture</h3>
-                        <p class="sheet-footnote">Tests <a href="#sheet-06">06 Data / App / Tech</a> · <a href="docs.html?file=domains/04-data-app-tech.md" target="_blank" rel="noopener">full deep-dive →</a></p>
-
-                        <div class="quiz-card" id="d4-q1">
-                            <div class="quiz-progress"><span>Domain 4 · Question 1 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 6.7%;"></div></div></div>
-                            <div class="quiz-question">An architect needs to show how solution components communicate with each other statically — what systems exist, what they connect to, and through which channels. Which diagram should they use?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q1" value="A"> A) Solution Process Flow Diagram</label>
-                                <label><input type="radio" name="d4q1" value="B"> B) Solution Value Flow Diagram</label>
-                                <label><input type="radio" name="d4q1" value="C"> C) Solution Component Diagram</label>
-                                <label><input type="radio" name="d4q1" value="D"> D) Application Architecture Overview</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q1', 'C', 'fb-d4-1')">Submit Answer</button>
-                            <div id="fb-d4-1" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> The Solution Component Diagram is the static STRUCTURE view of systems and their connections.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q2">
-                            <div class="quiz-progress"><span>Domain 4 · Question 2 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 13.3%;"></div></div></div>
-                            <div class="quiz-question">A company runs SAP S/4HANA on their own hardware in their own data centre, with no cloud involvement. What deployment type is this?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q2" value="A"> A) Private Cloud</label>
-                                <label><input type="radio" name="d4q2" value="B"> B) Public Cloud</label>
-                                <label><input type="radio" name="d4q2" value="C"> C) On-Premise</label>
-                                <label><input type="radio" name="d4q2" value="D"> D) Hybrid Cloud</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q2', 'C', 'fb-d4-2')">Submit Answer</button>
-                            <div id="fb-d4-2" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Own hardware in an owned data centre, with no cloud involvement, is On-Premise.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q3">
-                            <div class="quiz-progress"><span>Domain 4 · Question 3 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 20%;"></div></div></div>
-                            <div class="quiz-question">In a SaaS deployment, what does the customer control?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q3" value="A"> A) The operating system and storage</label>
-                                <label><input type="radio" name="d4q3" value="B"> B) The deployed applications and middleware</label>
-                                <label><input type="radio" name="d4q3" value="C"> C) Only user-specific configuration</label>
-                                <label><input type="radio" name="d4q3" value="D"> D) The physical hardware layer</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q3', 'C', 'fb-d4-3')">Submit Answer</button>
-                            <div id="fb-d4-3" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> In SaaS, the customer controls only user-specific configuration — everything else is the provider's responsibility.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q4">
-                            <div class="quiz-progress"><span>Domain 4 · Question 4 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 26.7%;"></div></div></div>
-                            <div class="quiz-question">A business user needs to extend SAP S/4HANA functionality without writing any code and without affecting the standard SAP delivery. Which Clean Core extension type should they use?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q4" value="A"> A) Developer Extensibility</label>
-                                <label><input type="radio" name="d4q4" value="B"> B) Side-by-Side Extension</label>
-                                <label><input type="radio" name="d4q4" value="C"> C) Key User Extensibility</label>
-                                <label><input type="radio" name="d4q4" value="D"> D) ABAP Custom Code</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q4', 'C', 'fb-d4-4')">Submit Answer</button>
-                            <div id="fb-d4-4" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Key User Extensibility is no-code, in-app, and leaves the standard S/4HANA delivery untouched.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q5">
-                            <div class="quiz-progress"><span>Domain 4 · Question 5 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 33.3%;"></div></div></div>
-                            <div class="quiz-question">A company wants to build a complex mobile application that integrates with S/4HANA but runs completely separately to avoid any impact on the core system. Which extension approach is recommended?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q5" value="A"> A) Key User Extensibility — low risk, in-app</label>
-                                <label><input type="radio" name="d4q5" value="B"> B) Developer Extensibility — ABAP on S/4HANA</label>
-                                <label><input type="radio" name="d4q5" value="C"> C) Side-by-Side Extension on SAP BTP</label>
-                                <label><input type="radio" name="d4q5" value="D"> D) Core modification with SAP support approval</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q5', 'C', 'fb-d4-5')">Submit Answer</button>
-                            <div id="fb-d4-5" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> A complex, separately-running app is exactly what Side-by-Side Extension on SAP BTP is for.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q6">
-                            <div class="quiz-progress"><span>Domain 4 · Question 6 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 40%;"></div></div></div>
-                            <div class="quiz-question">The Software Distribution Diagram belongs to which ADM phase?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q6" value="A"> A) Phase B — Business Architecture</label>
-                                <label><input type="radio" name="d4q6" value="B"> B) Phase C — Application &amp; Data Architecture</label>
-                                <label><input type="radio" name="d4q6" value="C"> C) Phase D — Technology Architecture</label>
-                                <label><input type="radio" name="d4q6" value="D"> D) Phase E — Opportunities &amp; Solutions</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q6', 'B', 'fb-d4-6')">Submit Answer</button>
-                            <div id="fb-d4-6" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> The Software Distribution Diagram belongs to Phase C, Application Architecture.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q7">
-                            <div class="quiz-progress"><span>Domain 4 · Question 7 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 46.7%;"></div></div></div>
-                            <div class="quiz-question">Which diagram in Technology Architecture evolves from the Software Distribution Diagram by adding physical data centre locations and network connectivity?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q7" value="A"> A) Network and Communications Diagram</label>
-                                <label><input type="radio" name="d4q7" value="B"> B) Application Architecture Overview</label>
-                                <label><input type="radio" name="d4q7" value="C"> C) Environments and Location Diagram</label>
-                                <label><input type="radio" name="d4q7" value="D"> D) Solution Component Diagram</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q7', 'C', 'fb-d4-7')">Submit Answer</button>
-                            <div id="fb-d4-7" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> The Environments &amp; Location Diagram evolves from the Software Distribution Diagram as the engagement moves into Phase D.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q8">
-                            <div class="quiz-progress"><span>Domain 4 · Question 8 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 53.3%;"></div></div></div>
-                            <div class="quiz-question">A company operates SAP infrastructure in a cloud environment that is used exclusively by them, managed by a third-party provider, and accessed via VPN. What deployment type is this?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q8" value="A"> A) On-Premise</label>
-                                <label><input type="radio" name="d4q8" value="B"> B) Public Cloud</label>
-                                <label><input type="radio" name="d4q8" value="C"> C) Private Cloud</label>
-                                <label><input type="radio" name="d4q8" value="D"> D) Community Cloud</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q8', 'C', 'fb-d4-8')">Submit Answer</button>
-                            <div id="fb-d4-8" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Exclusive use, third-party managed, and VPN access together describe a Private Cloud.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q9">
-                            <div class="quiz-progress"><span>Domain 4 · Question 9 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 60%;"></div></div></div>
-                            <div class="quiz-question">Which of the four ISA-M integration domains covers the connection between operational systems and reporting/analytics platforms?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q9" value="A"> A) Process Integration</label>
-                                <label><input type="radio" name="d4q9" value="B"> B) Data Integration</label>
-                                <label><input type="radio" name="d4q9" value="C"> C) Analytics Integration</label>
-                                <label><input type="radio" name="d4q9" value="D"> D) IoT Integration</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q9', 'C', 'fb-d4-9')">Submit Answer</button>
-                            <div id="fb-d4-9" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Analytics Integration is the ISA-M domain that connects operational data to analytics and reporting.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q10">
-                            <div class="quiz-progress"><span>Domain 4 · Question 10 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 66.7%;"></div></div></div>
-                            <div class="quiz-question">A company is migrating from SAP ECC to S/4HANA. They want maximum standardisation and are willing to re-configure everything from scratch, discarding all legacy customisations. Which transformation strategy is appropriate?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q10" value="A"> A) Brownfield</label>
-                                <label><input type="radio" name="d4q10" value="B"> B) Selective Data Transition</label>
-                                <label><input type="radio" name="d4q10" value="C"> C) Greenfield</label>
-                                <label><input type="radio" name="d4q10" value="D"> D) Lift and Shift</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q10', 'C', 'fb-d4-10')">Submit Answer</button>
-                            <div id="fb-d4-10" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Maximum standardisation with a fresh start is the definition of Greenfield.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q11">
-                            <div class="quiz-progress"><span>Domain 4 · Question 11 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 73.3%;"></div></div></div>
-                            <div class="quiz-question">Which SAP product serves as the canonical data model defining the structure of Solution Data Objects?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q11" value="A"> A) SAP Master Data Governance (MDG)</label>
-                                <label><input type="radio" name="d4q11" value="B"> B) SAP One Domain Model (ODM)</label>
-                                <label><input type="radio" name="d4q11" value="C"> C) SAP Data Intelligence</label>
-                                <label><input type="radio" name="d4q11" value="D"> D) SAP HANA Cloud</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q11', 'B', 'fb-d4-11')">Submit Answer</button>
-                            <div id="fb-d4-11" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> SAP One Domain Model (ODM) is the unified, canonical model for business objects shared across SAP applications — published on the SAP Business Accelerator Hub.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q12">
-                            <div class="quiz-progress"><span>Domain 4 · Question 12 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 80%;"></div></div></div>
-                            <div class="quiz-question">In the Solution Component Diagram, what is a "Communication Channel"?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q12" value="A"> A) A business process that flows between two organisational units</label>
-                                <label><input type="radio" name="d4q12" value="B"> B) A data transfer mechanism between two Deployment Units</label>
-                                <label><input type="radio" name="d4q12" value="C"> C) An API endpoint published on SAP Business Accelerator Hub</label>
-                                <label><input type="radio" name="d4q12" value="D"> D) A network connection described in the Environments &amp; Location Diagram</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q12', 'B', 'fb-d4-12')">Submit Answer</button>
-                            <div id="fb-d4-12" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> A Communication Channel is the data-transfer mechanism between two Deployment Units.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q13">
-                            <div class="quiz-progress"><span>Domain 4 · Question 13 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 86.7%;"></div></div></div>
-                            <div class="quiz-question">An architect is producing the Conceptual Data Diagram. After defining entities, what is the NEXT step?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q13" value="A"> A) Define relationships between entities</label>
-                                <label><input type="radio" name="d4q13" value="B"> B) Define attributes of each entity</label>
-                                <label><input type="radio" name="d4q13" value="C"> C) Map entities to solution components</label>
-                                <label><input type="radio" name="d4q13" value="D"> D) Create the Solution Data Flow Diagram</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q13', 'B', 'fb-d4-13')">Submit Answer</button>
-                            <div id="fb-d4-13" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> The sequence is Entities → Attributes → Relationships.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q14">
-                            <div class="quiz-progress"><span>Domain 4 · Question 14 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 93.3%;"></div></div></div>
-                            <div class="quiz-question">In an IaaS deployment, what does the customer control that they do NOT control in PaaS?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q14" value="A"> A) Deployed applications</label>
-                                <label><input type="radio" name="d4q14" value="B"> B) Platform middleware</label>
-                                <label><input type="radio" name="d4q14" value="C"> C) The operating system</label>
-                                <label><input type="radio" name="d4q14" value="D"> D) User-specific configuration</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q14', 'C', 'fb-d4-14')">Submit Answer</button>
-                            <div id="fb-d4-14" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> In IaaS the customer controls the OS (plus storage and apps); in PaaS the provider manages the OS.</div>
-                        </div>
-
-                        <div class="quiz-card" id="d4-q15">
-                            <div class="quiz-progress"><span>Domain 4 · Question 15 of 15</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 100%;"></div></div></div>
-                            <div class="quiz-question">Which of the following BEST describes the purpose of the Product Map in Application Architecture?</div>
-                            <div class="quiz-options">
-                                <label><input type="radio" name="d4q15" value="A"> A) A BPMN diagram showing step-by-step product delivery processes</label>
-                                <label><input type="radio" name="d4q15" value="B"> B) A bill of materials showing recommended SAP products per Business Domain or Area</label>
-                                <label><input type="radio" name="d4q15" value="C"> C) A landscape diagram showing all currently deployed SAP products</label>
-                                <label><input type="radio" name="d4q15" value="D"> D) A roadmap showing planned SAP product upgrades over time</label>
-                            </div>
-                            <button class="quiz-submit" onclick="checkAnswer('d4q15', 'B', 'fb-d4-15')">Submit Answer</button>
-                            <div id="fb-d4-15" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> The Product Map is a bill of materials recommending SAP products per Business Domain or Area.</div>
-                        </div>
-
-                        <div class="text-center" style="margin: 26px 0;">
-                            <button onclick="resetAllQuizzes()" class="btn btn-secondary">🔄 Reset All Quizzes</button>
-                        </div>
+                        <div id="domainQuizList"><p class="sheet-footnote">Loading questions…</p></div>
                     </section>
 
                     <!-- ================ QUIZ SECTION ================ -->
@@ -1640,6 +1005,12 @@
                                     <li>Existing dealer network pushing back</li>
                                 </ul>
                             </div>
+                            <h4>Push your reasoning further</h4>
+                            <ul>
+                                <li>The existing dealer network is losing revenue under direct-to-consumer sales. Whose concern do you address first — the dealers demanding protection, or the CEO demanding speed to market?</li>
+                                <li>OTA software updates ship on a completely different cadence than a physical vehicle. Does that push you toward two separate architectures, or one platform serving both cadences?</li>
+                                <li>R&amp;D needs agile development; manufacturing needs stability. Where exactly do you draw the boundary between them?</li>
+                            </ul>
                             <h4>Your Task</h4>
                             <p>Using the 9-step defense pattern, provide a complete architecture recommendation:</p>
                             <ol style="padding-left: 20px;">
@@ -1666,6 +1037,17 @@
                                     <p><strong>8. Roadmap:</strong> Phase 1: Stand up cloud platform; Phase 2: EV customer portal; Phase 3: Integration with manufacturing; Phase 4: Full transition.</p>
                                     <p><strong>9. Validation:</strong> Time-to-market for new features, customer satisfaction scores, cost per vehicle.</p>
                                 </div>
+                                <div class="case-checklist">
+                                    <p class="case-checklist__label">Self-score against the <a href="#sheet-09">rubric</a>:</p>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case1-alignment"> Business alignment — explicit, not just mentioned</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case1-constraints"> Constraints — prioritised, not just listed</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case1-architecture"> Architecture — coherent, not just reasonable</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case1-artifacts"> Artifacts / method — applied correctly, not just named</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case1-tradeoffs"> Trade-offs — defended, not just mentioned</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case1-roadmap"> Roadmap — sequenced, not generic</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case1-risk"> Risk — mitigated, not just identified</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case1-communication"> Communication — executive-quality, not rambling</label>
+                                </div>
                             </details>
                         </div>
 
@@ -1685,6 +1067,12 @@
                                     <li>High security requirements</li>
                                 </ul>
                             </div>
+                            <h4>Push your reasoning further</h4>
+                            <ul>
+                                <li>Competitors are moving faster, but the bank has a 1990s core and limited internal API expertise. Do you build the API layer in-house anyway, or bring in a partner — and what does that decision cost you later?</li>
+                                <li>Starting with read-only APIs is the safe move. What's the actual trigger condition for when you're allowed to open write access?</li>
+                                <li>Security compliance is non-negotiable in banking. Where does that constraint stop you from doing something the business explicitly asked for?</li>
+                            </ul>
                             <h4>Your Task</h4>
                             <p>Use the 9-step defense pattern for an API strategy recommendation:</p>
                             <ol style="padding-left: 20px;">
@@ -1702,6 +1090,17 @@
                                     <p><strong>7. Risk:</strong> Security breach or regulatory compliance failure.</p>
                                     <p><strong>8. Roadmap:</strong> Phase 1: Internal APIs; Phase 2: Partner APIs; Phase 3: Public APIs.</p>
                                     <p><strong>9. Validation:</strong> Number of developers using APIs, API uptime, security audit results.</p>
+                                </div>
+                                <div class="case-checklist">
+                                    <p class="case-checklist__label">Self-score against the <a href="#sheet-09">rubric</a>:</p>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case2-alignment"> Business alignment — explicit, not just mentioned</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case2-constraints"> Constraints — prioritised, not just listed</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case2-architecture"> Architecture — coherent, not just reasonable</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case2-artifacts"> Artifacts / method — applied correctly, not just named</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case2-tradeoffs"> Trade-offs — defended, not just mentioned</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case2-roadmap"> Roadmap — sequenced, not generic</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case2-risk"> Risk — mitigated, not just identified</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case2-communication"> Communication — executive-quality, not rambling</label>
                                 </div>
                             </details>
                         </div>
@@ -1722,6 +1121,12 @@
                                     <li>Maintain hospital autonomy where needed</li>
                                 </ul>
                             </div>
+                            <h4>Push your reasoning further</h4>
+                            <ul>
+                                <li>Hospital autonomy and unified billing pull in different directions. Which one loses first, and how do you justify that to the hospital that loses it?</li>
+                                <li>Patient data quality issues will surface the moment you integrate 5 systems. Do you fix data quality before integration, or integrate and fix in place?</li>
+                                <li>HIPAA compliance and "reduce IT operational costs" can conflict — compliance often costs more, not less. Where's that tension in this specific case?</li>
+                            </ul>
                             <h4>Your Task</h4>
                             <p>Use the 9-step defense pattern for a consolidation architecture:</p>
                             <ol style="padding-left: 20px;">
@@ -1739,6 +1144,17 @@
                                     <p><strong>7. Risk:</strong> Data quality and standardization issues.</p>
                                     <p><strong>8. Roadmap:</strong> Phase 1: Patient index; Phase 2: Clinical data; Phase 3: Billing; Phase 4: Full analytics.</p>
                                     <p><strong>9. Validation:</strong> Patient data accuracy, billing error reduction, cost savings.</p>
+                                </div>
+                                <div class="case-checklist">
+                                    <p class="case-checklist__label">Self-score against the <a href="#sheet-09">rubric</a>:</p>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case3-alignment"> Business alignment — explicit, not just mentioned</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case3-constraints"> Constraints — prioritised, not just listed</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case3-architecture"> Architecture — coherent, not just reasonable</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case3-artifacts"> Artifacts / method — applied correctly, not just named</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case3-tradeoffs"> Trade-offs — defended, not just mentioned</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case3-roadmap"> Roadmap — sequenced, not generic</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case3-risk"> Risk — mitigated, not just identified</label>
+                                    <label class="tracker-item"><input type="checkbox" data-check-id="case3-communication"> Communication — executive-quality, not rambling</label>
                                 </div>
                             </details>
                         </div>
