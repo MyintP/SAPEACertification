@@ -2,6 +2,35 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 remove all non-personal branding
+
+A full repository sweep after a report that `SAP_EA_StudyBible_Final.docx` still carried
+consultancy branding. It did — and so did three other files that don't render on the live site
+but are committed to this public repo:
+
+### Fixed
+- `SAP_EA_StudyBible_Final.docx`: removed "ZenCloud.au" from the cover line and closing footer
+  (edited `word/document.xml` directly, repackaged, verified content and hidden document
+  properties are otherwise unchanged and clean).
+- `LICENSE`: copyright holder changed from "Zencloud Advisory" to "Phil Myint" — this is personal
+  study content, not a company work product.
+- `CLAUDE.md`: was a stale, unedited copy of a *different* project's instructions file — it
+  literally named `github.com/ZenCloudAU/learn-with-claude` as "this repo," and listed four other
+  client/company repos with their Azure resource group names, container names, region, a public
+  IP address, and secret *names* (not values). None of that belongs in this repository. Replaced
+  with a short, project-specific file with no employer, other-repo, or infrastructure references.
+- `AGENTS.md`: deleted. It was an auto-generated, broken mash-up of the same stale template (e.g.
+  "Anthropic SDK (Codex-sonnet-4-6)", "github.com/ZenCloudAU/learn-with-Codex") — not accurate for
+  any tool, and not needed.
+- Confirmed clean via full-repository text search and binary `strings` scan: `index.html`,
+  `app.js`, `styles.css`, every `domains/`/`resources/`/`quiz/`/`artifacts/`/`docs/` file, the
+  official SAP PDF, and the NotebookLM podcast audio all have zero branding references.
+
+### Known limitation
+- Two past commits' *messages* still mention "ZenCloud" / "Zencloud Advisory" (they're where this
+  branding was originally added). Fixing that requires rewriting public git history (force-push),
+  which was not done here without being asked explicitly — flagged to the user instead.
+
 ## [Unreleased] - September 2026 concepts adapted from the sister Salesforce Architect workspace
 
 A sibling study workspace (github.com/MyintP/SalesForceArchitect, same author) was reviewed for
