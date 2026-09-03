@@ -559,6 +559,95 @@ code, kbd {
 .info-card--flat-blue { background: var(--blue-pale); border-color: transparent; }
 
 /* ============================================================
+   Decision engine: clickable card options + a dynamic result panel
+   ============================================================ */
+.decision-card {
+    background: var(--paper);
+    padding: 18px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--paper-border);
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    transition: border-color 0.12s var(--ease), transform 0.12s var(--ease), background-color 0.12s var(--ease);
+}
+
+.decision-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.decision-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.decision-card.is-selected { border-color: var(--accent); background: var(--accent-pale); }
+.decision-card h4 { margin: 0 0 6px; }
+.decision-card p { margin: 0; color: var(--text-muted); font-size: 14px; }
+
+.decision-result {
+    margin-top: 22px;
+    padding: 20px 22px;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--paper-border);
+    background: var(--canvas-bg);
+    animation: decisionFadeIn 0.25s var(--ease);
+}
+
+.decision-result[hidden] { display: none; }
+
+@keyframes decisionFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.decision-result--pass { border-left-color: var(--green); background: var(--green-pale); }
+.decision-result--breach { border-left-color: var(--red); background: var(--red-pale); }
+
+.decision-result__title { font-weight: 700; font-size: 16px; margin: 0 0 8px; }
+.decision-result--pass .decision-result__title { color: var(--green); }
+.decision-result--breach .decision-result__title { color: var(--red); }
+
+.fit-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+}
+
+.fit-badge--pass { background: var(--green-pale); color: var(--green); }
+.fit-badge--breach { background: var(--red-pale); color: var(--red); }
+
+/* ============================================================
+   Tabs: used by tabbed case-study guides
+   ============================================================ */
+.tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-bottom: 1px solid var(--paper-border);
+    margin-bottom: 18px;
+}
+
+.tab-btn {
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 10px 6px;
+    margin-bottom: -1px;
+    cursor: pointer;
+    transition: color 0.12s var(--ease), border-color 0.12s var(--ease);
+}
+
+.tab-btn:hover { color: var(--text); }
+.tab-btn.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.tab-panel[hidden] { display: none; }
+.tab-panel { animation: decisionFadeIn 0.2s var(--ease); }
+
+/* ============================================================
    Content patterns: definition / tip / important / example / scenario
    Consistent eyebrow + left border, no heavy card chrome
    ============================================================ */

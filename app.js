@@ -375,6 +375,86 @@
     window.toggleCaseChecklistItem = toggleCaseChecklistItem;
 
     // ------------------------------------------------------------------
+    // Tabs: generic component used by tabbed case-study guides. A
+    // .tab-group holds .tab-btn[data-tab] triggers and matching
+    // .tab-panel[data-tab-panel] targets - wired once via delegation.
+    // ------------------------------------------------------------------
+    function activateTab(group, tabId) {
+        group.querySelectorAll('.tab-btn').forEach(function(btn) {
+            btn.classList.toggle('is-active', btn.dataset.tab === tabId);
+            btn.setAttribute('aria-selected', String(btn.dataset.tab === tabId));
+        });
+        group.querySelectorAll('.tab-panel').forEach(function(panel) {
+            panel.hidden = panel.dataset.tabPanel !== tabId;
+        });
+    }
+
+    function wireTabGroups() {
+        document.querySelectorAll('.tab-group').forEach(function(group) {
+            if (group.dataset.tabsWired) return;
+            group.dataset.tabsWired = 'true';
+            group.addEventListener('click', function(e) {
+                const btn = e.target.closest('.tab-btn');
+                if (!btn || !group.contains(btn)) return;
+                activateTab(group, btn.dataset.tab);
+            });
+            const activeBtn = group.querySelector('.tab-btn.is-active') || group.querySelector('.tab-btn');
+            if (activeBtn) activateTab(group, activeBtn.dataset.tab);
+        });
+    }
+
+    // ------------------------------------------------------------------
+    // Clean Core Decision Engine: click a card, see the recommendation.
+    // Outcomes are declared as data (id -> {tone, title, body, fit}) so
+    // the HTML only needs to name which outcome each card triggers.
+    // ------------------------------------------------------------------
+    const DECISION_OUTCOMES = {
+        'embedded-abap': {
+            tone: 'pass',
+            title: '✅ Recommended: Developer Extensibility (Embedded ABAP Cloud, RAP)',
+            body: "Logic that needs to run close to the S/4HANA core for data-intensive ABAP operations belongs in-core, via the RESTful Application Programming Model (RAP). This keeps execution next to the data while staying inside Clean Core's upgrade-stable interface contract.",
+            fit: 'Clean Core Fit: Compliant'
+        },
+        'side-by-side': {
+            tone: 'pass',
+            title: '✅ Recommended: Side-by-Side Extensibility on SAP BTP',
+            body: 'Decoupled logic, non-ABAP languages, heavy use of BTP services (Workflow, AI, Integration), or a custom SAP UI5 interface all point away from the core. Side-by-side extensibility keeps innovation velocity high without ever touching the digital core.',
+            fit: 'Clean Core Fit: Compliant'
+        },
+        'table-modification': {
+            tone: 'breach',
+            title: '🚫 CRITICAL BREACH OF CLEAN CORE',
+            body: 'Standard core modifications are forbidden. You must use well-defined, upgrade-stable APIs and interfaces instead — direct table access breaks upgrade stability and voids the two-way guarantee Clean Core depends on: the core stays pristine, and extensions survive every release.',
+            fit: 'Clean Core Fit: Non-compliant — stop and redesign'
+        }
+    };
+
+    function showDecisionResult(container, outcomeId) {
+        const resultEl = container.querySelector('.decision-result');
+        const outcome = DECISION_OUTCOMES[outcomeId];
+        if (!resultEl || !outcome) return;
+        resultEl.className = 'decision-result decision-result--' + outcome.tone;
+        resultEl.innerHTML = `<p class="decision-result__title">${outcome.title}</p><p>${outcome.body}</p><span class="fit-badge fit-badge--${outcome.tone}">${outcome.fit}</span>`;
+        resultEl.hidden = false;
+        container.querySelectorAll('.decision-card').forEach(function(card) {
+            card.classList.toggle('is-selected', card.dataset.outcome === outcomeId);
+        });
+        resultEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+
+    function wireDecisionEngines() {
+        document.querySelectorAll('.decision-engine').forEach(function(container) {
+            if (container.dataset.wired) return;
+            container.dataset.wired = 'true';
+            container.addEventListener('click', function(e) {
+                const card = e.target.closest('.decision-card');
+                if (!card || !container.contains(card)) return;
+                showDecisionResult(container, card.dataset.outcome);
+            });
+        });
+    }
+
+    // ------------------------------------------------------------------
     // Study Desk: per-sheet notes, resize, collapse
     // ------------------------------------------------------------------
     const notesKey = 'sapEaNotes';
@@ -863,6 +943,8 @@
         // --- Domain Knowledge Checks: filter + reset wiring ---
         applyDomainQuizFilter();
         applyCaseChecklistState();
+        wireTabGroups();
+        wireDecisionEngines();
 
         const domainQuizFilterEl = document.getElementById('domainQuizFilter');
         if (domainQuizFilterEl) domainQuizFilterEl.addEventListener('change', applyDomainQuizFilter);

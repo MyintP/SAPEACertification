@@ -90,10 +90,18 @@
                 </ul>
             </details>
 
+            <details class="nav-group" open data-group-id="tools">
+                <summary>Tools</summary>
+                <ul>
+                    <li><a class="nav-item" href="#sheet-clean-core-tool"><span class="nav-item__code">14</span><span class="nav-item__label">Clean Core Decision Engine</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
+                </ul>
+            </details>
+
             <details class="nav-group" open data-group-id="case-study">
                 <summary>Case Study</summary>
                 <ul>
                     <li><a class="nav-item" href="#sheet-07"><span class="nav-item__code">07</span><span class="nav-item__label">Connected Case</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
+                    <li><a class="nav-item" href="#sheet-wanderlust"><span class="nav-item__code">15</span><span class="nav-item__label">Wanderlust Case Hub</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
                 </ul>
             </details>
 
@@ -482,6 +490,40 @@
                 </div>
             </article>
 
+            <!-- SHEET: CLEAN CORE DECISION ENGINE -->
+            <article class="sheet" id="sheet-clean-core-tool" data-title="Clean Core Decision Engine" data-group="Tools" data-code="14">
+                <div class="sheet-inner">
+                    <div class="sheet-header">
+                        <div class="sheet-kicker"><span class="sheet-kicker__code">14</span><span>Interactive Tool</span></div>
+                        <h1 class="sheet-title">Clean Core Decision Engine</h1>
+                        <p class="sheet-lede">Pick the scenario that matches what you're trying to build, and see which extensibility path — and which Clean Core outcome — it leads to.</p>
+                    </div>
+
+                    <p>Every SAP S/4HANA extension question on the exam reduces to the same three-way fork. Choose the case that fits:</p>
+
+                    <div class="decision-engine">
+                        <div class="card-grid card-grid--narrow">
+                            <button type="button" class="decision-card" data-outcome="embedded-abap">
+                                <h4>⚙️ Close to the core</h4>
+                                <p>Logic needs to run right next to S/4HANA data for a data-intensive ABAP operation.</p>
+                            </button>
+                            <button type="button" class="decision-card" data-outcome="side-by-side">
+                                <h4>🧩 Decoupled &amp; BTP-native</h4>
+                                <p>Logic is decoupled, non-ABAP, leans on BTP services (Workflow, AI, Integration), or needs a custom SAP UI5 interface.</p>
+                            </button>
+                            <button type="button" class="decision-card" data-outcome="table-modification">
+                                <h4>🛠️ Modify a standard table</h4>
+                                <p>The plan is to directly change a standard SAP database table.</p>
+                            </button>
+                        </div>
+
+                        <div class="decision-result" hidden></div>
+                    </div>
+
+                    <p class="sheet-footnote">Background: <a href="#sheet-06">06 Data / App / Tech</a> covers the Clean Core extension types in full · <a href="docs.html?file=domains/04-data-app-tech.md" target="_blank" rel="noopener">full deep-dive →</a></p>
+                </div>
+            </article>
+
             <!-- SHEET 07 -->
             <article class="sheet" id="sheet-07" data-title="Connected Case" data-group="Case Study" data-code="07">
                 <div class="sheet-inner">
@@ -521,6 +563,57 @@
                         <p>📌 Do the case before reading examples. Your first objective is not to find a perfect architecture. It is to demonstrate coherent reasoning.</p>
                     </div>
                     <p class="sheet-footnote">More practice cases with model answers: <a href="#sheet-practice">Practice → Full Practice Cases</a></p>
+                </div>
+            </article>
+
+            <!-- SHEET: WANDERLUST CASE HUB -->
+            <article class="sheet" id="sheet-wanderlust" data-title="Wanderlust Case Hub" data-group="Case Study" data-code="15">
+                <div class="sheet-inner">
+                    <div class="sheet-header">
+                        <div class="sheet-kicker"><span class="sheet-kicker__code">15</span><span>Case Study</span></div>
+                        <h1 class="sheet-title">Wanderlust GmbH case hub</h1>
+                        <p class="sheet-lede">SAP's own reference case study for the P_SAPEA exam, organised into the three things you actually need to hold in your head at once: the situation, who the stakeholders are, and where the architecture is heading.</p>
+                    </div>
+
+                    <div class="pattern pattern--important">
+                        <span class="pattern__label">Important</span>
+                        <p>📌 Wanderlust GmbH is a real, publicly-published SAP case study — not a fictional company invented for this workspace. Read the source directly at <a href="https://learning.sap.com/enterprise-architect" target="_blank" rel="noopener">learning.sap.com/enterprise-architect</a> before the exam. It is unconfirmed whether the current 2026 Scenario-Based Assessment still references Wanderlust by name — see <a href="#sheet-01">01 Exam Model &amp; Format</a>. Treat this hub as a structured summary to study from, not a substitute for reading the original.</p>
+                    </div>
+
+                    <div class="tab-group">
+                        <div class="tab-nav" role="tablist">
+                            <button type="button" class="tab-btn is-active" data-tab="situation" role="tab">The Situation</button>
+                            <button type="button" class="tab-btn" data-tab="stakeholders" role="tab">Stakeholder Blueprint</button>
+                            <button type="button" class="tab-btn" data-tab="architecture" role="tab">Target Architecture</button>
+                        </div>
+
+                        <div class="tab-panel" data-tab-panel="situation">
+                            <p>Wanderlust GmbH is a German-headquartered manufacturer of conventional fuel-driven cars, with manufacturing facilities and sales operations globally. It's renowned for best-in-class engineering — less so for aftermarket customer service — and has had limited success so far expanding into electric vehicles.</p>
+                            <ul>
+                                <li>Expanding into EVs via the <strong>"Smart Battery" initiative</strong> — value proposition, cost structure, revenue streams, partners and channels are all still being worked out with stakeholders.</li>
+                                <li>Legacy landscape: <strong>three separate SAP ECC instances</strong>, one per continent, evolved independently.</li>
+                                <li>The EA practice is at a <strong>"nascent" maturity level</strong> — no dedicated team, no formalised governance yet.</li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-panel" data-tab-panel="stakeholders" hidden>
+                            <ul>
+                                <li><strong>CEO</strong> — focused on evolving the business into new business models, particularly the EV/Smart Battery expansion.</li>
+                                <li><strong>CIO</strong> — goals centre on Lead-to-Cash capabilities: marketing analytics, lead management and campaign management, especially for the seldom-used legacy marketing application that can't carry the online marketing transformation forward.</li>
+                                <li><strong>Top priority: stakeholder involvement.</strong> With EA at nascent maturity and no existing stakeholder map, identifying who the key stakeholders and owners are comes before any tooling or technical decision — see <a href="#sheet-role">Discover the Enterprise Architect Role</a>.</li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-panel" data-tab-panel="architecture" hidden>
+                            <ul>
+                                <li>Transition path: legacy ECC → <strong>SAP S/4HANA Cloud</strong> for the digital core, with new capability built on <strong>SAP BTP</strong> — see <a href="#sheet-clean-core-tool">the Clean Core Decision Engine</a> for which extension type fits which requirement.</li>
+                                <li><strong>SAP Signavio</strong> maps the business processes (including the Lead-to-Cash variants relevant to Wanderlust's B2C and made-to-order models).</li>
+                                <li><strong>SAP LeanIX</strong> documents the IT application portfolio, giving the Business-IT alignment a nascent EA practice needs before it can make credible investment recommendations.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="sheet-footnote">Full prep guide with reading strategy and question patterns: <a href="docs.html?file=quiz/wanderlust-prep.md" target="_blank" rel="noopener">quiz/wanderlust-prep.md →</a></p>
                 </div>
             </article>
 
@@ -796,8 +889,50 @@
                         <p class="sheet-lede">Test your Enterprise Architecture decision-making skills. <span class="js-quiz-progress-display">Quiz: Not started yet</span></p>
                     </div>
 
+                    <!-- ================ SCENARIO-BASED ASSESSMENT DRILL ================ -->
+                    <section id="sbaDrill">
+                        <h2 class="quiz-section-heading">🎯 Scenario-Based Assessment Drill</h2>
+                        <p>Three questions in the format the current exam actually uses — a scenario, a choice, and an immediate explanation of why the SAP-prescribed answer wins over a plausible-sounding generic-cloud-architect distractor.</p>
+
+                        <div class="quiz-card">
+                            <div class="quiz-progress"><span>Question 1 of 3</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 33.3%;"></div></div></div>
+                            <div class="quiz-question">An architecture guideline demands a clean-core strategy for future extensions to Wanderlust's digital core. S/4HANA upgrades must not break extensions, and extensions must not break upgrades. How is this achieved?</div>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="sbaq1" value="A"> A) By permitting direct modifications to standard SAP tables as long as the custom code is fully documented.</label>
+                                <label><input type="radio" name="sbaq1" value="B"> B) By keeping standard core code pristine and ensuring extensions only access SAP business objects through well-defined, upgrade-stable interfaces.</label>
+                                <label><input type="radio" name="sbaq1" value="C"> C) By forbidding extensions entirely, forcing all custom business processes to run on external legacy systems.</label>
+                            </div>
+                            <button class="quiz-submit" onclick="checkAnswer('sbaq1', 'B', 'fb-sbaq1')">Submit Answer</button>
+                            <div id="fb-sbaq1" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> That two-way guarantee is the whole point of clean core: the digital core stays upgrade-stable and the extensions survive releases without rescue projects. Direct table access is an upgrade-breaker, and forbidding extensions entirely isn't a real architecture — it's giving up.</div>
+                        </div>
+
+                        <div class="quiz-card">
+                            <div class="quiz-progress"><span>Question 2 of 3</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 66.7%;"></div></div></div>
+                            <div class="quiz-question">Wanderlust's CIO asks where to begin architecting the online marketing transformation whose scope is still unclear. Which business architecture step does SAP's methodology put first?</div>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="sbaq2" value="A"> A) Select the target SAP SaaS products (e.g., Emarsys) first, and then map the processes backward.</label>
+                                <label><input type="radio" name="sbaq2" value="B"> B) Size the technical cloud hosting infrastructure for expected B2C transaction volumes.</label>
+                                <label><input type="radio" name="sbaq2" value="C"> C) Recommend a business capability mapping (BCM) first, and then model end-to-end processes (BPM) on top of it.</label>
+                            </div>
+                            <button class="quiz-submit" onclick="checkAnswer('sbaq2', 'C', 'fb-sbaq2')">Submit Answer</button>
+                            <div id="fb-sbaq2" class="feedback-text"><strong>✅ Correct answer: C</strong><br><em>Why:</em> Under SAP's principle of mapping business and IT separately, capabilities describe what the business must be able to do, and processes describe how they do it. Product selection and infrastructure sizing are both downstream decisions — they can't come first because nothing has been scoped yet.</div>
+                        </div>
+
+                        <div class="quiz-card">
+                            <div class="quiz-progress"><span>Question 3 of 3</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: 100%;"></div></div></div>
+                            <div class="quiz-question">As Wanderlust's Chief Enterprise Architect, you are running an EA practice at "nascent" maturity with no existing stakeholder map. What is identified as your topmost priority?</div>
+                            <div class="quiz-options">
+                                <label><input type="radio" name="sbaq3" value="A"> A) Purchase and deploy a complex EA repository tool immediately.</label>
+                                <label><input type="radio" name="sbaq3" value="B"> B) Stakeholder involvement — creating a stakeholder map identifying all key EA stakeholders and owners.</label>
+                                <label><input type="radio" name="sbaq3" value="C"> C) Write a custom, highly technical integration standard from scratch.</label>
+                            </div>
+                            <button class="quiz-submit" onclick="checkAnswer('sbaq3', 'B', 'fb-sbaq3')">Submit Answer</button>
+                            <div id="fb-sbaq3" class="feedback-text"><strong>✅ Correct answer: B</strong><br><em>Why:</em> At nascent maturity, an architecture without identified owners and key stakeholders is just an artifact, not a plan. Stakeholder mapping must precede tooling and development — see <a href="#sheet-wanderlust">the Wanderlust Case Hub</a> for exactly this scenario played out in full.</div>
+                        </div>
+                    </section>
+
                     <!-- ================ DOMAIN KNOWLEDGE CHECKS ================ -->
-                    <section id="domainQuizzes">
+                    <section id="domainQuizzes" style="margin-top: 50px;">
                         <h2 class="quiz-section-heading">🧠 Domain Knowledge Checks</h2>
                         <p>60 questions, 15 per skill area, testing the vocabulary and mechanics from the <a href="#sheet-03">Architecture Domains</a> sheets — not case-study reasoning, straight domain knowledge. <strong>13–15 correct = domain mastered. Below 10 = go back and re-read.</strong></p>
 

@@ -96,7 +96,7 @@ Example — Lead to Cash variations:
 - **Lead to Cash for B2C Omnichannel Commerce** — tangible products, B2C customers
 - **Lead to Cash for Subscription and Usage Business** — recurring/usage-based billing
 
-> **Exam angle:** When a scenario describes a specific business model (subscription, B2B, asset-heavy manufacturing), the correct answer references the appropriate **variation** — not the generic template. The Wanderlust case study uses this principle — Wanderlust is a travel company with specific process variations.
+> **Exam angle:** When a scenario describes a specific business model (subscription, B2B, asset-heavy manufacturing), the correct answer references the appropriate **variation** — not the generic template. The Wanderlust case study uses this principle — Wanderlust GmbH is an automotive manufacturer expanding into EVs, with process variations specific to that transition (see the [Wanderlust Case Hub](index.html#sheet-wanderlust)).
 
 ---
 

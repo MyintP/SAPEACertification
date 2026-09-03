@@ -2,6 +2,30 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 Clean Core tool, Wanderlust hub, SBA drill; fixed a real factual error
+
+### Added
+- **Clean Core Decision Engine** (new sheet, new "Tools" nav group, code 14): click one of three scenario cards
+  (data-intensive ABAP close to the core / decoupled &amp; BTP-native / direct table modification) and get an
+  immediate recommendation — Developer Extensibility, Side-by-Side on BTP, or a critical-breach flag — with the
+  reasoning behind it. New `.decision-engine`/`.decision-card`/`.decision-result` components in `styles.css`,
+  outcome data and click-handling in `app.js` (`DECISION_OUTCOMES`, `wireDecisionEngines()`).
+- **Wanderlust Case Hub** (new sheet, "Case Study" group, code 15): a tabbed guide (The Situation / Stakeholder
+  Blueprint / Target Architecture) to SAP's real Wanderlust GmbH reference case. New generic `.tab-group`
+  component (`wireTabGroups()` in `app.js`) — event-delegated, reusable for any future tabbed content.
+- **Scenario-Based Assessment Drill** (new section, top of the Practice sheet): three questions in the current
+  exam's scenario format, using the existing quiz-card/`checkAnswer()` pattern.
+
+### Fixed — real factual error, not just formatting
+- **Wanderlust GmbH is not a travel and tourism company.** It's a German automotive manufacturer expanding into
+  EVs via a "Smart Battery" initiative, with three continental SAP ECC instances and an EA practice at "nascent"
+  maturity. `quiz/wanderlust-prep.md` had it backwards (claimed "fictional travel and tourism company"), and
+  `domains/rba-deep-dive.md` repeated the error. Verified via public search results describing the actual SAP
+  P_SAPEA exam guide and community write-ups before correcting — this was wrong in the repository for multiple
+  prior revisions and would have actively misled anyone studying the real case. Both files corrected, including
+  the "Common Wanderlust Scenario Themes" section in `wanderlust-prep.md`, which was entirely rewritten around
+  the wrong industry (booking systems, hotels, airlines → Lead-to-Cash, dealer network, ECC landscape complexity).
+
 ## [Unreleased] - September 2026 remove all non-personal branding
 
 A full repository sweep after a report that `SAP_EA_StudyBible_Final.docx` still carried

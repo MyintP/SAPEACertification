@@ -6,7 +6,7 @@
 
 ## What is Wanderlust?
 
-Wanderlust is SAP's fictional travel and tourism company used as the reference case study for the SAP EA Certification exam. It is published on the SAP learning portal and is publicly available to read before sitting the exam.
+Wanderlust GmbH is SAP's real, publicly-published reference case study for the SAP EA Certification exam — a German-headquartered manufacturer of conventional fuel-driven cars, with manufacturing facilities and sales globally, expanding into electric vehicles via a "Smart Battery" initiative. It is published on the SAP learning portal and is publicly available to read before sitting the exam. See the [Wanderlust Case Hub](index.html#sheet-wanderlust) in this workspace for a structured summary.
 
 **This is not a trick — SAP wants you to read it in advance.** Case-study material like this tests whether you can apply the SAP EA Framework to a real-world scenario, not just recall facts — which is exactly the skill the current scenario-based exam evaluates.
 
@@ -93,7 +93,7 @@ Classic case-study questions typically follow these patterns:
 **How to answer:** Know the gap analysis → roadmap pathway. Gaps become roadmap items.
 
 ### Pattern 5: Tool Selection
-> "Which SAP tool should Wanderlust use to analyse the performance of their booking processes?"
+> "Which SAP tool should Wanderlust use to analyse the performance of their Lead-to-Cash processes?"
 
 **How to answer:** Know your tools. Signavio = processes. LeanIX = architecture. Cloud ALM = execution.
 
@@ -101,15 +101,15 @@ Classic case-study questions typically follow these patterns:
 
 ## Common Wanderlust Scenario Themes
 
-Based on the type of company Wanderlust is (travel/tourism), expect questions around:
+Wanderlust GmbH is a German automotive manufacturer expanding into electric vehicles — expect questions around:
 
-- **Customer Experience** capabilities (Customer domain in BCM)
-- **Product & Services** capabilities (package holidays, ancillary services)
-- **Supply chain** partnerships (hotels, airlines, car hire)
-- **Digital channels** (online booking, mobile)
-- **Data** (customer preferences, booking history, personalisation)
-- **Cloud migration** (modern travel companies move to cloud)
-- **Integration** (connecting multiple booking systems, third-party APIs)
+- **Customer Experience** capabilities (Customer domain in BCM) — direct-to-consumer EV sales is new territory for a company that has always sold through dealers.
+- **Product & Services** capabilities — the "Smart Battery" initiative: value proposition, cost structure, revenue streams, partners and channels.
+- **Landscape complexity** — three separate SAP ECC instances, one per continent, evolved independently.
+- **Digital channels** (Lead-to-Cash: marketing analytics, lead management, campaign management) — the legacy marketing application the CIO wants replaced.
+- **EA maturity** — the practice is "nascent," which makes stakeholder mapping the priority over any tooling or technical decision.
+- **Cloud migration** — the transition from ECC to S/4HANA Cloud and SAP BTP, and which Clean Core extension type fits which requirement.
+- **Integration** (connecting the continental ECC instances, and eventually the S/4HANA Cloud target, via Signavio for process mapping and LeanIX for the application portfolio).
 
 ---
 
