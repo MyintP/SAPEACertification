@@ -118,6 +118,28 @@ code, kbd {
 #sidebarNav { grid-area: sidebar; }
 #workspace { grid-area: workspace; }
 
+#fileProtocolBanner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    background: var(--amber-pale);
+    color: #4a3400;
+    border-bottom: 2px solid var(--amber);
+    padding: 10px 20px;
+    font-size: 13px;
+    text-align: center;
+}
+
+#fileProtocolBanner code {
+    background: rgba(0, 0, 0, 0.08);
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+
+#fileProtocolBanner[hidden] { display: none; }
+
 /* ============================================================
    Context Bar - a workspace toolbar, not a website header
    ============================================================ */

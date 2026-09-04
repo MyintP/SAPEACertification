@@ -37,6 +37,10 @@
         <div id="readingProgress" aria-hidden="true"></div>
     </header>
 
+    <div id="fileProtocolBanner" hidden>
+        ⚠️ You've opened this file directly (<code>file://</code>) — domain deep-dives and linked docs won't load. Serve this folder with a local server instead (e.g. <code>python -m http.server</code>) and open it via <code>http://localhost</code>, or use the live site.
+    </div>
+
     <!-- ================= SIDEBAR NAVIGATION ================= -->
     <nav id="sidebarNav" aria-label="Certification map">
         <div class="sidebar-brand">📘 SAPEA Certification</div>
@@ -866,9 +870,11 @@
                     <div class="info-card info-card--flat">
                         <ul class="resource-list" style="line-height: 2.2;">
                             <li>📁 <a href="docs.html?file=domains/01-framework-toolset.md" target="_blank" rel="noopener">Domain deep-dives</a> — full notes per skill area, plus <a href="docs.html?file=domains/rba-deep-dive.md" target="_blank" rel="noopener">RBA deep dive</a></li>
-                            <li>📁 <a href="docs.html?file=artifacts/artifact-cheatsheet.md" target="_blank" rel="noopener">Artifact cheatsheet</a> and <a href="docs.html?file=artifacts/togaf-to-sap-mapping.md" target="_blank" rel="noopener">TOGAF → SAP mapping</a></li>
+                            <li>📁 <a href="docs.html?file=artifacts/artifact-cheatsheet.md" target="_blank" rel="noopener">Artifact cheatsheet</a>, <a href="docs.html?file=artifacts/artifact-map-complete.md" target="_blank" rel="noopener">complete artifact map by domain</a> and <a href="docs.html?file=artifacts/togaf-to-sap-mapping.md" target="_blank" rel="noopener">TOGAF → SAP mapping</a></li>
                             <li>📁 <a href="docs.html?file=resources/glossary.md" target="_blank" rel="noopener">Glossary</a>, <a href="docs.html?file=resources/exam-traps.md" target="_blank" rel="noopener">exam traps</a> and <a href="docs.html?file=resources/official-diagrams-reference.md" target="_blank" rel="noopener">official diagrams reference</a></li>
-                            <li>📁 <a href="docs.html?file=docs/study-plan.md" target="_blank" rel="noopener">6-week study plan</a> and <a href="docs.html?file=docs/exam-overview.md" target="_blank" rel="noopener">exam overview</a></li>
+                            <li>📁 <a href="docs.html?file=resources/community-study-tips.md" target="_blank" rel="noopener">Community study tips</a> — curated lessons from certified practitioners</li>
+                            <li>📁 <a href="docs.html?file=resources/ea-trends.md" target="_blank" rel="noopener">EA trends</a> and <a href="docs.html?file=resources/use-cases-reference.md" target="_blank" rel="noopener">use-cases reference</a> — from the SAP EA Book Webcast</li>
+                            <li>📁 <a href="docs.html?file=docs/study-plan.md" target="_blank" rel="noopener">6-week study plan</a>, <a href="docs.html?file=docs/exam-overview.md" target="_blank" rel="noopener">exam overview</a> and <a href="docs.html?file=docs/key-links.md" target="_blank" rel="noopener">key links index</a></li>
                         </ul>
                     </div>
 
@@ -908,7 +914,7 @@
                     <div class="info-card info-card--flat">
                         <ul class="resource-list">
                             <li>▶️ <a href="https://www.youtube.com/watch?v=Bbh8glKpmmk" target="_blank" rel="noopener">The Enterprise Architecture with SAP Masterclass</a> — 90-minute virtual masterclass with authors Anup Das, Peter Klee and Johannes Reichel (<em>Enterprise Architecture with SAP</em>), hosted by SAP Community evangelist Paul Kurchina. Covers AI, Clean Core and accelerated S/4HANA transformation in real-world scenarios.</li>
-                            <li>📖 <a href="https://www.sap-press.com/enterprise-architecture-with-sap-planning-management-and-transformation_5863/" target="_blank" rel="noopener">Enterprise Architecture with SAP: Planning, Management, and Transformation</a> — the companion book the masterclass above is drawn from (also cited in <code>resources/ea-trends.md</code> and <code>resources/use-cases-reference.md</code>)</li>
+                            <li>📖 <a href="https://www.sap-press.com/enterprise-architecture-with-sap-planning-management-and-transformation_5863/" target="_blank" rel="noopener">Enterprise Architecture with SAP: Planning, Management, and Transformation</a> — the companion book the masterclass above is drawn from (also cited in <a href="docs.html?file=resources/ea-trends.md" target="_blank" rel="noopener">EA trends</a> and <a href="docs.html?file=resources/use-cases-reference.md" target="_blank" rel="noopener">use-cases reference</a>)</li>
                         </ul>
                     </div>
 

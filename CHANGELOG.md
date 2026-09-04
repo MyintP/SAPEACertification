@@ -2,6 +2,53 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 full site audit against the "hub + second window" model
+
+Explicit bar set by the user: this site is the master navigation hub (window one); official SAP
+material, the primary-source PDF/docx, and other reference content is window two. If a link
+doesn't actually get you into that second window, or a file sits in the repo with no path to it,
+the site fails its own purpose. Audited the whole site against that, not from memory:
+
+### Checked
+- Every internal `#sheet-x` link (regex-extracted from `index.html` + `app.js`) resolves to a real
+  sheet — none broken.
+- Every `docs.html?file=...` reference points to a file that actually exists — none broken.
+- Every `.md` file in the repository has at least one real path to it from the UI, except the four
+  `quiz/domain-N-quiz.md` files, which are legitimately consumed as data by the quiz bank rather
+  than linked directly.
+- All 16 unique external URLs referenced across the site (SAP Learning pages, YouTube channels,
+  the SAP PRESS book page) — fetched and confirmed live, correct titles, none 404ing.
+
+### Fixed
+- **5 markdown files had zero path to them from the app**: `artifacts/artifact-map-complete.md`,
+  `docs/key-links.md`, `resources/community-study-tips.md`, `resources/ea-trends.md`,
+  `resources/use-cases-reference.md`. They existed in the repo (so came with every fork) but were
+  simply unreachable. Linked all five from Official Resources; two of them (`ea-trends.md` and
+  `use-cases-reference.md`) were previously mentioned only as inert `<code>` text on Study
+  Companions — now real links there too.
+- **Links meant to open the "second window" weren't opening a new window.** The Today's Focus
+  card and Study Schedule rendered every link the same way — an official SAP page or a
+  `docs.html` page would navigate the current tab, replacing the hub instead of opening beside it.
+  Added `scheduleLinkAttrs()`: internal `#sheet-x` links stay in this tab (that's just moving
+  around the hub); everything else now opens in a new tab with `target="_blank" rel="noopener"`.
+- **The four "watch the IEA10 course" schedule days linked to this site's own Resources sheet
+  instead of the actual course.** Pointed directly at
+  `https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals`.
+- **Forking the repo and just double-clicking `index.html` silently breaks** — domain deep-dives
+  and `docs.html` both depend on `fetch()`, which browsers block for local files opened via
+  `file://`. This wasn't a regression check I'd done before. Added a visible in-page banner that
+  detects `location.protocol === 'file:'` and explains exactly what to do (run a static server, or
+  use the deployed Pages site) instead of failing silently. Corrected `README.md`'s "Local
+  Development" section, which previously said to just open `index.html` — no longer sufficient
+  advice given the fetch-dependent content added this session.
+
+### Not changed — verified already correct
+- The Wanderlust case study's official URL (`learning.sap.com/enterprise-architect`) doesn't
+  currently show case-study content when fetched — but the site already hedges this exact
+  uncertainty ("unconfirmed whether the current assessment still references Wanderlust by name")
+  rather than asserting it as guaranteed. No change needed; this confirms the existing caveat is
+  earning its keep, not overclaiming.
+
 ## [Unreleased] - September 2026 inline the domain deep-dives - no more click-through to read them
 
 User feedback after using Today's Focus for the first time: landing on `#sheet-03` from the "next

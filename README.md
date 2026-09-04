@@ -34,11 +34,19 @@ This repository hosts a certification workspace for the **SAP P_SAPEA Enterprise
 
 ## 🛠️ Local Development
 
-No build step, framework, or package installation is required. Simply:
+No build step, framework, or package installation is required — but the domain sheets and the
+`docs.html` markdown viewer fetch `.md` files at runtime, and browsers block `fetch()` of local
+files opened directly (`file://`). **Don't just double-click `index.html`** — serve the folder:
 
-1. Clone this repository
-2. Open `index.html` in your browser
-3. Edit files directly
+1. Clone this repository (or your fork)
+2. From the repo root, run a static server, e.g. `python -m http.server 8000` (any static server
+   works — VS Code's Live Server extension, `npx serve`, etc.)
+3. Open `http://localhost:8000` in your browser
+4. Edit files directly — no rebuild or restart needed, just refresh
+
+Forking to actually use the site day-to-day? Enable GitHub Pages on your fork (**Settings → Pages
+→ Source: Deploy from a branch, `main`, `/root`**) — see `DEPLOYMENT.md`. That serves everything
+over HTTPS with no server to run.
 
 ## 📚 Primary SAP Sources Used
 

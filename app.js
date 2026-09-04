@@ -584,7 +584,7 @@
     // ------------------------------------------------------------------
     const SCHEDULE = [
         { id: 'w1-mon', week: 1, day: 'Mon', task: 'Read Domain 1 fully - Framework & Toolset. Take notes on anything unclear.', link: '#sheet-03' },
-        { id: 'w1-tue', week: 1, day: 'Tue', task: 'Watch/review the IEA10 course: Module 1 - Framework & Toolset.', link: '#sheet-10' },
+        { id: 'w1-tue', week: 1, day: 'Tue', task: 'Watch/review the IEA10 course: Module 1 - Framework & Toolset.', link: 'https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals' },
         { id: 'w1-wed', week: 1, day: 'Wed', task: 'Flashcard drill: 5 Building Blocks, ADM Phases, Metro Map variants.', link: '#sheet-03' },
         { id: 'w1-thu', week: 1, day: 'Thu', task: 'Flashcard drill: 4 Org Models, 8 Maturity Dimensions, Toolchain steps.', link: '#sheet-03' },
         { id: 'w1-fri', week: 1, day: 'Fri', task: 'Take the Domain 1 quiz - target 13+/15.', link: '#sheet-practice' },
@@ -592,7 +592,7 @@
         { id: 'w1-sun', week: 1, day: 'Sun', task: 'Rest, or a light review of Domain 1 glossary terms.', link: 'docs.html?file=resources/glossary.md' },
 
         { id: 'w2-mon', week: 2, day: 'Mon', task: 'Read Domain 2 fully - Architecture Vision & Roadmap.', link: '#sheet-04' },
-        { id: 'w2-tue', week: 2, day: 'Tue', task: 'Watch/review the IEA10 course: Module 2 - Architecture Vision.', link: '#sheet-10' },
+        { id: 'w2-tue', week: 2, day: 'Tue', task: 'Watch/review the IEA10 course: Module 2 - Architecture Vision.', link: 'https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals' },
         { id: 'w2-wed', week: 2, day: 'Wed', task: 'Flashcard drill: Stakeholder Map quadrants + actions, BMC 9 blocks in sequence.', link: '#sheet-04' },
         { id: 'w2-thu', week: 2, day: 'Thu', task: 'Flashcard drill: Architecture Principle components, Statement of Architecture Work.', link: '#sheet-04' },
         { id: 'w2-fri', week: 2, day: 'Fri', task: 'Take the Domain 2 quiz - target 13+/15.', link: '#sheet-practice' },
@@ -600,7 +600,7 @@
         { id: 'w2-sun', week: 2, day: 'Sun', task: 'Rest, or review the TOGAF → SAP EA term mapping.', link: 'docs.html?file=artifacts/togaf-to-sap-mapping.md' },
 
         { id: 'w3-mon', week: 3, day: 'Mon', task: 'Read Domain 3 fully - Business Architecture.', link: '#sheet-05' },
-        { id: 'w3-tue', week: 3, day: 'Tue', task: 'Watch/review the IEA10 course: Module 3 - Business Architecture.', link: '#sheet-10' },
+        { id: 'w3-tue', week: 3, day: 'Tue', task: 'Watch/review the IEA10 course: Module 3 - Business Architecture.', link: 'https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals' },
         { id: 'w3-wed', week: 3, day: 'Wed', task: 'Flashcard drill: BCM levels, 4 Enterprise Domains, MECE.', link: '#sheet-05' },
         { id: 'w3-thu', week: 3, day: 'Thu', task: 'Flashcard drill: Business Process Model 4 levels + naming conventions.', link: '#sheet-05' },
         { id: 'w3-fri', week: 3, day: 'Fri', task: 'Take the Domain 3 quiz - target 13+/15.', link: '#sheet-practice' },
@@ -608,7 +608,7 @@
         { id: 'w3-sun', week: 3, day: 'Sun', task: 'Rest, or review the RBA → RSA mapping.', link: 'docs.html?file=domains/rba-deep-dive.md' },
 
         { id: 'w4-mon', week: 4, day: 'Mon', task: 'Read Domain 4 fully - Data, Application & Technology Architecture.', link: '#sheet-06' },
-        { id: 'w4-tue', week: 4, day: 'Tue', task: 'Watch/review the IEA10 course: Module 4 - Data, App & Tech Architecture.', link: '#sheet-10' },
+        { id: 'w4-tue', week: 4, day: 'Tue', task: 'Watch/review the IEA10 course: Module 4 - Data, App & Tech Architecture.', link: 'https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals' },
         { id: 'w4-wed', week: 4, day: 'Wed', task: 'Flashcard drill: 6 Application diagrams, deployment types, cloud service models.', link: '#sheet-06' },
         { id: 'w4-thu', week: 4, day: 'Thu', task: 'Flashcard drill: Clean Core extension types, ISA-M domains, S/4HANA strategies.', link: '#sheet-clean-core-tool' },
         { id: 'w4-fri', week: 4, day: 'Fri', task: 'Take the Domain 4 quiz - target 13+/15.', link: '#sheet-practice' },
@@ -643,6 +643,15 @@
         return SCHEDULE.find(function(item) { return !isDayDone(item.id); }) || null;
     }
 
+    // A link that stays inside this app (a #sheet-x anchor) navigates the
+    // current tab - it's just moving around the hub. Anything else (an
+    // official SAP page, or even docs.html for the raw file) is "the
+    // second window": it must open in a new tab so the hub stays put and
+    // doesn't get replaced by the material it's pointing at.
+    function scheduleLinkAttrs(link) {
+        return link.charAt(0) === '#' ? '' : ' target="_blank" rel="noopener"';
+    }
+
     function renderTodayFocus() {
         const card = document.getElementById('todayFocusCard');
         if (!card) return;
@@ -657,7 +666,7 @@
         }
 
         const dayNumber = SCHEDULE.indexOf(next) + 1;
-        const linkHtml = next.link ? `<a class="btn btn-primary" href="${next.link}">Start this →</a>` : '';
+        const linkHtml = next.link ? `<a class="btn btn-primary" href="${next.link}"${scheduleLinkAttrs(next.link)}>Start this →</a>` : '';
         card.innerHTML = `
             <p class="today-focus__label">Week ${next.week} · ${next.day} · Day ${dayNumber} of ${SCHEDULE.length}</p>
             <p class="today-focus__task">${next.task}</p>
@@ -678,7 +687,7 @@
             const items = weeks[weekNum];
             const doneInWeek = items.filter(function(item) { return isDayDone(item.id); }).length;
             const rows = items.map(function(item) {
-                const linkHtml = item.link ? ` <a href="${item.link}">open →</a>` : '';
+                const linkHtml = item.link ? ` <a href="${item.link}"${scheduleLinkAttrs(item.link)}>open →</a>` : '';
                 return `<label class="tracker-item schedule-checklist"><input type="checkbox" data-check-id="${item.id}"><span><strong>${item.day}</strong> — ${item.task}${linkHtml}</span></label>`;
             }).join('');
             return `<details class="schedule-week"${Number(weekNum) === 1 ? ' open' : ''}>
@@ -1031,6 +1040,14 @@
     // App shell wiring
     // ------------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', function() {
+        // Opened as a local file rather than served over http(s)? fetch()
+        // of local .md files is blocked by the browser in this mode, so
+        // domain deep-dives and docs.html would otherwise fail silently.
+        if (location.protocol === 'file:') {
+            const banner = document.getElementById('fileProtocolBanner');
+            if (banner) banner.hidden = false;
+        }
+
         renderDomainQuizBank();
         const sheetIndex = buildSheetIndex();
         const sheetsById = new Map(sheetIndex.map(s => [s.id, s]));
