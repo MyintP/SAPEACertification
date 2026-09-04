@@ -46,6 +46,7 @@
                 <summary>Get Started</summary>
                 <ul>
                     <li><a class="nav-item" href="#sheet-00"><span class="nav-item__code">00</span><span class="nav-item__label">Start</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
+                    <li><a class="nav-item" href="#sheet-schedule"><span class="nav-item__code">S</span><span class="nav-item__label">Study Schedule</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
                 </ul>
             </details>
 
@@ -157,6 +158,29 @@
                         <p class="sheet-lede">This guide turns the P_SAPEA preparation journey into a sequence: <strong>understand the idea → recognise it in a messy business situation → make a decision → defend it</strong>. Core rule: the unit of study is the decision, not the isolated fact.</p>
                     </div>
 
+                    <div class="today-dashboard">
+                        <div class="today-card" id="todayFocusCard">
+                            <p class="today-focus__label">Loading your plan…</p>
+                        </div>
+                        <div class="today-card timer-card" id="studyTimerCard">
+                            <div class="timer-card__gauge" id="timerGauge"></div>
+                            <div class="timer-card__body">
+                                <span class="timer-card__mode" id="timerModeLabel">Focus</span>
+                                <span class="timer-card__display" id="timerDisplay">25:00</span>
+                                <div class="timer-card__controls">
+                                    <button type="button" class="btn btn-primary" id="timerStartBtn">▶ Start</button>
+                                    <button type="button" class="btn btn-secondary" id="timerPauseBtn" hidden>⏸ Pause</button>
+                                    <button type="button" class="btn btn-secondary" id="timerResetBtn">↺ Reset</button>
+                                </div>
+                                <div class="timer-card__presets">
+                                    <button type="button" class="timer-preset-btn" data-focus="25" data-break="5">25 / 5</button>
+                                    <button type="button" class="timer-preset-btn" data-focus="50" data-break="10">50 / 10</button>
+                                    <button type="button" class="timer-preset-btn" data-focus="15" data-break="3">15 / 3</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card-grid">
                         <div class="info-card">
                             <h3>📖 Learn</h3>
@@ -188,6 +212,7 @@
 
                     <h4>How to use this workspace</h4>
                     <ul>
+                        <li>Don't decide what to study — the <strong>Today's Focus</strong> card above always shows your next day. Click it, do it, mark it done.</li>
                         <li>Start with <a href="#sheet-role">Discover the Enterprise Architect Role</a> to orient to the job itself before the platform mechanics.</li>
                         <li>Read the beginner sections in order using the left-hand map.</li>
                         <li>Do the connected case without looking at the model answer.</li>
@@ -195,6 +220,50 @@
                         <li>Repeat until you can explain the reasoning clearly and efficiently.</li>
                         <li>Use <a href="#sheet-practice">Practice</a> to check domain knowledge as you go, and the Study Desk below to keep notes per sheet.</li>
                     </ul>
+                </div>
+            </article>
+
+            <!-- SHEET: STUDY SCHEDULE -->
+            <article class="sheet" id="sheet-schedule" data-title="Study Schedule" data-group="Get Started" data-code="S">
+                <div class="sheet-inner">
+                    <div class="sheet-header">
+                        <div class="sheet-kicker"><span class="sheet-kicker__code">S</span><span>Get Started</span></div>
+                        <h1 class="sheet-title">Your 6-week study schedule</h1>
+                        <p class="sheet-lede">Self-paced, not calendar-paced — checking a day off just advances what the Start sheet shows you next. Skip a real day and nothing "falls behind"; you pick up exactly where you left off.</p>
+                    </div>
+
+                    <div id="scheduleList"><p class="sheet-footnote">Loading schedule…</p></div>
+
+                    <h4>Flashcard-worthy recall items</h4>
+                    <div class="table-scroll">
+                        <table class="table-standard">
+                            <thead><tr><th>Front</th><th>Back</th></tr></thead>
+                            <tbody>
+                                <tr><td>5 SAP EA Building Blocks</td><td>Methodology, Reference Content, Tooling, Practice, Services</td></tr>
+                                <tr><td>BMC Block 3</td><td>Channels</td></tr>
+                                <tr><td>BMC Block 6</td><td>Key Resources</td></tr>
+                                <tr><td>Opponent action</td><td>Satisfy</td></tr>
+                                <tr><td>Promoter action</td><td>Actively engage</td></tr>
+                                <tr><td>Max Architecture Principles</td><td>10–20</td></tr>
+                                <tr><td>MECE</td><td>Mutually Exclusive + Collectively Exhaustive</td></tr>
+                                <tr><td>Key User extensibility runs where?</td><td>On S/4HANA (in-app, no code)</td></tr>
+                                <tr><td>Side-by-Side runs where?</td><td>On SAP BTP</td></tr>
+                                <tr><td>Brownfield = ?</td><td>System conversion — existing SAP → S/4HANA, preserve config</td></tr>
+                                <tr><td>TOGAF "Driver" → SAP EA term</td><td>Strategic Priority</td></tr>
+                                <tr><td>Business Footprint = ?</td><td>Cross-domain X-ray: strategy → capabilities → solutions → tech</td></tr>
+                                <tr><td>LeanIX primary role</td><td>Architecture / Application Portfolio Management</td></tr>
+                                <tr><td>Signavio primary role</td><td>Business Process Management &amp; Analysis</td></tr>
+                                <tr><td>Cloud ALM primary role</td><td>Project Execution + Operations Monitoring</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pattern pattern--tip">
+                        <span class="pattern__label">Pacing</span>
+                        <p>Behind on a domain? Spend an extra day before moving on — all four are weighted equally, so a weak one isn't compensated by a strong one. Ahead? Use the extra time on case-study practice. Exam delayed? Come back to the domain quizzes weekly to hold retention.</p>
+                    </div>
+
+                    <p class="sheet-footnote">Full plan with source notes: <a href="docs.html?file=docs/study-plan.md" target="_blank" rel="noopener">docs/study-plan.md →</a></p>
                 </div>
             </article>
 

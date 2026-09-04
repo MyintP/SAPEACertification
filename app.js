@@ -346,33 +346,235 @@
     }
 
     // ------------------------------------------------------------------
-    // Case rubric self-score checklists (generic id->bool store, separate
-    // from the fixed 8-key Tracker so any number of arbitrary rubric
-    // checkboxes can be added to any case without touching sheet-12).
+    // Generic keyed checklist store (id->bool, keyed by a storage key) -
+    // used by the case rubric self-scores AND the study schedule, so any
+    // number of arbitrary checkboxes can be added anywhere without a new
+    // storage scheme each time.
     // ------------------------------------------------------------------
     const caseChecklistKey = 'sapEaCaseChecklist';
+    const scheduleChecklistKey = 'sapEaSchedule';
 
-    function loadCaseChecklist() {
-        try { return JSON.parse(localStorage.getItem(caseChecklistKey) || '{}'); }
+    function loadChecklist(storageKey) {
+        try { return JSON.parse(localStorage.getItem(storageKey) || '{}'); }
         catch (e) { return {}; }
     }
 
-    function toggleCaseChecklistItem(itemId, checked) {
+    function toggleChecklistItem(storageKey, itemId, checked) {
         try {
-            const state = loadCaseChecklist();
+            const state = loadChecklist(storageKey);
             state[itemId] = checked;
-            localStorage.setItem(caseChecklistKey, JSON.stringify(state));
-        } catch (e) { console.log('Error saving case checklist:', e); }
+            localStorage.setItem(storageKey, JSON.stringify(state));
+        } catch (e) { console.log('Error saving checklist:', storageKey, e); }
     }
 
-    function applyCaseChecklistState() {
-        const state = loadCaseChecklist();
-        document.querySelectorAll('.case-checklist input[type="checkbox"]').forEach(function(cb) {
+    function applyChecklistState(storageKey, selector) {
+        const state = loadChecklist(storageKey);
+        document.querySelectorAll(selector).forEach(function(cb) {
             if (state[cb.dataset.checkId]) cb.checked = true;
         });
     }
 
+    function applyCaseChecklistState() {
+        applyChecklistState(caseChecklistKey, '.case-checklist input[type="checkbox"]');
+    }
+
+    function toggleCaseChecklistItem(itemId, checked) {
+        toggleChecklistItem(caseChecklistKey, itemId, checked);
+    }
+
     window.toggleCaseChecklistItem = toggleCaseChecklistItem;
+
+    // ------------------------------------------------------------------
+    // Study Schedule: the 6-week plan from docs/study-plan.md as a
+    // self-paced (not calendar-anchored) checklist. "Next" is always
+    // just the first unchecked day - skip a day, fall behind a real
+    // calendar and it doesn't matter, you pick up exactly where you left off.
+    // ------------------------------------------------------------------
+    const SCHEDULE = [
+        { id: 'w1-mon', week: 1, day: 'Mon', task: 'Read Domain 1 fully - Framework & Toolset. Take notes on anything unclear.', link: '#sheet-03' },
+        { id: 'w1-tue', week: 1, day: 'Tue', task: 'Watch/review the IEA10 course: Module 1 - Framework & Toolset.', link: '#sheet-10' },
+        { id: 'w1-wed', week: 1, day: 'Wed', task: 'Flashcard drill: 5 Building Blocks, ADM Phases, Metro Map variants.', link: '#sheet-03' },
+        { id: 'w1-thu', week: 1, day: 'Thu', task: 'Flashcard drill: 4 Org Models, 8 Maturity Dimensions, Toolchain steps.', link: '#sheet-03' },
+        { id: 'w1-fri', week: 1, day: 'Fri', task: 'Take the Domain 1 quiz - target 13+/15.', link: '#sheet-practice' },
+        { id: 'w1-sat', week: 1, day: 'Sat', task: 'Review any wrong answers. Re-read the relevant sections.', link: '#sheet-practice' },
+        { id: 'w1-sun', week: 1, day: 'Sun', task: 'Rest, or a light review of Domain 1 glossary terms.', link: 'docs.html?file=resources/glossary.md' },
+
+        { id: 'w2-mon', week: 2, day: 'Mon', task: 'Read Domain 2 fully - Architecture Vision & Roadmap.', link: '#sheet-04' },
+        { id: 'w2-tue', week: 2, day: 'Tue', task: 'Watch/review the IEA10 course: Module 2 - Architecture Vision.', link: '#sheet-10' },
+        { id: 'w2-wed', week: 2, day: 'Wed', task: 'Flashcard drill: Stakeholder Map quadrants + actions, BMC 9 blocks in sequence.', link: '#sheet-04' },
+        { id: 'w2-thu', week: 2, day: 'Thu', task: 'Flashcard drill: Architecture Principle components, Statement of Architecture Work.', link: '#sheet-04' },
+        { id: 'w2-fri', week: 2, day: 'Fri', task: 'Take the Domain 2 quiz - target 13+/15.', link: '#sheet-practice' },
+        { id: 'w2-sat', week: 2, day: 'Sat', task: 'Review wrong answers. Read the book notes, Chapter 2 section.', link: 'docs.html?file=resources/book-notes.md' },
+        { id: 'w2-sun', week: 2, day: 'Sun', task: 'Rest, or review the TOGAF → SAP EA term mapping.', link: 'docs.html?file=artifacts/togaf-to-sap-mapping.md' },
+
+        { id: 'w3-mon', week: 3, day: 'Mon', task: 'Read Domain 3 fully - Business Architecture.', link: '#sheet-05' },
+        { id: 'w3-tue', week: 3, day: 'Tue', task: 'Watch/review the IEA10 course: Module 3 - Business Architecture.', link: '#sheet-10' },
+        { id: 'w3-wed', week: 3, day: 'Wed', task: 'Flashcard drill: BCM levels, 4 Enterprise Domains, MECE.', link: '#sheet-05' },
+        { id: 'w3-thu', week: 3, day: 'Thu', task: 'Flashcard drill: Business Process Model 4 levels + naming conventions.', link: '#sheet-05' },
+        { id: 'w3-fri', week: 3, day: 'Fri', task: 'Take the Domain 3 quiz - target 13+/15.', link: '#sheet-practice' },
+        { id: 'w3-sat', week: 3, day: 'Sat', task: 'Review wrong answers. Spend extra time on the Business Footprint Diagram.', link: '#sheet-05' },
+        { id: 'w3-sun', week: 3, day: 'Sun', task: 'Rest, or review the RBA → RSA mapping.', link: 'docs.html?file=domains/rba-deep-dive.md' },
+
+        { id: 'w4-mon', week: 4, day: 'Mon', task: 'Read Domain 4 fully - Data, Application & Technology Architecture.', link: '#sheet-06' },
+        { id: 'w4-tue', week: 4, day: 'Tue', task: 'Watch/review the IEA10 course: Module 4 - Data, App & Tech Architecture.', link: '#sheet-10' },
+        { id: 'w4-wed', week: 4, day: 'Wed', task: 'Flashcard drill: 6 Application diagrams, deployment types, cloud service models.', link: '#sheet-06' },
+        { id: 'w4-thu', week: 4, day: 'Thu', task: 'Flashcard drill: Clean Core extension types, ISA-M domains, S/4HANA strategies.', link: '#sheet-clean-core-tool' },
+        { id: 'w4-fri', week: 4, day: 'Fri', task: 'Take the Domain 4 quiz - target 13+/15.', link: '#sheet-practice' },
+        { id: 'w4-sat', week: 4, day: 'Sat', task: 'Review wrong answers. Focus on Structure vs. Behaviour diagram confusion.', link: '#sheet-06' },
+        { id: 'w4-sun', week: 4, day: 'Sun', task: 'Rest, or review the Software Distribution → Environments & Location flow.', link: '#sheet-06' },
+
+        { id: 'w5-mon', week: 5, day: 'Mon', task: 'Read the artifact cheatsheet in full. Map every artifact to its phase.', link: 'docs.html?file=artifacts/artifact-cheatsheet.md' },
+        { id: 'w5-tue', week: 5, day: 'Tue', task: 'Read all 31 exam traps. Mark any you didn’t know.', link: 'docs.html?file=resources/exam-traps.md' },
+        { id: 'w5-wed', week: 5, day: 'Wed', task: 'Read the Wanderlust Case Hub in full.', link: '#sheet-wanderlust' },
+        { id: 'w5-thu', week: 5, day: 'Thu', task: 'Work through the Wanderlust prep questions while keeping case notes open.', link: 'docs.html?file=quiz/wanderlust-prep.md' },
+        { id: 'w5-fri', week: 5, day: 'Fri', task: 'Re-read the case with an architect’s eye - annotate per domain.', link: '#sheet-wanderlust' },
+        { id: 'w5-sat', week: 5, day: 'Sat', task: 'Cross-domain connections: trace a full ADM cycle using the cheatsheet.', link: 'docs.html?file=artifacts/artifact-cheatsheet.md' },
+        { id: 'w5-sun', week: 5, day: 'Sun', task: 'Re-take all 4 domain quizzes (60 questions total).', link: '#sheet-practice' },
+
+        { id: 'w6-mon', week: 6, day: 'Mon', task: 'Re-read exam traps. Focus on the ones you’ve been getting wrong.', link: 'docs.html?file=resources/exam-traps.md' },
+        { id: 'w6-tue', week: 6, day: 'Tue', task: 'Full knowledge mock (all 60 domain questions), then say a full 9-step defense out loud against the clock.', link: '#sheet-practice' },
+        { id: 'w6-wed', week: 6, day: 'Wed', task: 'Review the glossary for any terms still unclear.', link: 'docs.html?file=resources/glossary.md' },
+        { id: 'w6-thu', week: 6, day: 'Thu', task: 'Re-read the connected case study - final read.', link: '#sheet-wanderlust' },
+        { id: 'w6-fri', week: 6, day: 'Fri', task: 'Light review only. No new content. Rest.', link: '#sheet-review' },
+        { id: 'w6-sat', week: 6, day: 'Sat', task: 'Exam day (or final revision if your exam is booked later).', link: '#sheet-11' }
+    ];
+
+    const WEEK_TITLES = {
+        1: 'Domain 1 — Framework & Toolset', 2: 'Domain 2 — Vision & Roadmap',
+        3: 'Domain 3 — Business Architecture', 4: 'Domain 4 — Data / App / Tech',
+        5: 'Revision & Case-Study Practice', 6: 'Final Preparation'
+    };
+
+    function getScheduleState() { return loadChecklist(scheduleChecklistKey); }
+    function isDayDone(id) { return !!getScheduleState()[id]; }
+    function getNextScheduleItem() {
+        return SCHEDULE.find(function(item) { return !isDayDone(item.id); }) || null;
+    }
+
+    function renderTodayFocus() {
+        const card = document.getElementById('todayFocusCard');
+        if (!card) return;
+        const state = getScheduleState();
+        const doneCount = SCHEDULE.filter(function(item) { return state[item.id]; }).length;
+        const next = getNextScheduleItem();
+
+        if (!next) {
+            card.innerHTML = `<p class="today-focus__label">🎉 Schedule complete</p>
+                <p class="today-focus__task">All ${SCHEDULE.length} days checked off. Spend today on your <a href="#sheet-review">Review Queue</a> and a full mock defense.</p>`;
+            return;
+        }
+
+        const dayNumber = SCHEDULE.indexOf(next) + 1;
+        const linkHtml = next.link ? `<a class="btn btn-primary" href="${next.link}">Start this →</a>` : '';
+        card.innerHTML = `
+            <p class="today-focus__label">Week ${next.week} · ${next.day} · Day ${dayNumber} of ${SCHEDULE.length}</p>
+            <p class="today-focus__task">${next.task}</p>
+            <div class="today-focus__actions">
+                ${linkHtml}
+                <button type="button" class="btn btn-secondary" id="markDayDoneBtn" data-day-id="${next.id}">✓ Mark done</button>
+            </div>
+            <p class="today-focus__progress">${doneCount}/${SCHEDULE.length} days complete · <a href="#sheet-schedule">see full plan →</a></p>`;
+    }
+
+    function renderScheduleSheet() {
+        const container = document.getElementById('scheduleList');
+        if (!container) return;
+        const weeks = {};
+        SCHEDULE.forEach(function(item) { (weeks[item.week] = weeks[item.week] || []).push(item); });
+
+        const html = Object.keys(weeks).map(function(weekNum) {
+            const items = weeks[weekNum];
+            const doneInWeek = items.filter(function(item) { return isDayDone(item.id); }).length;
+            const rows = items.map(function(item) {
+                const linkHtml = item.link ? ` <a href="${item.link}">open →</a>` : '';
+                return `<label class="tracker-item schedule-checklist"><input type="checkbox" data-check-id="${item.id}"><span><strong>${item.day}</strong> — ${item.task}${linkHtml}</span></label>`;
+            }).join('');
+            return `<details class="schedule-week"${Number(weekNum) === 1 ? ' open' : ''}>
+                <summary class="schedule-week__summary">Week ${weekNum} — ${WEEK_TITLES[weekNum]} <span class="schedule-week__count">${doneInWeek}/7</span></summary>
+                <div class="schedule-week__days">${rows}</div>
+            </details>`;
+        }).join('');
+
+        container.innerHTML = html;
+    }
+
+    // ------------------------------------------------------------------
+    // Study Timer: a simple Pomodoro-style focus/break countdown. Runs
+    // in-memory (no persistence) - it keeps ticking across sheet
+    // navigation within the same page load, but resets on reload, same
+    // as any other Pomodoro app.
+    // ------------------------------------------------------------------
+    const timerState = { focusLength: 25 * 60, breakLength: 5 * 60, mode: 'focus', remaining: 25 * 60, running: false, intervalId: null };
+
+    function formatTimer(totalSeconds) {
+        const m = Math.floor(totalSeconds / 60);
+        const s = totalSeconds % 60;
+        return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }
+
+    function updateTimerDisplay() {
+        const displayEl = document.getElementById('timerDisplay');
+        if (!displayEl) return;
+        displayEl.textContent = formatTimer(timerState.remaining);
+        const modeEl = document.getElementById('timerModeLabel');
+        if (modeEl) modeEl.textContent = timerState.mode === 'focus' ? 'Focus' : 'Break';
+        const total = timerState.mode === 'focus' ? timerState.focusLength : timerState.breakLength;
+        const pct = total > 0 ? Math.round(((total - timerState.remaining) / total) * 100) : 0;
+        const gaugeEl = document.getElementById('timerGauge');
+        if (gaugeEl) gaugeEl.innerHTML = svgGauge(pct, { size: 96, stroke: 8 });
+        const startBtn = document.getElementById('timerStartBtn');
+        const pauseBtn = document.getElementById('timerPauseBtn');
+        if (startBtn) startBtn.hidden = timerState.running;
+        if (pauseBtn) pauseBtn.hidden = !timerState.running;
+    }
+
+    function timerTick() {
+        if (timerState.remaining <= 0) {
+            clearInterval(timerState.intervalId);
+            timerState.running = false;
+            timerState.mode = timerState.mode === 'focus' ? 'break' : 'focus';
+            timerState.remaining = timerState.mode === 'focus' ? timerState.focusLength : timerState.breakLength;
+            updateTimerDisplay();
+            const card = document.getElementById('studyTimerCard');
+            if (card) {
+                card.classList.add('timer-flash');
+                setTimeout(function() { card.classList.remove('timer-flash'); }, 1800);
+            }
+            document.title = (timerState.mode === 'break' ? '☕ Break time!' : '🎯 Back to focus!') + ' · SAP EA Workspace';
+            return;
+        }
+        timerState.remaining -= 1;
+        updateTimerDisplay();
+    }
+
+    function startTimer() {
+        if (timerState.running) return;
+        timerState.running = true;
+        timerState.intervalId = setInterval(timerTick, 1000);
+        updateTimerDisplay();
+    }
+
+    function pauseTimer() {
+        timerState.running = false;
+        clearInterval(timerState.intervalId);
+        updateTimerDisplay();
+    }
+
+    function resetTimer() {
+        pauseTimer();
+        timerState.mode = 'focus';
+        timerState.remaining = timerState.focusLength;
+        updateTimerDisplay();
+    }
+
+    function setTimerPreset(focusMin, breakMin) {
+        pauseTimer();
+        timerState.focusLength = focusMin * 60;
+        timerState.breakLength = breakMin * 60;
+        timerState.mode = 'focus';
+        timerState.remaining = timerState.focusLength;
+        updateTimerDisplay();
+    }
 
     // ------------------------------------------------------------------
     // Tabs: generic component used by tabbed case-study guides. A
@@ -952,12 +1154,52 @@
         const domainQuizResetBtn = document.getElementById('domainQuizReset');
         if (domainQuizResetBtn) domainQuizResetBtn.addEventListener('click', resetAllQuizzes);
 
-        // --- Case rubric self-score checklists (event delegation - items
-        // are added freely to any case without needing new listeners) ---
+        // --- Case rubric self-score checklists AND the study schedule
+        // (event delegation - items are added freely to either without
+        // needing new listeners) ---
         document.addEventListener('change', function(e) {
-            if (e.target.matches && e.target.matches('.case-checklist input[type="checkbox"]')) {
+            if (!e.target.matches) return;
+            if (e.target.matches('.case-checklist input[type="checkbox"]')) {
                 toggleCaseChecklistItem(e.target.dataset.checkId, e.target.checked);
+            } else if (e.target.matches('.schedule-checklist input[type="checkbox"]')) {
+                toggleChecklistItem(scheduleChecklistKey, e.target.dataset.checkId, e.target.checked);
+                renderTodayFocus();
+                const summary = e.target.closest('details.schedule-week');
+                if (summary) {
+                    const countEl = summary.querySelector('.schedule-week__count');
+                    const doneCount = summary.querySelectorAll('.schedule-checklist input[type="checkbox"]:checked').length;
+                    if (countEl) countEl.textContent = `${doneCount}/7`;
+                }
             }
+        });
+
+        // --- Today's Focus + full Study Schedule ---
+        renderScheduleSheet();
+        applyChecklistState(scheduleChecklistKey, '.schedule-checklist input[type="checkbox"]');
+        renderTodayFocus();
+
+        document.addEventListener('click', function(e) {
+            const markDoneBtn = e.target.closest('#markDayDoneBtn');
+            if (markDoneBtn) {
+                toggleChecklistItem(scheduleChecklistKey, markDoneBtn.dataset.dayId, true);
+                renderScheduleSheet();
+                applyChecklistState(scheduleChecklistKey, '.schedule-checklist input[type="checkbox"]');
+                renderTodayFocus();
+            }
+        });
+
+        // --- Study Timer ---
+        updateTimerDisplay();
+        const timerStartBtn = document.getElementById('timerStartBtn');
+        const timerPauseBtn = document.getElementById('timerPauseBtn');
+        const timerResetBtn = document.getElementById('timerResetBtn');
+        if (timerStartBtn) timerStartBtn.addEventListener('click', startTimer);
+        if (timerPauseBtn) timerPauseBtn.addEventListener('click', pauseTimer);
+        if (timerResetBtn) timerResetBtn.addEventListener('click', resetTimer);
+        document.querySelectorAll('.timer-preset-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                setTimerPreset(Number(btn.dataset.focus), Number(btn.dataset.break));
+            });
         });
 
         // --- Search dialog (command palette: sheets + in-sheet headings) ---

@@ -2,6 +2,29 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 zero-decision landing: Today's Focus, a study timer, and a live schedule
+
+The user wanted to open the site and start studying without deciding anything first. Redesigned
+the Start sheet around that.
+
+### Added
+- **Today's Focus card** (Start sheet): always shows the single next thing to do, computed from
+  the study schedule below — no navigation or decision required. A "Mark done" button advances it
+  immediately; a direct link opens the relevant sheet.
+- **Study Schedule** (new sheet, code `S`, in Get Started): `docs/study-plan.md`'s 6-week plan (41
+  days — week 6 intentionally ends at Exam Day on the Saturday) turned into a checkable list,
+  grouped by week with a live done-count per week. Checking a day here or via "Mark done" on the
+  Today's Focus card keeps both in sync immediately, no reload needed.
+  - Deliberately **self-paced, not calendar-anchored**: "next" is always just the first unchecked
+    day, so skipping a real day never puts you "behind" — you pick up exactly where you left off.
+  - Reuses the case-rubric checklist storage mechanism (generalised from a single-purpose
+    `sapEaCaseChecklist`-only implementation into `loadChecklist(key)`/`toggleChecklistItem(key, ...)`
+    so both features share one pattern instead of two parallel ones).
+- **Study Timer** (Start sheet): a Pomodoro-style focus/break countdown with 25/5, 50/10 and 15/3
+  presets, a circular progress ring (reusing the existing `svgGauge()` helper), and a visual flash
+  + title-bar change when a session ends. Runs in-memory — keeps ticking across sheet navigation
+  within the same page load, resets on reload, same as any other Pomodoro timer.
+
 ## [Unreleased] - September 2026 mined three external study documents, rejected one significant claim
 
 Reviewed three AI-generated study documents supplied by the user (a "Day 1 textbook," a "decision
