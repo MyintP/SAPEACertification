@@ -45,6 +45,23 @@ The three pillars — Methodology, Reference Architecture Content, and Tooling �
 
 ---
 
+## The Six Architectural Principles
+
+Every scenario answer should be defensible against these six. In scenario-based questions, a "reasonable-sounding" generic answer is often the distractor precisely because it violates one of these.
+
+| # | Principle | Guard Rail | Applied Example |
+|---|-----------|-----------|-----------------|
+| 1 | **Map Business and IT Separately** | Disentangle IT solutions from business goals — don't let a product decision drive the business capability definition. | Before debating Teams vs. Zoom, first map the business capability "Real-Time Collaboration." Product selection is downstream. |
+| 2 | **Use Industry Standards** | Reuse proven, stress-tested standards instead of inventing new ones. | TOGAF for methodology, BPMN for process notation, APQC PCF for the process classification basis. |
+| 3 | **Connect to Other Architectures** | EA is an equal partner, not a ruler — it works in harmony with integration, data and system-landscape architecture. | Align EA work products with integration and data architects using domain-driven design, rather than dictating to them. |
+| 4 | **Collaborative Approach & Content Fluency** | Shared taxonomy and repeatable processes so content flows to every use case without restricting local autonomy. | Consistent meta-models let different business units use the same architecture data without a central bottleneck. |
+| 5 | **Defined Content Ownership** | Every artifact, capability, application and process has a single named owner accountable for keeping it current. | One owner per Business Capability Map entry — not a committee, and not "whoever last touched it." |
+| 6 | **Sustainability and Simplicity** | Keep the architecture and its documentation as simple as the problem allows. | Unnecessary complexity is a cost, not a sign of rigor — it's also the justification for the 10–20 Architecture Principles limit. |
+
+> **Trap:** Principle 1 is the one most often violated by a plausible-sounding distractor — any answer that starts with "select the SAP product first, then..." is wrong before you finish reading it.
+
+---
+
 ## The ADM Phases
 
 ```
@@ -159,6 +176,18 @@ Two different counts appear depending on which question you're answering — bot
 - Connecting business process models to real-world execution
 - Enabling continuous adoption and operational stability
 
+### The same toolchain, mapped to SAP Activate
+
+The five-step flow above describes what LeanIX and Signavio do for each other. Mapped onto **SAP Activate** (the standard delivery methodology for cloud implementations), the same tools play consistent roles at each phase:
+
+| SAP Activate Phase | SAP Signavio | SAP LeanIX |
+|---|---|---|
+| **Discover** | Mines as-is transaction logs from legacy systems to understand actual (not assumed) process flows | Imports and documents the as-is IT application portfolio, flagging legacy systems and initial technology risk |
+| **Prepare / Explore** | Runs the Fit-to-Standard workshop — compares current processes against SAP's reference process content | Links target business capabilities to the proposed SAP applications; defines interfaces, ownership and the target-state roadmap |
+| **Realize / Deploy** | Acts as the single source of truth for process documentation, training and workflow alignment | Manages the transition architecture and tracks go-live dependencies for a clean legacy decommission |
+
+> This is a delivery-lifecycle view of the same toolchain, not a separate framework — useful for scenario questions phrased around "when in the project" rather than "which architecture layer."
+
 ---
 
 ## EA Practice — Four Organisational Models
@@ -236,6 +265,7 @@ Two different counts appear depending on which question you're answering — bot
 8. What is IndRA, and how does it relate to TOGAF?
 9. Name all 9 ADM phases from Preliminary through H
 10. How many domains does the Metro Map have? How many does the SAP EA Methodology itself define?
+11. Name the 6 Architectural Principles, and give the one-line application example for Principle 1
 
 > Answers: review the sections above 👆
 

@@ -66,6 +66,21 @@
 
 ---
 
+## S/4HANA Cloud: Public Edition vs. Private Edition
+
+A layer more specific than the generic cloud models above — this is the actual product-level decision an architect makes when the target is S/4HANA Cloud. Evaluate workload-by-workload against the client's real constraints, not as a single enterprise-wide choice:
+
+| Factor | Points to Public Edition | Points to Private Edition |
+|---|---|---|
+| **Standardisation appetite** | High — willing to adopt SAP best-practice processes as-is | Low — needs to preserve differentiating custom processes |
+| **Extension complexity** | Light — Key User / in-app extensibility covers the gap | Heavy — needs on-stack Developer Extensibility close to the core |
+| **Upgrade cadence** | Accepts frequent, mandatory releases | Needs control over upgrade timing |
+| **Regulatory / data residency** | Standard multi-tenant hosting is acceptable | Requires dedicated infrastructure or specific hosting terms |
+
+> **Trap:** "Which edition is better" is not a real question — the exam expects a workload-by-workload evaluation against constraints, not a blanket recommendation. A single enterprise can legitimately run both.
+
+---
+
 ## Data Architecture Diagrams
 
 | Diagram | Purpose |

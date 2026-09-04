@@ -363,6 +363,12 @@
                         <li><strong>SAP LeanIX and SAP Signavio</strong> can support different parts of the architecture and process picture.</li>
                         <li>Always ask: <em>who needs this artifact, what decision does it support, and what evidence feeds it?</em></li>
                     </ul>
+
+                    <div class="pattern pattern--tip">
+                        <span class="pattern__label">Six Principles</span>
+                        <p>Every scenario answer should hold up against six guard rails — most importantly Principle 1: map the business capability before naming a product. Full table with applied examples in the deep-dive below.</p>
+                    </div>
+
                     <p class="sheet-footnote"><a href="docs.html?file=domains/01-framework-toolset.md" target="_blank" rel="noopener">Full domain deep-dive →</a> · <a href="#sheet-practice">Test yourself: Domain 1 quiz →</a></p>
                 </div>
             </article>
@@ -585,6 +591,8 @@
                             <button type="button" class="tab-btn is-active" data-tab="situation" role="tab">The Situation</button>
                             <button type="button" class="tab-btn" data-tab="stakeholders" role="tab">Stakeholder Blueprint</button>
                             <button type="button" class="tab-btn" data-tab="architecture" role="tab">Target Architecture</button>
+                            <button type="button" class="tab-btn" data-tab="decisions" role="tab">Six Decisions</button>
+                            <button type="button" class="tab-btn" data-tab="defend" role="tab">Defend It Live</button>
                         </div>
 
                         <div class="tab-panel" data-tab-panel="situation">
@@ -610,6 +618,49 @@
                                 <li><strong>SAP Signavio</strong> maps the business processes (including the Lead-to-Cash variants relevant to Wanderlust's B2C and made-to-order models).</li>
                                 <li><strong>SAP LeanIX</strong> documents the IT application portfolio, giving the Business-IT alignment a nascent EA practice needs before it can make credible investment recommendations.</li>
                             </ul>
+                        </div>
+
+                        <div class="tab-panel" data-tab-panel="decisions" hidden>
+                            <p>Six connected decisions run through the case. Each one constrains the next — this is the "unit of study is the decision" principle applied to a single continuous scenario.</p>
+                            <ol>
+                                <li><strong>EA maturity → Stakeholder Map first.</strong> Nascent maturity, no stakeholder map, no Architecture Board yet. An architecture without identified owners is a drawing, not a plan — see <a href="#sheet-role">Discover the Enterprise Architect Role</a>.</li>
+                                <li><strong>Process-to-capability sequence.</strong> Business Process Modeling (BPM) and the Business Capability Model (BCM) are linked by assigning both to <strong>shared Enterprise Domains</strong>, then ensuring BPM business activities are enabled by BCM business capabilities — never the reverse.</li>
+                                <li><strong>Lead-to-Cash capability alignment.</strong> The CIO's online-marketing transformation maps to three named capabilities: <strong>Marketing Campaign Management</strong>, <strong>Lead Management</strong>, and <strong>Marketing Analytics</strong> — capabilities first, SaaS product selection (e.g. a marketing cloud tool) second.</li>
+                                <li><strong>Organisation map → Business Roles &amp; Personas.</strong> The CEO wants internal teams and the dealer network activated for the marketing transformation. A generic org chart is too high-level; extending it into specific business roles and personas gives clear ownership boundaries and drives change adoption.</li>
+                                <li><strong>Smart Battery alignment via Business Model Canvas.</strong> Value proposition, cost structure, revenue streams, partners and channels were developed in isolation. A <strong>Business Model Canvas</strong> pulls all nine dimensions into one page so they can be reconciled together.</li>
+                                <li><strong>Scoping the IBP quick win.</strong> SAP Integrated Business Planning is identified as a fast win for demand/supply planning. Before implementation: a <strong>Fit-Gap Assessment</strong> (what can't be met out-of-the-box), a defined <strong>Solution Context</strong>, and an <strong>Aspirational Solution Concept</strong> — all three baseline the Statement of Architecture Work.</li>
+                            </ol>
+                        </div>
+
+                        <div class="tab-panel" data-tab-panel="defend" hidden>
+                            <p>Practice defending out loud, not just recognising the right answer on paper — that's what the current scenario format actually rewards.</p>
+
+                            <div class="pattern pattern--scenario">
+                                <span class="pattern__label">Stakeholder says</span>
+                                <p>"We're expanding our EV dealer portal. Buy the CRM license today so developers can start building — why waste time mapping 'business capabilities' first?"</p>
+                            </div>
+                            <div class="pattern pattern--tip">
+                                <span class="pattern__label">Your defense</span>
+                                <p>Buying the license first lets the product dictate the business strategy — a Principle 1 violation. Mapping capabilities first defines <em>what</em> Wanderlust must do to support EV dealers; only then can we select the CRM module and size what it needs to integrate with. Skip the sequence and you get redundant applications and expensive rework later.</p>
+                            </div>
+
+                            <div class="pattern pattern--scenario">
+                                <span class="pattern__label">Developer says</span>
+                                <p>"I need logic close to the S/4HANA core. A direct database trigger is faster than a side-by-side BTP extension, and I've documented my code — why block the change?"</p>
+                            </div>
+                            <div class="pattern pattern--tip">
+                                <span class="pattern__label">Your defense</span>
+                                <p>Documentation doesn't change the outcome: a direct table trigger breaks the two-way Clean Core guarantee, and the next automated cloud release will break your trigger or the release itself. If the logic genuinely needs to run close to the core, we build it as Developer Extensibility via RAP against released, upgrade-stable APIs — see <a href="#sheet-clean-core-tool">the Clean Core Decision Engine</a>.</p>
+                            </div>
+
+                            <div class="pattern pattern--scenario">
+                                <span class="pattern__label">Project manager says</span>
+                                <p>"We're running agile sprints. The TOGAF ADM is a slow, sequential waterfall — it doesn't fit our timeline."</p>
+                            </div>
+                            <div class="pattern pattern--tip">
+                                <span class="pattern__label">Your defense</span>
+                                <p>The ADM is iterative by design — within phases, between phases, and between full cycles, not a single pass. We tailor the depth per area: a competitive differentiator like Smart Battery gets a full deep-dive, while standard supporting processes run at a lighter tailoring level. That gives technical discipline without sacrificing sprint speed.</p>
+                            </div>
                         </div>
                     </div>
 
@@ -780,7 +831,7 @@
                     <div class="sheet-header">
                         <div class="sheet-kicker"><span class="sheet-kicker__code">13</span><span>Certification</span></div>
                         <h1 class="sheet-title">Certification track</h1>
-                        <p class="sheet-lede">P_SAPEA isn't an entry-level credential — SAP positions it for architects who already have real enterprise-architecture engagement experience. This sheet maps where it sits relative to other SAP certifications, not just the one exam.</p>
+                        <p class="sheet-lede">P_SAPEA isn't an entry-level credential — third-party training providers describe it as intended for architects with 5+ years of active engagement experience. This sheet maps where it sits relative to other SAP certifications, not just the one exam.</p>
                     </div>
 
                     <div class="pattern pattern--important">

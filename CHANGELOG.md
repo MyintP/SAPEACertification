@@ -2,6 +2,56 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 mined three external study documents, rejected one significant claim
+
+Reviewed three AI-generated study documents supplied by the user (a "Day 1 textbook," a "decision
+cookbook," and a "neutral syllabus") against this repo's own already-verified content before
+incorporating anything. The raw files are **not** committed to the repo — they carry meaningless
+bracket citation numbers referencing a source PDF this repo doesn't have, and contain at least one
+significant, confidently-stated error. Only cross-checked, genuinely new content was mined out and
+rewritten in this repo's own voice.
+
+### Added — verified against existing repo content and, where checked, public sources
+- **The Six Architectural Principles** (`domains/01-framework-toolset.md`, teaser on `index.html`
+  sheet 03): a real gap — this repo had referenced the principles but never given them a dedicated
+  table. Corroborated against this repo's own Study Bible extract (Part 5), which lists the same
+  six principles independently.
+- **SAP Activate phase mapping for the LeanIX/Signavio toolchain** (`domains/01-framework-toolset.md`):
+  the same five-step toolchain, reframed against Discover/Prepare-Explore/Realize-Deploy — SAP
+  Activate's phases are extremely well-documented public knowledge, low-risk addition.
+- **S/4HANA Cloud Public vs. Private Edition decision framework** (`domains/04-data-app-tech.md`):
+  a workload-by-workload evaluation table — genuinely missing; the repo previously only covered the
+  generic cloud deployment models (On-Premise/Private/Public, SaaS/PaaS/IaaS), not this
+  product-specific decision.
+- **Wanderlust Case Hub: two new tabs** — "Six Decisions" (the connected decision chain: EA
+  maturity → process/capability sequencing → Lead-to-Cash capabilities → org roles & personas →
+  Business Model Canvas for the Smart Battery initiative → IBP quick-win scoping) and "Defend It
+  Live" (three scripted stakeholder-objection / architect-defense dialogues). All three uploaded
+  documents independently corroborate the same six Wanderlust decisions, which also matches and
+  extends the Wanderlust facts already corrected in this repo's previous revision.
+- Certification Track sheet: added the "5+ years engagement experience" detail to the lede,
+  consistent with the existing third-party-sourced hedging already on that sheet.
+
+### Explicitly rejected — do not treat as current fact
+- **All three uploaded documents present "40 questions, 180 minutes, 80% cut score, with four
+  domains individually weighted 21–30%/21–30%/21–30%/11–20%" as current P_SAPEA exam mechanics.**
+  This directly contradicts `docs/exam-overview.md`, which already documents — sourced from SAP's
+  own live Scenario-Based Assessment FAQ — that these are **legacy 2023-format numbers**, that the
+  current exam is a single extended scenario (not discrete weighted questions), and that the four
+  domains are stated by SAP to be **equally weighted**. None of it was incorporated. This looks
+  like exactly the kind of stale AI-training-cutoff content this repo has already been burned by
+  once this session (see the Wanderlust industry correction) — the uploaded documents cite an old,
+  now-superseded 2023 exam guide as if it were current.
+- **"SAP Enterprise Architecture Designer (SAP EAD)" presented as a current, separate tool
+  alongside LeanIX.** This repo's own `resources/book-notes.md` already documents EAD as the
+  legacy pre-acquisition name for what is now SAP LeanIX. Not added as a distinct current tool.
+- The "8-Layer Strategic-to-Infrastructure Stack" — the three documents don't even agree with each
+  other on whether it's 8 or 9 layers, and it doesn't appear to be official SAP terminology (more
+  likely a teaching device from a cited secondary source). Not added as if it were an official
+  artifact.
+- A generic "Git Collaboration & PR Contribution Guide" section — doesn't match this repo's actual
+  `CONTRIBUTING.md`, which already exists and is more specific to this project. Left untouched.
+
 ## [Unreleased] - September 2026 Clean Core tool, Wanderlust hub, SBA drill; fixed a real factual error
 
 ### Added
