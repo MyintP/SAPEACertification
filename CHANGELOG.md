@@ -2,6 +2,29 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 inline the domain deep-dives - no more click-through to read them
+
+User feedback after using Today's Focus for the first time: landing on `#sheet-03` from the "next
+step" link showed five bullet points and a small footnote link below the Study Desk panel — easy
+to miss, and the sheet read as a stub rather than real content, even though the real content
+(`domains/01-framework-toolset.md`) was one click away the whole time.
+
+### Fixed
+- **Sheets 03–06 now render their full `.md` deep-dive directly in the sheet** — no navigation,
+  no separate page. Extracted docs.js's markdown parser into `app.js` (`parseMarkdownToHtml()`)
+  so the same source file renders identically whether viewed via `docs.html` or inline; no content
+  duplicated or forked between the two.
+  - Search continues to work on this async-loaded content: `buildSheetIndex()`'s per-sheet
+    heading scan was split out into `scanHeadingsForSheet()` so each domain's headings can be
+    re-indexed the moment its `fetch()` resolves, rather than only at initial page load.
+  - Each sheet now ends with two visible, button-styled calls to action ("Test yourself" and
+    "Open as its own page") instead of one small italic footnote link.
+- **`.callout` classes had no CSS at all** — every blockquote/"Trap:" callout in every `.md` file
+  rendered as an unstyled, unindented paragraph in `docs.html` since the markdown viewer was
+  added. Found while inlining this content made the gap obvious. Fixed with proper styling
+  (warning/accent/soft variants matching the existing `.pattern--*` visual language) — this also
+  retroactively fixes every existing `docs.html?file=...` page, not just the newly-inlined ones.
+
 ## [Unreleased] - September 2026 zero-decision landing: Today's Focus, a study timer, and a live schedule
 
 The user wanted to open the site and start studying without deciding anything first. Redesigned

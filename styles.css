@@ -476,6 +476,51 @@ code, kbd {
 }
 
 /* ============================================================
+   Markdown-viewer callouts (blockquotes) - used by both docs.js and
+   the inline deep-dive renderer in app.js. Never had CSS before -
+   every ">" blockquote in every .md file was rendering unstyled.
+   ============================================================ */
+.callout {
+    margin: 16px 0;
+    padding: 12px 16px;
+    border-left: 3px solid var(--paper-border);
+    border-radius: var(--radius-sm);
+    background: var(--canvas-bg);
+}
+
+.callout p { margin: 0; }
+.callout--warning { border-left-color: var(--amber); background: var(--amber-pale); }
+.callout--accent { border-left-color: var(--accent); background: var(--accent-pale); }
+.callout--soft { border-left-color: var(--paper-border); background: var(--canvas-bg); }
+
+/* ============================================================
+   Inline deep-dive (a domain sheet's .md file, rendered directly
+   into the sheet - no separate page, no extra click)
+   ============================================================ */
+.deep-dive-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 18px;
+}
+
+.deep-dive-inline table code { white-space: nowrap; }
+
+.sheet-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 28px 0 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--paper-border);
+}
+
+/* ============================================================
    Prose & section rhythm
    ============================================================ */
 .sheet-inner h2 {

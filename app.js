@@ -16,8 +16,202 @@
     }
 
     // ------------------------------------------------------------------
+    // Markdown -> HTML (same parser as docs.js) - lets a domain sheet
+    // inline its own deep-dive .md file directly, so "read the summary,
+    // then click through to a separate page for the real content" isn't
+    // a step the user has to take at all.
+    // ------------------------------------------------------------------
+    function mdEscapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    function mdRenderInline(rawText) {
+        const codeSpans = [];
+        let text = rawText.replace(/`([^`]+)`/g, function(m, code) {
+            codeSpans.push(mdEscapeHtml(code));
+            return '@@CODE' + (codeSpans.length - 1) + '@@';
+        });
+        text = mdEscapeHtml(text);
+        text = text.replace(/@@CODE(\d+)@@/g, function(m, i) {
+            return '<code>' + codeSpans[Number(i)] + '</code>';
+        });
+        text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, label, url) {
+            const external = /^https?:\/\//.test(url);
+            return '<a href="' + url + '"' + (external ? ' target="_blank" rel="noopener"' : '') + '>' + label + '</a>';
+        });
+        text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+        text = text.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
+        return text;
+    }
+
+    function mdIsTableSeparator(line) {
+        return /^\s*\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?\s*$/.test(line);
+    }
+
+    function mdSplitRow(line) {
+        let l = line.trim();
+        if (l.charAt(0) === '|') l = l.slice(1);
+        if (l.charAt(l.length - 1) === '|') l = l.slice(0, -1);
+        return l.split('|').map(function(c) { return c.trim(); });
+    }
+
+    function mdCalloutClass(text) {
+        if (text.indexOf('⚠') !== -1) return 'callout callout--warning';
+        if (text.indexOf('💡') !== -1 || text.indexOf('🎯') !== -1) return 'callout callout--accent';
+        return 'callout callout--soft';
+    }
+
+    function mdIsBlockStartLine(line) {
+        const trimmed = line.trim();
+        return /^BLOCK\d+$/.test(trimmed) ||
+            /^(#{1,4})\s+/.test(line) ||
+            /^(---+|\*\*\*+|___+)\s*$/.test(trimmed) ||
+            /^>\s?/.test(line) ||
+            /^\s*[-*]\s+/.test(line) ||
+            /^\s*\d+\.\s+/.test(line) ||
+            line.indexOf('|') !== -1;
+    }
+
+    function parseMarkdownToHtml(md) {
+        md = md.replace(/\r\n?/g, '\n');
+        const codeBlocks = [];
+        md = md.replace(/```[a-zA-Z]*\n([\s\S]*?)```/g, function(m, code) {
+            codeBlocks.push(code.replace(/\n$/, ''));
+            return '\nBLOCK' + (codeBlocks.length - 1) + '\n';
+        });
+
+        const lines = md.split('\n');
+        let html = '';
+        let i = 0;
+
+        while (i < lines.length) {
+            const line = lines[i];
+            const trimmed = line.trim();
+
+            if (trimmed === '') { i++; continue; }
+
+            const blockMatch = trimmed.match(/^BLOCK(\d+)$/);
+            if (blockMatch) {
+                html += '<pre><code>' + mdEscapeHtml(codeBlocks[Number(blockMatch[1])]) + '</code></pre>\n';
+                i++; continue;
+            }
+
+            if (/^(---+|\*\*\*+|___+)\s*$/.test(trimmed)) {
+                html += '<hr class="sheet-divider">\n';
+                i++; continue;
+            }
+
+            const headerMatch = line.match(/^(#{1,4})\s+(.*)$/);
+            if (headerMatch) {
+                const level = headerMatch[1].length;
+                html += '<h' + level + '>' + mdRenderInline(headerMatch[2].trim()) + '</h' + level + '>\n';
+                i++; continue;
+            }
+
+            if (line.indexOf('|') !== -1 && lines[i + 1] && mdIsTableSeparator(lines[i + 1])) {
+                const headerCells = mdSplitRow(line);
+                i += 2;
+                const rows = [];
+                while (i < lines.length && lines[i].indexOf('|') !== -1 && lines[i].trim() !== '') {
+                    rows.push(mdSplitRow(lines[i]));
+                    i++;
+                }
+                html += '<div class="table-scroll"><table class="table-standard"><thead><tr>';
+                headerCells.forEach(function(c) { html += '<th>' + mdRenderInline(c) + '</th>'; });
+                html += '</tr></thead><tbody>';
+                rows.forEach(function(r) {
+                    html += '<tr>';
+                    r.forEach(function(c) { html += '<td>' + mdRenderInline(c) + '</td>'; });
+                    html += '</tr>';
+                });
+                html += '</tbody></table></div>\n';
+                continue;
+            }
+
+            if (/^>\s?/.test(line)) {
+                const quoteLines = [];
+                while (i < lines.length && /^>\s?/.test(lines[i])) {
+                    quoteLines.push(lines[i].replace(/^>\s?/, ''));
+                    i++;
+                }
+                const text = quoteLines.join(' ');
+                html += '<div class="' + mdCalloutClass(text) + '"><p>' + mdRenderInline(text) + '</p></div>\n';
+                continue;
+            }
+
+            if (/^\s*[-*]\s+/.test(line)) {
+                const items = [];
+                while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+                    items.push(mdRenderInline(lines[i].replace(/^\s*[-*]\s+/, '')));
+                    i++;
+                }
+                html += '<ul>' + items.map(function(it) { return '<li>' + it + '</li>'; }).join('') + '</ul>\n';
+                continue;
+            }
+
+            if (/^\s*\d+\.\s+/.test(line)) {
+                const items = [];
+                while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+                    items.push(mdRenderInline(lines[i].replace(/^\s*\d+\.\s+/, '')));
+                    i++;
+                }
+                html += '<ol>' + items.map(function(it) { return '<li>' + it + '</li>'; }).join('') + '</ol>\n';
+                continue;
+            }
+
+            const paraLines = [line];
+            i++;
+            while (i < lines.length && lines[i].trim() !== '' && !mdIsBlockStartLine(lines[i])) {
+                paraLines.push(lines[i]);
+                i++;
+            }
+            html += '<p>' + mdRenderInline(paraLines.join(' ')) + '</p>\n';
+        }
+
+        return html;
+    }
+
+    function loadInlineDeepDive(containerId, mdPath, sheetId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        fetch(mdPath)
+            .then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.text();
+            })
+            .then(function(text) {
+                container.innerHTML = parseMarkdownToHtml(text);
+                refreshHeadingsForSheetId(sheetId);
+            })
+            .catch(function(err) {
+                container.innerHTML = '<div class="pattern pattern--important"><span class="pattern__label">Couldn\'t load</span><p>' +
+                    mdEscapeHtml(err.message) + ' — <a href="docs.html?file=' + mdPath + '" target="_blank" rel="noopener">open it directly →</a></p></div>';
+            });
+    }
+
+    // ------------------------------------------------------------------
     // Sheet + heading index (derived from the DOM - not duplicated data)
     // ------------------------------------------------------------------
+    let liveSheetIndex = null; // populated once by buildSheetIndex(); re-scanned per-sheet after async content (e.g. inline deep-dives) loads
+
+    // Assign deterministic, URL-safe anchor IDs to a sheet's headings
+    // (h2/h3/h4) so search can jump to a subsection and links stay stable.
+    // Exported as its own function so content added after initial page
+    // load (e.g. a fetched deep-dive) can be folded into the same index.
+    function scanHeadingsForSheet(sheet) {
+        sheet.headings = [];
+        sheet.el.querySelectorAll('h2, h3, h4').forEach(h => {
+            if (!h.id) {
+                const slug = slugify(h.textContent);
+                if (slug) h.id = `${sheet.id}-${slug}`;
+            }
+            if (h.id) sheet.headings.push({ id: h.id, text: h.textContent.trim(), el: h });
+        });
+    }
+
     function buildSheetIndex() {
         const sheets = [...document.querySelectorAll('.sheet')].map(el => ({
             id: el.id,
@@ -27,20 +221,18 @@
             el
         }));
 
-        // Assign deterministic, URL-safe anchor IDs to in-sheet headings
-        // (h2/h3/h4) so search can jump to a subsection and links stay stable.
-        sheets.forEach(sheet => {
-            sheet.headings = [];
-            sheet.el.querySelectorAll('h2, h3, h4').forEach(h => {
-                if (!h.id) {
-                    const slug = slugify(h.textContent);
-                    if (slug) h.id = `${sheet.id}-${slug}`;
-                }
-                if (h.id) sheet.headings.push({ id: h.id, text: h.textContent.trim(), el: h });
-            });
-        });
-
+        sheets.forEach(scanHeadingsForSheet);
+        liveSheetIndex = sheets;
         return sheets;
+    }
+
+    // Called once a sheet's content has changed asynchronously (inline
+    // deep-dive fetch resolved) - re-scans just that sheet's headings so
+    // search picks up the new content without a full index rebuild.
+    function refreshHeadingsForSheetId(sheetId) {
+        if (!liveSheetIndex) return;
+        const sheet = liveSheetIndex.find(s => s.id === sheetId);
+        if (sheet) scanHeadingsForSheet(sheet);
     }
 
     // ------------------------------------------------------------------
@@ -1172,6 +1364,13 @@
                 }
             }
         });
+
+        // --- Inline the domain deep-dives directly into their sheets -
+        // no separate page, no extra click, the real content is just there.
+        loadInlineDeepDive('domain03DeepDive', 'domains/01-framework-toolset.md', 'sheet-03');
+        loadInlineDeepDive('domain04DeepDive', 'domains/02-vision-roadmap.md', 'sheet-04');
+        loadInlineDeepDive('domain05DeepDive', 'domains/03-business-architecture.md', 'sheet-05');
+        loadInlineDeepDive('domain06DeepDive', 'domains/04-data-app-tech.md', 'sheet-06');
 
         // --- Today's Focus + full Study Schedule ---
         renderScheduleSheet();
