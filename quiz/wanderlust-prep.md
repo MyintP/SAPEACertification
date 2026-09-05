@@ -6,7 +6,7 @@
 
 ## What is Wanderlust?
 
-Wanderlust GmbH is SAP's real, publicly-published reference case study for the SAP EA Certification exam — a German-headquartered manufacturer of conventional fuel-driven cars, with manufacturing facilities and sales globally, expanding into electric vehicles via a "Smart Battery" initiative. It is published on the SAP learning portal and is publicly available to read before sitting the exam. See the [Wanderlust Case Hub](index.html#sheet-wanderlust) in this workspace for a structured summary.
+Wanderlust GmbH is SAP's real, publicly-published reference case study for the SAP EA Certification exam — a German-headquartered manufacturer of conventional fuel-driven cars, with manufacturing facilities and sales globally, expanding into electric vehicles via a "Smart Battery" initiative. It is published on the SAP learning portal and is publicly available to read before sitting the exam. See the Wanderlust Case Hub sheet in this workspace for a structured summary.
 
 **This is not a trick — SAP wants you to read it in advance.** Case-study material like this tests whether you can apply the SAP EA Framework to a real-world scenario, not just recall facts — which is exactly the skill the current scenario-based exam evaluates.
 

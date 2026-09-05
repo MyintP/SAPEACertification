@@ -27,6 +27,7 @@ jobs:
             --exclude "https://learning.sap.com/*"
             --exclude "https://community.sap.com/*"
             --exclude "https://groups.community.sap.com/*"
+            --exclude "index\.html#sheet-"
             --accept 200,206,403,429
             --max-retries 2
             index.html

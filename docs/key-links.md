@@ -22,7 +22,7 @@
 | SAP IEA10 Course | https://learning.sap.com/courses/intelligent-enterprise-architecture-fundamentals |
 | Scenario-Based Assessment FAQs | https://learning.sap.com/helpcenter/certification-support/scenario-based-assessment-faqs |
 | Wanderlust Case Study *(legacy exam material — see note below)* | https://learning.sap.com/enterprise-architect |
-| SAP Certification Hub | https://training.sap.com/certification |
+| SAP Certification Hub | https://learning.sap.com/get-certified |
 
 ---
 
@@ -51,7 +51,7 @@
 
 | Tool | URL | Purpose |
 |------|-----|---------|
-| SAP LeanIX | https://www.leanix.net | EA Management, Application Portfolio, Roadmaps |
+| SAP LeanIX | https://www.leanix.net/en/ | EA Management, Application Portfolio, Roadmaps |
 | SAP Signavio | https://www.signavio.com | Business Process Management & Analysis |
 | SAP Cloud ALM | https://support.sap.com/en/alm/sap-cloud-alm.html | Project Execution, Operations Monitoring |
 
