@@ -219,6 +219,46 @@ The five-step flow above describes what LeanIX and Signavio do for each other. M
 
 ---
 
+## EA Governance — The Operating Model
+
+Governance is where the **Practice** building block becomes real. A nascent practice (no board, no decision rights, no register) is the single most common weakness in a scenario — and the fix is structural, not documentary.
+
+### The Architecture Board is a body, not a person
+
+> **Trap:** "Architecture Board" is a **governance body**, never an individual role. Its *absence* is a gap you must name and resolve early — it provides strategic oversight, reviews standards, and keeps long-term alignment intact.
+
+| Body | Scope |
+|---|---|
+| **Architecture Review Board (ARB)** | Sets, reviews and enforces architecture standards and policies; owns high-impact decisions |
+| **Design Review Board (DRB)** | Reviews solution/design-level decisions against those standards |
+
+### Decision rights — tier the decisions, don't review everything
+
+Governance fails in two directions: reviewing nothing, or trying to review everything. The working model is to classify decisions by impact and route each tier to the body that adds genuine value:
+
+| Tier | Impact | Decided by |
+|---|---|---|
+| **Tier 1** | High — landscape-wide, strategic, expensive to reverse | Architecture Review Board |
+| **Tier 2** | Medium — domain-level | Domain architects |
+| **Tier 3** | Low | Delivery teams, self-serve |
+
+> Concentrate governance capacity on Tier 1 and Tier 2. Tier 3 typically accounts for **70–80% of all architectural decisions** in a programme — funnelling those through a board creates a queue, not control.
+
+### The Architecture Runway
+
+The **Architecture Runway** is the document that captures the pre-approved Tier 3 decisions and standards, so delivery squads can **self-serve** and build without waiting for individual design approvals. Publishing it before the build phase begins is what makes agile delivery and architectural discipline coexist.
+
+### Keep it alive: quarterly architecture reviews
+
+Run a recurring review focused entirely on **decisions**, not slideware:
+- Which decisions are open?
+- Which must be made next quarter?
+- What **landscape drift** has occurred since the last review?
+
+> **Connects to:** Architecture Decision Records below — ADRs are the artifact; the board, the tiers and the runway are the operating model that decides *who writes which ADR, and who approves it*.
+
+---
+
 ## Requirements, Risk & Decisions (Cross-Cutting)
 
 ### Requirements Management

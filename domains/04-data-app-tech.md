@@ -166,6 +166,75 @@ Evolves from the **Software Distribution Diagram** (Phase C) into a more detaile
 
 ---
 
+## The Three SAP Advisory Methodologies
+
+ISA-M is not the only one. SAP publishes three specialised advisory methodologies that plug into the EA Framework, each owning a different problem space. Knowing which one applies to a given scenario is the testable point.
+
+| Methodology | Owns | Use it when the scenario is about |
+|---|---|---|
+| **ISA-M** — Integration Solution Advisory Methodology | Integration | Connecting systems across a hybrid estate; integration styles, domains, use-case patterns |
+| **SAP Application Extension Methodology** | Extensibility | Choosing *how* to extend — protecting the clean core, in-app vs. side-by-side |
+| **SAP Data and Analytics Advisory Methodology** | Data & analytics | Designing the data landscape, analytics strategy, data governance |
+
+> **Exam angle:** These are *complements*, not alternatives — and none of them replaces the EA Methodology (the ADM). They are specialist methods you invoke inside a phase, not a substitute for the framework.
+
+---
+
+## SAP Application Extension Methodology
+
+A structured, technology-agnostic way to decide extension architecture — the method behind the Clean Core decision you make on instinct. Three phases, three steps each.
+
+**Two entry points:**
+- Start at **Phase 1** for a specific extension use case
+- Start at **Phase 2** to define an organisation-wide extension strategy and governance
+
+| Phase | Steps | Output |
+|---|---|---|
+| **1 — Assess Extension Use Case** | System Context → Business Context & Requirements → Application Extension Use Case | Shared understanding of the business challenge, captured as an Extension Application Use Case Description |
+| **2 — Assess Extension Technology** | Extension Styles → Extension Task → Extension Technology Mapping | Business requirements translated into technology-agnostic extension tasks |
+| **3 — Define Extension Target Solution** | Extension Technology per Task → Decision Guidance Assets → Extension Target Solution | An extension target solution diagram |
+
+### Extension Styles — mapped to the Three-Tier Architecture
+
+| Tier | Extension Style | What it does |
+|---|---|---|
+| **Presentation** | User Interface Extension | Adapt the standard UI — add, remove, change labels, buttons, fields |
+| **Presentation** | New User Interface | Create a custom UI alongside or replacing a standard one |
+| **Presentation** | Form and E-Mail | Adapt or create forms and e-mail templates |
+| **Application** | Business Logic Extension | Add business logic; add, exchange or rewire process steps |
+| **Data** | Data Model Extension | Extend an existing data model's entities, or define a new one |
+
+### Extension Tasks and Building Blocks
+
+- **Extension tasks** are **technology-agnostic** and carry IDs (`P01`–`P07` presentation, `A01`+ application). You map each requirement to one or many tasks *before* thinking about technology — deliberately, so technical limitations don't shape the requirement.
+- **Technical extension building blocks** are the actual technology options, categorised into **extension domains**: the **core solution extension domain** and the **side-by-side extension domain**.
+- Only in Phase 3 do tasks get mapped to building blocks.
+
+> **Trap:** The sequence is use case → task → technology. Naming the technology first (the instinct to say "we'll build it on BTP") inverts the method, and is the same Principle 1 violation as picking a product before mapping a capability.
+
+**Personas involved:** Enterprise Architect, Domain Architect, Business User.
+
+> Source: SAP Application Extension Methodology, User Guide (PUBLIC, 2025-08-13), help.sap.com.
+
+---
+
+## SAP Data and Analytics Advisory Methodology
+
+Guides the design and validation of solution architectures for data-driven innovation. Built on TOGAF and the SAP EA Framework — so its vocabulary deliberately matches the ADM. Four phases:
+
+| Phase | Focus | Key deliverables |
+|---|---|---|
+| **I — Scoping & Baseline Analysis** | Scope, current artifacts, pain points | Statement of Architecture Work, current architecture documentation, prioritised issues (Business Priority Matrix) |
+| **II — Business Outcomes & Solution Requirements** | What the business needs and why | Business outcome definitions, use-case analyses with **data journey maps**, solution context diagram, data integration flow diagrams |
+| **III — Capability Map & Solution Architecture** | Requirements → architecture | Solution concept diagram, capability maps, solution maps, architecture options assessment, target architecture diagram |
+| **IV — Data Governance & Roadmaps** | Making it stick organisationally | Data & analytics maturity assessment, organisational role definitions, architecture roadmap |
+
+> **Note:** Phases II and III **iterate** — they're run repeatedly to refine the target architecture against business outcomes. Same iterative logic as the ADM; same trap if you describe it as a one-pass sequence.
+
+Relevant SAP solutions: **SAP Datasphere** (data fabric / integration across hybrid landscapes) and **SAP Analytics Cloud** (planning and analytics).
+
+---
+
 ## SAP Business Technology Platform (BTP)
 
 SAP's platform-as-a-service (PaaS) layer. Underpins Side-by-Side extensions and cloud integrations.
@@ -208,6 +277,42 @@ Know these three migration strategies — they appear in exam scenarios:
 | **Greenfield** | New implementation from scratch | New business, clean start, maximum standardisation desired |
 | **Brownfield** | System conversion from existing SAP to S/4HANA | Existing SAP customer, wants to preserve config and data |
 | **Selective Data Transition** | Process re-engineering + selective data migration | Wants Greenfield processes but needs specific historical data |
+
+---
+
+## RISE with SAP vs. GROW with SAP
+
+These are SAP's **commercial and delivery packaging** around the transformation — not part of the EA methodology itself, but the container almost every real engagement runs inside. An architect who can't place a customer in the right one will design a target state the commercial model won't support.
+
+| | **RISE with SAP** | **GROW with SAP** |
+|---|---|---|
+| **Core** | S/4HANA Cloud, **Private Edition** | S/4HANA Cloud, **Public Edition** (multi-tenant SaaS) |
+| **Aimed at** | Existing installed base — mid-to-large enterprises on ECC or older ERP | Net-new and midmarket customers adopting cloud ERP |
+| **Customisation philosophy** | Retains room for existing complexity and custom ABAP | Adopt best-practice standard processes, minimal customisation |
+| **Upgrades** | Customer manages upgrade timing; new capabilities adopted deliberately | Automatic public-cloud release cycle |
+| **Typical timeline** | Longer, complexity-driven | Faster — often ~3–6 months |
+
+**Why it matters architecturally:** the choice constrains your extensibility options and your Clean Core story. Private Edition leaves developer extensibility on-stack available; Public Edition pushes you harder toward key-user and side-by-side extensibility. It also determines who controls the upgrade calendar — which is the whole basis of the two-way upgrade-stable guarantee.
+
+> **Caveat:** RISE and GROW are commercial constructs that SAP repositions periodically (GROW was relaunched in January 2026 as an AI-first midmarket pathway). Treat the packaging details above as orientation from partner/industry sources, not as certification fact — verify current terms on SAP's own pages before advising a customer.
+
+---
+
+## Security, Identity & Authorisation (Architect-Level View)
+
+Security is a cross-cutting non-functional concern the Requirements Catalog explicitly classifies (see Domain 1) — but it also lands as concrete architecture decisions:
+
+| Concern | Architect's question |
+|---|---|
+| **Identity provider & SSO** | Where does identity live, and how does it propagate across S/4HANA, BTP and third-party apps? |
+| **Authorisation model** | Business roles → application roles → technical authorisations. Who owns role design? |
+| **User context propagation** | Does a side-by-side extension on BTP carry the user's security context, or run as a technical user? |
+| **Data protection & residency** | Where is personal data stored and processed, and which jurisdiction's rules apply? |
+| **Segregation of duties** | Which role combinations are prohibited, and where is that enforced? |
+
+> **Connects to:** the **Business Role Model → Application Role Model** pairing in the Four Views (Domain 3). Business roles are product-agnostic; application roles implement them inside a specific SAP product. Security architecture is where that mapping becomes enforceable.
+
+> **Trap:** "Security" is not only Technology Architecture. Identity and authorisation decisions bind Business Architecture (who does what) to Application Architecture (what the system permits) — treating it as a late infrastructure concern is the classic failure.
 
 ---
 

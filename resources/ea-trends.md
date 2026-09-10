@@ -62,6 +62,25 @@ Two dimensions:
 - Reliable — tested, validated, consistent
 - Responsible — ethical, high security and privacy standards, compliant
 
+### The actual SAP AI stack — what you'd be architecting with
+
+The principles above are the philosophy. These are the moving parts:
+
+| Layer | What it is |
+|---|---|
+| **SAP BTP** | The foundation everything else sits on |
+| **AI Foundation** (on BTP) | The infrastructure layer serving both SAP's own AI features and customer-built AI apps; includes **AI Core** |
+| **SAP Business Data Cloud** | The data layer AI reasons over |
+| **Joule** | Positioned beyond a copilot — an agentic environment for creating, orchestrating and managing agents and multi-step workflows |
+
+**Architecturally relevant consequences:**
+- Joule is **not** a drop-in feature — it carries real landscape prerequisites (a BTP subaccount with Cloud Foundry runtime, SAP Cloud Identity Services on a unified tenant, SAP Build Work Zone, AI Core entitlements). That makes AI adoption an **architecture** decision with identity and platform dependencies, not a licensing one.
+- Identity is the hard dependency. "Unified tenant" identity services means AI adoption pulls the **security and identity architecture** (Domain 4) onto the critical path.
+- SAP is positioning the AI story as **governance and control plane first** — auditability and policy enforcement over incremental copilot features. That maps directly onto the EA governance operating model rather than onto application functionality.
+- Public vs. Private Edition changes the AI adoption curve: public-cloud customers receive AI capability on the standard release cycle, private-edition customers adopt deliberately through managed upgrades.
+
+> **Caveat:** This portfolio moves faster than any other area in this workspace, and most of the detail above comes from partner and industry reporting rather than SAP's own certification material. Treat it as landscape orientation for scenario reasoning — verify specifics on SAP's own pages before quoting them.
+
 > **Career relevance:** The Brisbane role mentions AI integration. Knowing how to position AI within an architecture capability map (capability → process → AI scenario) is a differentiating skill.
 
 ---

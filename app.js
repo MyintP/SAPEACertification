@@ -279,35 +279,156 @@
     // ------------------------------------------------------------------
     const quizProgressKey = 'sapEaQuizProgress';
 
-    function trackQuizProgress(score) {
+    // Derived from the live quizState rather than counting "attempts" - an
+    // attempt counter incremented per answer would inflate meaninglessly now
+    // that progress is recorded on every question rather than once at the end.
+    function trackQuizProgress() {
         try {
-            const current = JSON.parse(localStorage.getItem(quizProgressKey) || '{}');
-            current.lastScore = score;
-            current.attempts = (current.attempts || 0) + 1;
-            current.lastAttempt = new Date().toISOString();
-            localStorage.setItem(quizProgressKey, JSON.stringify(current));
+            const answered = Object.keys(quizState.answered).length;
+            const correct = Object.values(quizState.correct).filter(Boolean).length;
+            localStorage.setItem(quizProgressKey, JSON.stringify({
+                answered: answered,
+                correct: correct,
+                total: totalQuizQuestions(),
+                pct: answered > 0 ? Math.round((correct / answered) * 100) : 0,
+                updatedAt: new Date().toISOString()
+            }));
         } catch (e) { console.log('Error tracking quiz progress:', e); }
     }
 
     function getQuizProgress() {
         try {
             const data = localStorage.getItem(quizProgressKey);
-            return data ? JSON.parse(data) : null;
+            const parsed = data ? JSON.parse(data) : null;
+            return parsed && parsed.answered ? parsed : null;
         } catch (e) { console.log('Error getting quiz progress:', e); return null; }
     }
 
     function displayQuizProgress() {
-        const progress = getQuizProgress();
-        const text = progress
-            ? `📊 Quiz: ${progress.lastScore || 0}% (${progress.attempts || 0} attempt${progress.attempts === 1 ? '' : 's'})`
+        const p = getQuizProgress();
+        const text = p
+            ? `📊 Quiz: ${p.answered}/${p.total} answered · ${p.correct} correct (${p.pct}%)`
             : '📊 Quiz: Not started yet';
         document.querySelectorAll('.js-quiz-progress-display').forEach(el => { el.textContent = text; });
     }
 
     // ------------------------------------------------------------------
     // Scenario Quiz Logic (Practice sheet)
+    //
+    // quizState is persisted, not just in-memory: which questions you got
+    // wrong is the most useful thing a quiz produces, and losing it on
+    // refresh made the Review Queue structurally unable to resurface them.
+    // `picked` and `answer` are stored alongside so the marked-up state of
+    // every answered card can be rebuilt exactly on the next visit.
     // ------------------------------------------------------------------
-    const quizState = { answered: {}, correct: {} };
+    const quizStateKey = 'sapEaQuizState';
+    const quizState = { answered: {}, correct: {}, picked: {}, answer: {} };
+
+    function saveQuizState() {
+        try { localStorage.setItem(quizStateKey, JSON.stringify(quizState)); }
+        catch (e) { console.log('Error saving quiz state:', e); }
+    }
+
+    function restoreQuizState() {
+        let saved;
+        try { saved = JSON.parse(localStorage.getItem(quizStateKey) || 'null'); }
+        catch (e) { saved = null; }
+        if (!saved) return;
+
+        quizState.answered = saved.answered || {};
+        quizState.correct = saved.correct || {};
+        quizState.picked = saved.picked || {};
+        quizState.answer = saved.answer || {};
+
+        // Rebuild the visual state of every previously answered card. The
+        // feedback element is found via the card rather than by id, because
+        // feedback ids follow three different conventions across the sheet.
+        Object.keys(quizState.answered).forEach(function(name) {
+            const inputs = document.querySelectorAll(`input[name="${name}"]`);
+            if (!inputs.length) return;
+            const correctAnswer = quizState.answer[name];
+            const picked = quizState.picked[name];
+
+            // picked/answer are a single letter for radio questions and an
+            // array of letters for the multi-select assessment - normalise
+            // both to arrays so one code path restores either.
+            const pickedList = Array.isArray(picked) ? picked : [picked];
+            const answerList = Array.isArray(correctAnswer) ? correctAnswer : [correctAnswer];
+
+            inputs.forEach(function(opt) {
+                const label = opt.closest('label');
+                if (!label) return;
+                if (pickedList.indexOf(opt.value) !== -1) opt.checked = true;
+                label.classList.remove('selected', 'correct', 'wrong');
+                if (answerList.indexOf(opt.value) !== -1) label.classList.add('correct');
+                else if (pickedList.indexOf(opt.value) !== -1) label.classList.add('wrong');
+            });
+
+            const card = inputs[0].closest('.quiz-card');
+            if (!card) return;
+            const fb = card.querySelector('.feedback-text');
+            if (fb) fb.classList.add('show');
+            const btn = card.querySelector('.quiz-submit');
+            if (btn) btn.disabled = true;
+        });
+    }
+
+    // Every question you answered and got wrong, with its text pulled from
+    // the DOM so this works for the generated domain bank, the SBA drill and
+    // the hand-authored scenario cards alike.
+    function getWrongAnswers() {
+        return Object.keys(quizState.answered)
+            .filter(function(name) { return quizState.correct[name] === false; })
+            .map(function(name) {
+                const input = document.querySelector(`input[name="${name}"]`);
+                if (!input) return null;
+                const card = input.closest('.quiz-card');
+                const qEl = card ? card.querySelector('.quiz-question') : null;
+                return { name: name, text: qEl ? qEl.textContent.trim() : name };
+            })
+            .filter(Boolean);
+    }
+
+    // Multi-select scoring: correct only if every right option is selected
+    // AND no wrong one is. Partial credit would misrepresent readiness.
+    function checkMultiAnswer(questionName, correctCsv, feedbackId) {
+        const correctSet = correctCsv.split(',');
+        const inputs = document.querySelectorAll(`input[name="${questionName}"]`);
+        if (!inputs.length) return;
+        const picked = [].slice.call(inputs).filter(function(i) { return i.checked; }).map(function(i) { return i.value; });
+
+        if (!picked.length) { alert('Select at least one answer first.'); return; }
+
+        const isCorrect = picked.length === correctSet.length &&
+            picked.every(function(p) { return correctSet.indexOf(p) !== -1; });
+
+        inputs.forEach(function(opt) {
+            const label = opt.closest('label');
+            if (!label) return;
+            label.classList.remove('selected', 'correct', 'wrong');
+            if (correctSet.indexOf(opt.value) !== -1) label.classList.add('correct');
+            else if (opt.checked) label.classList.add('wrong');
+        });
+
+        const fb = document.getElementById(feedbackId);
+        if (fb) fb.classList.add('show');
+        const card = inputs[0].closest('.quiz-card');
+        if (card) {
+            const btn = card.querySelector('.quiz-submit');
+            if (btn) btn.disabled = true;
+        }
+
+        quizState.answered[questionName] = true;
+        quizState.correct[questionName] = isCorrect;
+        quizState.picked[questionName] = picked;
+        quizState.answer[questionName] = correctSet;
+        saveQuizState();
+
+        updateLiveQuizTally();
+        updateDomainQuizScoreLine();
+        trackQuizProgress();
+        displayQuizProgress();
+    }
 
     function totalQuizQuestions() {
         return document.querySelectorAll('.quiz-options').length;
@@ -347,15 +468,18 @@
 
         quizState.answered[questionName] = true;
         quizState.correct[questionName] = selected.value === correctAnswer;
+        quizState.picked[questionName] = selected.value;
+        quizState.answer[questionName] = correctAnswer;
+        saveQuizState();
+
         updateLiveQuizTally();
         updateDomainQuizScoreLine();
 
-        const total = totalQuizQuestions();
-        if (Object.keys(quizState.answered).length === total && total > 0) {
-            const correctCount = Object.values(quizState.correct).filter(Boolean).length;
-            trackQuizProgress(Math.round((correctCount / total) * 100));
-            displayQuizProgress();
-        }
+        // Record progress on every answer, not only once all questions are
+        // answered in a single sitting - which, with state now persisted
+        // across sessions, would otherwise almost never fire.
+        trackQuizProgress();
+        displayQuizProgress();
     }
 
     function resetAllQuizzes() {
@@ -373,8 +497,14 @@
 
         quizState.answered = {};
         quizState.correct = {};
+        quizState.picked = {};
+        quizState.answer = {};
+        saveQuizState();
+        try { localStorage.removeItem(quizProgressKey); } catch (e) { /* storage unavailable */ }
+
         updateLiveQuizTally();
         updateDomainQuizScoreLine();
+        displayQuizProgress();
 
         const quizzesSection = document.getElementById('quizzes');
         if (quizzesSection) quizzesSection.scrollIntoView({ behavior: 'smooth' });
@@ -700,6 +830,275 @@
     }
 
     // ------------------------------------------------------------------
+    // Foundations Assessment: parsed live from
+    // quiz/discovering-sap-ea-assessment.md rather than re-typed into JS,
+    // so the questions, answers and explanations have exactly one source of
+    // truth and can't drift apart. 11 single-answer, 19 multi-select.
+    // ------------------------------------------------------------------
+    function parseAssessmentMarkdown(md) {
+        return md.replace(/\r\n?/g, '\n').split(/^### /m).slice(1).map(function(block) {
+            const lines = block.split('\n');
+            const heading = lines[0] || '';
+            const idMatch = heading.match(/^Q(\d+)/);
+            if (!idMatch) return null;
+
+            const multi = heading.indexOf('✦✦') !== -1;
+            let question = '';
+            let why = '';
+            const options = [];
+
+            lines.forEach(function(line) {
+                const t = line.trim();
+                const opt = t.match(/^-\s*\[([ xX])\]\s*(.*)$/);
+                if (opt) {
+                    options.push({
+                        correct: opt[1].toLowerCase() === 'x',
+                        text: opt[2].replace(/\*\*/g, '').trim()
+                    });
+                    return;
+                }
+                if (!question && /^\*\*.+\*\*$/.test(t)) {
+                    question = t.replace(/^\*\*/, '').replace(/\*\*$/, '');
+                    return;
+                }
+                if (!why && /^\*\*Why correct:\*\*/.test(t)) {
+                    why = t.replace(/^\*\*Why correct:\*\*\s*/, '').replace(/\*\*/g, '');
+                }
+            });
+
+            if (!question || options.length < 2 || !options.some(function(o) { return o.correct; })) return null;
+            return { id: 'asmt' + idMatch[1], num: idMatch[1], multi: multi, question: question, options: options, why: why };
+        }).filter(Boolean);
+    }
+
+    function renderAssessment(items) {
+        const container = document.getElementById('assessmentList');
+        if (!container) return;
+        if (!items.length) {
+            container.innerHTML = '<p class="sheet-footnote">Could not parse the assessment source file.</p>';
+            return;
+        }
+
+        container.innerHTML = items.map(function(q, i) {
+            const type = q.multi ? 'checkbox' : 'radio';
+            const correctLetters = [];
+            const opts = q.options.map(function(o, idx) {
+                const letter = String.fromCharCode(65 + idx);
+                if (o.correct) correctLetters.push(letter);
+                return `<label><input type="${type}" name="${q.id}" value="${letter}"> ${letter}) ${escapeHtml(o.text)}</label>`;
+            }).join('');
+
+            const pct = Math.round(((i + 1) / items.length) * 1000) / 10;
+            const handler = q.multi
+                ? `checkMultiAnswer('${q.id}', '${correctLetters.join(',')}', 'fb-${q.id}')`
+                : `checkAnswer('${q.id}', '${correctLetters[0]}', 'fb-${q.id}')`;
+
+            return `<div class="quiz-card">
+                <div class="quiz-progress"><span>Question ${q.num} of ${items.length}${q.multi ? ' · select all that apply' : ''}</span><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width: ${pct}%;"></div></div></div>
+                <div class="quiz-question">${escapeHtml(q.question)}</div>
+                <div class="quiz-options">${opts}</div>
+                <button class="quiz-submit" onclick="${handler}">Submit Answer</button>
+                <div id="fb-${q.id}" class="feedback-text"><strong>✅ Correct: ${correctLetters.join(', ')}</strong><br><em>Why:</em> ${escapeHtml(q.why)}</div>
+            </div>`;
+        }).join('');
+    }
+
+    function loadAssessment() {
+        const container = document.getElementById('assessmentList');
+        if (!container) return;
+        fetch('quiz/discovering-sap-ea-assessment.md')
+            .then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.text();
+            })
+            .then(function(text) {
+                renderAssessment(parseAssessmentMarkdown(text));
+                // Re-apply saved answers now that these cards exist, and
+                // refresh the tallies for the larger question total.
+                restoreQuizState();
+                updateLiveQuizTally();
+                trackQuizProgress();
+                displayQuizProgress();
+                refreshHeadingsForSheetId('sheet-assessment');
+            })
+            .catch(function(err) {
+                container.innerHTML = '<div class="pattern pattern--important"><span class="pattern__label">Couldn\'t load</span><p>' +
+                    mdEscapeHtml(err.message) + ' — <a href="docs.html?file=quiz/discovering-sap-ea-assessment.md" target="_blank" rel="noopener">read it as a document →</a></p></div>';
+            });
+    }
+
+    window.checkMultiAnswer = checkMultiAnswer;
+
+    // ------------------------------------------------------------------
+    // Flashcard drill. The 6-week plan schedules "Flashcard drill" on eight
+    // separate days, so the workspace needs to actually be able to run one.
+    // Self-scored: cards you miss stay in the queue, cards you know retire
+    // for the session. Per-card outcomes persist so "still missing this"
+    // survives a reload.
+    // ------------------------------------------------------------------
+    const flashcardStateKey = 'sapEaFlashcards';
+
+    const FLASHCARDS = [
+        // --- Domain 1: Framework & Toolset ---
+        { id: 'f-d1-01', domain: 'd1', front: 'Name the 5 SAP EA Framework building blocks', back: 'Methodology · Reference Architecture Content · Tooling · Practice · Services' },
+        { id: 'f-d1-02', domain: 'd1', front: 'Practice vs. Services — what is the difference?', back: 'Practice = the INTERNAL EA organisational model and governance. Services = EXTERNAL SAP consulting engagements. Most commonly swapped pair on the exam.' },
+        { id: 'f-d1-03', domain: 'd1', front: 'Name all 9 ADM phases, Preliminary through H', back: 'Preliminary → A Vision → B Business → C Information Systems → D Technology → E Opportunities & Solutions → F Migration Planning → G Implementation Governance → H Change Management (+ Requirements Management, cross-cutting)' },
+        { id: 'f-d1-04', domain: 'd1', front: 'What does Phase E do — precisely?', back: 'IDENTIFIES the projects and transition plans needed to REALISE the target architecture. It does not define the target (that is Phases B–D).' },
+        { id: 'f-d1-05', domain: 'd1', front: 'What are the 3 Metro Map variants, and what drives the choice?', back: 'Business-Centric · IT-Centric · Holistic. Driven by the primary engagement driver (business vs. IT vs. both).' },
+        { id: 'f-d1-06', domain: 'd1', front: 'Metro Map domains vs. SAP EA Methodology domains — how many each?', back: 'Metro Map = 7 domains. SAP EA Methodology core model = 3 domains (+ IT Landscape connection). Both correct — different questions.' },
+        { id: 'f-d1-07', domain: 'd1', front: 'Name the 4 EA organisational models', back: 'Informal · Separated · Federated · Centralised' },
+        { id: 'f-d1-08', domain: 'd1', front: 'Federated EA model — what is the risk?', back: 'Without conflict resolution it collapses back into Separated.' },
+        { id: 'f-d1-09', domain: 'd1', front: 'How many EA Practice maturity dimensions, and what are the levels?', back: '8 dimensions. 5 levels: Ad-Hoc → Initial → Defined → Managed → Optimised. Output is a spider-web diagram.' },
+        { id: 'f-d1-10', domain: 'd1', front: 'Name the 5 steps of the integrated toolchain', back: '1 Ingest (LeanIX ↔ Cloud ALM) · 2 Analyse (Signavio) · 3 Design (LeanIX + Signavio) · 4 Plan (LeanIX → Cloud ALM) · 5 Execute & Monitor' },
+        { id: 'f-d1-11', domain: 'd1', front: 'LeanIX vs. Signavio vs. Cloud ALM — one line each', back: 'LeanIX = architecture / application portfolio. Signavio = business processes. Cloud ALM = project execution and operations monitoring.' },
+        { id: 'f-d1-12', domain: 'd1', front: 'What is the ORIGIN of the SAP EA Methodology?', back: 'IndRA (Industry Reference Architecture) — built internally at SAP, then aligned with TOGAF. TOGAF is what it is built ON; IndRA is where it CAME FROM.' },
+        { id: 'f-d1-13', domain: 'd1', front: 'Name the 6 SAP EA architectural principles', back: 'Map Business and IT Separately · Use Industry Standards · Connect to Other Architectures · Collaborative Approach & Content Fluency · Defined Content Ownership · Sustainability and Simplicity' },
+        { id: 'f-d1-14', domain: 'd1', front: 'Initial Risk vs. Residual Risk', back: 'Initial = before mitigation. Residual = what remains after mitigation actions are applied.' },
+        { id: 'f-d1-15', domain: 'd1', front: 'When must an ADR be created?', back: 'BEFORE the decision is taken, to inform it. Architecture produced after decisions is too late.' },
+        { id: 'f-d1-16', domain: 'd1', front: 'Architecture Board — what is it, and what tiers of decision go where?', back: 'A governance BODY, never a person. Tier 1 (high impact) → Architecture Review Board. Tier 2 (medium) → domain architects. Tier 3 (low, ~70–80% of decisions) → delivery teams, self-serve via the Architecture Runway.' },
+        { id: 'f-d1-17', domain: 'd1', front: 'What are the 3 types of tailoring in the Preliminary Phase?', back: 'Terminology · Content · Process' },
+
+        // --- Domain 2: Vision & Roadmap ---
+        { id: 'f-d2-01', domain: 'd2', front: 'Stakeholder Map — name the 4 quadrants and the action for each', back: 'Promoters (high influence, positive) → Actively engage. Enthusiasts (low influence, positive) → Inform. Opponents (high influence, negative) → Satisfy. Resisters (low influence, negative) → Monitor and respond.' },
+        { id: 'f-d2-02', domain: 'd2', front: 'Business Model Canvas — all 9 blocks in sequence', back: 'Value Proposition → Customer Segments → Channels → Customer Relationships → Revenue Streams → Key Resources → Key Activities → Key Partners → Cost Structure' },
+        { id: 'f-d2-03', domain: 'd2', front: 'Which BMC block is #3? Which is #6?', back: '#3 = Channels. #6 = Key Resources.' },
+        { id: 'f-d2-04', domain: 'd2', front: 'What are the 4 components of an Architecture Principle?', back: 'Name · Statement · Rationale · Implications. (Rationale = why it benefits the business.)' },
+        { id: 'f-d2-05', domain: 'd2', front: 'Maximum number of Architecture Principles — and why?', back: '10–20. More principles means less architectural flexibility, not more control.' },
+        { id: 'f-d2-06', domain: 'd2', front: 'Statement of Architecture Work — when is it produced and approved?', back: 'Output of Phase A. Must be approved BEFORE Phase B begins. It is the contract.' },
+        { id: 'f-d2-07', domain: 'd2', front: 'Business Strategy Map — the full chain', back: 'Strategic Priority → Goals → Value Drivers → Business Capabilities → Initiatives' },
+        { id: 'f-d2-08', domain: 'd2', front: 'TOGAF "Driver" and "Objective" → SAP EA terms?', back: 'Driver → Strategic Priority. Objective → Value Driver. Do not use TOGAF terms on the exam.' },
+        { id: 'f-d2-09', domain: 'd2', front: 'Solution Context vs. Solution Concept Diagram', back: 'Context = organisational relationships (passes the 10-minute test). Concept = technical building blocks, the "pencil sketch".' },
+        { id: 'f-d2-10', domain: 'd2', front: 'TIME model — all four quadrants', back: 'Tolerate (high tech / low functional) · Invest (high / high) · Migrate (low tech / high functional) · Eliminate (low / low)' },
+        { id: 'f-d2-11', domain: 'd2', front: 'What is a Transition Architecture?', back: 'A formally defined INTERMEDIATE state between Baseline and Target — not the target itself.' },
+        { id: 'f-d2-12', domain: 'd2', front: 'Golden rule for roadmap entity types', back: 'ONE entity type per roadmap — never mix Initiatives, Capabilities and Outcomes on the same view. Outcome-based resonates best with business stakeholders.' },
+        { id: 'f-d2-13', domain: 'd2', front: 'Enterprise Transformation Assessment — how many activities, and what are they?', back: 'THREE: EA Practice Capability Assessment (spider web) · Preliminary Business & Technology Capability Assessment (heat map) · Business & Technology Transformation Readiness Assessment.' },
+
+        // --- Domain 3: Business Architecture ---
+        { id: 'f-d3-01', domain: 'd3', front: 'Business Capability vs. Business Process', back: 'Capability = WHAT the business must be able to do (stable). Process = HOW it does it (continually improved).' },
+        { id: 'f-d3-02', domain: 'd3', front: 'What does MECE stand for, and both conditions?', back: 'Mutually Exclusive (no overlap) AND Collectively Exhaustive (no gaps). Both conditions required — governs the Business Capability Model.' },
+        { id: 'f-d3-03', domain: 'd3', front: 'Business Capability Map — the 3 levels', back: 'Domain → Area → Capability' },
+        { id: 'f-d3-04', domain: 'd3', front: 'Name the 4 Enterprise Domains and their definitions', back: 'Products & Services (developing/managing products) · Supply (fulfilling demand) · Customer (generating demand) · Corporate (planning and managing the enterprise)' },
+        { id: 'f-d3-05', domain: 'd3', front: 'Business Process Model — the 4 levels', back: 'L1 E2E Business Process → L2 Business Process Module → L3 Business Process Segment → L4 Business Activity' },
+        { id: 'f-d3-06', domain: 'd3', front: 'Which BPM level is stored in ONE central repository?', back: 'Level 4 — Business Activities, in the central Business Activity Repository.' },
+        { id: 'f-d3-07', domain: 'd3', front: 'Level 2 Business Process Module naming convention?', back: '"<A> to <B>" — e.g. "Customer to Cash". Level 1 uses "Plan to Optimise…" style.' },
+        { id: 'f-d3-08', domain: 'd3', front: 'What makes the Business Footprint Diagram unique?', back: 'The only artifact linking strategy → capabilities → solution components → technology in a single view. A cross-domain X-ray.' },
+        { id: 'f-d3-09', domain: 'd3', front: 'Organisation Map — what is it NOT?', back: 'NOT an org chart. It shows the network of working relationships, not hierarchical reporting lines.' },
+        { id: 'f-d3-10', domain: 'd3', front: 'Who owns and names business capabilities?', back: 'The BUSINESS stakeholders — naming must resonate with the business, not IT.' },
+        { id: 'f-d3-11', domain: 'd3', front: 'Bottom-Up vs. Top-Down capability assessment', back: 'Bottom-Up = start from current state, heat map, find gaps. Top-Down = start from strategy via the Strategy Map.' },
+        { id: 'f-d3-12', domain: 'd3', front: 'Name the 8 Business Process Groups', back: 'Idea to Market · Source to Pay · Plan to Fulfill · Lead to Cash · Recruit to Retire · Acquire to Decommission · Governance · Finance' },
+        { id: 'f-d3-13', domain: 'd3', front: 'Lead to Cash vs. Finance — where is the boundary?', back: 'Lead to Cash includes AR and payment collection. Finance covers accounting, financial close, treasury. Boundary = where commercial activity ends and financial reporting begins.' },
+        { id: 'f-d3-14', domain: 'd3', front: 'What standard is the SAP Business Process Model based on?', back: 'APQC Process Classification Framework (PCF).' },
+
+        // --- Domain 4: Data, App & Tech ---
+        { id: 'f-d4-01', domain: 'd4', front: 'Name the 3 Clean Core extension types and where each runs', back: 'Key User Extensibility (in-app, no code, on S/4HANA) · Developer Extensibility (Embedded ABAP Cloud / RAP, on-stack) · Side-by-Side (on SAP BTP)' },
+        { id: 'f-d4-02', domain: 'd4', front: 'State the Clean Core two-way guarantee', back: 'Upgrades must not break extensions, AND extensions must not break upgrades — achieved by only reaching standard objects through well-defined, upgrade-stable APIs.' },
+        { id: 'f-d4-03', domain: 'd4', front: 'Name the 3 deployment types', back: 'On-Premise · Private Cloud (single-tenant, VPN, org or third-party managed) · Public Cloud (multi-tenant, provider managed)' },
+        { id: 'f-d4-04', domain: 'd4', front: 'Private Cloud vs. On-Premise — the trap', back: 'Private Cloud is still CLOUD. Not physically on-premise by definition, even though it is single-tenant.' },
+        { id: 'f-d4-05', domain: 'd4', front: 'SaaS / PaaS / IaaS — what does the customer control in each?', back: 'SaaS = user-specific configuration only. PaaS = deployed apps + platform config. IaaS = OS, storage, deployed apps, selected network.' },
+        { id: 'f-d4-06', domain: 'd4', front: 'Solution Component Diagram vs. Solution Process Flow Diagram', back: 'Component = STRUCTURE (static). Process Flow = BEHAVIOUR (dynamic, BPMN 2.0). Most tested distinction in Domain 4.' },
+        { id: 'f-d4-07', domain: 'd4', front: 'Name the 4 ISA-M integration domains', back: 'Process Integration · Data Integration · Analytics Integration · IoT Integration' },
+        { id: 'f-d4-08', domain: 'd4', front: 'Name the 3 S/4HANA transformation strategies', back: 'Greenfield (new implementation, max standardisation) · Brownfield (system conversion, preserve config/data) · Selective Data Transition (greenfield processes + selective history)' },
+        { id: 'f-d4-09', domain: 'd4', front: 'What is a Deployment Unit? What is a Communication Channel?', back: 'Deployment Unit = smallest solution component that can be deployed and run independently. Communication Channel = the data transfer between two Deployment Units. Interactions WITHIN a unit are not modelled.' },
+        { id: 'f-d4-10', domain: 'd4', front: 'Name the 6 options in the 6R framework', back: 'Rehost · Retire · Replatform · Repurchase · Refactor/Re-architect · Retain' },
+        { id: 'f-d4-11', domain: 'd4', front: 'TIME vs. 6R — when do you use each?', back: 'TIME = application portfolio decisions. 6R = cloud migration/transformation priority.' },
+        { id: 'f-d4-12', domain: 'd4', front: 'Which is the ONLY artifact in Technology Architecture?', back: 'The Environments and Location Diagram. It evolves from the Software Distribution Diagram (Phase C).' },
+        { id: 'f-d4-13', domain: 'd4', front: 'Conceptual Data Diagram — what is the order of steps?', back: 'Entities → Attributes → Relationships' },
+        { id: 'f-d4-14', domain: 'd4', front: 'Name SAP\'s 3 advisory methodologies and what each owns', back: 'ISA-M = integration. SAP Application Extension Methodology = extensibility. SAP Data and Analytics Advisory Methodology = data & analytics. All complement the ADM; none replaces it.' },
+        { id: 'f-d4-15', domain: 'd4', front: 'Application Extension Methodology — the 3 phases', back: '1 Assess Extension Use Case → 2 Assess Extension Technology → 3 Define Extension Target Solution. Tasks stay technology-agnostic until Phase 3.' },
+        { id: 'f-d4-16', domain: 'd4', front: 'RISE with SAP vs. GROW with SAP', back: 'RISE = S/4HANA Cloud Private Edition, existing installed base, retains complexity. GROW = Public Edition, net-new/midmarket, adopt standard with minimal customisation.' },
+        { id: 'f-d4-17', domain: 'd4', front: 'What is SAP One Domain Model (ODM)?', back: 'The canonical/unified data model defining the structure of Solution Data Objects shared across SAP applications.' }
+    ];
+
+    const FLASHCARD_DOMAIN_LABELS = { d1: 'Domain 1 — Framework & Toolset', d2: 'Domain 2 — Vision & Roadmap', d3: 'Domain 3 — Business Architecture', d4: 'Domain 4 — Data / App / Tech' };
+
+    const flashcardSession = { queue: [], index: 0, flipped: false, filter: 'all' };
+
+    function loadFlashcardState() { return loadChecklist(flashcardStateKey); }
+
+    function recordFlashcard(cardId, knewIt) {
+        try {
+            const state = loadFlashcardState();
+            const prev = state[cardId] || { seen: 0, missed: 0 };
+            state[cardId] = {
+                seen: (prev.seen || 0) + 1,
+                missed: (prev.missed || 0) + (knewIt ? 0 : 1),
+                lastKnown: knewIt
+            };
+            localStorage.setItem(flashcardStateKey, JSON.stringify(state));
+        } catch (e) { console.log('Error saving flashcard state:', e); }
+    }
+
+    function shuffleArray(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+    }
+
+    function buildFlashcardQueue() {
+        const filter = flashcardSession.filter;
+        const pool = filter === 'all'
+            ? FLASHCARDS
+            : (filter === 'missed'
+                ? FLASHCARDS.filter(function(c) { const s = loadFlashcardState()[c.id]; return s && s.lastKnown === false; })
+                : FLASHCARDS.filter(function(c) { return c.domain === filter; }));
+        flashcardSession.queue = shuffleArray(pool);
+        flashcardSession.index = 0;
+        flashcardSession.flipped = false;
+    }
+
+    function renderFlashcard() {
+        const stage = document.getElementById('flashcardStage');
+        if (!stage) return;
+        const statsEl = document.getElementById('flashcardStats');
+        const q = flashcardSession.queue;
+
+        if (!q.length) {
+            stage.innerHTML = `<div class="flashcard flashcard--empty"><p>No cards in this selection.</p>
+                <p class="sheet-footnote">Try "All cards", or drill a domain — "Missed only" fills up once you've marked some.</p></div>`;
+            if (statsEl) statsEl.textContent = '';
+            return;
+        }
+
+        if (flashcardSession.index >= q.length) {
+            const state = loadFlashcardState();
+            const missed = q.filter(function(c) { const s = state[c.id]; return s && s.lastKnown === false; }).length;
+            stage.innerHTML = `<div class="flashcard flashcard--empty">
+                <p class="flashcard__done">✅ Deck complete — ${q.length} cards</p>
+                <p>${missed === 0 ? 'You knew every card in this pass.' : `${missed} still marked as missed. Switch the filter to <strong>Missed only</strong> to drill those.`}</p>
+                <button type="button" class="btn btn-primary" id="flashcardRestart">↺ Go again</button>
+            </div>`;
+            if (statsEl) statsEl.textContent = `${q.length}/${q.length}`;
+            return;
+        }
+
+        const card = q[flashcardSession.index];
+        const face = flashcardSession.flipped
+            ? `<p class="flashcard__label">Answer</p><p class="flashcard__back">${card.back}</p>`
+            : `<p class="flashcard__label">${FLASHCARD_DOMAIN_LABELS[card.domain] || 'Card'}</p><p class="flashcard__front">${card.front}</p>`;
+
+        const controls = flashcardSession.flipped
+            ? `<div class="flashcard__controls">
+                    <button type="button" class="btn btn-secondary" data-fc="missed">✗ Missed it</button>
+                    <button type="button" class="btn btn-primary" data-fc="knew">✓ Got it</button>
+               </div>`
+            : `<div class="flashcard__controls"><button type="button" class="btn btn-primary" data-fc="flip">Show answer</button></div>`;
+
+        stage.innerHTML = `<div class="flashcard" data-fc="flip">${face}</div>${controls}`;
+        if (statsEl) statsEl.textContent = `${flashcardSession.index + 1}/${q.length}`;
+    }
+
+    function flashcardAdvance(knewIt) {
+        const card = flashcardSession.queue[flashcardSession.index];
+        if (card) recordFlashcard(card.id, knewIt);
+        flashcardSession.index += 1;
+        flashcardSession.flipped = false;
+        renderFlashcard();
+    }
+
+    // ------------------------------------------------------------------
     // Study Timer: a simple Pomodoro-style focus/break countdown. Runs
     // in-memory (no persistence) - it keeps ticking across sheet
     // navigation within the same page load, but resets on reload, same
@@ -976,11 +1375,12 @@
         const bookmarked = getBookmarkedSheets(sheetIndex);
         const noted = getNotedSheets(sheetIndex);
         const practice = getQuizProgress();
+        const wrong = getWrongAnswers();
         const lastVisitedId = getLastVisitedSheet();
         const lastVisited = lastVisitedId ? sheetIndex.find(s => s.id === lastVisitedId) : null;
 
         const showAll = filter === 'all';
-        const isEmpty = bookmarked.length === 0 && noted.length === 0 && !practice;
+        const isEmpty = bookmarked.length === 0 && noted.length === 0 && !practice && wrong.length === 0;
         let html = '';
 
         if (lastVisited) {
@@ -999,6 +1399,22 @@
                 <p>Bookmark a sheet or add a Study Desk note while studying and it will appear here.</p>
             </div>`;
         } else {
+            if (showAll || filter === 'wrong') {
+                const body = wrong.length
+                    ? wrong.map(function(w) {
+                        return `<a class="review-item" href="#sheet-practice">
+                            <span class="review-item__code">✗</span>
+                            <span class="review-item__body">
+                                <span class="review-item__title">${escapeHtml(w.text)}</span>
+                                <span class="review-item__meta">Answered incorrectly — re-drill this one</span>
+                            </span>
+                            <span class="review-item__cta">Practice →</span>
+                        </a>`;
+                    }).join('')
+                    : '<p class="review-empty">Nothing wrong yet — questions you miss in Practice show up here to re-drill.</p>';
+                html += renderReviewSection('Needs Review', wrong.length, body);
+            }
+
             if (showAll || filter === 'bookmarked') {
                 const body = bookmarked.length
                     ? bookmarked.map(s => renderReviewItem(
@@ -1023,8 +1439,8 @@
                 const body = practice
                     ? `<a class="review-item" href="#sheet-practice">
                         <span class="review-item__body">
-                            <span class="review-item__title">Live Defense</span>
-                            <span class="review-item__meta">Last attempt: ${practice.lastScore}% · ${practice.attempts} attempt${practice.attempts === 1 ? '' : 's'}</span>
+                            <span class="review-item__title">Practice Quizzes &amp; Cases</span>
+                            <span class="review-item__meta">${practice.answered}/${practice.total} answered · ${practice.correct} correct (${practice.pct}%)</span>
                         </span>
                         <span class="review-item__cta">Continue →</span>
                     </a>`
@@ -1049,6 +1465,9 @@
         }
 
         renderDomainQuizBank();
+        // Must follow renderDomainQuizBank() - the 60 generated cards have to
+        // exist in the DOM before their saved answers can be re-applied.
+        restoreQuizState();
         const sheetIndex = buildSheetIndex();
         const sheetsById = new Map(sheetIndex.map(s => [s.id, s]));
 
@@ -1403,6 +1822,52 @@
                 renderTodayFocus();
             }
         });
+
+        // --- Foundations Assessment (parsed from its markdown source) ---
+        loadAssessment();
+
+        // --- Flashcard drill ---
+        buildFlashcardQueue();
+        renderFlashcard();
+
+        const flashcardFilter = document.getElementById('flashcardFilter');
+        if (flashcardFilter) {
+            flashcardFilter.addEventListener('change', function() {
+                flashcardSession.filter = flashcardFilter.value;
+                buildFlashcardQueue();
+                renderFlashcard();
+            });
+        }
+
+        const flashcardShuffle = document.getElementById('flashcardShuffle');
+        if (flashcardShuffle) {
+            flashcardShuffle.addEventListener('click', function() {
+                buildFlashcardQueue();
+                renderFlashcard();
+            });
+        }
+
+        const flashcardStage = document.getElementById('flashcardStage');
+        if (flashcardStage) {
+            flashcardStage.addEventListener('click', function(e) {
+                const trigger = e.target.closest('[data-fc], #flashcardRestart');
+                if (!trigger) return;
+                if (trigger.id === 'flashcardRestart') {
+                    buildFlashcardQueue();
+                    renderFlashcard();
+                    return;
+                }
+                const action = trigger.dataset.fc;
+                if (action === 'flip') {
+                    flashcardSession.flipped = !flashcardSession.flipped;
+                    renderFlashcard();
+                } else if (action === 'knew') {
+                    flashcardAdvance(true);
+                } else if (action === 'missed') {
+                    flashcardAdvance(false);
+                }
+            });
+        }
 
         // --- Study Timer ---
         updateTimerDisplay();

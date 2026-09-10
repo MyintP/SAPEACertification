@@ -2,6 +2,65 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 gap scan: fixed a data-loss defect, added missing methodologies and two drills
+
+Full scan of the repo plus external research against official SAP sources. Findings and fixes:
+
+### Fixed — quiz answers were never saved
+`quizState` was a plain in-memory object, absent from the 8 persisted localStorage keys. Every
+answer was discarded on refresh, **which questions you got wrong was never recorded**, and the
+aggregate score only wrote when `answered === total` — all 99 questions in one unbroken sitting,
+so in practice never. For a study tool, wrong-answer history is the most valuable thing the quiz
+produces, and it was being thrown away.
+
+- `quizState` now persists to `sapEaQuizState`, storing `picked` and `answer` alongside
+  `answered`/`correct` so every answered card's marked-up state is rebuilt exactly on return.
+- Progress is recorded on **every** answer, not once at 100%. `trackQuizProgress()` is now derived
+  from live state (`answered/total/correct/pct`) instead of counting "attempts", which would have
+  inflated meaninglessly once it fired per-question.
+- New **Needs Review** section and filter in the Review Queue, listing every question answered
+  incorrectly, with question text read from the DOM so it works for the generated domain bank, the
+  SBA drill and hand-authored cards alike.
+
+### Added — content gaps, verified against official sources
+- **SAP Application Extension Methodology** (`domains/04`): 3 phases × 3 steps, Extension Styles
+  mapped to the Presentation/Application/Data tiers, technology-agnostic extension tasks and their
+  IDs, core vs. side-by-side extension domains, personas, and both entry points. Sourced from SAP's
+  own User Guide PDF (PUBLIC, 2025-08-13) on help.sap.com.
+- **SAP Data and Analytics Advisory Methodology** (`domains/04`): all four phases with deliverables,
+  including that Phases II and III iterate. Sourced from SAP Learning.
+- **The three advisory methodologies framed together** — ISA-M (integration), Application Extension
+  (extensibility), Data & Analytics — with the point that they complement the ADM, never replace it.
+- **EA governance operating model** (`domains/01`): Architecture Board as a body not a role, ARB vs.
+  DRB, Tier 1/2/3 decision rights, the **Architecture Runway** (Tier 3 self-serve, ~70–80% of
+  decisions), and quarterly decision-focused reviews including landscape drift.
+- **RISE with SAP vs. GROW with SAP** (`domains/04`) — and why the choice constrains extensibility
+  options and the Clean Core story. Flagged as commercial packaging, not certification fact.
+- **Security, identity & authorisation** (`domains/04`) — previously zero mentions of identity or
+  authorisation anywhere in the repo, despite it binding Business to Application Architecture.
+- **The actual SAP AI stack** (`resources/ea-trends.md`): BTP → AI Foundation → Business Data Cloud
+  → Joule, its real landscape prerequisites, and why identity lands on the critical path. The trends
+  file previously discussed "AI for EA" only in the abstract.
+
+### Added — two drills the site prescribed but couldn't run
+- **Flashcard Drill** (new sheet): 61 cards across the four domains, covering exactly the
+  must-memorise items the 6-week plan drills on eight separate days — the plan had been assigning
+  an exercise the workspace couldn't perform. Flip, self-score, shuffle, filter by domain, and a
+  **Missed only** deck. Per-card outcomes persist.
+- **Foundations Assessment** (new sheet): the 30-question "Discovering SAP Enterprise Architecture"
+  set, finally interactive after being deferred twice for needing multi-select scoring. **Parsed
+  live from `quiz/discovering-sap-ea-assessment.md`** rather than re-typed into JS, so questions,
+  answers and explanations keep exactly one source of truth. 11 single-answer, 19 multi-select;
+  multi-select scores strictly (every correct option, no incorrect ones) — partial answers are wrong.
+
+### Noted, not acted on
+- Two claims appear **only on exam-dump vendor sites**, not SAP: a `P_SAPEA_2601` exam code, and
+  "official SAP documentation is permitted during the exam". SAP's own Scenario-Based Assessment FAQ
+  says nothing about permitted resources. Not baked in anywhere. The second would materially change
+  study strategy if true — worth checking your own exam invitation.
+- The podcast `.m4a` is 45MB — **96% of total repo weight** (47MB tree, 36MB `.git`). Every clone
+  and fork pulls it. Reclaiming it needs Git LFS or history rewrite; left alone pending a decision.
+
 ## [Unreleased] - September 2026 full site audit against the "hub + second window" model
 
 Explicit bar set by the user: this site is the master navigation hub (window one); official SAP

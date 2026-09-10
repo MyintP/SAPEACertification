@@ -114,6 +114,8 @@
                 <summary>Practice</summary>
                 <ul>
                     <li><a class="nav-item" href="#sheet-practice"><span class="nav-item__code">Q</span><span class="nav-item__label">Scenario Quizzes &amp; Cases</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
+                    <li><a class="nav-item" href="#sheet-flashcards"><span class="nav-item__code">F</span><span class="nav-item__label">Flashcard Drill</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
+                    <li><a class="nav-item" href="#sheet-assessment"><span class="nav-item__code">A2</span><span class="nav-item__label">Foundations Assessment</span><span class="nav-item__note-dot" aria-hidden="true"></span></a></li>
                 </ul>
             </details>
 
@@ -340,6 +342,7 @@
 
                     <div class="review-filters" role="group" aria-label="Filter review queue">
                         <button type="button" class="review-filter is-active" data-filter="all" aria-pressed="true">All</button>
+                        <button type="button" class="review-filter" data-filter="wrong" aria-pressed="false">Needs Review</button>
                         <button type="button" class="review-filter" data-filter="bookmarked" aria-pressed="false">Bookmarked</button>
                         <button type="button" class="review-filter" data-filter="notes" aria-pressed="false">Has Notes</button>
                         <button type="button" class="review-filter" data-filter="practice" aria-pressed="false">Practice</button>
@@ -1034,6 +1037,57 @@
                             <button id="resetProgress" class="btn btn-danger">🔄 Reset Progress</button>
                         </div>
                     </div>
+                </div>
+            </article>
+
+            <!-- SHEET: FLASHCARD DRILL -->
+            <article class="sheet" id="sheet-flashcards" data-title="Flashcard Drill" data-group="Practice" data-code="F">
+                <div class="sheet-inner">
+                    <div class="sheet-header">
+                        <div class="sheet-kicker"><span class="sheet-kicker__code">F</span><span>Practice</span></div>
+                        <h1 class="sheet-title">Flashcard drill</h1>
+                        <p class="sheet-lede">Recall practice for the facts you have to produce cold. Read the front, answer it in your head, then flip. Be honest on the self-score — cards you mark missed are the ones worth coming back to.</p>
+                    </div>
+
+                    <div class="flashcard-controls">
+                        <label class="flashcard-controls__filter">
+                            Deck
+                            <select id="flashcardFilter">
+                                <option value="all">All cards</option>
+                                <option value="missed">Missed only</option>
+                                <option value="d1">Domain 1 — Framework &amp; Toolset</option>
+                                <option value="d2">Domain 2 — Vision &amp; Roadmap</option>
+                                <option value="d3">Domain 3 — Business Architecture</option>
+                                <option value="d4">Domain 4 — Data / App / Tech</option>
+                            </select>
+                        </label>
+                        <span class="flashcard-controls__stats" id="flashcardStats"></span>
+                        <button type="button" class="btn btn-secondary" id="flashcardShuffle">🔀 Shuffle</button>
+                    </div>
+
+                    <div id="flashcardStage"><p class="sheet-footnote">Loading deck…</p></div>
+
+                    <p class="sheet-footnote">These map to the must-memorise items in your <a href="#sheet-schedule">study schedule</a> — the plan drills them on Wednesdays and Thursdays of weeks 1–4.</p>
+                </div>
+            </article>
+
+            <!-- SHEET: FOUNDATIONS ASSESSMENT -->
+            <article class="sheet" id="sheet-assessment" data-title="Foundations Assessment" data-group="Practice" data-code="A2">
+                <div class="sheet-inner">
+                    <div class="sheet-header">
+                        <div class="sheet-kicker"><span class="sheet-kicker__code">A2</span><span>Practice</span></div>
+                        <h1 class="sheet-title">Foundations assessment</h1>
+                        <p class="sheet-lede">30 questions from SAP's own "Discovering SAP Enterprise Architecture" content — 11 single-answer and 19 <strong>multiple-answer</strong>. Multi-select scores strictly: every correct option selected, no incorrect ones.</p>
+                    </div>
+
+                    <div class="pattern pattern--tip">
+                        <span class="pattern__label">Read the marker</span>
+                        <p>Questions marked <em>select all that apply</em> have more than one correct answer. Partial answers score as wrong — which is the point, because half-right reasoning is what the real assessment is designed to expose.</p>
+                    </div>
+
+                    <div id="assessmentList"><p class="sheet-footnote">Loading assessment…</p></div>
+
+                    <p class="sheet-footnote">Answers and full "why others are wrong" explanations: <a href="docs.html?file=quiz/discovering-sap-ea-assessment.md" target="_blank" rel="noopener">read the source document →</a></p>
                 </div>
             </article>
 

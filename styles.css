@@ -1552,6 +1552,84 @@ h2.quiz-section-heading {
 .timer-preset-btn:hover { border-color: var(--teal); color: var(--teal); }
 
 /* ============================================================
+   Flashcard drill
+   ============================================================ */
+.flashcard-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    background: var(--navy-pale);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 22px;
+}
+
+.flashcard-controls__filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.flashcard-controls__filter select {
+    font: inherit;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--paper-border);
+    background: var(--paper);
+    color: var(--text);
+}
+
+.flashcard-controls__stats {
+    font-weight: 700;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    flex: 1;
+}
+
+.flashcard-controls .btn { margin-left: auto; }
+
+.flashcard {
+    background: var(--paper);
+    border: 1px solid var(--paper-border);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 32px 30px;
+    min-height: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    animation: decisionFadeIn 0.2s var(--ease);
+}
+
+.flashcard--empty { cursor: default; border-left-color: var(--paper-border); text-align: center; }
+
+.flashcard__label {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin: 0 0 12px;
+}
+
+.flashcard__front { font-size: 20px; font-weight: 600; line-height: 1.45; margin: 0; color: var(--text); }
+.flashcard__back { font-size: 17px; line-height: 1.6; margin: 0; color: var(--text); }
+.flashcard__done { font-size: 18px; font-weight: 700; margin: 0 0 8px; color: var(--green); }
+
+.flashcard__controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+/* ============================================================
    Study Schedule: collapsible week groups
    ============================================================ */
 .schedule-week {
