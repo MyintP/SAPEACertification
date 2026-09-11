@@ -2,6 +2,28 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 sourcing policy: learning aid vs. cheating
+
+Refined the previous entry's rule. "Which vendor published it" was the wrong test and cut useful
+material along with the bad. The actual test is **does it help someone learn the material and pass
+honestly** — so reproduced exam questions stay out, while practitioner experience stays in, labelled
+as experience rather than as SAP fact.
+
+### Restored, better sourced than before
+- **Adjacent certifications** on the Certification Track sheet, now framed as *which domain each one
+  deepens* rather than as a prerequisite ladder. Sourced to SAP Community practitioner posts (Mark
+  Anderson, May 2025) — the same source already backing `resources/community-study-tips.md`, which
+  had carried this legitimately all along. The removed vendor version was a worse-sourced duplicate.
+- **Readiness expectations** ("assumes real engagement experience", "many don't pass first time, and
+  here's the usual cause"), attributed to practitioner accounts. Useful for deciding whether to book
+  the exam — and honest about not being an SAP-published requirement.
+- Exam **version codes deliberately left out** — they're re-issued periodically, so the sheet points
+  at SAP Learning for the current one instead of freezing a number that will rot.
+
+### Added
+- An explicit **sourcing policy** in `docs/exam-overview.md` stating the include/exclude test, so the
+  line is written down rather than re-litigated per change.
+
 ## [Unreleased] - September 2026 purge all exam-dump-sourced content
 
 Audited every claim in the workspace for provenance and removed anything whose only source was an

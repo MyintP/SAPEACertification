@@ -112,6 +112,17 @@ See `study-plan.md` for the full day-by-day 6-week plan.
 - SAP EA Certification article by Rajprasath Subramanian (Principal EA @ SAP)
 - SAP EA Link Collection by Rene de Daniel (Principal EA @ SAP LeanIX)
 
-> **Not used as a source:** exam-dump and practice-question vendors. They publish exam statistics,
-> "prerequisite paths" and question banks that SAP does not confirm — and in at least one case
-> contradicted SAP's own pages outright. Nothing in this workspace is sourced from them.
+### Sourcing policy
+
+The test for including anything here is simple: **does it help someone genuinely learn the material
+and pass honestly?**
+
+**Included** — official SAP pages and courses, practitioner accounts from the SAP Community, the
+published books, and SAP's own publicly-released case study. Practitioner experience is welcome even
+where SAP publishes nothing: study order, readiness expectations, which adjacent certifications
+deepen which domain. It's labelled as experience, never as SAP fact.
+
+**Excluded** — reproduced or leaked exam questions, and vendor claims dressed up as SAP requirements
+(invented "prerequisite paths", unconfirmed exam statistics). The first is cheating and defeats the
+point of certifying. The second is just wrong, and in at least one case contradicted SAP's own pages
+outright.
