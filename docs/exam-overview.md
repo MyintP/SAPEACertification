@@ -111,4 +111,7 @@ See `study-plan.md` for the full day-by-day 6-week plan.
 - *SAP Enterprise Architecture: A Blueprint for Executing Digital Transformation* — Sheunopa Chalmers Musukutwa
 - SAP EA Certification article by Rajprasath Subramanian (Principal EA @ SAP)
 - SAP EA Link Collection by Rene de Daniel (Principal EA @ SAP LeanIX)
-- Third-party prep sites (erpprep, pass4success, etc.) — useful for domain content, **not authoritative on current exam mechanics**
+
+> **Not used as a source:** exam-dump and practice-question vendors. They publish exam statistics,
+> "prerequisite paths" and question banks that SAP does not confirm — and in at least one case
+> contradicted SAP's own pages outright. Nothing in this workspace is sourced from them.

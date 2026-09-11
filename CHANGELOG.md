@@ -2,6 +2,36 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 purge all exam-dump-sourced content
+
+Audited every claim in the workspace for provenance and removed anything whose only source was an
+exam-dump or practice-question vendor.
+
+### Removed
+- **The "commonly cited path" certification ladder** on the Certification Track sheet
+  (C_ADBTP → P_BTPA → P_SAPEA). Its sole provenance was a prep vendor. SAP publishes no
+  prerequisite chain for P_SAPEA, so the sheet now says exactly that, and points at SAP's own
+  certification catalogue instead of an invented sequence.
+- **The "5+ years of active engagement experience" entry requirement** — vendor-published, not
+  stated by SAP.
+- **The "SAP Cloud ERP / SAP Cloud Platform associate-level certifications" prerequisite bullet**,
+  which rested on the same vendor guidance.
+- **Prep vendors named as source material** in `docs/exam-overview.md`. Replaced with an explicit
+  statement that dump vendors are *not* used as a source anywhere in this workspace.
+
+### Kept, deliberately
+- The **LeanIX credential**, re-verified independently against SAP's own Credly badge listing and
+  renamed to its correct official title (*SAP Certified – Enterprise Architecture Consultant – SAP
+  LeanIX*). The specific version code was dropped, since version codes churn and only vendor pages
+  quote them.
+- The **TOGAF credential**, which the repo already recommends independently in
+  `artifacts/togaf-to-sap-mapping.md`.
+- The **struck-through legacy exam numbers** (40 questions / 3 hours / 80%) in `docs/exam-overview.md`
+  and the matching warning on sheet 01. These are *inoculation*, not sourcing: they are genuine
+  legacy SAP exam format, already marked as superseded, and naming them is what lets a reader
+  recognise and distrust them when a dump site quotes them. Removing the warning would leave the
+  reader less protected, not more.
+
 ## [Unreleased] - September 2026 gap scan: fixed a data-loss defect, added missing methodologies and two drills
 
 Full scan of the repo plus external research against official SAP sources. Findings and fixes:
