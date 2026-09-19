@@ -2,6 +2,29 @@
 
 All notable changes to the SAP Enterprise Architect Study Guide will be documented here.
 
+## [Unreleased] - September 2026 display controls: A− / A+ and Theme: Auto
+
+New controls in the top bar of the workspace **and** the document window: **A−**, **A+** and
+**Theme: Auto / Light / Dark**.
+
+- **Auto means automatic for both.** The theme follows the device's light/dark setting, and reading
+  text is sized to the screen: 100% on phones and ordinary laptops, stepping up to 110% / 120% / 135%
+  on wide monitors so the fixed-width reading column doesn't shrink to a strip. Choosing Auto hands
+  the text size back to the screen; A−/A+ switch to manual steps (85%–150%).
+- **Dark reading theme.** Previously only the app shell was dark. Every hard-coded colour in the
+  stylesheet was converted to a token so the dark palette overrides them cleanly. Checked
+  programmatically: all 3,190 text elements across every sheet meet WCAG AA contrast (4.5:1) in dark.
+  Printing always uses the light palette, so dark mode never prints light-on-white.
+- **No flash, and the two windows stay in step.** `display.js` loads in `<head>` so the saved theme
+  and size apply before first paint. A change in the workspace updates an open document window live.
+  Settings persist in `sapEaDisplay`.
+- **Large text on phones fixed at the source.** Testing every sheet at every size on a 375px screen
+  found three layouts that scrolled sideways at 135–150%: filter dropdowns sized to their longest
+  option, and the Start page's focus/timer cards refusing to shrink. All three now wrap. Every sheet
+  is clean at every step.
+- README file table was also stale — it still said the 30-question assessment wasn't wired in.
+  Corrected, and `display.js` / `docs.html` / `docs.js` added to the file lists.
+
 ## [Unreleased] - September 2026 sourcing policy: learning aid vs. cheating
 
 Refined the previous entry's rule. "Which vendor published it" was the wrong test and cut useful

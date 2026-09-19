@@ -29,6 +29,27 @@
     --text-muted: #565c6b;
     --text-faint: #83889a;
 
+    /* Surfaces that were previously hard-coded - tokenised so the dark
+       reading theme can override them */
+    --tip-bg: #eef5f5;
+    --example-bg: #f1f0eb;
+    --flow-border: #d7e0f5;
+    --code-block-bg: #1c2333;
+    --code-block-text: #dbe2f5;
+    --table-head-bg: #1e2a4d;
+    --table-head-text: #ffffff;
+    --table-stripe: #faf9f5;
+    --on-solid: #ffffff;
+    --neutral-solid: #565c6b;
+    --tag-easy-text: #155724;
+    --tag-medium-text: #7a5c00;
+    --tag-hard-text: #7a201a;
+    --banner-text: #4a3400;
+    --backdrop: rgba(10, 12, 18, 0.55);
+
+    /* Reading-column text scale, set by display.js (Auto = by screen width) */
+    --reading-zoom: 1;
+
     /* Dark app shell */
     --shell-bg: #12151c;
     --shell-panel: #171b24;
@@ -51,6 +72,46 @@
     --wide-width: 1040px;
 
     --ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Dark reading theme. The app shell is dark in both themes; this darkens
+   the reading canvas and everything drawn on it. data-theme is resolved
+   by display.js - "Auto" follows the device setting. */
+:root[data-theme="dark"] {
+    --accent: #6ea1ff;
+    --accent-pale: #1a2540;
+    --navy-pale: #182031;
+
+    --amber: #e3b35a;
+    --amber-pale: #2a2314;
+    --red: #f2877c;
+    --red-pale: #2e1b19;
+    --green: #6cc995;
+    --green-pale: #15261c;
+    --teal: #5cc0cc;
+
+    --canvas-bg: #0e1117;
+    --paper: #161a22;
+    --paper-border: #2a303b;
+    --text: #e4e7ee;
+    --text-muted: #a8afbd;
+    --text-faint: #7d8494;
+
+    --tip-bg: #12232a;
+    --example-bg: #1a1c21;
+    --flow-border: #2a3552;
+    --code-block-bg: #0a0d13;
+    --code-block-text: #dbe2f5;
+    --table-head-bg: #1f2a47;
+    --table-stripe: #1a1e27;
+    --on-solid: #0e1117;
+    --neutral-solid: #8a91a1;
+    --tag-easy-text: #8fe0b0;
+    --tag-medium-text: #f0c878;
+    --tag-hard-text: #f5a39a;
+    --banner-text: #f0d9a8;
+
+    --shadow: 0 1px 3px rgba(0,0,0,0.45);
 }
 
 /* --- Reset & Base --- */
@@ -125,7 +186,7 @@ code, kbd {
     right: 0;
     z-index: 500;
     background: var(--amber-pale);
-    color: #4a3400;
+    color: var(--banner-text);
     border-bottom: 2px solid var(--amber);
     padding: 10px 20px;
     font-size: 13px;
@@ -234,6 +295,40 @@ code, kbd {
 }
 
 .icon-btn.is-active { color: var(--accent-on-dark); }
+
+.icon-btn:disabled { opacity: 0.35; cursor: default; }
+.icon-btn:disabled:hover { background: none; color: var(--shell-text); }
+
+/* --- Display controls: A- / A+ / Theme --- */
+.display-controls {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.display-size {
+    font-weight: 700;
+    min-width: 30px;
+    padding: 5px 6px;
+}
+.display-size--down { font-size: 12px; }
+.display-size--up { font-size: 15px; }
+
+.display-theme {
+    background: none;
+    border: 1px solid var(--shell-border);
+    color: var(--shell-text);
+    border-radius: var(--radius-sm);
+    padding: 5px 9px;
+    margin-left: 4px;
+    cursor: pointer;
+    font-size: 12.5px;
+    white-space: nowrap;
+    transition: border-color 0.12s var(--ease), color 0.12s var(--ease);
+}
+.display-theme:hover { color: var(--shell-text-strong); border-color: var(--accent-on-dark); }
+.display-theme__value { color: var(--shell-text-strong); font-weight: 600; }
 
 .search-trigger {
     display: flex;
@@ -438,12 +533,19 @@ code, kbd {
 
 /* Breakout grid: narrow prose column by default; .breakout elements span wider */
 .sheet-inner {
+    zoom: var(--reading-zoom, 1);
     display: grid;
     grid-template-columns: 1fr min(var(--prose-width), 100%) 1fr;
     row-gap: 0;
 }
 
 .sheet-inner > * { grid-column: 2; min-width: 0; }
+
+/* A <select> sizes itself to its longest option. Let it and its label
+   shrink and wrap so large text sizes never push it off-screen. */
+.sheet-inner select { max-width: 100%; min-width: 0; }
+.quiz-bank-controls__filter,
+.flashcard-controls__filter { flex-wrap: wrap; min-width: 0; max-width: 100%; }
 
 .sheet-inner > .breakout {
     grid-column: 1 / 4;
@@ -744,7 +846,7 @@ code, kbd {
 
 .pattern--tip {
     border-left-color: var(--teal);
-    background: #eef5f5;
+    background: var(--tip-bg);
 }
 .pattern--tip .pattern__label { color: var(--teal); }
 
@@ -756,7 +858,7 @@ code, kbd {
 
 .pattern--example {
     border-left-color: var(--text-faint);
-    background: #f1f0eb;
+    background: var(--example-bg);
 }
 .pattern--example .pattern__label { color: var(--text-muted); }
 .pattern--example p { font-style: italic; }
@@ -772,7 +874,7 @@ code, kbd {
 /* Compact architecture-model flow banner (e.g. Vision -> ... -> Roadmap) */
 .flow-diagram {
     background: var(--navy-pale);
-    border: 1px solid #d7e0f5;
+    border: 1px solid var(--flow-border);
     border-radius: var(--radius-sm);
     padding: 18px 24px;
     margin: 8px 0 28px;
@@ -810,8 +912,8 @@ code, kbd {
     max-width: 100%;
     margin: 18px 0;
     padding: 16px 18px;
-    background: #1c2333;
-    color: #dbe2f5;
+    background: var(--code-block-bg);
+    color: var(--code-block-text);
     border-radius: var(--radius-sm);
     font-size: 13px;
     line-height: 1.6;
@@ -848,14 +950,14 @@ code, kbd {
 }
 
 .table-standard th {
-    background: #1e2a4d;
-    color: white;
+    background: var(--table-head-bg);
+    color: var(--table-head-text);
     font-weight: 600;
     white-space: nowrap;
 }
 
 .table-standard td.center { text-align: center; }
-.table-standard tbody tr:nth-child(even) { background: #faf9f5; }
+.table-standard tbody tr:nth-child(even) { background: var(--table-stripe); }
 
 /* --- Defense pattern grid --- */
 .defense-step {
@@ -870,7 +972,7 @@ code, kbd {
 
 /* --- Score bands --- */
 .score-band {
-    color: white;
+    color: var(--on-solid);
     padding: 14px;
     border-radius: var(--radius-sm);
     text-align: center;
@@ -958,8 +1060,8 @@ code, kbd {
 }
 
 .btn:hover { opacity: 0.88; }
-.btn-danger { background: var(--red); color: white; }
-.btn-secondary { background: #565c6b; color: white; }
+.btn-danger { background: var(--red); color: var(--on-solid); }
+.btn-secondary { background: var(--neutral-solid); color: var(--on-solid); }
 
 /* ============================================================
    Study Desk (bottom panel)
@@ -1102,7 +1204,7 @@ code, kbd {
 .review-filter.is-active {
     background: var(--accent);
     border-color: var(--accent);
-    color: white;
+    color: var(--on-solid);
 }
 
 .review-continue {
@@ -1110,7 +1212,7 @@ code, kbd {
     flex-direction: column;
     gap: 4px;
     background: var(--navy-pale);
-    border: 1px solid #d7e0f5;
+    border: 1px solid var(--flow-border);
     border-radius: var(--radius-sm);
     padding: 14px 18px;
     margin-bottom: 30px;
@@ -1248,7 +1350,7 @@ code, kbd {
     color: var(--text);
 }
 
-#searchDialog::backdrop { background: rgba(10, 12, 18, 0.55); }
+#searchDialog::backdrop { background: var(--backdrop); }
 
 .search-dialog__input-row {
     display: flex;
@@ -1370,7 +1472,7 @@ h2.quiz-section-heading {
 
 .quiz-submit {
     background: var(--accent);
-    color: white;
+    color: var(--on-solid);
     border: none;
     padding: 10px 26px;
     border-radius: var(--radius-sm);
@@ -1488,6 +1590,10 @@ h2.quiz-section-heading {
     margin: 22px 0;
 }
 
+/* Grid items default to min-width:auto and refuse to shrink below their
+   content - at large text sizes that pushed the cards off-screen */
+.today-dashboard > * { min-width: 0; }
+
 @media (max-width: 700px) {
     .today-dashboard { grid-template-columns: 1fr; }
 }
@@ -1517,6 +1623,7 @@ h2.quiz-section-heading {
 
 .timer-card {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 18px;
     border-left-color: var(--teal);
@@ -1535,7 +1642,7 @@ h2.quiz-section-heading {
 
 .timer-card__controls { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
 
-.timer-card__presets { display: flex; gap: 6px; margin-top: 8px; }
+.timer-card__presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 
 .timer-preset-btn {
     font: inherit;
@@ -1689,9 +1796,9 @@ h2.quiz-section-heading {
     margin-right: 5px;
 }
 
-.tag-easy { background: var(--green-pale); color: #155724; }
-.tag-medium { background: var(--amber-pale); color: #7a5c00; }
-.tag-hard { background: var(--red-pale); color: #7a201a; }
+.tag-easy { background: var(--green-pale); color: var(--tag-easy-text); }
+.tag-medium { background: var(--amber-pale); color: var(--tag-medium-text); }
+.tag-hard { background: var(--red-pale); color: var(--tag-hard-text); }
 .tag-architect { background: var(--accent-pale); color: var(--accent); }
 
 .model-answer summary {
@@ -1779,6 +1886,7 @@ h2.quiz-section-heading {
 
 @media (max-width: 640px) {
     .search-trigger__text { display: none; }
+    .display-theme__prefix { display: none; }
     .search-trigger { padding: 6px 8px; }
 }
 
@@ -1825,4 +1933,17 @@ h2.quiz-section-heading {
     #contextBar, #sidebarNav, #studyDesk, #navDrawerToggle { display: none !important; }
     #contentCanvas { overflow: visible; padding: 0; }
     .sheet { display: block !important; }
+    .sheet-inner { zoom: 1; }
+
+    /* Paper is white: print the light palette whatever the screen theme */
+    :root[data-theme="dark"] {
+        --accent: #2454c9; --accent-pale: #e8eefb; --navy-pale: #eef2fa;
+        --amber: #93650a; --amber-pale: #f7efdd; --red: #a1281f; --red-pale: #f8ebe9;
+        --green: #1e6b42; --green-pale: #e7f1ea; --teal: #12616d;
+        --canvas-bg: #ffffff; --paper: #ffffff; --paper-border: #e2ddd2;
+        --text: #1c1f26; --text-muted: #565c6b; --text-faint: #83889a;
+        --tip-bg: #eef5f5; --example-bg: #f1f0eb; --flow-border: #d7e0f5;
+        --table-stripe: #faf9f5; --on-solid: #ffffff; --neutral-solid: #565c6b;
+        --tag-easy-text: #155724; --tag-medium-text: #7a5c00; --tag-hard-text: #7a201a;
+    }
 }

@@ -3,7 +3,7 @@
 Production URL: https://myintp.github.io/SAPEACertification/
 Platform: GitHub Pages
 Source branch: main (root)
-Site source: static site (index.html, quiz.html, styles.css, app.js)
+Site source: static site (index.html, docs.html, quiz.html, styles.css, display.js, app.js, docs.js)
 Role: SAP enterprise architecture certification study hub
 
 ## How it deploys

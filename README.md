@@ -22,9 +22,10 @@ This repository hosts a certification workspace for the **SAP P_SAPEA Enterprise
 |-------------|-------------|
 | `index.html` | The app shell: context bar, sidebar navigation, content workspace and Study Desk, containing every sheet (including Practice) |
 | `quiz.html` | Redirect stub to `index.html#sheet-practice`, kept so old links/bookmarks still resolve |
-| `styles.css` | Design system: dark app shell, light reading canvas, one accent colour |
+| `styles.css` | Design system: dark app shell, light or dark reading canvas (all colours are tokens, overridden under `data-theme="dark"`), one accent colour |
+| `display.js` | Display settings shared by the workspace and the document window: **A− / A+** text size and **Theme: Auto / Light / Dark**. *Auto* follows the device's light/dark setting **and** sizes reading text to the screen width. Loaded in `<head>` so there's no flash of the wrong theme; saved in `sapEaDisplay` |
 | `app.js` | Shell behaviour: sheet routing, sidebar/context bar sync, Study Desk notes, progress tracker, quiz scoring, search. The Domain Knowledge Checks quiz bank (60 questions) is content-as-data here — a `DOMAIN_QUIZ_BANK` array rendered and filtered at runtime, not hand-authored HTML |
-| `/quiz` | Self-assessment questions for each skill area. `domain-1..4-quiz.md` are the source for the Practice sheet's Domain Knowledge Checks; `discovering-sap-ea-assessment.md` and `wanderlust-prep.md` are referenced from other sheets but not yet wired in as live quizzes (multiple-answer format needs different scoring logic) |
+| `/quiz` | Self-assessment questions for each skill area. `domain-1..4-quiz.md` are the source for the Practice sheet's Domain Knowledge Checks; `discovering-sap-ea-assessment.md` is parsed live into the interactive Foundations Assessment sheet (multi-select scored strictly); `wanderlust-prep.md` is referenced from other sheets |
 | `/resources` | Supplementary study materials and references |
 | `/domains` | Domain-specific architecture guides |
 | `/artifacts` | Sample architecture artifacts and templates |
